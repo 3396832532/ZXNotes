@@ -1,7 +1,7 @@
 ﻿## LeetCode - 91. Decode Ways & 639. Decode Ways II(DP)
 
 * [LeetCode - 91. Decode Ways](#leetcode---91-decode-ways)
-* [LeetCode - 639. Decode Ways II](#2)
+* [LeetCode - 639. Decode Ways II](#leetcode---639-decode-ways-II)
 
 ***
 ### <font id = "1">LeetCode - 91. Decode Ways 
