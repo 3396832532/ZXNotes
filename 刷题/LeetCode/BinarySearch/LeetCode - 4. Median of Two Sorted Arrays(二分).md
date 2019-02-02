@@ -1,5 +1,8 @@
 ﻿## LeetCode - 4. Median of Two Sorted Arrays(二分)
-#### [题目链接](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/)
+#### [题目链接](https://leetcode.com/problems/median-of-two-sorted-arrays/)
+
+> https://leetcode.com/problems/median-of-two-sorted-arrays/
+
 #### 题目
 ![在这里插入图片描述](images/4_t.png)
 #### 解析
