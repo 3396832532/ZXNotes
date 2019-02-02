@@ -1,13 +1,14 @@
 ﻿## LeetCode - 91. Decode Ways & 639. Decode Ways II(DP)
 
-* [LeetCode - 91. Decode Ways](#1)
+* [LeetCode - 91. Decode Ways](#leetcode---91-decode-ways)
 * [LeetCode - 639. Decode Ways II](#2)
 
 ***
 ### <font id = "1">LeetCode - 91. Decode Ways 
 #### [题目链接](https://leetcode.com/problems/decode-ways/)
 #### 题目
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190202131941724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/91_t.png)
+
 #### 解析
 
 也是很明显的DP题目，递归思路
@@ -16,7 +17,7 @@
 * 第一种情况，拆分出来当前的`str[i]`，然后求出`[i+1, s.length()]`的方法数`r1`，只要当前`str[i] != 0`，答案`res`就累加`r1`，然后我们还可以考虑将`str[i], str[i+1]`这两个字符拆分出来，这两个字符组成的数字只要满足`10 <= X <= 26 `，则递归`[i+2, s.length()]`得到的结果`r2`，则`res = r1 + r2`；
 * 然后用记忆化记录结果即可；
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/201902022127254.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/91_s.png)
 直观的递归代码: 
 ```java
 class Solution {
@@ -108,7 +109,7 @@ class Solution {
 ### <font id = "2">LeetCode - 639. Decode Ways II
 #### [题目链接](https://leetcode.com/problems/decode-ways-ii/)
 #### 题目
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2019020213212088.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/639_t.png)
 #### 解析
 
 大体思路和上一题相同:
@@ -118,7 +119,7 @@ class Solution {
 * 然后就是注意结果的返回，上一题相当于是`1 * r1 + 1 * r2`，这一题就是上面的一些不同的结果导致，如果前缀不是`1`，就要和系数相乘，即`res = p1 * r1 + p2 * r2`，其中`r1`还是隔离`str[i]`之后的返回结果，`r2`是隔离`str[i]str[i+1]`之后的返回结果，不过要带上系数即可；
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190202214318650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/639_s.png)
 由于这一题数据规模比较大，所以递归会产生`StackOverflowError`，即递归深度太大，所以最好使用递推代码: 
 ```java
 class Solution {
