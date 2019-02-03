@@ -231,6 +231,9 @@ public class Main {
 
 ### <font color = red id = "4">Codeforces - 368B - Sereja and Suffixes
 #### [题目链接](https://codeforces.com/problemset/problem/368/B)
+
+> https://codeforces.com/problemset/problem/368/B
+
 #### 题目大意
 给你两个数`n`、`m`，以及`n`个数的数组`a[]`，然后给你`m`个查询，每个查询输入一个数`l[i]`，问你在`a`数组中，`a[l[i]-1]~a[n-1]`位置有多少个不相同的数。
 ![在这里插入图片描述](images/368B_t.png)
