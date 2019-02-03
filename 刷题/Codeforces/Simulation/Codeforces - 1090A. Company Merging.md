@@ -1,4 +1,4 @@
-## Codeforces -1090A. Company Merging
+## Codeforces - 1090A. Company Merging
 
 #### [题目链接](http://codeforces.com/problemset/problem/1090/A)
 
