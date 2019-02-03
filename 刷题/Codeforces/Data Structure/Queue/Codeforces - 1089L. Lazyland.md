@@ -16,16 +16,16 @@
 *  否则就要选择这些人，但是只能选择`noChoseJob`，于是维护一个`noChoseJob`大小的堆，并使用个`map`来记录相同工作之间时间的最大值；
 
 ```java
-import java.io.BufferedInputStream;
+import java.io.*;
 import java.util.*;
 
-/** question link : http://codeforces.com/problemset/problem/1089/L  */
 public class Main {
 
-    private final static int MAX = 100000;
+    final static int MAX = 100000;
 
     public static void main(String[] args) {
         Scanner cin = new Scanner(new BufferedInputStream(System.in));
+        PrintStream out = System.out;
         int n = cin.nextInt(), k = cin.nextInt(); // idlers num , jobs num
         HashSet<Integer> set = new HashSet<>(); // judge
         int[] a = new int[n], b = new int[n];
@@ -37,33 +37,33 @@ public class Main {
         }
         for (int i = 0; i < n; i++)
             b[i] = cin.nextInt();
-        int noChoseJob = k - set.size();
-        if (noChoseJob == 0) { // all idlers have job
-            System.out.println(0);
+        int noChose = k - set.size(); 
+        if (noChose == 0) { // all idlers have job
+            out.println(0);
             return;
         }
-
         Queue<Integer> pq = new PriorityQueue<>((o1, o2) -> o2 - o1); // the big heap
         HashMap<Integer, Integer> maxMap = new HashMap<>();
+
         for(int i = 0; i < n; i++){
             if(times[a[i]] <= 1)
                 continue;
             if(maxMap.get(a[i]) == null){
                 maxMap.put(a[i], b[i]);
             }else{
-                Integer previous_max_ai = maxMap.get(a[i]);
-                if(previous_max_ai < b[i]){
-                    if(noChoseJob == pq.size()){
-                        if(previous_max_ai < pq.peek()) {
+                Integer pMax = maxMap.get(a[i]); 
+                if(pMax < b[i]){
+                    if(noChose == pq.size()){
+                        if(pMax < pq.peek()) {
                             pq.poll();
-                            pq.add(previous_max_ai);
+                            pq.add(pMax);
                         }
                     }else { // if pq.size < noChoseJob, add directly
-                        pq.add(previous_max_ai);
+                        pq.add(pMax);
                     }
                     maxMap.put(a[i], b[i]); // update max
-                }else {  // add b[i] to the pq directly 
-                    if(noChoseJob == pq.size()){
+                }else {  // add b[i] to the pq directly
+                    if(noChose == pq.size()){
                         if(b[i] < pq.peek()) {
                             pq.poll();
                             pq.add(b[i]);
@@ -77,7 +77,7 @@ public class Main {
         long res = 0;  // notice, must long
         while(!pq.isEmpty())
             res += pq.poll();
-        System.out.println(res);
+        out.println(res);
     }
 }
 ```
