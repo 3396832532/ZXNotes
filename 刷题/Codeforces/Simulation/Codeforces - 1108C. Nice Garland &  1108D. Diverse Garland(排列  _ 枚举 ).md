@@ -4,7 +4,7 @@
 * [Codeforces - 1108D. Diverse Garland](#codeforces---1108d-diverse-garland)
 
 ***
-### <font color = red id = "1"> Codeforces - 1108C. Nice Garland
+### <font color = red id = "1">Codeforces - 1108C. Nice Garland
 
 #### [题目链接](https://codeforces.com/problemset/problem/1108/C)
 
