@@ -2,7 +2,7 @@
 
 * [DFS](#1)
 * [并查集](#并查集)
-* [LeetCode - 685. Redundant Connection II](#leetcode---685-redundant-connectionII)
+* [LeetCode - 685. Redundant Connection II](#leetcode---685-redundant-connection-II)
 
 ***
 
