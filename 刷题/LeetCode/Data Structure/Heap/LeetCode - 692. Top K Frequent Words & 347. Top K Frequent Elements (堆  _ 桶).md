@@ -70,7 +70,7 @@ class Solution {
 #### [题目链接](https://leetcode.com/problems/top-k-frequent-elements/)
 #### 题目
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190126210245274.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/347_t.png)
 #### 解析
 
 `O(N*logK)`
@@ -135,7 +135,7 @@ class Solution {
 * 然后记最大频率为`maxFreq`，然后生成`maxFreq`个桶，每个桶中放对应的频率的集合；
 * <font color = red>然后从后向前取从高频率到低频率的桶中的元素即可(取到`k`个就退出)；
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190126224142332.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/347_s.png)
 ```java
 class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
