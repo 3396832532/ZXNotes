@@ -1,8 +1,8 @@
 
-## HDU4109_Instrction Arrangement以及关键路径详解
+## Hdu - 4109.Instrction Arrangement以及关键路径详解
 
 * [关键路径详解](#关键路径详解)
-* [HDU4109_Instrction Arrangement题解](#HDU4109_Instrction Arrangement题解)
+* [Hdu4109-Instrction Arrangement题解](#hdu4109-instrction-arrangement题解)
 
 ***
 ### <font color  = red id = "1">关键路径详解
@@ -212,7 +212,7 @@ public class CriticalPathMethod2 {
 上图的测试结果: 
 ![在这里插入图片描述](images/g7.png)
 ***
-###  <font color  = red id = "2">HDU4109_Instrction Arrangement题解
+###  <font color  = red id = "2">Hdu4109-Instrction Arrangement题解
 #### [题目链接](http://acm.hdu.edu.cn/showproblem.php?pid=4109)
 #### 题目大意
 给你`n`和`m`代表编号`0 ~ n-1`个任务(顶点)，和`m`条关系(边)，每条关系由`X、Y、Z`，代表想要完成`Y`必须先完成`X`并花费`Z`个时间、`CPU`可以同时完成多个任务处理，一次花费一个单位时间。问完成`0 ~ n-1`个任务需要多少时间。
