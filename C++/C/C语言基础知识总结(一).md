@@ -53,6 +53,8 @@ g++ [-option] ... <filename>   //c++编译
 
 * 注意下面的两种方式生成可执行文件的效果是一样的: 
 
+
+
 ![在这里插入图片描述](images/c1.png)
 **平台问题:**
 ① Linux编译后的可执行程序只能在Linux运行，Windows编译后的程序只能在Windows下运行；
@@ -75,7 +77,11 @@ int main(int argc, char const *argv[])
 }
 ```
 运行: 
+
 ![在这里插入图片描述](images/c2.png)
+
+
+
 * `#include< >` 与 `#include ""`的区别：
 ①`< >` 表示系统直接按系统指定的目录检索；
 ② `""` 表示系统先在 `""` 指定的路径(没写路径代表当前路径)查找头文件，如果找不到，再按系统指定的目录检索；
@@ -89,10 +95,14 @@ C代码编译成可执行程序经过4步：
 * 4）链接：C语言写的程序是需要依赖各种库的，所以编译之后还需要把库链接到最终的可执行程序中去；
 
 
+
 ![在这里插入图片描述](images/c3.png)
+
 ![在这里插入图片描述](images/c4.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106195818281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
 <font color = red>然而一般编译的时候都是使用的一步编译</font>。 (但是这样还是经过：<font color = red>预处理、编译、汇编、链接的过程。)
+
 ```shell
 gcc hello.c -o hello
 ```
@@ -108,6 +118,7 @@ ldd hello
 * CPU计算时，先预先把要用的数据从硬盘读到内存，然后再把即将要用的数据读到寄存器。于是` CPU<--->寄存器<--->内存`，这就是它们之间的信息交换，看下面的图片说明:  
 
 <font color = red> 寄存器、缓存、内存三者关系: 
+
 ![在这里插入图片描述](images/c5.png)
 
 ##### 关于VS的C4996错误
@@ -446,14 +457,26 @@ printf("%u\n", b);// 1
 ### 数据类型、运算符等基础
 ##### C语言数据类型
 * 数据类型的作用：编译器预算对象（变量）分配的内存空间大小。
-![在这里插入图片描述](images/c6.png) 
+
+  
+
+  ![在这里插入图片描述](images/c6.png) 
+
+
 
 **变量特点:**
 * <font color = red>变量在编译时为其分配相应的内存空间；</font>
+
 * <font color = red>可以通过其名字和地址访问相应内存；
-![在这里插入图片描述](images/c7.png)
+
+  
+
+  ![在这里插入图片描述](images/c7.png)
+
+
 
 **声明和定义的区别:**
+
 * <font color = blue>声明变量不需要建立存储空间，如：`extern int a`; (使用`extern`关键字)
 * 定义变量需要建立存储空间，如：`int b`;
 * 从广义的角度来讲声明中包含着定义，即定义是声明的一个特例，所以并非所有的声明都是定义：
@@ -523,7 +546,9 @@ ch2[c] = a
 ch2 - 32 = A
 ```
 <font color = blue>以及注意转义字符: 
+
 ![在这里插入图片描述](images/c8.png)
+
 转义字符简单测试: 
 
 ```cpp
@@ -580,6 +605,8 @@ a = 100.900002
 原因还是计算机按照`二进制`存储。
 
 * 类型限定符:
+
+
 ![在这里插入图片描述](images/c9.png)
 
 ##### 字符的输入问题
@@ -605,12 +632,15 @@ int main(int argc, char const *argv[])
 
 ```
 输入输出演示: 
+
 ![在这里插入图片描述](images/c10.png)
+
 这个程序要特别注意: 
 
 * 当我们输入完一个字符时，按下回车，会直接结束程序；
 * 因为第二个字符在按下回车的时候已经输入完成了，也就是`ch2 = '\n'`；而`'\n'`的`ascii`码为10；
-  ![在这里插入图片描述](images/c11.png)
+
+![在这里插入图片描述](images/c11.png)
 
 处理上面的问题，可以使用另一个字符变量过滤掉`\n`，也可以使用`getchar()`来过滤一个字符: 
 
@@ -643,7 +673,11 @@ int main(int argc, char const *argv[])
 
 ##### 运算符以及优先级
 **<font color  = red>运算符优先级: </font>**
+
+
+
 ![在这里插入图片描述](images/c12.png)
+
 ![在这里插入图片描述](images/c13.png)
 
 > *  另外，注意 逻辑判断中的  <font color = red>短路原则。</font>
@@ -864,7 +898,10 @@ int main(int argc, char const *argv[])
 }
 ```
 输出结果: 
+
 ![在这里插入图片描述](images/c14.png)
+
+
 
 ##### 随机数生成
 
@@ -939,7 +976,10 @@ int main(int argc, char const *argv[])
 }
 ```
 输入输出结果: 
+
 ![在这里插入图片描述](images/c15.png)
+
+
 
 ###### 输出函数
 
@@ -966,7 +1006,11 @@ int main(int argc, char const *argv[])
 ```
 输出: 
 
+
+
 ![在这里插入图片描述](images/c16.png)
+
+
 
 ###### sizeof()和strlen()的区别
 
@@ -1029,7 +1073,11 @@ int main(int argc, char const *argv[])
 }
 ```
 输出：
+
 ![在这里插入图片描述](images/c17.png)
+
+
+
 ###### strcat()、strncat()、 strcmp()、strncmp()
 
 * `char *strcat(char *dest, const char *src);`: 将src字符串连接到dest的尾部，`‘\0’`也会追加过去；
@@ -1116,9 +1164,13 @@ int main(int argc, char const *argv[])
 }
 ```
 结果: 
+
 ![在这里插入图片描述](images/c18.png)
 
+
+
 ###### strchr()、strstr()、strtok()
+
 * `char *strchr(const char *s, char c);`: 在字符串s中查找字母c出现的位置；
 * `char *strstr(const char *haystack, const char *needle);`: 在字符串haystack中查找字符串needle出现的位置；
 * `char *strtok(char *str, const char *delim);`
@@ -1174,9 +1226,12 @@ casdert
 
 看下面两张图解释`.h`文件的作用: 
 
+
+
 ![在这里插入图片描述](images/c19.png)
 
 解决办法: 
+
 ![在这里插入图片描述](images/c20.png)
 
 * 多个文件中(同一项目)，不能出现同名函数(static除外)。<font color =red>这就是为什么 `.h`文件只放函数的声明，不放函数的定义；
