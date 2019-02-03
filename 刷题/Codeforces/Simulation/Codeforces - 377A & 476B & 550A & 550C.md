@@ -1,4 +1,4 @@
-﻿## Codefores - 377A & 476B & 550A & 550C
+﻿## Codeforces - 377A & 476B & 550A & 550C
 
 * [Codeforces - 377A - Maze](#codeforces---377a---maze)
 * [Codeforces - 476B - Dreamoon and WiFi](#codeforces---476b---dreamoon-and-wifi)
