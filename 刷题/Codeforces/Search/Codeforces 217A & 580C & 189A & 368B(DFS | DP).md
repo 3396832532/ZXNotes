@@ -157,6 +157,9 @@ public class Main {
 ***
 ### <font color = red id = "3">Codeforces - 189A - Cur Ribbon
 #### [题目链接](https://codeforces.com/problemset/problem/189/A)
+
+> https://codeforces.com/problemset/problem/189/A
+
 #### 题目大意
 
 给你一段`n`长度的绳子，要你剪断它，但是剪出来的段只能是`a`、`b`、`c`三种长度，问你最多可以剪多少段。
