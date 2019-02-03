@@ -1,4 +1,4 @@
-## Codeforces-1088B -  Ehab and subtraction
+## Codeforces - 1088B. Ehab and subtraction
 
 #### [题目链接](http://codeforces.com/problemset/problem/1088/B)
 

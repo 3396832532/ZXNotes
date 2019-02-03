@@ -1,4 +1,4 @@
-## Codeforces-1084B. Kvass and the Fair Nut
+## Codeforces - 1084B. Kvass and the Fair Nut
 
 #### [题目链接](http://codeforces.com/problemset/problem/1084/B)
 
