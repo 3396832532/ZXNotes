@@ -1,9 +1,9 @@
 
 ## Codeforces - 20C & 115A & 840A  & 782C
-* [Codeforces - 20C - Dijkstra?](#codeforces---20c---dijkstra?)
+* [Codeforces - 20C - Dijkstra?](#codeforces---20c---dijkstra)
 * [Codeforces - 115A - Party](#codeforces---115a---party)
 * [Codeforces - 840A - Leha and Function](#codeforces---840a---leha-and-function)
-* [Codeforces - 782C - Andryusha and Colored Balloons](#codeforces-782c---andryusha-and-colored-balloons)
+* [Codeforces - 782C - Andryusha and Colored Balloons](#codeforces---782c---andryusha-and-colored-balloons)
 
 ***
 ### <font color =red id = "1">Codeforces - 20C - Dijkstra?
