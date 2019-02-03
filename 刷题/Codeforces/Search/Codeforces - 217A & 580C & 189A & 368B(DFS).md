@@ -1,5 +1,5 @@
 
-## Codeforces 217A & 580C & 189A & 368B
+## Codeforces - 217A & 580C & 189A & 368B
 * [Codeforces - 217A - Ice Skating](#codeforces---217a---ice-skating)
 * [Codeforces - 580C - Kefa and Park](#codeforces---580c---kefa-and-park)
 * [Codeforces - 189A - Cur Ribbon](#codeforces---189a---cur-ribbon)
