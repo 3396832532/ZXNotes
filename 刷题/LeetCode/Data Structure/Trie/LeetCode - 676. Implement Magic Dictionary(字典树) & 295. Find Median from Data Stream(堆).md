@@ -1,4 +1,4 @@
-﻿## LeetCode676. Implement Magic Dictionary & 295. Find Median from Data Stream
+﻿## LeetCode - 676. Implement Magic Dictionary & 295. Find Median from Data Stream
 * [LeetCode-676. Implement Magic Dictionary](#1)
 * [LeetCode-295. Find Median from Data Stream](#leetcode-295-find-median-from-data-stream)
 
