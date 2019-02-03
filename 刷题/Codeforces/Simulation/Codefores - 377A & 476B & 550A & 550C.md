@@ -2,7 +2,7 @@
 
 * [Codeforces - 377A - Maze](#codeforces---377a---maze)
 * [Codeforces - 476B - Dreamoon and WiFi](#codeforces---476b---dreamoon-and-wifi)
-* [Codeforces - 550A - Two Substrings](#codeforces---550a----two-substrings)
+* [Codeforces - 550A - Two Substrings](#codeforces---550a---two-substrings)
 * [Codeforces - 550C - Divisibility by Eight](#codeforces---550c---divisibility-by-eight)
 
 ***
