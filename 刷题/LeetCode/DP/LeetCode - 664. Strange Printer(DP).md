@@ -1,7 +1,7 @@
 ﻿## LeetCode - 664. Strange Printer(DP)
-#### [题目链接](https://leetcode-cn.com/problems/strange-printer/)
+#### [题目链接](https://leetcode.com/problems/strange-printer/)
 
-> https://leetcode-cn.com/problems/strange-printer/
+> https://leetcode.com/problems/strange-printer/
 
 #### 题目
 
