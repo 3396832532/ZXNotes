@@ -1,4 +1,4 @@
-## Codeforce - 1080B. Margarite and the best present
+## Codeforces - 1080B. Margarite and the best present
 
 #### [题目链接](http://codeforces.com/problemset/problem/1080/B)
 
