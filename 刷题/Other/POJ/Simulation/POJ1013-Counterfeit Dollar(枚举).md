@@ -1,0 +1,154 @@
+﻿## POJ1013-Counterfeit Dollar(枚举)
+#### [题目链接](http://poj.org/problem?id=1013)
+
+> http://poj.org/problem?id=1013
+
+#### 题目大意
+有`12`枚硬币，其中有`11`枚真币和`1`枚假币，真币和假币重量不同，<font color= red>但不知道是真币重还是假币重</font>，现在，用一架天平称了这些硬币三次，给你称量的结果，请你找出假币，<font color=  red>并且确定假币是重还是轻。
+
+<font color = purple size = 5>**Sample Input**
+
+
+
+```c
+1 
+ABCD EFGH even 
+ABCI EFJK up 
+ABIJ EFGH even 
+```
+<font color = purple size = 5>**Sample Output**
+
+
+
+```c
+K is the counterfeit coin and it is light. 
+```
+***
+#### 解题思路
+
+直接枚举`12`个字母:
+
+* 每个字母假设它是假币，且枚举它是重或者轻，也就是枚举`12 * 2 = 24`次，每次都调用`isFake`函数，如果满足条件，就输出对应信息；
+* `isFake`函数实现: 要分两种情况 ①假设此时假币`c`是**轻**的，即`light = true`，则通过称量结果来判断这样是不是成立，判断要分三种情况，`(1)`. 假如`res = up`，则表示左边重，右边轻，则在右边一定要能找到`c`，否则返回`false`；`(2)`. 假如`res = even`，则在左右两边都不能找到`c`，否则返回`false`；`(3)`. 如果`res = down`，则左边轻，右边重，则在左边一定要能找到`c`，否则返回`false`；②第二种情况，就是`light = false`，我们可以一开始对调字符串即可，过程同理；
+
+
+
+
+`Java`
+```java
+import java.io.BufferedInputStream;
+import java.util.Scanner;
+
+public class Main {
+
+    static String[] left, right, result;
+
+    static boolean isFake(char c, boolean light) {
+        for (int i = 0; i < 3; i++) {
+            String L, R;
+            if (light) {
+                L = left[i];
+                R = right[i];
+            } else {
+                L = right[i];
+                R = left[i];
+            }
+            //judge
+            if (result[i].charAt(0) == 'u') {
+                if (!R.contains(String.valueOf(c)))
+                    return false;
+            } else if (result[i].charAt(0) == 'e') {
+                if (L.contains(String.valueOf(c)) || R.contains(String.valueOf(c)))
+                    return false;
+            } else {
+                if (!L.contains(String.valueOf(c)))
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner cin = new Scanner(new BufferedInputStream(System.in));
+        int T = cin.nextInt();
+        for(int t = 0; t < T; t++){
+            left = new String[3];
+            right = new String[3];
+            result = new String[3];
+            for (int i = 0; i < 3; i++) {
+                left[i] = cin.next();
+                right[i] = cin.next();
+                result[i] = cin.next();
+            }
+            for (char c = 'A'; c <= 'L'; c++) {
+                if (isFake(c, true)) {
+                    System.out.println(c + " is the counterfeit coin and it is light. ");
+                    break;
+                } else if (isFake(c, false)) {
+                    System.out.println(c + " is the counterfeit coin and it is heavy. ");
+                    break;
+                }
+            }
+        }
+    }
+}
+
+```
+`C++`
+```cpp
+#include <iostream>
+#include <stdio.h>
+#include <string.h>
+
+char left[3][7], right[3][7], result[3][7];
+
+bool isFake(char c, bool light){ 
+    for(int i = 0; i < 3; i++){ 
+        char *pL,*pR;
+        if(light){ 
+            pL = left[i];
+            pR = right[i];
+        }else{ 
+            pL = right[i];
+            pR = left[i];
+        }
+        //assume light is true, judge
+        switch(result[i][0]){ 
+            case 'u': 
+                if(strchr(pR, c) == NULL)
+                    return false;
+                break;
+            case 'e':  // equals, --> c
+                if(strchr(pL, c) || strchr(pR, c))
+                    return false;
+                break;
+            case 'd':
+                if(strchr(pL, c) == NULL)
+                    return false;
+                break;
+        }
+    }    
+    return true;
+}
+
+int main(int argc, char const **argv)
+{
+    //freopen("in.txt", "r", stdin);
+    int T;
+    for(std::cin >> T; T--; ){ 
+        for(int i = 0; i < 3; i++)
+            std::cin>> left[i] >> right[i] >> result[i];
+        for(char c = 'A'; c <= 'L'; c++){ 
+            if(isFake(c, true)){
+                std::cout << c <<" is the counterfeit coin and it is light. "<< std::endl;
+                break;
+            }else if(isFake(c, false)){ 
+                std::cout << c <<" is the counterfeit coin and it is heavy. "<< std::endl;
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+```
