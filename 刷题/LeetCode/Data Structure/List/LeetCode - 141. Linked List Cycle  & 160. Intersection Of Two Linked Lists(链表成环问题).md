@@ -1,11 +1,11 @@
 ﻿## LeetCode - 141. Linked List Cycle  & 160. Intersection Of Two Linked Lists(链表成环问题)
-* LeetCode-141 Linked List Cycle(判断是否有环)
-* LeetCode-142  Linked List Cycle II(找到第一个入环节点)
-* LeetCode-160 Intersection Of Two Linked Lists(找到两个链表的第一个相交的节点(两个链表都无环))
-* 扩展问题(<font color  = red>**两个链表可以有环的情况下找到两个链表的第一个相交的节点**</font>)
+* [LeetCode - 141. Linked List Cycle-判断是否有环](#leetcode---141-linked-list-cycle-判断是否有环)
+* [LeetCode - 142. Linked List Cycle II-找到第一个入环节点](#leetcode---142-linked-list-cycle-ii-找到第一个入环节点)
+* [LeetCode - 160. Intersection Of Two Linked Lists-找到两个链表的第一个相交的节点-两个链表都无环](#leetcode---160-intersection-of-two-linked-lists-找到两个链表的第一个相交的节点-两个链表都无环)
+* [扩展问题-两个链表可以有环的情况下找到两个链表的第一个相交的节点](#扩展问题-两个链表可以有环的情况下找到两个链表的第一个相交的节点)
 
 ***
-### LeetCode141 Linked List Cycle(判断是否有环)
+### LeetCode - 141. Linked List Cycle-判断是否有环
 #### [题目链接](https://leetcode.com/problems/linked-list-cycle/)
 
 > https://leetcode.com/problems/linked-list-cycle/
@@ -57,7 +57,7 @@ public class Solution {
 }
 ```
 ***
-### LeetCode142  Linked List Cycle II(找到第一个入环节点)
+### LeetCode - 142. Linked List Cycle II-找到第一个入环节点
 #### [题目链接](https://leetcode.com/problems/linked-list-cycle-ii/)
 
 > https://leetcode.com/problems/linked-list-cycle-ii/
@@ -101,7 +101,7 @@ public class Solution {
 }
 ```
 ***
-### LeetCode160 Intersection Of Two Linked Lists(找到两个链表的第一个相交的节点(两个链表都无环))
+### LeetCode - 160. Intersection Of Two Linked Lists-找到两个链表的第一个相交的节点-两个链表都无环
 #### [题目链接](https://leetcode.com/problems/intersection-of-two-linked-lists/)
 
 > https://leetcode.com/problems/intersection-of-two-linked-lists/
@@ -163,7 +163,7 @@ public class Solution {
 }
 ```
 ***
-### 扩展问题(<font color  = red>两个链表可以有环的情况下找到两个链表的第一个相交的节点)
+### 扩展问题-两个链表可以有环的情况下找到两个链表的第一个相交的节点
 
 #### 问题: 
 > <font color = blue>**两个链表，可以有环或者无环，可以相交或者不相交，如果相交，返回第一个入环节点，否则返回`null`。**
