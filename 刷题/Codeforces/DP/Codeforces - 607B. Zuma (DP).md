@@ -1,4 +1,4 @@
-﻿## Codeforces - 607B.Zuma (DP)
+﻿## Codeforces - 607B. Zuma (DP)
 
 #### [题目链接](https://codeforces.com/problemset/problem/607/B)
 
