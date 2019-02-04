@@ -1,7 +1,7 @@
 ﻿## LeetCode - 112. PathSum & Path SumII(树的路径和问题)(递归和非递归)
 
 * [LeetCode - 112. Path Sum](#1)
-* [LeetCode - 113. Path Sum II](#leetcode---113-pathsum-)
+* [LeetCode - 113. Path Sum II](#leetcode---113-path-sum-ii)
 
 ***
 ### <font id = "1">LeetCode - 112. Path Sum
