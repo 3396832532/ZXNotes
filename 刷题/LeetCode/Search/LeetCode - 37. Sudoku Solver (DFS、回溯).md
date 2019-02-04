@@ -1,4 +1,4 @@
-﻿## LeetCode - 37.Sudoku Solver (DFS、回溯)
+﻿## LeetCode - 37. Sudoku Solver (DFS、回溯)
 #### [题目链接](https://leetcode.com/problems/sudoku-solver/)
 
 > https://leetcode.com/problems/sudoku-solver/
