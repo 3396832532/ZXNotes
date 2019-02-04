@@ -83,7 +83,9 @@ class Solution {
 但是上面显然是错误的。
 为什么呢，经过调试，<font color = blue>发现虽然看似处理了当前`t1`为`null`的情况，但是当前`t1`却没有和它的父亲连接起来，也就是没有在树的体系结构中，看下图: 
 ![在这里插入图片描述](images/617_s.png)
+
 **所以处理的办法就是:**
+
 * <font color = red>当前的`t1`直接判断自己的`left`和`right`，如果为空，就设置成`t2`的结点；</font>
 * <font color = red>如果不为空，就加入栈中，进行前序非递归的步骤；
 * <font color = red>这样的话，当前的`t1(tops[0])`一定不为`null`；
