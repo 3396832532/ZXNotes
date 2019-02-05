@@ -1,7 +1,7 @@
 ﻿## LeetCode - 268. Missing Number &  674. Longest Continuous Increasing Subsequence
 
-* [LeetCode - 268. Missing Number](#1)
-* [LeetCode - 674. Longest Continuous Increasing Subsequence](#2)
+* [LeetCode - 268. Missing Number](#leetcode---268-missing-number)
+* [LeetCode - 674. Longest Continuous Increasing Subsequence](#leetcode---674-longest-continuous-increasing-subsequence)
 
 ***
 ### <font color = red id = "1">LeetCode - 268. Missing Number
