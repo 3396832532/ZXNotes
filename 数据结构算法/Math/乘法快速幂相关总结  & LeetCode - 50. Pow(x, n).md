@@ -53,9 +53,18 @@
     }
 ```
 使用`a ^ 11`来模拟一下计算过程: 
+
 ![在这里插入图片描述](images/m17.png)
+
+
+
 ### 计算 <font color = red>( a * b ) % mod
+
+
+
 ![在这里插入图片描述](images/m16.png)
+
+
 
 ```java
 	// 计算 (a * b) % mod
