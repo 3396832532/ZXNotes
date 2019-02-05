@@ -7,8 +7,11 @@
  - 加强问题(ic,dc,rc)
 
 #### [题目链接](https://leetcode.com/problems/edit-distance/description/)
+
+> https://leetcode.com/problems/edit-distance/description/
+
 #### 题目
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190106211019471.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/72_t.png)
 ***
 ## 记忆化
 使用递归的解法: 
@@ -17,11 +20,11 @@
 
  * <font color = red>如果最后两个字符`(i,j)`相等，最后两个字符就不要配对，所以等于`minDistance(s1[0..i-1]，s2[0...j-1])`；</font>
  * <font color = red>如果最后两个字符不相等: 说明要编辑，具体可以分为三种情况: </font>
- 	* 如果 `s1[i-1]`和`s2[j]`可以配对，那我就删除`s1[i]`即可(删除)；
- 	* 如果 `s1[i]和s2[j-1]`可以配对，那我就在`s1`的后面加上`s2[j]`即可(插入)；
- 	* 如果 `s1[i-1]和s2[j-1]`可以配对，那我就把`s1[i]`修改成`s2[j]`即可；
+		* 如果 `s1[i-1]`和`s2[j]`可以配对，那我就删除`s1[i]`即可(删除)；
+		* 如果 `s1[i]和s2[j-1]`可以配对，那我就在`s1`的后面加上`s2[j]`即可(插入)；
+		* 如果 `s1[i-1]和s2[j-1]`可以配对，那我就把`s1[i]`修改成`s2[j]`即可；
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190106211707300.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/72_s.png)
 然后就是使用一个`dp`数组记录递归中已经求解的子问题。
 ```java
 class Solution {
@@ -63,7 +66,7 @@ class Solution {
 ```
 ***
 ### 二维dp
-![这里写图片描述](https://img-blog.csdn.net/20180826002203455?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](images/72_s2.png)
 二维`dp`就是使用一个二维数组从左到右，从上倒下来递归出最后的答案，注意几点: 
 
  - `dp`数组的大小 `dp[chs1.length + 1] [chs2.length + 1]`，因为一开始是空串`" "`，所以要多开一个；
@@ -99,7 +102,7 @@ class Solution {
 
 解决的办法是使用两个变量`temp`和`pre`保存，在更新之前，使用`temp`保存`dp[j]`，然后`dp[j]`要被更新，然后将`dp[j]`赋值给`pre`，下次递推的时候，左上角的值就是`pre`； 
 
-![这里写图片描述](https://img-blog.csdn.net/20180825235522468?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](images/72_s3.png)
 ```java
 class Solution {
 
@@ -172,7 +175,7 @@ class Solution {
 
 这个问题是上面问题的加强版，不同的地方在于这里三个编辑的代价不同，所以我们要更加的清楚<font color = red>是哪个编辑的更新: </font>
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190106212318629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/72_s4.png)
 **也就是说: **
 
  - `dp[i-1][j]`代表的是删除了 `chs1[i-1]`，然后配对`chs1[i-2]`和`chs2[j-1]`， 所以加上`dc`(删除`chs1[i-1]`的)；
