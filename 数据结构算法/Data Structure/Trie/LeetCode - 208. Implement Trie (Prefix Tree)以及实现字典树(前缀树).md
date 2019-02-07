@@ -12,9 +12,12 @@
 ***
 ### 基础知识和结构
 `Map`和`Trie`的差别，关于映射集合等可以看[**这篇博客**](https://blog.csdn.net/zxzxzx0119/article/details/79891408)。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181228081830617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
- -  <font color = red> 字典树也叫做前缀树，可以存储一组元素(一般是字符串)，可以快速的**查找某个字符串在树中的个数**以及**寻找以某个字符串为前缀的字符串的个数**，先看下图为一些字符串插入到字典树中的情形。
+![在这里插入图片描述](images/t1.png)
+
+
+
+ -  <font color = red> **字典树也叫做前缀树，可以存储一组元素(一般是字符串)，可以快速的查找某个字符串在树中的个数以及寻找以某个字符串为前缀的字符串的个数，先看下图为一些字符串插入到字典树中的情形。**
 
 字典树的存储结构: 
 
@@ -47,10 +50,17 @@ public class Trie {
 ```
 
 例如: 下面的这颗字典树: 
-![这里写图片描述](https://img-blog.csdn.net/20180908104657337?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/t2.png)
+
+
 
 再如:  **树中有`"abc","ab","ab","abd","bc","bd","cd","cde","ce"`总共`9`个字符串。如下的结构:** 
-![这里写图片描述](https://img-blog.csdn.net/20180908110651637?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/t3.png)
+
+
+
 ***
 ### 字符串的插入
 
@@ -283,13 +293,28 @@ public class Trie {
 }
 
 ```
-测试结果: 
-![这里写图片描述](https://img-blog.csdn.net/2018090811583492?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+测试结果输出: 
+
+```c
+2
+1
+1
+0
+1
+0
+```
+
 ***
 ### 题目解析
 #### [题目链接](https://leetcode.com/problems/implement-trie-prefix-tree/description/)
+
+> https://leetcode.com/problems/implement-trie-prefix-tree/description/
+
 #### 题目
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181228082129891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/t4.png)
+
+
+
 #### 解析
 运用上面的操作完全能解决这个问题：
 
@@ -471,6 +496,9 @@ class Trie {
 ### 更多字典树
 
  - **压缩字典树；**
-![这里写图片描述](https://img-blog.csdn.net/20180908120700569?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
- - **三分搜索树**：
-![这里写图片描述](https://img-blog.csdn.net/20180908120837591?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/t5.png)
+
+ - **三分搜索树；**
+
+![这里写图片描述](images/t6.png)
