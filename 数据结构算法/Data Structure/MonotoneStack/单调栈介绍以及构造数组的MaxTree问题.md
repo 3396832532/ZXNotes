@@ -293,6 +293,9 @@ public class MaxTree {
 }
 ```
 效果
+
 ![这里写图片描述](images/ms1.png)
+
+
 
 这里没有用二叉树遍历来验证，直接用的直观打印二叉树的方法，上面打印二叉树的程序可以看[**这篇博客**](https://blog.csdn.net/zxzxzx0119/article/details/81096554)。
