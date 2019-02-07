@@ -13,7 +13,9 @@
 > https://leetcode.com/problems/permutations-ii/description/
 
 #### 题目
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190125103237159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/47_t.png)
+
+
 
 ### 方法一: 使用普通全排列并使用`List`判断去重
  这种方式很简单，就是在将中间结果集添加到最终结果集之前，判断一下中间集在结果集中之前是否出现过即可。
