@@ -7,6 +7,14 @@
 ***
 #### [题目链接](https://leetcode.com/problems/shortest-palindrome/description/)
 
+#### 题目
+
+
+
+![](images/214_t.png)
+
+
+
 ### KMP算法解决
 **KMP基础可以先看一下[这篇文章](https://blog.csdn.net/zxzxzx0119/article/details/81430392)**。
 
@@ -15,7 +23,10 @@
 * 然后我们要的就是整个串的最长公共前缀和后缀，然后再进行字符串的处理即可，处理的方面看代码。  
 
  <font color = red> **注意下面画的图所有的例子都是  `12321cba` 这个字符串。**</font>
-![这里写图片描述](https://img-blog.csdn.net/20180807190627167?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/214_s.png)
+
+
 
 代码如下: 
 
@@ -58,9 +69,13 @@ class Solution {
 * 那么我们的问题只需要把后面的`cba`反过来放到前面就就可以；
 * 而这就是进行下标的变化得到结果(code的细节)。(下图的第二种情况)
 
+这个问题变化问题，就是我们可以在后面添加最少字符使得变成回文串，这个是一样的(而且更简单)，看下图的第一种情况。
 
-这个问题变化问题，就是我们可以在后面添加最少字符使得变成回文串，这个是一样的(而且更简单)，看下图的第一种情况
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190207121203966.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+
+![在这里插入图片描述](images/214_s2.png)
+
+
 
 ```java
 class Solution {
