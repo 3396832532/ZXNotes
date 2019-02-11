@@ -17,10 +17,12 @@
 * 用一个变量`sumAll`记录包含没有丢失的那个数的所有的和(也可以用等差数列求和公式求出)；
 * 然后求出数组的和`sum`，结果就是`sumAll - sum`；
 
-
 更好的解法，利用亦或的性质: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181227133612458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![在这里插入图片描述](images/268_s.png)
+
 利用第四条性质，循环亦或`xor = xor ^ (i+1) ^ nums[i]`其中没有出现的数就会剩下来。
+
 ```java
 class Solution {
     public int missingNumber(int[] nums) {
