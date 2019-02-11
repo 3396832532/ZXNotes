@@ -7,7 +7,7 @@
  - 插入、更新与删除数据
  - 索引
 ***
-## <font color = red>数据库的基本操作
+## <font color = red>一、数据库的基本操作
 ### 1、基本命令
 **登陆数据库命令:**
 ```mysql
@@ -100,13 +100,13 @@ MEMORY 存储引擎**将表中的数据存储到内存中，为查询和引用�
 
 ![](images/1_存储引擎选择.png)
 
-* 如果要提供提交、回滚和崩溃恢复能力的事务安全 (ACID 兼容) 能力，并要求实现并发控制，InnoDB 是个很好的选择；
+* 如果要提供提交、回滚和崩溃恢复能力的**事务安全** (ACID 兼容) 能力，并要求实现**并发控制**，InnoDB 是个很好的选择；
 
-* 如果数据表主要用来插入和查询记录，则 MyISAM 引擎能提供较高的处理效率；
+* 如果数据表主要用来**插入和查询记录**，则 MyISAM 引擎能提供较**高的处理效率**；
 
-* 如果只是临时存放数据，数据量不大，并且不需要较高的数据安全性，可以选择将数据保存在内存中的 Memory 引擎，MySQL 中使用该引擎作为临时表，存放查询的中间结果；
+* 如果只是**临时存放数据**，数据量不大，并且**不需要较高的数据安全性**，可以选择将**数据保存在内存中**的 Memory 引擎，MySQL 中使用该引擎作为临时表，存放查询的中间结果；
 
-* 如果只有 INSERT 和 SELECT 操作，可以选择 Archive 引擎，Archive 存储引擎支持高并发的插入操作，但是本身并不是事务安全的。Archive 存储引擎非常适合存储归档数据，如记录日志信息可以使用 Archive 引擎。
+* 如果只有 **INSERT 和 SELECT 操作**，可以选择 Archive 引擎，Archive 存储引擎支持高并发的插入操作，但是本身**并不是事务安全**的。Archive 存储引擎非常适合**存储归档数据**，如记录日志信息可以使用 Archive 引擎。
 
 使用哪一种引擎要根据需要灵活选择, 一个数据库中多个表可以使用不同引擎以满足各种性能和实际需求。使用合适的存储引擎，将会提高整个数据库的性能。
 
@@ -114,10 +114,10 @@ MEMORY 存储引擎**将表中的数据存储到内存中，为查询和引用�
 
 ***
 
-### <font color = red>数据表
+## <font color = red>二、数据表的基本操作
 
+### 1、创建数据表
 
-**创建数据表**
 ```sql
 use test_db;
 create table tb_emp1
@@ -129,10 +129,12 @@ create table tb_emp1
 );
 ```
 使用下面语句查看此数据库存在的表
-```sql
+```mysql
 show tables;
 ```
 **主键约束**
+
+>  主键，又称主码，是表中**一列或多列的组合**。主键约束〈Primary Key Constraint) 要求**主键列的数据唯一，并且不允许为空`!= null`**。主键能够唯一地标识表中的一条记录，可以结合外键**来定义不同数据表之间的关系，** 并且可以加快数据库查询的速度。主键和记录之间的关系如同身份证和人之间的关系，它们之间是一一对应的。主键分为两种类型: **单字段主键和多字段联合主键。**
 
  - 单字段主键
  - 在定义完所有列之后定义主键
@@ -414,7 +416,7 @@ alter table employees rename employees_info;
 ```
 ***
 
-### <font color = red>数据类型和运算符
+## <font color = red>三、数据类型和运算符
 
 数据类型主要有下面几种
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220743641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
@@ -602,7 +604,7 @@ select price,price<<2,price>>2 from tmp15;
 ```
 
 ***
-### <font color = red>Mysql函数
+## <font color = red>四、Mysql函数
 
 ###数学函数
 
