@@ -132,13 +132,13 @@ create table tb_emp1
 ```mysql
 show tables;
 ```
-**主键约束**
+#### 1)、主键约束
 
 >  主键，又称主码，是表中**一列或多列的组合**。主键约束〈Primary Key Constraint) 要求**主键列的数据唯一，并且不允许为空`!= null`**。主键能够唯一地标识表中的一条记录，可以结合外键**来定义不同数据表之间的关系，** 并且可以加快数据库查询的速度。主键和记录之间的关系如同身份证和人之间的关系，它们之间是一一对应的。主键分为两种类型: **单字段主键和多字段联合主键。**
 
- - 单字段主键
- - 在定义完所有列之后定义主键
- - 多字段联合主键
+ - 单字段主键；
+ - 在定义完所有列之后定义主键；
+ - 多字段联合主键；
 
 单字段约束: 
 ```sql
@@ -173,13 +173,28 @@ create table tb_emp4
 	primary key(name,deptID)
 );
 ```
-**外键约束**
-需要注意: 
- - <font color= red>子表的外键必须要关联父表的**主键**
- - 相关联的数据类型必须匹配
- - <font color= red>先删子表，再删父表
+#### 2)、外键约束
 
-下面的例子**tb_emp5(员工表)中的deptID关联部门表中的ID(主键)**
+* 外键用来在两个表的数据之间建立链接， 它可以是一列或者多列。一个表可以有一个或多个外键。**外键对应的是参照完整性**，一个表的外键可以为空值，**若不为空值，则每一个外键值必须等于另一个表中主键的某个值。**
+* 外键 : 首先它是表中的一个字段，**它可以不是本表的主键，但对应另外一个表的主键。**外键主要作用是保证数据引用的完整性， 定义外键后，**不允许删除在另一个表中具有关联关系的行**。外键的作用是保持数据的一致性、完整性。例如，部门表 `tb_dept `的主键是`id`，在员工表`tb_emp5`中有一个键 `deptId` 与这个` id` 关联。
+
+有关主表和从表:
+
+* 主表〈父表) : 对于两个具有关联关系的表而言，相关联字段中**主键所在的那个表**即是主
+
+表。
+
+* 从表〈子表) : 对于两个具有关联关系的表而言，相关联字段中**外键所在的那个表**即是从
+
+表。
+
+需要注意: 
+
+ - <u>子表的外键必须要关联父表的**主键**</u>；
+ - **相关联的数据类型必须匹配**；
+ - **先删子表，再删父表**；
+
+下面的例子**tb_emp5(员工表)中的deptID关联部门表中的ID(主键)**：
 ```sql
 //父表
 create table tb_dept1
@@ -201,7 +216,8 @@ create table tb_emp5
 	constraint fk_emp5_dept foreign key(deptID) references tb_dept1(id)
 )
 ```
-**非空约束**
+#### 3)、非空约束
+
 非空约束指定的字段不能为空，如果添加数据的时候没有指定值，会报错。
 
 ```sql
@@ -213,8 +229,11 @@ create table tb_emp6
 	salary 	float
 );
 ```
-**唯一性约束**
-唯一性要求该列唯一，允许为空，但只能出现一个空值，唯一性可以确保一列或几列不出现重复值。
+#### 4)、唯一性约束
+
+* 唯一性要求该列唯一；
+* **允许为空，但只能出现一个空值；**
+* 唯一性可以确保一列或几列不出现重复值；
 
 ```sql
 create table tb_dept2
@@ -233,10 +252,15 @@ create table tb_dept3
 	constraint N_uq unique(name)  #N_uq是约束名
 );
 ```
-注意`UNIQUE`和主键约束的区别: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205215424660.png)
-**默认约束**
+**注意`UNIQUE`和主键约束(`PRIMARY KEY `)的区别:** 
+
+*  <u>一个表中可以有多个字段声明为`UNIQUE`，但只能有一个`PRIMARY KEY` 声明；</u>
+*  <u>声明为 `PRIMAY KEY` 的列不允许有空值，但是声明为 `UNIQUE`的字段允许空值 (NULL) 的存在。</u>
+
+#### 5)、默认约束
+
 指定了默认约束之后，如果没有指定值，就用默认的。
+
 ```sql
 create table tb_emp7
 (
@@ -246,7 +270,8 @@ create table tb_emp7
 	salary 	float
 ); 
 ```
-**设置表的属性自加**
+#### 6)、设置表的属性自加
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205215623352.png)
 
 ```sql
@@ -258,20 +283,28 @@ create table tb_emp8
 	salary 	float
 ); 
 ```
-**查看表的结构**
+#### 7)、查看表的结构
+
 desc可以查看表的字段名，数据类型，是否为主键，是否默认值。
+
 ```sql
 desc tb_emp8;
 ```
 效果如图
+
 ![这里写图片描述](https://img-blog.csdn.net/20180412152855997?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 查看表的详细结构，可以看储存引擎，和字符编码
+
 ```sql
 show create table tb_emp8;
 ```
-**修改数据表**
-**修改表名**
+### 2、修改数据表
+
+#### 1)、修改表名
+
 将表`tb_dept3`改为`tb_deptment3`
+
 ```sql
 alter table tb_dept3 rename tb_deptment3;
 ```
@@ -281,12 +314,13 @@ show tables;
 ```
 修改表名不会改变结构，`desc`前后结果一样。
 
-**修改字段的数据类型**
+#### 2)、修改字段的数据类型
+
 ```sql
 # 修改表字段的数据类型,把name列的数据类型改为varchar(33)
 alter table tb_dept1 modify name varchar(33);
 ```
-**修改字段名**
+#### 3)、修改字段名
 
 ```sql
 #修改表的字段名,不改数据类型
@@ -299,7 +333,10 @@ alter table tb_dept1 change loc location varchar(60);
 ```
 `change`也可以只改变数据类型，但是一般不要**轻易改变数据类型**。
 
-**添加字段**
+#### 4)、添加字段
+
+
+
 有三种添加方式，① 默认在最后面添加，②在第一个位置添加，③和指定的位置添加
 
 ```sql
@@ -320,12 +357,13 @@ alter table tb_dept1 add column2 int(10) first;
 #添加字段(在指定位置后面添加)
 alter table tb_dept1 add column3 int(10) after name;
 ```
-**删除字段**
+#### 5)、删除字段
+
 ```sql
 #删除字段
 alter table tb_dept1 drop column3;
 ```
-**修改字段的排列位置**
+#### 6)、修改字段的排列位置
 
 ```sql
 #修改字段的排列位置(改到第一个位置)
@@ -333,14 +371,15 @@ alter table tb_dept1 modify column1 int(10) first;
 #修改字段的位置为指定的位置
 alter table tb_dept1 modify column2 int(10) after name;
 ```
-**更改表的储存引擎**
+#### 7)、更改表的储存引擎
+
 ```sql
 #查看数据表的定义
 show create table tb_deptment3;
 #更改数据表的引擎
 alter table tb_deptment3 engine = MyISAM;
 ```
-**删除表的外键约束**
+#### 8)、删除表的外键约束
 
 ```sql
 create table tb_emp9
@@ -355,13 +394,16 @@ create table tb_emp9
 #删除外键约束
 alter table tb_emp9 drop foreign key fk_emp9_dept;
 ```
-**删除数据表**
+### 3、删除数据表
+
 ```sql
 #删除表
 drop table if exists tb_emp9;
 ```
 注意**删除有关联的数据表的父表的时候，先删除外键再删除父表**
-**综合案例小结**
+
+### 4、综合案例小结
+
 ```sql
 create database company;
 use company;
@@ -373,7 +415,6 @@ create table offices
 	country varchar(50) not null,
 	postalCode varchar(15) unique
 )
-
 
 create table employees
 (
