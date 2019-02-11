@@ -1,5 +1,8 @@
 ## Codeforces - 1101A. Minimum Integer(数学推理)
-#### [题目链接]()
+#### [题目链接](https://codeforces.com/problemset/problem/1101/A)
+
+> https://codeforces.com/problemset/problem/1101/A
+
 #### 题目
 
 给你`q`代表`q`个查询，每个查询给你`l, r, d`，要你找到**最小**的不在`[l, r]`之间的能整除`d`的数。
