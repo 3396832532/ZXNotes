@@ -545,8 +545,10 @@ public void test1(){
 **注意，这样写的前提: `Consumer`中的`accept()`方法和`println()`方法的参数列表和返回类型要完全一致:** 
 ![这里写图片描述](images/lambda4.png)
 ![这里写图片描述](images/lambda5.png)
+
 再看一个例子: 
 三种写法的效果是一样的: 
+
 ```java
 public class TestLambda {
 
