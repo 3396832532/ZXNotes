@@ -78,38 +78,85 @@ public class Code_01_TryConcurrency {
 
 ### 线程声明周期以及start和run方法区别等
 
- - **注意只有当Thread的实例调用start()方法时，才能真正的成为一个线程，调用run()方法不是一个线程；**
+ - **注意只有当Thread的实例调用start()方法时，才能真正的成为一个线程；**
+ - **调用run()方法不是一个线程；**
 
 ![这里写图片描述](https://img-blog.csdn.net/20180909232522964?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-下面的代码，如果是t.start()输出的线程名为"Read-Thread"，而如果调用的是t.run则会输出main线程名。
+下面的代码，如果是`t.start()`输出的线程名为`"Read-Thread"`，而如果调用的是`t.run()`则会输出`main`线程名。
 ```java
-	   Thread t = new Thread("Read-Thread"){
-            @Override
-            public void run() {
-                println(Thread.currentThread().getName()); //如果调用start就是"Read-Thread"，如果调用的是run方法就是main
-                readFromDataBase();
-            }
-        };
+Thread t = new Thread("Read-Thread"){
+    @Override
+    public void run() {
+        println(Thread.currentThread().getName()); //如果调用start就是"Read-Thread"，如果调用的是run方法就是main
+        readFromDataBase();
+    }
+};
 
-//        t.start();  //只有调用start()方法才是真正的线程
-        t.run();
+//  t.start();  //只有调用start()方法才是真正的线程
+t.run();
 ```
 
- - **Thread中使用了[模板方法设计模式](https://blog.csdn.net/zxzxzx0119/article/details/81709199)，也就是我们继承Thread类，重写的是run()方法(钩子方法)，但是调用的却是start()方法(最终方法)的原因。**
-    ![在这里插入图片描述](https://img-blog.csdn.net/20181007190314719?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-    ![在这里插入图片描述](https://img-blog.csdn.net/20181007190629875?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
- - Java应用程序的main函数是一个线程，在JVM启动的时候调用，名字叫main；
- - **当你调用一个线程start()方法的时候，此时至少有两个线程，一个是调用你的线程(例如main)，还有一个是执行run()方法的线程；**
- - JVM启动时，实际上有多个线程，但是至少有一个**非守护线程**；
 
 
+**Thread中使用了[模板方法设计模式](https://blog.csdn.net/zxzxzx0119/article/details/81709199)，也就是我们继承Thread类，重写的是run()方法(钩子方法)，但是调用的却是start()方法(最终方法)的原因。**
+![在这里插入图片描述](https://img-blog.csdn.net/20181007190314719?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-其中一个是 main，另一个是 Thread-0，之前
-说过在操作系统启动一个 Java 虚拟机 (JVM) 的时候，其实是启动了一个进程，而在该进
-程里面启动了一个以上的线程，其中 Thread-0 这个线程就是 1.2.2 节中创建的，main 线程
-是由JVM 启动时创建的，我们都知道 J2SE 程序的人口就是 main 函数，虽然我们在 1.2.2
-节中显式地创建了一个线程，事实上还有一个 main 线程，当然还有一些其他的守护线程，
-比如垃圾回收线程、RMI 线程等。
+关于模板方法，简单说: **就是父类写了一些固定的逻辑，但是给自己留了一个方法可以实现，有些逻辑不能改，有些可以改**，看一个简单的例子:
+
+```java
+public class Code_02_TemplateMethod {
+
+    // 不能给子类实现
+    public final void print(String msg){
+        System.out.println("################");
+        wrapPrint(msg);
+        System.out.println("################");
+    }
+
+    // 给子类实现(也可以写成抽象方法，子类必须实现)
+    protected void wrapPrint(String msg){
+
+    }
+
+    public static void main(String[] args){
+
+        Code_02_TemplateMethod t1 = new Code_02_TemplateMethod(){
+            @Override
+            protected void wrapPrint(String msg) {
+                System.out.println("**" + msg + "**");
+            }
+        };
+        t1.print("Hello Thread");
+
+        Code_02_TemplateMethod t2 = new Code_02_TemplateMethod(){
+            @Override
+            protected void wrapPrint(String msg) {
+                System.out.println("++" + msg + "++");
+            }
+        };
+        t2.print("Hello Thread");
+    }
+}
+
+```
+输出:
+```c
+################
+**Hello Thread**
+################
+################
+++Hello Thread++
+################
+```
+
+* `print` 方法类似于 Thread 的 start方法，而 wrapPrint 则类似于 run 方法；
+* 这样做的好处是，程序结构由父类控制，并且是 `final` 修饰的，不允许被重写，子类只需要实现想要的罗
+
+辑任务即可；
+
+ - Java应用程序的main函数是一个线程，在JVM启动的时候调用，名字叫`main`；
+ - **当你调用一个线程`start()`方法的时候，此时至少有两个线程，一个是调用你的线程(例如`main`)，还有一个是执行`run()`方法的线程；**
+ - JVM启动时，实际上有多个线程，但是至少有一个**非守护线程**；s
 
 关于守护线程和非守护线程:
 
