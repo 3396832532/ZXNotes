@@ -1,4 +1,4 @@
-## Codeforeces - 1111B. Average Superhero Gang Power(超人的最大平均战斗力)
+## Codeforces - 1111B. Average Superhero Gang Power(超人的最大平均战斗力)
 #### [题目链接]()
 #### 题目
 
