@@ -1,8 +1,14 @@
 # <font color = red>MySQL基础
- - 数据库的基本操作
- - 数据表的基本操作
- - 数据类型和运算符
- - `Mysql`函数
+ - [一、数据库的基本操作](#一数据库的基本操作)
+    - [1、基本命令](#1基本命令)
+    - [2、数据库储存引擎](#2数据库储存引擎)
+ - [二、数据表的基本操作](#二数据表的基本操作)
+    - [1、创建数据表](#1创建数据表)
+    - [2、修改数据表](#2修改数据表)
+    - [3、删除数据表](#3删除数据表)
+    - [4、综合案例小结](#4综合案例小结)
+ - [三、数据类型和运算符](#三数据类型和运算符)
+ - [四、Mysql函数](#四mysql函数)
  - 查询数据
  - 插入、更新与删除数据
  - 索引
@@ -322,12 +328,12 @@ alter table tb_dept1 modify name varchar(33);
 #### 3)、修改字段名
 
 ```mysql
-# 修改表的字段名,不改数据类型
+# 修改表的字段名,不改数据类型 将tb_dept1中的location字段改成loc
 alter table tb_dept1 change location loc varchar(50);
 ```
 
 ```mysql
-# 修改表的字段名,并且改变数据类型
+# 修改表的字段名,并且改变数据类型, 同时改变数据类型
 alter table tb_dept1 change loc location varchar(60);
 ```
 `change`也可以只改变数据类型，但是一般不要**轻易改变数据类型**。
@@ -337,8 +343,8 @@ alter table tb_dept1 change loc location varchar(60);
 有三种添加方式:
 
 * ①默认在最后面添加；
-* ②在第一个位置添加；
-* ③和指定的位置添加；
+* ②在第一个位置添加`first`；
+* ③和指定的位置添加`after`；
 
 ```mysql
 # 添加字段(默认在最后面添加)
@@ -361,7 +367,7 @@ alter table tb_dept1 add column3 int(10) after name;
 #### 5)、删除字段
 
 ```mysql
-# 删除字段
+# 删除字段, 删除tb_dept1的column3字段
 alter table tb_dept1 drop column3;
 ```
 #### 6)、修改字段的排列位置
@@ -401,7 +407,7 @@ alter table tb_emp9 drop foreign key fk_emp9_dept;
 # 删除表
 drop table if exists tb_emp9;
 ```
-注意**删除有关联的数据表的父表的时候，先删除外键再删除父表**
+注意注意: **删除有关联的数据表的父表的时候，先删除外键再删除父表**
 
 ### 4、综合案例小结
 
@@ -461,13 +467,20 @@ alter table employees rename employees_info;
 ## <font color = red>三、数据类型和运算符
 
 数据类型主要有下面几种
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220743641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 **整数类型**
+
 整数数据类型主要有一下几种：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220807642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
 不同的数据类型取值范围如下：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220837614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
 注意`INT`(`num`)中的数和取值范围无关。
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205234759642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
 **浮点数类型和定点数类型**
