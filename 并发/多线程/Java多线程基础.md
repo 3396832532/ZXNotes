@@ -1,15 +1,19 @@
 # Java多线程基础
 
- - 线程介绍
- - 深入理解Thread构造函数
- - Thread API的详细介绍
- - 线程安全与数据同步
- - 线程间通信
- - ThreadGroup详细讲解
+ - [一、线程介绍](#一线程介绍)
+    - [1、简单案例引入](#1简单案例引入)
+    - [2、start和run方法区别](#2start和run方法区别)
+    - [3、线程生命周期](#3线程生命周期)
+    - [4、银行排队业务案例](#4银行排队业务案例)
+ - 二、深入理解Thread构造函数
+ - 三、Thread API的详细介绍
+ - 四、线程安全与数据同步
+ - 五、线程间通信
+ - 六、ThreadGroup详细讲解
 
 ***
 
-## 线程介绍
+## 一、线程介绍
 
 ### 1、简单案例引入
 > 模拟同时从数据库中读取数据和写入文件；
@@ -348,8 +352,6 @@ static class TicketWindow extends Thread {
 
 **可以使用实现Runnable接口来传入到Thread的构造方法当中，完成和static关键字同样的效果。**
 
-![这里写图片描述](https://img-blog.csdn.net/20180910001149250?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
 ```java
 public class Code_03_TicketWindowTest02 {
 
@@ -395,53 +397,176 @@ Thread[一号窗口,5,main] 的号码是: 4
 Thread[二号窗口,5,main] 的号码是: 5
 ```
 
+重写Thread类的`run`方法和实现`Runnable`接口的`run`方法有一个很大的不同:
 
+* Thread类的`run`方法是不能共享的，也就是说`A`线程不能把`B`线程的`run`方法当做自己的执行单元；
+* 而使用`Runnable`接口则很任意就能实现这一点，**使用同一个`Runnable`的实例构造不同的Thread实例**；
+
+**这里注意Runnable接口使用的是设计模式中的[策略模式](https://blog.csdn.net/zxzxzx0119/article/details/81327444)**: 
+
+* Runnable接口类类似接口的行为族；
+* 具体的实现由我们自己创建的是实现Runnable接口的类来指定，并且重写方法`run()`方法，具体指定自己的实现。 
+
+> 很多书籍经常会提到，创建线程有两种方式，第一种是构造一个Thread，第二种是实现 Runnable 接口，这种说法是错误的，最起码是不严谨的，在 JDK 中代表线程的就只有 Thread 这个类，我们在前面分析过，线程的执行单元就是run方法，你可以通过继承 Thread 然后重写 run 方法实现自己的业务逻辑，也可以实现 Runnable 接口实现自己的业务逻辑，代码如下:
+>
+> ```java
+> @Override
+> public void run(){
+>     // 如果构造Thread时传入了Runnable，则会执行runnable的run方法
+>     if(target != null){
+>         target.run();
+>     }
+>     // 否则需要重写Thread类的run()方法
+> }
+> ```
+>
+> **准确地讲，创建线程只有一种方式那就是构造Thread 类。**
+>
+> **而实现线程的执行单元则有两种方式，第一种是重写 Thread 的 run 方法，第二种是实现 Runnable 接口的 run 方法，并且将 Runnable 实例用作构造 Thread 的参数。**
+
+## 二、深入理解Thread构造函数
+
+### 1、线程的默认命名
+
+打开JDK的源码可以看到我们构造Thread的时候，默认的线程的名字是
+
+* 以`Thread-`开头，从`0`开始计数；
+* 即`Thread-0、Thread-1、Thread-2...`；
 
 ```java
-public class MyTest {
+public Thread() {
+    init(null, null, "Thread-" + nextThreadNum(), 0);
+}
+/* For autonumbering anonymous threads. */
+private static int threadInitNumber;
+private static synchronized int nextThreadNum() {
+    return threadInitNumber++;
+}
+```
 
-    public static void main(String[] args) {
-        final TickWindowRunnable ticketWindow = new TickWindowRunnable();
-        
-        Thread t1 = new Thread(ticketWindow,"一号");
-        Thread t2 = new Thread(ticketWindow,"二号");
-        Thread t3 = new Thread(ticketWindow,"三号");
-public class ThreadConstruction {
+修改线程的名字，在线程启动之前，还有一个而已修改线程名字的机会，一旦线程启动，名字就不可以修改: 
 
-    public static void main(String[] args) {
-        Thread t1 = new Thread("t1");
+下面是在Thread中修改名字的代码: 
 
-        ThreadGroup group = new ThreadGroup("TestGroup");
-        Thread t2 = new Thread(group,"t1");
+```java
+public final synchronized void setName(String name) {
+    checkAccess();
+    if (name == null) {
+        throw new NullPointerException("name cannot be null");
+    }
 
-        ThreadGroup mainGroup = Thread.currentThread().getThreadGroup();
-
-        System.out.println("main group : "+ mainGroup.getName());
-
-        System.out.println( t1.getThreadGroup() == mainGroup); 
-        System.out.println( t2.getThreadGroup() == mainGroup);
-        System.out.println( t2.getThreadGroup() == group);
+    this.name = name;
+    if (threadStatus != 0) {
+        setNativeName(name);
     }
 }
+```
 
+### 2、线程的父子关系
 
-        t1.start();
-        t2.start();
-        t3.start();
+Thread的所有构造函数，最终都会去调用一个静态方法`init`，我们截取片段代码对其进行分析，不难发现新创建的任何一个线程都会有一个父线程:
+
+这里截取`Thread`的`init`的部分代码: 
+
+```java
+ private void init(ThreadGroup g, Runnable target, String name,
+                      long stackSize, AccessControlContext acc,
+                      boolean inheritThreadLocals) {
+     if (name == null) {
+         throw new NullPointerException("name cannot be null");
+     }
+     this.name = name;
+     Thread parent = currentThread();//获取当前运行的线程作为赴现场
+     SecurityManager security = System.getSecurityManager();
+     this.group = g;// 设置线程组
+     this.daemon = parent.isDaemon();// 当前线程是否为守护线程，取决于父线程
+     this.priority = parent.getPriority(); // 设置优先级
+     setPriority(priority);
+     this.stackSize = stackSize;
+     /* Set thread ID */
+     tid = nextThreadID();
+ }
+```
+
+上面代码中的 `currentThread() `是获取当前线程，在线程生命周期中，我们说过线程的最初状态为NEW，没有执行 start 方法之前，它只能算是一个 Thread 的实例，并不意味着一个新的线程被创建，因此 `currentThread()` 代表的将会是**创建它的那个线程**，因此我们可以得出以下结论。
+
+*  一个线程的创建肯定是由另一个线程完成的。
+*  **被创建线程的父线程是创建它的线程**。
+
+**我们都知道 main 函数所在的线程是由 JVM 创建的，也就是 main 线程，那就意味着我们前面创建的所有线程，其父线程都是 main 线程。**
+
+### 3、Thread和ThreadGroup
+
+在Thread的构造函数中，可以显示的指定线程的Group，也就是ThreadGroup，下面看`init`方法的中间部分: 
+
+```java
+ if (g == null) {
+     /* Determine if it's an applet or not */
+
+     /* If there is a security manager, ask the security manager
+               what to do. */
+     if (security != null) {
+         g = security.getThreadGroup();
+     }
+
+     /* If the security doesn't have a strong opinion of the matter
+               use the parent thread group. */
+     if (g == null) {
+         g = parent.getThreadGroup();
+     }
+ }
+```
+
+源码的意思: **如果在构造Thread的时候没有显示的指定一个ThreadGroup，那么子线程将会被加入父线程所在的线程组。**
+
+简单测试代码: 
+
+```java
+public class Code_04_ThreadGroupTest {
+
+    public static void main(String[] args){
+        PrintStream out = System.out;
+
+        Thread t1 = new Thread("t1");// 没有给t1指定group
+        ThreadGroup group1 = new ThreadGroup("group1");
+        Thread t2 = new Thread(group1, "t2");
+        ThreadGroup mainGroup = Thread.currentThread().getThreadGroup();
+
+        out.println("Main Thread Group : " + mainGroup.getName());
+        out.println(t1.getThreadGroup() == mainGroup); // true // 默认就是main线程的
+        out.println(t2.getThreadGroup() == mainGroup); // false
+        out.println(group1 == t2.getThreadGroup()); // true // 指定了就是这个了
     }
 }
 
 ```
 
- - **这里注意Runnable接口使用的是设计模式中的[策略模式](https://blog.csdn.net/zxzxzx0119/article/details/81327444)**，Runnable接口类类似接口的行为族，具体的实现由我们自己创建的是实现Runnable接口的类来指定，并且重写方法run()方法，具体指定自己的实现。 
+输出:
 
-![这里写图片描述](https://img-blog.csdn.net/20180910001013264?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+```java
+Main Thread Group : main
+true
+false
+true
+```
 
-***
-### Thread内部更加深入的东西
+得出结论: 
+
+* main线程所在的`ThreadGroup`称为`main`；
+* 构造一个线程的时候如果没有显示的指定`ThreadGroup`，那么它将会和父线程属于同一个`ThreadGroup`（且拥有同样的优先级）；
+
+### 4、Thread和JVM虚拟机栈
+
+#### 1)、Thread与Stacksize
+
+#### 2)、JVM内存结构
+
+#### 3)、Thread与虚拟机栈
+
 ![这里写图片描述](https://img-blog.csdn.net/20180909232233636?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 ![在这里插入图片描述](https://img-blog.csdn.net/2018100719245529?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-##### Thread与ThreadGroup
+**Thread与ThreadGroup**
 
 ```java
 public class ThreadConstruction {
@@ -471,7 +596,9 @@ public class ThreadConstruction {
 ![这里写图片描述](https://img-blog.csdn.net/20180909200244839?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 stackSize中虚拟机栈和创建线程的关系：
 ![在这里插入图片描述](https://img-blog.csdn.net/20181007194530371?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#### 守护线程
+
+**守护线程**
+
 ![在这里插入图片描述](https://img-blog.csdn.net/20181007202220745?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![在这里插入图片描述](https://img-blog.csdn.net/20181007202419696?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 再看一个嵌套的例子: 
