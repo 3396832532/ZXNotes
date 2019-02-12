@@ -118,7 +118,7 @@ public class Trie {
  - 这个和上面都是一个套路，遍历完之后，返回结点的`path`的值。
 
 ```java
-	public int prefixNum(String prefix){
+    public int prefixNum(String prefix){
         if(prefix == null)
             return 0;
         Node cur = root;
