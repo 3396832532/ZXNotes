@@ -1,10 +1,11 @@
 # Java多线程基础
 
  - 线程介绍
- - 线程声明周期以及start和run方法区别等
- - 银行排队业务案例
- - Thread内部一些更加深入的东西
- - 守护线程
+ - 深入理解Thread构造函数
+ - Thread API的详细介绍
+ - 线程安全与数据同步
+ - 线程间通信
+ - ThreadGroup详细讲解
 
 ***
 
@@ -76,12 +77,12 @@ public class Code_01_TryConcurrency {
 
 ![这里写图片描述](images/t1.png) 
 
-### 线程声明周期以及start和run方法区别等
+### 2、start和run方法区别
 
- - **注意只有当Thread的实例调用start()方法时，才能真正的成为一个线程；**
- - **调用run()方法不是一个线程；**
+ - 注意只有当Thread的实例调用`start()`方法时，才能真正的成为一个线程，否则`Thread`和其他普通的Java对象没有什么区别；
+ - 调用`run()`方法不是一个线程；
+ - `start()`方法是一个立即返回的方法，不会让程序陷入阻塞；
 
-![这里写图片描述](https://img-blog.csdn.net/20180909232522964?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 下面的代码，如果是`t.start()`输出的线程名为`"Read-Thread"`，而如果调用的是`t.run()`则会输出`main`线程名。
 ```java
 Thread t = new Thread("Read-Thread"){
@@ -96,9 +97,8 @@ Thread t = new Thread("Read-Thread"){
 t.run();
 ```
 
+Thread中使用了[模板方法设计模式](https://blog.csdn.net/zxzxzx0119/article/details/81709199)，也就是我们继承Thread类，重写的是`run()`方法(钩子方法)，但是调用的却是`start()`方法(最终方法)的原因。
 
-
-**Thread中使用了[模板方法设计模式](https://blog.csdn.net/zxzxzx0119/article/details/81709199)，也就是我们继承Thread类，重写的是run()方法(钩子方法)，但是调用的却是start()方法(最终方法)的原因。**
 ![在这里插入图片描述](https://img-blog.csdn.net/20181007190314719?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 关于模板方法，简单说: **就是父类写了一些固定的逻辑，但是给自己留了一个方法可以实现，有些逻辑不能改，有些可以改**，看一个简单的例子:
@@ -149,14 +149,23 @@ public class Code_02_TemplateMethod {
 ################
 ```
 
-* `print` 方法类似于 Thread 的 start方法，而 wrapPrint 则类似于 run 方法；
-* 这样做的好处是，程序结构由父类控制，并且是 `final` 修饰的，不允许被重写，子类只需要实现想要的罗
+* `print` 方法类似于 Thread 的 `start`方法，而 wrapPrint 则类似于 `run` 方法；
+* 这样做的好处是，程序结构由父类控制，并且是 `final` 修饰的，不允许被重写，子类只需要实现想要的罗辑任务即可；
 
-辑任务即可；
+也就是说`start`方法中会调用`start0`方法(并没有调用`run`方法)，而重新的`run`方法何时被调用呢?
+
+在开始执行这个线程时，JVM 将会调用该线程的 `run` 方法，换言之，**`run` 方法是被 JNI 方法 `start0()` 调用的**，仔细阅读 `start()` 的源码将会总结出如下几个知识要点。
+
+* Thread 被构造后的NEW 状态，事实上 threadStatus 这个内部属性为 0。
+* 不能两次启动 Thread，否则就会出现 IlegalThreadStateException 异常。
+* 线程启动后将会被加入到一个 ThreadGroup 中；
+* 一个线程生命周期结束，也就是到了 TERMINATED 状态，再次调用 start 方法是不允许的，也就是说 TERMINATED 状态是没有办法回到RUNNABLE/RUNNING 状态的。
+
+其他总结:
 
  - Java应用程序的main函数是一个线程，在JVM启动的时候调用，名字叫`main`；
  - **当你调用一个线程`start()`方法的时候，此时至少有两个线程，一个是调用你的线程(例如`main`)，还有一个是执行`run()`方法的线程；**
- - JVM启动时，实际上有多个线程，但是至少有一个**非守护线程**；s
+ - JVM启动时，实际上有多个线程，但是至少有一个**非守护线程**；
 
 关于守护线程和非守护线程:
 
@@ -224,38 +233,37 @@ TERMINATED 是一个线程的最终状态，在该状态中线程将**不会切�
 * `JVM Crash`，导致所有的线程都结束；
 
 ***
-### 银行排队业务案例
+### 4、银行排队业务案例
+
 ![这里写图片描述](https://img-blog.csdn.net/20180908220950149?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#### 方案一(各个线程各搞各的)
+#### 1)、方案一，各个线程各搞各的
 ```java
-public class TicketWindow extends Thread{
+public class Code_03_TicketWindowTest01 {
 
-    private String name;
+    static class TicketWindow extends Thread {
 
-    private static final int MAX = 5;
+        private String name;
 
-    private int index = 1;
+        private static final int MAX = 5;
 
-    public TicketWindow(String name) {
-        this.name = name;
-    }
+        private int index = 1;
 
-    @Override
-    public void run() {
-        while(index <= MAX){
-            System.out.println("柜台: " + name + ",当前号码: " + (index++));
+        public TicketWindow(String name) {
+            this.name = name;
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+        @Override
+        public void run() {
+            while (index <= MAX) {
+                System.out.println("柜台: " + name + ",当前号码: " + (index++));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
-}
-```
-
-```java
-public class MyTest {
 
     public static void main(String[] args) {
 
@@ -269,14 +277,39 @@ public class MyTest {
         t3.start();
     }
 }
-
 ```
 
-![这里写图片描述](https://img-blog.csdn.net/20180908223225329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#### 方案二(使用static关键字(顺序不对))
+输出如下，可以看到每个柜台都有`5`个号，显然不对，银行总共才`5`个号。
 
 ```java
-public class TicketWindow extends Thread{
+柜台: 二号,当前号码: 1
+柜台: 一号,当前号码: 1
+柜台: 三号,当前号码: 1
+柜台: 二号,当前号码: 2
+柜台: 一号,当前号码: 2
+柜台: 三号,当前号码: 2
+柜台: 二号,当前号码: 3
+柜台: 一号,当前号码: 3
+柜台: 三号,当前号码: 3
+柜台: 一号,当前号码: 4
+柜台: 三号,当前号码: 4
+柜台: 二号,当前号码: 4
+柜台: 一号,当前号码: 5
+柜台: 三号,当前号码: 5
+柜台: 二号,当前号码: 5
+```
+
+#### 2)、方案二，使用static关键字
+
+最简单的解决方案 : 将`index`设置成`static`，这样每个对象都是用这个值，总共就只有`MAX`个了。
+
+但是这种方案也有一些缺点:
+
+* `static`修饰的变量生命周期很长，浪费资源；
+* 如果将号码`MAX`调整到`500、1000`等稍微大一点的数字就会出现线程安全问题； 
+
+```java
+static class TicketWindow extends Thread {
 
     private String name;
 
@@ -290,46 +323,80 @@ public class TicketWindow extends Thread{
 
     @Override
     public void run() {
-        while(index <= MAX){
+        while (index <= MAX) {
             System.out.println("柜台: " + name + ",当前号码: " + (index++));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            Thread.sleep(1000 );
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
     }
 }
-
 ```
-测试类不变: 
-![这里写图片描述](https://img-blog.csdn.net/20180908223151372?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#### 方法三(使用Runnable接口)
-**可以使用实现Runnable接口来传入到Thread的构造方法当中，完成和static关键字同样的效果。**
-![这里写图片描述](https://img-blog.csdn.net/20180910001149250?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+测试类不变， 输出如下，可以看到总共只会输出`5`次，但是不是好的方案。
+
 ```java
-public class TickWindowRunnable implements Runnable {
+柜台: 一号,当前号码: 1
+柜台: 二号,当前号码: 2
+柜台: 三号,当前号码: 3
+柜台: 一号,当前号码: 4
+柜台: 二号,当前号码: 5
+```
 
-    private int index = 1; //没有使用static关键字
+#### 3)、方法三，使用Runnable接口以及策略
 
-    public final static int MAX = 50;
+**可以使用实现Runnable接口来传入到Thread的构造方法当中，完成和static关键字同样的效果。**
 
-    @Override
-    public void run() {
-        while(index <= MAX){
-            System.out.println("柜台: " + Thread.currentThread().getName() + ",当前号码: " + (index++));
-        }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+![这里写图片描述](https://img-blog.csdn.net/20180910001149250?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+```java
+public class Code_03_TicketWindowTest02 {
+
+    static class TicketWindow implements Runnable{
+
+        private static final int MAX = 5;
+
+        private int index = 1; // 没有做static修饰
+
+        @Override
+        public void run() {
+            while (index <= MAX) {
+                System.out.println(Thread.currentThread() + " 的号码是: " + (index++));
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+         }
+    }
+
+    public static void main(String[] args){
+        TicketWindow ticketWindow = new TicketWindow(); // 只有一个 TicketWindow实例
+        Thread t1 = new Thread(ticketWindow, "一号窗口");
+        t1.start();
+        Thread t2 = new Thread(ticketWindow, "二号窗口");
+        t2.start();
+        Thread t3 = new Thread(ticketWindow, "三号窗口");
+        t3.start();
     }
 }
 
 
 ```
+输出: (此时号码就是有序的):
+
+```java
+Thread[一号窗口,5,main] 的号码是: 1
+Thread[二号窗口,5,main] 的号码是: 2
+Thread[三号窗口,5,main] 的号码是: 3
+Thread[一号窗口,5,main] 的号码是: 4
+Thread[二号窗口,5,main] 的号码是: 5
+```
+
+
+
 ```java
 public class MyTest {
 
