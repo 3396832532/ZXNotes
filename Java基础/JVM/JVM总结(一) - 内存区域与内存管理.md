@@ -123,7 +123,7 @@ JVM体系主要是两个JVM的内部体系结构，分为三个子系统和两�
 * 几乎所有的对象实例都在这里分配内存(**所有的对象实例以及数组**)；
 * Java堆是垃圾收集器管理的主要区域，**大部分收集器基于分代收集: 分为新生代和老生代**，甚至更加的细分为`Eden`空间，`From Survivor`空间，`To Survivor`空间，这样分配的目的是为了更好的回收内存和分配内存；
 * Java堆可以处理物理上不连续，但是逻辑上连续的内存空间；现在的虚拟机可以通过Xms和
-Xmx等来扩展大小；
+  Xmx等来扩展大小；
 * 如果堆中已经没有内存来分本实例，并且堆没法扩展，就会报出OutofMemoryError异常;
 
 ![在这里插入图片描述](https://img-blog.csdn.net/20181018085014307?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
@@ -195,32 +195,93 @@ public class StringTest {
 #### 1)、对象的内存分配
 ![这里写图片描述](images/j6_对象初始化过程.png)
 
-虚拟机在堆中分配内存有两种方式:   
+虚拟机在堆中分配内存有两种方式:  
 
- - <font color = red>指针碰撞
-![这里写图片描述](https://img-blog.csdn.net/20180909183800195?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
- - <font color = red>空闲列表
-![这里写图片描述](https://img-blog.csdn.net/20180909184013976?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+**指针碰撞**
+
+假设 Java 堆中内存是绝对规整的，**所有用过的内存都放在一边，空闲的内存放在另一边**，中间放着一个指针作为分界点的**指示器**，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离，这种分配方式称为"指针碰撞"(`Bump the Pointer`)。
+
+**空闲列表**
+
+如果 Java 堆中的内存并不是规整的，**已使用的内存和空闲的内存相互交错，那就没有办法简单地进行指针碰了，虚拟机就必须维护一个列表，记录上哪些内存块是可用的**，在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录，这种分配方式称为"空闲列表"(Free List)。
+
+选择哪种分配方式由 Java 堆是否规整决定，而 Java 堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。
+
+> 因此，在使用 Serial、ParNew 等带 Compact 过程的收集器时，系统采用的分配算法是指针碰撞，而使用CMS 这种基于 Mark-Sweep 算法的收集器时，通常采用空闲列表。
 
 #### 2)、线程安全问题
-![这里写图片描述](https://img-blog.csdn.net/20180909185026511?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+除如何划分可用空间之外，还有另外一个需要考虑的问题是对象创建在虚拟机中是非常频繁的行为，即使是仅仅修改一个指针所指向的位置，**在并发情况下也并不是线程安全的**，可能出现正在给对象 A 分配内存，指针还没来得及修改，对象B又同时使用了原来的指针来分配内存的情况。
+
+解决这个问题有两种方案:
+
+* 一种是对分配内存空间的动作**进行同步处理(加锁)**一 实际上虚拟机采用 `CAS` 配上失败重试的方式保证更新操作的原子性；
+* 另一种是**把内存分配的动作按照线程划分在不同的空间之中进行**，即每个线程在 Java堆中预先分配一小块内存，称为**本地线程分配缓冲**(Thread Local Allocation Buffer，TLAB)。 哪个线程要分配内存，就在哪个线程的TEAB 上分配； 只有 TEAB 用完并分配新的 TLAB 时，才需要同步锁定。虚拟机是否使用TEAB，可以通过`-XX:+/-UseTLAB` 参数来设定。            
 
 #### 3)、初始化对象
-![这里写图片描述](https://img-blog.csdn.net/20180909185509896?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-#### 4)、调用对象的构造方法< init >
-![这里写图片描述](https://img-blog.csdn.net/20180909185545177?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+内存分配完成后，虚拟机需要将分配到的内在空间都初始化为零值 (不包括对象头)，如果使用`TLAB`，这一工作过程也可以提前至 TLAB 分配时进行。这一步操作保证了对象的实例字段在 Java 代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。
+
+接下来，**虚拟机要对对象进行必要的设置，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的 GC 分代年龄等信息**。这些信息存放在对象的对象头 (Object Header) 之中。根据虚拟机当前的运行状态的不同。如是否启用偏向锁等，对象头会有不同的设置方式。
+
+#### 4)、调用对象的构造方法
+
+在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从 Java 程序的视角来看，对象创建才刚刚开始:
+
+* 即`<init>`方法还没有执行，所有的字段都还为零。
+* 所以一般来说( 由字节码中是否跟随`invokespecial` 指令所决定)，执行 `new`s 指令之后会接着执行 `<init>` 方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。
 
 ### 2、对象的内存布局
-![这里写图片描述](https://img-blog.csdn.net/20180909191951181?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+对象在内存中存储的布局可以分为3块区域: **对象头、实例数据和对其填充**。
+
+#### 1)、对象头(Header)
+
+* 自身的运行数据(Mark Word):
+  * 包括: 哈希值、GC分代年龄，锁状态标志、线程持有的锁、偏向线程ID、偏向时间戳；
+* 类型指针: 通过这个指针来确定这个对象是哪个类的实例；
+
+#### 2)、实例数据(InstanceData)
+
+* 实例数据是对象真正存储的有效信息；
+* 也是程序代码中所定义的各种类型的字段内容；
+
+#### 3)、对齐填充(Paddings)
+
+* 对齐填充并不是必然存在的，也没有特别的含义；
+* 仅仅起着占位符的作用；
+
 ### 3、对象的访问定位
+
+对象访问方式取决于虚拟机实现而定的。目前主流的访问方式有使用句柄和直接指针两种。
 
  - 句柄访问
  - 直接指针
 
-**句柄访问:** 
-![这里写图片描述](https://img-blog.csdn.net/20180909193840328?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**直接指针:** 
-![这里写图片描述](https://img-blog.csdn.net/20180909193925670?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**各自的优势:** 
-![这里写图片描述](https://img-blog.csdn.net/20180909194035220?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+#### 1)、句柄访问 
+
+* 如果使用句柄访问的话，那么 Java 堆中将会划分出一块内存来作为句柄池，`reference`中存储的就是对象的句柄地址；
+* 而句柄中包含了对象实例数据与类型数据各自的具体地址信息；
+
+
+
+如图:
+
+![这里写图片描述](images/j7_句柄访问.png)
+
+
+
+#### 2)、直接指针 
+
+* 如果使用直接指针访问，那么Java堆对象的布局中就必须考虑如何放置访问类型数据的相关信息。
+* 而`reference`中存储的直接就是**对象地址**。
+
+![这里写图片描述](images/j8_直接指针.png)
+
+#### 3)、各自的优势
+
+这两种对象访问方式各有优势。
+
+使用句柄来访问的最大好处就是 `reference` 中**存储的是稳定的句柄地址**，在对象被移动垃圾收集时移动对象是非常普遍的行为) 时**只会改变句柄中的实例数据指针，而 reference 本身不需要修改**。
+
+使用直接指针访问方式的最大好处就是**速度更快**，它节省了一次指针定位的时间开销，由于对象的访问在 Java 中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。
