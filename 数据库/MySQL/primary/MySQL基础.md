@@ -8,6 +8,9 @@
     - [3、删除数据表](#3删除数据表)
     - [4、综合案例小结](#4综合案例小结)
  - [三、数据类型和运算符](#三数据类型和运算符)
+     - [1、MYSQL数据类型介绍](#1mysql数据类型介绍)
+     - [2、如何选择数据类型](#2如何选择数据类型)
+     - [3、常见运算符介绍](#3常见运算符介绍)
  - [四、Mysql函数](#四mysql函数)
  - 查询数据
  - 插入、更新与删除数据
@@ -773,46 +776,113 @@ CHAR 是固定长度，**所以它的处理速度比 VARCHAR 的速度要快**�
 
 ***
 ###  3、常见运算符介绍
-![这里写图片描述](https://img-blog.csdn.net/20180413214916676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+#### 1)、运算符概述
+
+总共有四大类: 
+
+1. 算术运算符
+
+算术运算符用于各类数值运算，包括加 (+) 、减 (-) 、乘 (+) 、除 (/) 、求余(或称模运算，%) 。
+
+2. 比较运算符
+
+比较运算符用于比较运算。包括大于 (>) 、小于 (<) 、等于 (=) 、大于等于 (>=) 、小于等于 (<=) 、不等于 (!=) ，以及`IN、BETWEEN AND、IS NULL、GREATEST、LEAST、LIKE、REGEXP `等。
+
+3. 逻辑运算符
+
+逻辑运算符的求值所得结果均为1 (TRUE) 、0 (FALSE) ，这类运算符有逻辑非 (NOT或者!) 、逻辑与 (AND 或者&&) 、逻辑或 (OR 或者|) 、逻辑异或 C(XOR) 。
+
+4. 位操作运算符
+
+位操作运算符参与运算的操作数按二进制位进行运算。包括位与(&) 、位或 (|) 、位非(~) 、位异或 (^) 、左移 (<<) 、右移 (>>) 6种。
+
+#### 2)、算数运算符
+
+没啥好说的就是`+、－、*、/、%`。
+
+#### 3)、比较运算符
+
 注意一下比较运算符
-![这里写图片描述](https://img-blog.csdn.net/2018041321511361?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180413215209417?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-注意两个相等运算符的微小差异
-![这里写图片描述](https://img-blog.csdn.net/20180413215434876?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180413215616466?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180413215740247?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-正则表达式也是很重要的
-![这里写图片描述](https://img-blog.csdn.net/20180413220304443?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/24_比较运算符.png)
+
+数值比较有如下规则:
+
+* 若有一个或两个参数为NULL，则比较运算的结果为NULL；
+* 若同一个比较运算中的两个参数都是字符串，则按照字符串进行比较；
+* 若两个参数均为整数，则按照整数进行比较；
+* **若一个字符串和数字进行相等判断，则 MySQL 可以自动将字符串转换为数字**；
+
+**安全等于运算符**
+
+这个操作符和=操作符执行相同的比较操作，不过`<=>`可以用来判断 NULL 值。在两个操作数均为NULL 时，其返回值为 1 而不为NULL；而当一个操作数为 NULL 时，其返回值为0而不为NULL。
+
+`<=>`在执行比较操作时和`"="`的作用是相似的，唯一的区别是`<=>`可以来对NULL进行判断，两者都为NULL时返回`1`。
+
+**不等于运算符`<>`或者`!=`**:
+
+`"<>"`或者`"!="`用于判断数字、字符串、表达式不相等的判断。如果不相等，返回值为 1； 否则返回值为 0。这两个运算符不能用于判断空值 NULL。
+
+**LEAST运算符**
+
+语法格式为: 
+
+```mysql
+LEAST(值 1,值 2…,值m)
+```
+
+其中值 `n` 表示参数列表中有`n`个值。在有两个或多个参数的情况下, 返回最小值。假如任意一个自变量为NULL,则`LEAST()`的返回值为`NULL`。
+
+**GREATEST**
+
+语法格式：`GREATEST(值1, 值2, 值3)` ，其中`n`表示参数列表中有`n`个值。当有`2`个或多个参数时，返回为最大值，假如任意一个自变量为NULL，则`GREATEST()`的返回值为NULL。\
+
+**LIKE**
+
+![这里写图片描述](images/26_LIKE.png)
+
+**正则表达式REGEXP**
+
+![这里写图片描述](images/27_REGEXP.png)
+
 看一个例子
 
-```
+```mysql
 select 'ssky' regexp '^s','ssky' regexp 'y$', 'ssky' regexp '.sky', 'ssky' regexp '[ab]';
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/20180413220519323?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
-####逻辑运算符
-![这里写图片描述](https://img-blog.csdn.net/20180413220712150?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/2018041322073142?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#####位运算
-这个和别的语言里面差不多，不细说
-####运算符的优先级
-![这里写图片描述](https://img-blog.csdn.net/20180413221155814?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/25_正则结果.png)s
+
+#### 4)、逻辑运算符
+
+和高级语言差不多，不赘述。
+
+#### 5)、位运算
+
+和高级语言差不多，不赘述。
+
+#### 6)、运算符优先级
+
+![](images/28_优先级.png)
+
 ### 4、综合案例-运算符的使用
 
-```
+```mysql
 create table tmp15(note varchar(100),price int);
 insert into tmp15 values("Thisisgood",50);
 #算术运算符
 select price,price+10,price-10,price*2,price/2,price%3 from tmp15;
 #比较运算符
 select price,price>10,price<10,price != 10,price = 10,price <=>10,price <>10 from tmp15;
+# in, greatest等
 select price,price between 30 and 80,greatest(price,70,30),price in(10,20,50,35) from tmp15;
-
+# 正则等
 select note,note is null,note like 't%',note regexp '$y',note regexp '[gm]' from tmp15;
-
+# 逻辑运算
 select price,price&2,price|4, ~price from tmp15;
-
+# 位运算
 select price,price<<2,price>>2 from tmp15;
 
 ```
