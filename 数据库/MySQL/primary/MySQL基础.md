@@ -466,88 +466,159 @@ alter table employees rename employees_info;
 
 ## <font color = red>三、数据类型和运算符
 
+### 1、MYSQL数据类型介绍
+
 数据类型主要有下面几种
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220743641.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-**整数类型**
+MySQL 支持多种数据类型，主要有**数值类型、日期/时间类型和字符串类型**。
+
+* 数值数据类型: 包括整数类型 TINYINT、SMALLINT、MEDIUMINT、INT、BIGINT；浮点小数数据类型 FLOAT 和 DOUBLE；定点小数类型 DECIMAL 。
+*  日期/时间类型: 包括 YEAR、TIME、DATE、DATETIME 和TIMESTAMP。
+* 字符串类型: 包括 CHAR、VARCHAR、BINARY、VARBINARY、BLOB、TEXT、ENUM 和 SET 等。字符串类型又分为**文本字符串和二进制字符串**。
+
+#### 1)、整数类型
 
 整数数据类型主要有一下几种：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220807642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![](images/3_整形.png)
 
 不同的数据类型取值范围如下：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205220837614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](images/4_整形取值范围.png)
 
 注意`INT`(`num`)中的数和取值范围无关。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205234759642.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+举例
 
-**浮点数类型和定点数类型**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205235051102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+```mysql
+create table tb_emp1{
+	id INT(11),
+	name VARCHAR(25),
+	deptId INT(11),
+	salary FLOAT
+};
+```
 
-注意: 不论定点还是浮点类型，如果用户指定的精度超出精度范围，则会四舍五入进行处理。
+`id `字段的数据类型为 INT(11)，注意到后面的数字 11，这表示的是该数据类型指定的显示宽度，指定能够显示的数值中数字的个数。例如，假设声明一个 INT 类型的字段:`year INT(4)`该声明指明，在 year 字段中的数据一般只显示 4 位数字的宽度。在这里要注意: **显示宽度和数据类型的取值范围是无关的**。显示宽度只是指明 MySQL最大可能显示的数字个数，数值的位数小鱼指定的宽度时会由空格填充。
+
+#### 2)、浮点数类型和定点数类型
+
+小数类型:
+
+| 类型名称           | 说明                   | 存储需求  |
+| ------------------ | ---------------------- | --------- |
+| FLOAT              | 单精度浮点数           | 4个字节   |
+| DOUBLE             | 双精度浮点数           | 8个字节   |
+| DECIMAL(M, D), DEC | 压缩的"严格"**定点数** | M+2个字节 |
+
+DECIMAL 类型不同于 FLOAT 和 DOUBLE，DECIMAL 实际是以**串**存放的，DECIMAL可能的最大取值范围与 DOUBLE 一样，**但是其有效的取值范围由M 和 D 的值决定**。如果改变 M 而固定D，则其取值范围将随 M 的变大而变大。从表中可以看到，DECIMAL 的存储空间并不是固定的，而由**其精度值 M** 决定，占用 M+2 个字节。
+
+FLOAT 类型的取值范围如下:
+
+* 有符号的取值范围: `-3.402823466E+38 ~ -1.175494351E-38`。
+* 无符号的取值范围: `0` 和 `1.175494351E-38 ~ 3.402823466E+38`。
+
+DOUBLE 类型的取值范围如下:
+
+* 有符号的取值范围: `-1.7976931348623157E+308 ~ -2.2250738585072014E-308`。
+* 无符号的取值范围: `0` 和 `2.2250738585072014E-308 ~ 1.7976931348623157E+308`。
+
+注意: **不论定点还是浮点类型，如果用户指定的精度超出精度范围，则会四舍五入进行处理。**
 
 注意浮点数和定点数的使用场合：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205235647467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
-**时间和日期类型**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181205235720697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-**Year**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206000202874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-**`0`表示`0000`，`‘0’`和`‘00’`表示`2000`，`‘78’`和`78`表示`1978`，`‘68’`和`68`表示`2068`**
+* 在MySQL 中，**定点数以字符串形式存储**，在对精度要求比较高的时候〈如货币，科学数据等) 使用 DECIMAL 的类型比较好；
+* 另外两个浮点数进行减法和比较运算时也容易出问题，**所以在使用浮点型时需要注意，并尽量避免做浮点数比较。**
 
-**Time**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206000447295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+#### 3)、时间和日期类型
+![在这里插入图片描述](images/5_时间日期.png)
 
-```sql
+##### a)、Year
+
+![在这里插入图片描述](images/6_日期Date.png)
+
+举几个例子:
+
+* **`0`表示`0000`，`‘0’`和`‘00’`表示`2000`；**
+* **`‘78’`和`78`表示`1978`，`‘68’`和`68`表示`2068`**；
+
+##### b)、Time
+
+![在这里插入图片描述](images/7_时间Time.png)
+
+案例:
+
+```mysql
 create table tmp4(t Time);
-delete  from tmp4;
+delete from tmp4;
 insert into tmp4 values('10:05:05'),('23:23'),('2 10:10'),('3 02'),('10'),(now()),(current_time);
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/20180413182426669?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-**Date**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206000522752.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![这里写图片描述](images/8_演示插入结果.png)
 
-```sql
+##### c)、Date
+
+![在这里插入图片描述](images/9_Date日期.png)
+
+```mysql
 create table tmp5(d Date);
 insert into tmp5 values('1998-09-01'),('19980902'),('980903'),(19980904),(980905),(100906),(000907),(current_date);
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/2018041318385773?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**DateTime**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206000608865.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![这里写图片描述](images/10_演示结果.png)
+##### d)、DateTime
+
+![在这里插入图片描述](images/11_DateTime.png)
+
+举例:
 
 ```sql
 create table tmp6(dt DateTime);
 insert into tmp6 values('1998-08-08 08:08:08'),('19980809080808'),('98-08-08 08:08:08'),('980808080808'),(19980808080808),(980808080808);
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/20180413184554983?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**TimeStamp**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206000723281.png)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206000738572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![这里写图片描述](images/12_演示效果.png)
+
+##### e)、TimeStamp
+![](images/13_TimeStamp.png)
+
 `TimeStamp`把时区修改之后查询结果就会不同，但是`DateTime`不会。
 
-**文本字符串类型**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232137628.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+#### 4)、文本字符串类型
+![在这里插入图片描述](images/14_文本字符串类型.png)
 
-`char`和`varchar`类型
+##### a)、`char`和`varchar`类型
+
 `char`数据类型长度不可变，`varchar`长度可变
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232158420.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![在这里插入图片描述](images/15_char和varchar.png)
+
+举例:
 
 ```sql
 create table tmp8(ch char(4),vch varchar(4));
-insert into tmp8 values('ab  ','ab  ');
+insert into tmp8 values('ab  ','ab  ');-- 注意这里有空格
 select concat('(',ch,')'),concat('(',vch,')') from tmp8;
 ```
-看效果vch中的空格没有被截取
-![这里写图片描述](https://img-blog.csdn.net/2018041320052037?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**Text类型**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232327218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-`Enum`类型
+看效果`vch`中的空格没有被截取(即`ch`末尾的两个空格被删除了，而`vch`的没有删除)
+![这里写图片描述](images/16_char和varchar2.png)
+
+##### b)、Text类型
+
+TEXT 列保存**非二进制字符串**，如文章内容、评论等。当保存或查询 TEXT 列的值时，不删除尾部空格。Text 类型分为 4 种: TINYTEXT、TEXT、MEDIUMTEXT 和 LONGTEXT。不同的 TEXT 类型的存储空间和数据长度不同。
+
+* TINYTEXT 最大长度为 255(2<sup>8</sup> - 1)字符的 TEXT 列；
+
+* TEXT 最大长度为 65535(2<sup>16</sup> - 1)字符的TEXT 列；
+
+* MEDIUMTEXT 最大长度为 16777215(2<sup>24</sup> - 1)字符的TEXT列；
+* LONGTEXT 最大长度为 4294967295 或 4GB(2<sup>32</sup> - 1)字符的TEXT 列；
+
+
+
+##### c)、`Enum`类型
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232423516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
 ```sql
@@ -566,7 +637,7 @@ insert into tmp10 values(100,4); #没有4这个选项
 ```
 效果
 ![这里写图片描述](https://img-blog.csdn.net/20180413203512394?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**Set类型**
+##### d)、Set类型
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232555988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
 ```
@@ -578,13 +649,13 @@ select *from tmp11;
 效果
 ![这里写图片描述](https://img-blog.csdn.net/20180413204802629?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ***
-####二进制字符串类型
+#### 5)、二进制字符串类型
 ![这里写图片描述](https://img-blog.csdn.net/20180413204919966?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#####Bit类型
+##### a)、Bit类型
 保存的是数的二进制表示
 ![这里写图片描述](https://img-blog.csdn.net/20180413210002742?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-```
+```mysql
 #bit
 create table tmp12(b bit(4));
 insert into tmp12 values(2),(9),(15);
@@ -593,7 +664,7 @@ select b,b+0 from tmp12;
 ```
 效果
 ![这里写图片描述](https://img-blog.csdn.net/20180413210036151?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#####Binary和varBinary
+##### b)、Binary和varBinary
 ![这里写图片描述](https://img-blog.csdn.net/20180413210206410?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 ```
@@ -604,16 +675,16 @@ select length(b),length(vb) from tmp13;
 ```
 效果如图
 ![这里写图片描述](https://img-blog.csdn.net/20180413212908210?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-#####Blob类型
+##### c)、Blob类型
 ![这里写图片描述](https://img-blog.csdn.net/20180413213100132?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ***
-###如何选择数据类型
+### 2、如何选择数据类型
 ![这里写图片描述](https://img-blog.csdn.net/20180413213929136?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![这里写图片描述](https://img-blog.csdn.net/20180413214509984?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![这里写图片描述](https://img-blog.csdn.net/20180413214615254?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![这里写图片描述](https://img-blog.csdn.net/20180413214720537?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ***
-###常见运算符介绍
+###  3、常见运算符介绍
 ![这里写图片描述](https://img-blog.csdn.net/20180413214916676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 注意一下比较运算符
 ![这里写图片描述](https://img-blog.csdn.net/2018041321511361?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
@@ -639,7 +710,7 @@ select 'ssky' regexp '^s','ssky' regexp 'y$', 'ssky' regexp '.sky', 'ssky' regex
 这个和别的语言里面差不多，不细说
 ####运算符的优先级
 ![这里写图片描述](https://img-blog.csdn.net/20180413221155814?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###综合案例-运算符的使用
+### 4、综合案例-运算符的使用
 
 ```
 create table tmp15(note varchar(100),price int);
