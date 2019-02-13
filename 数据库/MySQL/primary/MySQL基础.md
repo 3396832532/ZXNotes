@@ -616,17 +616,28 @@ TEXT 列保存**非二进制字符串**，如文章内容、评论等。当保�
 * MEDIUMTEXT 最大长度为 16777215(2<sup>24</sup> - 1)字符的TEXT列；
 * LONGTEXT 最大长度为 4294967295 或 4GB(2<sup>32</sup> - 1)字符的TEXT 列；
 
-
-
 ##### c)、`Enum`类型
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232423516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+ENUM 是一个字符串对象，其值为表创建时在列规定中枚举的一列值。语法格式如下:''
+
+```mysql
+字段名 ENUM('值1', '值2', ..., '值n')
+```
+
+字段名指将**要定义的字段**，值n指枚举列表中的第 n 个值。 ENUM 类型的字段在取值时，只能在指定的枚举列表中取，而且一次只能取一个。如果创建的成员中有空格时，其尾部的空格将自动被删除。ENUM 值在内部用整数表示，每个枚举值均有一个索引值: **列表值所允许的成员值从 1 开始编号**，MySQL 存储的就是这个索引编号。枚举最多可以有 65 535 个元素。
+
+例如定义 ENUM 类型的列(first，'second'，'third)，该列可以取的值和每个值的索引如表所示:
+
+![](images/17_emum.png)
+
+举例:
 
 ```sql
 create table tmp9(enm Enum('first','second','third'));
 insert into tmp9 values('first'),('second'),('third'),(null);
 select enm,enm+0 from tmp9;
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180413201755914?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](images/18_测试结果.png)
 再看一个实例
 
 ```sql
@@ -636,24 +647,38 @@ select soc,level,level+0 from tmp10;
 insert into tmp10 values(100,4); #没有4这个选项
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/20180413203512394?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-##### d)、Set类型
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181206232555988.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![这里写图片描述](images/19_测试结果2.png)
 
+##### d)、Set类型
+
+SET 是一个字符串对象，可以有零或多个值，SET 列最多可以有 64 个成员，其值为表创建时规定的一列值。指定包括多个 SET 成员的 SET 列值时，各成员之间用逗号`(, )`间隔开。语法格式如下:
+
+```mysql
+SET('值1', '值2', ... '值n')
 ```
-#自动排序去重
-create table tmp11(s set('a','b','c','d'));  #只能插入a,b,c,d这四个值
+
+与 ENUM 类型相同，SET 值在内部用整数表示，**列表中每一个值都有一个索引编号**。当创建表时，SET 成员值的尾部空格将自动被删除。但与 ENUM 类型不同的是，ENUM 类型的字段只能从定义的列值中选择一个值插入，而 SET 类型的列可从定义的列值中选择多个字符的联合。
+
+如果插入 SET 字段中列值有重复，则 **MySQL 自动删除重复的值**，**插入 SET 字段的值的顺序并不重要**，MySQL 会在存入数据库时，按照定义的顺序显示；如果插入了不正确的值，默认情况下，MySQL 将忽视这些值，并给出警告。
+
+```mysql
+-- 自动排序去重
+create table tmp11(s set('a','b','c','d'));  # 只能插入a,b,c,d这四个值
 insert into tmp11 values('a'),('a,b,a'),('c,a,d');
 select *from tmp11;
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/20180413204802629?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![这里写图片描述](images/20_SET测试.png)
+
 ***
 #### 5)、二进制字符串类型
-![这里写图片描述](https://img-blog.csdn.net/20180413204919966?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](images/21_二进制字符串类型.png)
+
 ##### a)、Bit类型
-保存的是数的二进制表示
-![这里写图片描述](https://img-blog.csdn.net/20180413210002742?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+保存的是数的二进制表示:
+
+BIT 类型是位字段类型。M 表示每个值的位数，范围为 1-64。如果 M 被省略，默认为 1。如果为 BIT(M)列分配的值的长度小于 M 位，在值的左边用 0填充。例如，为 BIT(6)列分配一个值`b'101'`，其效果与分配 `b'000101'`相同。**BIT 数据类型用来保存位字段值**，例如: 以二进制的形式保存数据 13，13 的二进制形式为 1101，在这里需要位数至少为`4`位的 BIT 类型，即可以定义列类型为 BIT(4)。大于二进制 1111 的数据是不能插入 BIT(4)类型的字段中的。
 
 ```mysql
 #bit
@@ -663,26 +688,89 @@ insert into tmp12 values(16);#报错，只能存到0-15
 select b,b+0 from tmp12;
 ```
 效果
-![这里写图片描述](https://img-blog.csdn.net/20180413210036151?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-##### b)、Binary和varBinary
-![这里写图片描述](https://img-blog.csdn.net/20180413210206410?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-```
+![这里写图片描述](images/22_Bit类型.png)
+
+
+
+##### b)、Binary和varBinary
+
+BINARY 类型的长度是固定的 指定长度之后 不足最大长度的 将在它们右边填充 `"\0"`补齐以达到指定长度。例如: 指定列数据类型为 BINARY(3)，当插入“a”时，存储的内容实际为`“a\0\0”`，当插入`“ab”`时，实际存储的内容为`“ab\0”`，不管存储的内容是否达到指定的长度，其存储空间均为指定的值 M。
+
+VARBINARY 类型的长度是可变的，指定好长度之后，其长度可以在 0 到最大值之间。例如: 指定列数据类型为 VARBINARY(20)，如果插入的值的长度只有 10，则实际存储空间为 10 加 1，即其实际占用的空间为字符串的实际长度加 1。
+
+```mysql
 #binary和varbinary
 create table tmp13(b binary(3),vb varbinary(30));
 insert into tmp13 values(5,5);
 select length(b),length(vb) from tmp13;
 ```
-效果如图
-![这里写图片描述](https://img-blog.csdn.net/20180413212908210?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+效果如图:
+
+![这里写图片描述](images/23_效果.png)
+
 ##### c)、Blob类型
-![这里写图片描述](https://img-blog.csdn.net/20180413213100132?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+BLOB是一个二进制大对象，用来存储可变数量的数据。有四种类型: TINYBLOB、BLOB、MEDIUMBLOB和LONGBLOB。
+
+**BLOB列存储的是二进制字符串(字节字符串)，TEXT存储的是非二进制字符串(字符字符串)**。
+
 ***
 ### 2、如何选择数据类型
-![这里写图片描述](https://img-blog.csdn.net/20180413213929136?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180413214509984?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180413214615254?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180413214720537?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+#### 1)、整数和浮点数
+
+如果不需要小数部分，则使用整数来保存数据；
+
+如果需要表示小数部分，则使用浮点数类型。对于浮点数据列，存入的数值会对该列定义的小数位**进行四舍五入**。 例如，如果列的值的范围为 1-99999, 若使用整数，则MEDIUMINT UNSIGNED 是最好的类型，若需要存储小数，则使用 FLOAT 类型。
+
+浮点类型包括 FLOAT 和 DOUBLE 类型。DOUBLE 类型精度比 FLOAT 类型高，因此，如要求存储精度较高时，应选择 DOUBLE 类型。
+
+
+
+#### 2)、浮点数和定点数
+
+浮点数FLOAT、DOUBLE 相对于定点数 DECIMAL 的优势是: **在长度一定的情况下, 浮点数能表示更大的数据范围**，但是由于浮点数容易产生误差。
+
+**因此对精确度要求比较高时，建议使用DECIMAL 来存储**。DECIMAL 在 MySQL 中是以**字符串存储**的，用于定义货币等对精确度要求较高的数据。另外**两个浮点数进行减法和比较运算时也容易出问**题，因此在进行计算的时候，一定要小心。如果进行**数值比较，最好使用 DECIMAL 类型**。
+
+#### 3)、日期和时间类型
+
+MySQL 对于不同种类的日期和时间有很多的数据类型，比如 YEAR 和 TIME。如果只需要记录年份，则使用YEAR 类型即可； 如果只记录时间，只需使用TIME 类型。
+
+**如果同时需要记录日期和时间，则可以使用 TIMESTAMP 或者 DATETIME 类型**。由于TIMESTAMP 列的取值范围小于 DATETIME 的取值范围，**因此存储范围较大的日期最好使用DATETIME**。
+
+TIMESTAMP 也有一个DATETIME 不具备的属性。默认的情况下，当插入一条记录但并没有指定 TIMESTAMP 这个列值时，MySQL 会把 TIMESTAMP 列设为当前的时间。**因此当需要插入记录同时插入当前时间**时，使用TIMESTAMP 是方便的，另外 TIMESTAMP 在空间上比 DATETIME 更有效。
+
+#### 4)、char和varchar
+
+char和varchar的区别:
+
+* char是固定长度字符，varchar是可变长度字符；
+
+* CHAR 会自动删除插入数据的尾部空格，VARCHAR 不会删除尾部空格。
+
+CHAR 是固定长度，**所以它的处理速度比 VARCHAR 的速度要快**，但是它的缺点就是浪费存储空间。所以对存储不大，但在速度上有要求的可以使用 CHAR 类型，反之可以使用VARCHAR 类型来实现。
+
+存储引擎对于选择 CHAR 和 VARCHAR 的影响:
+
+* 对于MYyISAM 存储引擎: 最好使用固定长度(`char`)的数据列代替可变长度的数据列。这样可以使整个表静态化，从而使数据检索更快，用空间换时间。
+* 对于 InnoDB 存储引擎: 使用可变长度(`varchar`)的数据列，因为 InnoDB 数据表的存储格式不分固定长度和可变长度，因此使用 CHAR 不一定比使用 VARCHAR 更好，但由于VARCHAR 是按照实际的长度存储，比较节省空间，所以对磁盘 IO 和数据存储总量比较好。
+
+
+
+#### 5)、ENUM和SET
+
+**ENUM 只能取单值**, 它的数据列表是一个**枚举集合**。它的合法取值列表最多允许有 65 535个成员。因此，在需要从**多个值中选取一个**时，可以使用 ENUM。比如: 性别字段适合定义为 ENUM 类型，每次只能从“男”或“女”中取一个值。
+
+**SET 可取多值**。它的合法取值列表最多允许有 64 个成员。空字符串也是一个合法的 SET值。在需要**取多个值的时候**，适合使用 SET 类型，比如: 要存储一个人兴趣爱好，最好使用SET 类型 。
+
+**ENUM 和 SET 的值是以字符串形式出现的，但在内部，MySQL 以数值的形式存储它们**。
+
+#### 6)、BLOB和TEXT
+
+**BLOB 是二进制字符串，TEXT 是非二进制字符串**，两者均可存放大容量的信息。BLOB主要存储图片、音频信息等，而 TEXT 只能存储纯文本文件。
+
 ***
 ###  3、常见运算符介绍
 ![这里写图片描述](https://img-blog.csdn.net/20180413214916676?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
