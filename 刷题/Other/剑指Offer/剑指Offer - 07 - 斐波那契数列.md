@@ -94,6 +94,8 @@ public class Solution {
 
 ##### 5)、利用矩阵快速幂
 
+>  矩阵操作可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82822588)和[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82816131)。
+
 ![](images/07_s.png)
 
 ```java
