@@ -14,8 +14,6 @@
 
 ##### 1)、思路一－Use HashMap
 
-
-
 ```java
 import java.util.HashMap;
 public class Solution {
@@ -102,9 +100,57 @@ public class Solution {
 }
 ```
 
-
-
 ##### 2)、思路二－O(1)空间
 
 本题最优解法是只用`O(1)`的空间来解决。
+
+* 第一个步骤，先从左到右遍历一遍链表，对每个结点`cur`都复制生成相应的副本结点`copy`，然后把副本结点`copy`放在`cur`和下一个要遍历结点的中间；
+* 再从左到右遍历一遍链表，在遍历时设置每一个结点的副本结点的`random`指针；
+* 设置完`random`指针之后，将链表拆成两个链表，返回第二个链表的头部；
+
+例子:
+
+![](images/25_s.png)
+
+代码:
+
+```java
+public class Solution {
+    public RandomListNode Clone(RandomListNode pHead) {
+        if (pHead == null)
+            return null;
+        RandomListNode cur = pHead, next;
+        //先拷贝一份原来的链表
+        while (cur != null) {
+            next = cur.next;  //先存着之前的next
+            cur.next = new RandomListNode(cur.label);
+            cur.next.next = next;
+            cur = next;
+        }
+
+        //复制结点的random指针
+        cur = pHead;
+        RandomListNode copyCur = null;
+        while (cur != null) {
+            next = cur.next.next; //保存原来链表中的下一个
+            copyCur = cur.next; //复制链表的cur
+            copyCur.random = cur.random != null ? cur.random.next : null;
+            cur = next;
+        }
+
+        //拆开两个链表
+        RandomListNode copyHead = pHead.next;
+        cur = pHead;
+        while (cur != null) {
+            next = cur.next.next;
+            copyCur = cur.next;
+            cur.next = next;
+            copyCur.next = next != null ? next.next : null;
+            cur = next;
+        }
+        return copyHead;
+    }
+}
+
+```
 
