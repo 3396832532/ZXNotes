@@ -8,7 +8,7 @@
 
 > 输入一个链表，反转链表后，输出新链表的表头。
 
-#### 解析
+### 解析
 
 这个题目和[LeetCode206](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20206.%20Reverse%20Linked%20List%E5%8D%95%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92)(%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E5%8F%8D%E8%BD%AC).md)是一样的。解析也可以看那篇博客。两种思路:
 

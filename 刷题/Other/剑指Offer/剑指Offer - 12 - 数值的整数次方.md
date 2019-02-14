@@ -8,7 +8,7 @@
 
 > 给定一个`double`类型的浮点数`base`和`int`类型的整数`exponent`。求`base`的`exponent`次方。
 
-#### 解析
+### 解析
 
 这题和[**LeetCode50**](https://github.com/ZXZxin/ZXNotes/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Math/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20%26%20LeetCode%20-%2050.%20Pow(x%2C%20n).md)几乎一样，具体看那篇博客讲解。
 
