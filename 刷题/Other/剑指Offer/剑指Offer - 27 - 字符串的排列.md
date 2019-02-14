@@ -12,9 +12,13 @@
 
 ### 解析
 
-这题也很经典，给出四种写法。
+这题也很经典，和[**LeetCode47**](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2047.%20Permutations%20II(%E4%B8%8D%E9%87%8D%E5%A4%8D%E5%85%A8%E6%8E%92%E5%88%97)(%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0).md)几乎一样，具体可以看[**这篇博客**](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2047.%20Permutations%20II(%E4%B8%8D%E9%87%8D%E5%A4%8D%E5%85%A8%E6%8E%92%E5%88%97)(%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0).md)。给出四种写法。
+
+**这题要注意去重和有序两个方面。**
 
 #### 1)、写法一－经典写法
+
+这种方法真是没啥好说的，经典方法，[这篇博客](https://blog.csdn.net/summerxiachen/article/details/60579623)讲的很好。
 
 ```java
 import java.util.ArrayList;
@@ -53,6 +57,13 @@ public class Solution {
 ```
 
 #### 2)、写法二－先排序+递归函数字符串数组拷贝
+
+比较玄乎:
+
+- 使用的是先要排序，而且在调用`rec`函数的时候，我们要进行行数组的拷贝(`Arrays.copyof()`)，不能使用原来的数组(`C++`中传递的就是数组的拷贝)；
+- 而且使用数组的复制品还不能交换回来，这样就可以得到整个序列的字典序(在先排序的情况下得到字典序)，去重的时候使用`if(cur != i && newNums[i] == newNums[cur])continue;`去重。
+
+代码:
 
 ```java
 import java.util.ArrayList;
@@ -94,6 +105,8 @@ public class Solution {
 ```
 
 #### 3)、HashSet去重
+
+原理和经典的议案该，只不过利用`HashSet`去重。
 
 ```java
 import java.util.*;
@@ -138,7 +151,15 @@ public class Solution {
 
 #### 4)、dfs+回溯
 
+类似下面这种，枚举所有的可能。时间复杂度O(`n* n`<sup>`n-1`</sup>)。 
 
+![pic.png](images/27_s.png)
+
+* 利用`used`标记已经使用过的字符的位置即可；
+* 然后判断重复就要在`dfs`之前进行排序，保证相邻元素在一块。
+* 然后记得回溯，维护`used`和`sb`；
+
+代码:
 
 ```java
 import java.util.ArrayList;

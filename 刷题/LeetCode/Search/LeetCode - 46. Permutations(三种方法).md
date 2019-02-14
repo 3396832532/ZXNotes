@@ -50,7 +50,7 @@ class Solution {
 ***
 ### 使用`dfs`记录是否使用，并填充
 这种方法就是使用一个`bool`数组，记录是否填过，如果没有填过就填(向中间集添加元素)，然后递归，填到`n`个数就得到一个排列，时间复杂度O(`n* n`<sup>`n-1`</sup>)。
-![这里写图片描述](https://img-blog.csdn.net/20180806121056723?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](images/46_s2.png)
 
 ```java
 class Solution {
