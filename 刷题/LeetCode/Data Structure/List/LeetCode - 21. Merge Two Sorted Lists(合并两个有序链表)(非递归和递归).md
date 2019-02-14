@@ -10,7 +10,7 @@
 #### 题目
 ![在这里插入图片描述](images/21_t.png)
 
-**这个题目[剑指Offer](https://blog.csdn.net/zxzxzx0119/article/details/79779703#t4)中也出现过。**
+**这个题目[剑指Offer](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/Other/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer%20-%2016%20-%20%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8.md)中也出现过。**
 
 ### 非递归解法
 非递归解法很简单，就是每次比较两个结点，把较小的加到结果链表中，并且那个指针向后移动，代码如下: 
