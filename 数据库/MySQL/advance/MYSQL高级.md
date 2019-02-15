@@ -81,7 +81,7 @@ Mysql逻辑架构图如下:
 
 下面是mysql官网的体系图:
 
-![images/ad4_逻辑架构.png](images/ad4_逻辑架构.png)
+![images/ad4_逻辑架构.pngs](images/ad4_逻辑架构.png)
 
 各层的基本概述
 
