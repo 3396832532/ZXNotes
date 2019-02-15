@@ -12,7 +12,7 @@
 
 #### 1)、查看是否已经安装好
 
-![](images/ad1_.png)
+![pic.png](images/ad1_.png)
 
 #### 2)、Mysql的启动和停止
 
@@ -69,7 +69,7 @@ mysql> exit;
 * 查询日志`log` : 默认关闭，记录查询的`sql`语句，如果开启会减低`mysql`的整体性能，因为记录日志也是需要消耗系统资源的；
 * 数据文件
 
-![](images/ad2_数据文件.png)
+![images/ad2_数据文件.png](images/ad2_数据文件.png)
 
 * 如何配置: ①`windows`: `my.ini`文件；②`linux`: `/etc/my.cnf`文件；
 
@@ -77,11 +77,11 @@ mysql> exit;
 
 Mysql逻辑架构图如下:
 
-![](images/ad3_mysql服务器逻辑架构图.png)
+![images/ad3_mysql服务器逻辑架构图.png](images/ad3_mysql服务器逻辑架构图.png)
 
 下面是mysql官网的体系图:
 
-![](images/ad4_逻辑架构.png)
+![images/ad4_逻辑架构.png](images/ad4_逻辑架构.png)
 
 各层的基本概述
 
