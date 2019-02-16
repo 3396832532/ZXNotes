@@ -43,7 +43,7 @@ public class Solution {
             return 0;
         int mid = L + (R - L) / 2;
         return ((mergeRec(arr, L, mid) + mergeRec(arr, mid + 1, R))%mod + merge(arr, L, mid, R))%mod; // 正确
-//        return ((merge(arr, L, mid, R) + mergeRec(arr, L, mid))%mod + mergeRec(arr, mid + 1, R))%mod; // 正确
+//        return ((merge(arr, L, mid, R) + mergeRec(arr, L, mid))%mod + mergeRec(arr, mid + 1, R))%mod; // 错误
     }
 
     // [L, mid]有序， [mid+1, R]有序
