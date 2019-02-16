@@ -23,7 +23,9 @@
 
 ![](images/35_s.png)
 
->  注意这个过程会修改输入的数组`array`。
+>  注意这个过程明显会修改输入的数组`array`。
+
+代码:
 
 ```java
 public class Solution {
