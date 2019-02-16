@@ -1,23 +1,23 @@
-﻿## Lambda表达式总结
+﻿# Lambda表达式总结
 
- - [使用范例以及例子](#使用范例以及例子)
-    - [原始方法](#原始方法)
-    - [优化方式一-使用策略模式来优化](#优化方式一-使用策略模式来优化)
-    - [优化方式二-使用匿名内部类优化](#优化方式二-使用匿名内部类优化)
-    - [优化方式三-使用Lambda表达式](#优化方式三-使用lambda表达式)
-    - [优化方式四-使用Stream-API](#优化方式四-使用stream-api)
- - [`Lambda`表达式基础语法](#lambda表达式基础语法)
- - [函数式接口](#函数式接口)
- - [`Lambda`练习](#lambda练习)
-    - [练习一-`Employee`类中先按年龄比，年龄相同按照姓名比-都是升序](#练习一-employee类中先按年龄比年龄相同按照姓名比-都是升序)
-    - [练习二-声明一个带两个泛型的接口，并且对两个`Long`型数值计算](#练习二-声明一个带两个泛型的接口并且对两个long型数值计算)
- - [`Java8`四大内置函数式接口](#java8四大内置函数式接口)
- - [方法引用和构造器引用](#方法引用和构造器引用)
-     - [方法引用](#方法引用)
-     - [构造器引用](#构造器引用)
+ - [一、使用范例以及例子](#一使用范例以及例子)
+    - [1、原始方法](#1原始方法)
+    - [2、优化方式一-使用策略模式来优化](#2优化方式一-使用策略模式来优化)
+    - [3、优化方式二-使用匿名内部类优化](#3优化方式二-使用匿名内部类优化)
+    - [4、优化方式三-使用Lambda表达式](#4优化方式三-使用lambda表达式)
+    - [5、优化方式四-使用Stream-API](#5优化方式四-使用stream-api)
+ - [二、`Lambda`表达式基础语法](#二lambda表达式基础语法)
+ - [三、函数式接口](#三函数式接口)
+ - [四、`Lambda`练习](#四lambda练习)
+    - [1、练习一-`Employee`类中先按年龄比，年龄相同按照姓名比-都是升序](#1练习一-employee类中先按年龄比年龄相同按照姓名比-都是升序)
+    - [2、练习二-声明一个带两个泛型的接口，并且对两个`Long`型数值计算](#2练习二-声明一个带两个泛型的接口并且对两个long型数值计算)
+ - [五、`Java8`四大内置函数式接口](#五java8四大内置函数式接口)
+ - [六、方法引用和构造器引用](#六方法引用和构造器引用)
+     - [1、方法引用](#方法引用)
+     - [2、构造器引用](#构造器引用)
 
 ***
-### 使用范例以及例子
+## 一、使用范例以及例子
 
 使用匿名内部类:
 ```java
@@ -89,7 +89,7 @@ List<Employee> employees = Arrays.asList(
     new Employee("田七",27,7777.77)
 );
 ```
-#### 原始方法
+### 1、原始方法
 然后我们写分别查询出<font color =red>年龄大于`25`岁的员工信息和工资大于`4000`</font>的员工信息，发现`findEmployeesByAge`和`findEmployeesBySalary`两个方法代码非常的相似，<font color =red>只有查询条件不同，所以这个方法是不太可取的。
 ```java
 public void test3(){
@@ -130,7 +130,7 @@ public List<Employee> findEmployeesBySalary(List<Employee>list){
 }
 
 ```
-#### <font color = green>优化方式一-使用策略模式来优化
+### 2、优化方式一-使用策略模式来优化
 策略模式需要行为算法族，于是我们创建查询行为的接口`MyPredicate<T>`: 
 
 ```java
@@ -186,7 +186,7 @@ public void test4(){
     }
 }
 ```
-#### <font color = green>优化方式二-使用匿名内部类优化
+### 3、优化方式二-使用匿名内部类优化
 <font color =red>这样的好处在于不需要创建接口的具体的实现类，(但是还是需要`MyPredicate`接口和`filterEmployees()`方法): 
 ```java
 //优化方式二 ： 使用匿名内部类  这样的好处是不要创建一个额外的 策略类
@@ -202,15 +202,15 @@ public void test5(){
     }
 }
 ```
-#### <font color = green>优化方式三-使用Lambda表达式
-<font color = red>省去匿名内部类的没用的代码，增强可读性:(注意还是需要那个filterEmployees方法)</font>
+### 4、<font color = green>优化方式三-使用Lambda表达式
+<font color = red>省去匿名内部类的没用的代码，增强可读性:(注意还是需要那个`filterEmployees()`方法和`MyPredicate`接口)</font>
 ```java
 public void test6(){
     List<Employee> list = filterEmployees(this.employees, (e) -> e.getSalary() > 4000);
     list.forEach(System.out::println);
 }
 ```
-#### <font color = green>优化方式四-使用Stream-API
+### 5、<font color = green>优化方式四-使用Stream-API
 <font color = red>使用`StreamAPI`完全不需要其他的代码，包括不需要`filterEmployees()`方法，代码很简洁:
 ```java
 public void test7(){
@@ -220,7 +220,7 @@ public void test7(){
 }
 ```
 ***
-### Lambda表达式基础语法
+## 二、Lambda表达式基础语法
 **关于箭头操作符:** 
 
  - `Java8`中引入了一个新的操作符，`"->"`，该操作符称为箭头操作符或者`Lambda`操作符，箭头操作符将`Lambda`表达式拆分成两部分；
@@ -231,32 +231,30 @@ public void test7(){
 
 **语法格式:**
 
-
-
- - <font color =red>(一) 接口中的抽象方法 : 无参数，无返回值；
+(一)、接口中的抽象方法 : 无参数，无返回值；
 
 例如: `Runnable`接口中的`run`方法: 
 
 ```java
-　　 public void test1(){
-        /*final */int num = 2; //jdk1.7之前必须定义为final的下面的匿名内部类中才能访问
+public void test1(){
+    /*final */int num = 2; //jdk1.7之前必须定义为final的下面的匿名内部类中才能访问
 
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Hello world!" + num); //本质还是不能对num操作(只是jdk自己为我们设置成了final的)
-            }
-        };
-        r.run();
+    Runnable r = new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("Hello world!" + num); //本质还是不能对num操作(只是jdk自己为我们设置成了final的)
+        }
+    };
+    r.run();
 
-        System.out.println("----------使用Lambda输出-----------");
+    System.out.println("----------使用Lambda输出-----------");
 
-        Runnable r1 = () -> System.out.println("Hello world!" + num);
-        r1.run();
-    }
+    Runnable r1 = () -> System.out.println("Hello world!" + num);
+    r1.run();
+}
 ```
 
- - <font color =red>(二) 接口中的抽象方法 : 一个参数且无返回值；  (若只有一个参数，那么小括号可以省略不写)
+<font color =red>(二)、接口中的抽象方法 : 一个参数且无返回值；  (若只有一个参数，那么小括号可以省略不写)
 
 ```java
 public void test2(){
@@ -266,7 +264,7 @@ public void test2(){
 }
 ```
 
- - <font color =red>(三) 两个参数，有返回值，并且有多条语句 ：　**要用大括号括起来，而且要写上`return`**
+<font color =red>(三)、两个参数，有返回值，并且有多条语句 ：　**要用大括号括起来，而且要写上`return`**
 
 ```java
 public void test3(){
@@ -295,7 +293,7 @@ public void test3(){
 [8, 5, 4, 2, 1]
 ```
 
- - <font color =red>(四) 两个参数，有返回值，但是只有一条语句:　**大括号省略，`return`省略**
+<font color =red>(四)、两个参数，有返回值，但是只有一条语句:　**大括号省略，`return`省略**
 
  
 
@@ -313,9 +311,7 @@ public void test4(){
 [1, 2, 4, 5, 8]
 ```
 
- 
-
- - <font color =red>(五) `Lambda`表达式的参数列表的数据类型 可以省略不写，因为JVM编译器通过上下文推断出数据类型，即"类型推断"， `(Integer x,Integer y ) -> Integer.compare(x,y)`可以简写成`(x,y) -> Integer.compare(x,y)`；
+ <font color =red>(五)、 `Lambda`表达式的参数列表的数据类型 可以省略不写，因为JVM编译器通过上下文推断出数据类型，即"类型推断"， `(Integer x,Integer y ) -> Integer.compare(x,y)`可以简写成`(x,y) -> Integer.compare(x,y)`；
 
 ```java
 上联: 左右遇一括号省
@@ -323,7 +319,7 @@ public void test4(){
 横批: 能省则省
 ```
 ***
-### 函数式接口
+## 三、函数式接口
 
  - <font color =red>若接口中只有一个抽象方法的接口称为函数式接口；
  - <font color =red>可以使用注解`@FunctionlInterface`来标识，可以检查是否是函数式接口；
@@ -352,8 +348,8 @@ public void test5(){
  }
 ```
 ***
-### Lambda练习
-#### 练习一-`Employee`类中先按年龄比，年龄相同按照姓名比-都是升序
+## 四、Lambda练习
+### 1、练习一-`Employee`类中先按年龄比，年龄相同按照姓名比-都是升序
 先给出集合，模拟数据库表: 
 
 ```java
@@ -390,7 +386,7 @@ name='王五', age=24, salary=5555.55
 name='赵六', age=26, salary=6666.66
 name='田七', age=27, salary=7777.77
 ```
-#### 练习二-声明一个带两个泛型的接口，并且对两个`Long`型数值计算
+### 2、练习二-声明一个带两个泛型的接口，并且对两个`Long`型数值计算
 
 ```java
 @FunctionalInterface
@@ -410,9 +406,28 @@ public interface MyCalFunction<T,R> {
 ```
 更多的例子: (取自`<<`Java8`实战>>`)
 ![在这里插入图片描述](images/lambda1.png)
-![在这里插入图片描述](images/lambda2.png)
-(注意类型可以省略(<font color = red>类型推导</font>))。
-![在这里插入图片描述](images/lambda3.png)
+
+> 根据上述语法规则，以下哪个不是有效的Lambda表达式？
+> (1)  () -> {}
+> (2)  () -> "Raoul"
+> (3)  () -> {return "Mario";}
+> (4)  (Integer i) -> return "Alan" + i;
+> (5)  (String s) -> {"IronMan";}
+> 答案：只有4和 5是无效的Lambda。
+>
+> (1) 这个Lambda没有参数，并返回void。 它类似于主体为空的方法：public void run() {}。
+> (2) 这个Lambda没有参数，并返回String作为表达式。
+> (3) 这个Lambda没有参数，并返回String（利用显式返回语句）。
+>
+> (4) return是一个控制流语句。要使此Lambda有效，需要使花括号，如下所示：`(Integer i) -> {return "Alan" + i;}`。
+>
+> (5)“Iron Man”是一个表达式，不是一个语句。要使此Lambda有效，你可以去除花括号和分号，如下所示：`(String s) -> "Iron Man"`。或者如果你喜欢，可以使用显式返回语句，如下所示：`(String s)->{return "IronMan";}`。
+
+(注意类型可以省略(类型推导)。
+
+下面是一些使用示例:![在这里插入图片描述](images/lambda3.png)
+
+
 上图的`Apple`类: 
 
 ```java
@@ -446,7 +461,7 @@ public class Apple {
 ```
 
 ***
-### Java8四大内置函数式接口
+## 五、Java8四大内置函数式接口
 我们发现，如果使用`Lambda`还要自己写一个接口的话太麻烦，所以`Java`自己提供了一些接口: 
 
  - `Consumer< T >con` 消费性 接口:  `void accept(T t)`；
@@ -454,7 +469,7 @@ public class Apple {
  -  `Function< T , R >fun ` 函数式接口 :   `R apply (T t)`；
  -  `Predicate< T >`： 断言形接口 : `boolean test(T t)`；
 
-#### `Consumer< T >con`消费性接口-`void accept(T t)`
+### 1、`Consumer< T >con`消费性接口-`void accept(T t)`
 
 ```java
 @Test
@@ -467,7 +482,7 @@ public void apply(double num,Consumer<Double>con){
 ```
 
 ***
-#### `Supplier< T >sup`供给型接口-`T get()`
+### 2、`Supplier< T >sup`供给型接口-`T get()`
 例子: 产生指定个数的整数，并放入集合中；
 ```java
 public void test2(){
@@ -484,7 +499,7 @@ public ArrayList<Integer> getNumList(int num, Supplier<Integer>sup){
     return list;
 }
 ```
-#### `Function< T, R >fun`函数式接口-` R apply (T t)`
+### 3、`Function< T, R >fun`函数式接口-` R apply (T t)`
 
 ```java
 public void test3(){
@@ -497,7 +512,7 @@ public String strHandler(String str, Function<String,String>fun){
     return fun.apply(str);
 }
 ```
-#### `Predicate< T >`断言形接口-`boolean test(T t)`
+### 4、`Predicate< T >`断言形接口-`boolean test(T t)`
 判断一些字符串数组判断长度`>2`的字符串: 
 ```java
 public void test4(){
@@ -517,12 +532,12 @@ public List<String> filterStr(List<String>list, Predicate<String>pre){
 }
 ```
 ***
-### 方法引用和构造器引用
-#### 方法引用
+## 六、方法引用和构造器引用
+### 1、方法引用
 
-使用前提: <font color = red>**`Lambda`体中调用方法的参数列表和返回值类型，要和函数式接口中抽象方法的参数列表和返回值类型保持一致；**</font>
+使用前提: **`Lambda`体中调用方法的参数列表和返回值类型，要和函数式接口中抽象方法的参数列表和返回值类型保持一致；**</font>
 
- - <font color = red>语法格式(一) 对象::实例方法名
+#### 1)、语法格式(一) 对象::实例方法名
 
 ```java
 public void test1(){
@@ -608,9 +623,7 @@ public void test2(){
 
 
 
-
-
- - <font color = red>语法格式(二)  类名::静态方法</font>
+#### 2)、语法格式(二)  类名::静态方法
 
 ```java
 public void test3(){
@@ -623,11 +636,14 @@ public void test3(){
 `Integer`类中的
 
 ![这里写图片描述](images/lambda8.png)
+
 `Comparator`接口中的方法: 
 
 ![这里写图片描述](images/lambda9.png)
 
- - <font color = red>语法格式(三) 类::实例方法名</font>
+
+
+#### 3)、语法格式(三) 类::实例方法名</font>
 
 使用注意: **若Lambda参数列表中的第一个参数是实例方法的第一个调用者，而第二个参数是实例方法的参数时，可以使用`ClassName :: method`。**
 ```java
@@ -643,7 +659,7 @@ public void test4(){
 
 
 
-#### 构造器引用
+### 2)、构造器引用
 **需要调用构造器的参数列表，要与函数式接口中的抽象方法的参数列表保持一致；**
 
 ```java

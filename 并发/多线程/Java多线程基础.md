@@ -5,8 +5,13 @@
     - [2、start和run方法区别](#2start和run方法区别)
     - [3、线程生命周期](#3线程生命周期)
     - [4、银行排队业务案例](#4银行排队业务案例)
- - 二、深入理解Thread构造函数
- - 三、Thread API的详细介绍
+ - [二、深入理解Thread构造函数](#二深入理解thread构造函数)
+       - [1、线程的默认命名](#1线程的默认命名)
+       - [2、线程的父子关系](#2线程的父子关系)
+       - [3、Thread和ThreadGroup](#3thread和threadgroup)
+       - [4、Thread和JVM虚拟机栈](#4thread和jvm虚拟机栈)
+       - [5、守护线程](#5守护线程)
+ - 三、Thread API的详细内容
  - 四、线程安全与数据同步
  - 五、线程间通信
  - 六、ThreadGroup详细讲解
@@ -169,7 +174,8 @@ public class Code_02_TemplateMethod {
 
  - Java应用程序的main函数是一个线程，在JVM启动的时候调用，名字叫`main`；
  - **当你调用一个线程`start()`方法的时候，此时至少有两个线程，一个是调用你的线程(例如`main`)，还有一个是执行`run()`方法的线程；**
- - JVM启动时，实际上有多个线程，但是至少有一个**非守护线程**；
+- 如果在构造Thread的时候没有传递Runable或者没有复写`Thread`的`run()`方法，就不会调用任何东西。只有传递`Runable`接口的实例(策略模式的算法族)；或者复写了`Thread`的`run()`方法(在`start()`中有一个`start0()`方法（会调用子类重写的`run()`方法）)，才会执行相应的逻辑代码；
+- JVM启动时，实际上有多个线程，但是至少有一个**非守护线程**；s
 
 关于守护线程和非守护线程:
 
@@ -559,92 +565,71 @@ true
 
 #### 1)、Thread与Stacksize
 
+看下列`Thread`构造函数
+
+```java
+Thread(ThreadGroup group, Runnable target, String name, long stackSize) 
+//分配新的 Thread 对象，以便将 target 作为其运行对象，将指定的 name 作为其名称，作为 group 所引用的线程组的一员，并具有指定的堆栈大小。
+```
+
+构造Thread的时候传入`stackSize`代表着线程占用的`stack`大小，如果没有指定`stackSize`的大小，默认是`0`，`0`代表着会忽略该参数，改参数会被JNI函数(`Native`)去使用。
+
 #### 2)、JVM内存结构
+
+详见`JVM`相关知识。可看我的[另一篇博客](../../Java基础/JVM/JVM总结(一) - 内存区域与内存管理.md)。
 
 #### 3)、Thread与虚拟机栈
 
-![这里写图片描述](https://img-blog.csdn.net/20180909232233636?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+虚拟机栈的大小大概是可以存放21456个栈桢(栈桢中存放局部变量表、操作数栈、动态链接...)，而自己创建的线程的虚拟机栈只有大概15534个栈桢，但是我们可以在创建线程的时候指定`stackSize`；
 
-![在这里插入图片描述](https://img-blog.csdn.net/2018100719245529?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-**Thread与ThreadGroup**
+### 5、守护线程
 
+基本性质。
+
+* 在正常的情况下，如果JVM没有一个**非守护线程**，JVM的进程才会退出。(当只有`Daemon`线程运行的时候才会退出)；
+* `setDaemon()`方法必须在`start()`方法之前调用(否则会抛出`IllegalThreadException`)；
+
+线程是否为守护线程和它的父线程有很大的关系，如果父线程是正常线程，则子线程也是正常线程，反之亦然，如果你想要修改它的特性则可以借助 `setDaemon` 方法。`isDaemon()` 方法可以判断该线程是不是守护线程。
+
+另外需要注意的就是，`setDaemon()` 方法只在线程启动之前才能生效，如果一个线程已经死亡，那么再设置 `setDaemon()` 则会抛出 `IllegalThreadStateException` 异常。
+
+看一个`daemonThread`的例子: 
 ```java
-public class ThreadConstruction {
+public class Code_05_DaemonThread {
 
-    public static void main(String[] args) {
-        Thread t1 = new Thread("t1");
-
-        ThreadGroup group = new ThreadGroup("TestGroup");
-        Thread t2 = new Thread(group,"t1");
-
-        ThreadGroup mainGroup = Thread.currentThread().getThreadGroup();
-
-        System.out.println("main group : "+ mainGroup.getName());
-
-        System.out.println( t1.getThreadGroup() == mainGroup); 
-        System.out.println( t2.getThreadGroup() == mainGroup);
-        System.out.println( t2.getThreadGroup() == group);
-    }
-}
-
-```
-输出: 
-![在这里插入图片描述](https://img-blog.csdn.net/20181007193926569?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-结论：
-![在这里插入图片描述](https://img-blog.csdn.net/20181007193846554?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-在构造Thread()的时候指定这个线程虚拟机栈(线程独占区)的大小: 
-![这里写图片描述](https://img-blog.csdn.net/20180909200244839?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-stackSize中虚拟机栈和创建线程的关系：
-![在这里插入图片描述](https://img-blog.csdn.net/20181007194530371?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-**守护线程**
-
-![在这里插入图片描述](https://img-blog.csdn.net/20181007202220745?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![在这里插入图片描述](https://img-blog.csdn.net/20181007202419696?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-再看一个嵌套的例子: 
-```java
-public class TestDaemonThread {
-
-    public static void main(String[] args) {
-
-        Thread t = new Thread(){
-            @Override
-            public void run() {
-
-                Thread innerThread = new Thread(){
-                    @Override
-                    public void run() {
-                        while(true){
-                            System.out.println("do something in innerThread...");
-                            try {
-                                Thread.sleep(1_000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
-                };
-                //设置了这个，当父线程结束了之后，子线程也就结束了，如果注释，父线程结束，子线程也不一定会结束
-                innerThread.setDaemon(true); //不能在启动之后  setDaemon 不然会抛出异常
-                innerThread.start();
-
-                try {
-                    Thread.sleep(1_000);
-                    System.out.println("T thread is finished!");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        };
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+           while(true){
+               System.out.println("t running...");
+               try {
+                   Thread.sleep(1_000);
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+           }
+        });
+//        t.setDaemon(true);
         t.start();
+        Thread.sleep(2_000);
+        System.out.println("Main 线程结束!");
     }
 }
-
 ```
-运行结果: 
-![在这里插入图片描述](https://img-blog.csdn.net/20181007201849894?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-也就是说: 当主线程main结束，里面的线程都结束了，但是如果注释掉setDaemon(true)
-运行: 
-![在这里插入图片描述](https://img-blog.csdn.net/20181007201931457?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+上面注释了`t.setDaemon(true);`运行结果如下，发现`main` 线程结束了，但是里面的线程没有结束。
+
+![](images/t3_Daemon结果.png)
+
+但是如果不注释`t.setDaemon(true);`，当`main`线程结束，里面的线程就会结束。
+
+![](images/t4_.png)
+
+**守护线程的作用**
+
+**如果一个 JVM 进程中没有一个非守护线程，那么 JVM 会退出，也就是说守护线程具备自动结束生命周期的特性，而非守护线程则不具备这个特点**，试想一下如果 JVM 进程的垃圾回收线程是非守护线程，如果 main 线程完成了工作，则 JVM 无法退出，因为垃圾回收线程还在正常的工作。再比如有一个简单的游戏程序，其中有一个线程正在与服务器不断地交互以获取玩家最新的金币、武器信息，若希望在退出游戏客户端的时候，这些数据同步的工作也能够立即结束，等等。
+
+守护线程经常用作与执行一些后台任务，因此有时它也被称为**后台线程**，**当你希望关闭某些线程的时候，或者退出 JVM 进程的时候，一些线程能够自动关闭**，此时就可以考虑用守护线程(`setDaemon()`)为你完成这样的工作。
+
+***
+
+## 三、Thread API的详细内容
+
