@@ -12,7 +12,7 @@
 
  - 这个题目比较好的解题思路是从<font color =red>**右上角或者左下角**</font>开始找；这个是题目给定的每一行<font color =red>**从左到右递增**</font>和每一列<font color =red>**从上到下递增**</font>的原因；
 
- - 例如，从<font color =red>右上角</font>开始找，设置两个变量`row`，`col`分别代表列和行， 如果要找的数就是`target`，则直接返回；
+ - 例如，从<font color =red>右上角</font>开始找，设置两个变量`row`，`col`分别代表行坐标和列坐标， 如果要找的数就是`target`，则直接返回；
 
  - **如果`arr[row][col]  < target`，那` row = row + 1`，因为它左边的都会`arr[row][col]`小，这是因为列增加的性质**；
 
