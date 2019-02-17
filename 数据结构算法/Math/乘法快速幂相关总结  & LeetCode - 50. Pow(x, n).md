@@ -14,7 +14,10 @@
 * 但是如果`n`为奇数的话，就需要再乘以一个`a`，然后再返回；
 
 ![幂分解](images/m14.png)
-![在这里插入图片描述](https://img-blog.csdn.net/20180922190849170?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![在这里插入图片描述](images/m26.png)
+
+代码:
+
 ```java
     static long pow_mod(long a, long n, long mod) {
         if (n == 0)      // a^0 = 1
