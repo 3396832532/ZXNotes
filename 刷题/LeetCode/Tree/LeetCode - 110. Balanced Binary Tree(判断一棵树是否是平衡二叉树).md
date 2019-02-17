@@ -9,7 +9,7 @@
 #### 题目
 ![在这里插入图片描述](images/110_t.png)
 
-这个题目[**剑指offer**](https://blog.csdn.net/zxzxzx0119/article/details/80357393)中也出现过。
+这个题目**剑指offer**中也出现过。
 
 #### 解析
 ### O(N*logN)解法
