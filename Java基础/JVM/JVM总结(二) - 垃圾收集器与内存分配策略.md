@@ -18,7 +18,7 @@
   * [1、各个垃圾收集器的联系](#1各个垃圾收集器的联系)
   * [2、Serial收集器](#2serial收集器)
   * [3、ParNew收集器](#3parnew收集器)
-  * [4、Parallel Scavenge收集器](#4psarallel-scavenge收集器)
+  * [4、Parallel Scavenge收集器](#4parallel-scavenge收集器)
   * [5、Serial Old收集器](#5serial-old收集器)
   * [6、Paralell Old收集器](#6paralell-old收集器)
   * [7、CMS收集器](#7cms收集器)
