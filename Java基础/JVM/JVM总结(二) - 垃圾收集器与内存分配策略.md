@@ -470,7 +470,7 @@ Parallel Scavenge 收集器提供了两个参数用于精确控制委吐量，�
 
 * 整个过程分为四个步骤: 
 
-  * **① 初始标记(CMS initial Mark) (标记一下 GC Roots 能直接关联到的对象，速度很快，需要停顿。) **；
+  * **① 初始标记(CMS initial Mark) (标记一下 GC Roots 能直接关联到的对象，速度很快，需要停顿**；
   * **② 并发标记(CMS concurrent mark)(时间最长)**；
   * **③重新标记(CMS remark)(需要停顿)**；
   * **④并发清除(CMS concurrent sweep)**；
