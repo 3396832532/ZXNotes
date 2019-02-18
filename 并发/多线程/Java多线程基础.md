@@ -11,7 +11,16 @@
        - [3、Thread和ThreadGroup](#3thread和threadgroup)
        - [4、Thread和JVM虚拟机栈](#4thread和jvm虚拟机栈)
        - [5、守护线程](#5守护线程)
- - 三、Thread API的详细内容
+ - [三、Thread API的详细内容](#三threadapi的详细内容)
+     - [1、线程sleep](#1线程sleep)
+     - [2、线程yield](2线程yield)
+     - [3、设置线程的优先级](#3设置线程的优先级)
+     - [4、获取线程ID](#4获取线程id)
+     - [5、获取当前线程](5获取当前线程)
+     - [6、设置线程上下文类加载器](#6设置线程上下文类加载器)
+     - [7、线程interrupt](#7线程interrupt)
+     - [8、线程join](#8线程join)
+     - [9、关闭线程](9关闭线程)
  - 四、线程安全与数据同步
  - 五、线程间通信
  - 六、ThreadGroup详细讲解
@@ -632,4 +641,388 @@ public class Code_05_DaemonThread {
 ***
 
 ## 三、Thread API的详细内容
+
+### 1、线程sleep
+
+#### 1)、简单介绍
+
+两个构造方法
+
+* public static void sleep(long millis) throws InterruptedException
+
+* public static void sleep(long millis, int nanos) throws InterruptedException
+
+`sleep` 方法会**使当前线程进入指定毫秒数的休眠**，和暂停执行，虽然给定了一个休眠的时间，但是最终要以系统的定时器和调度器的精度为准，休眠有一个非常重要的特性，那就是其不会放弃 monitor 锁的所有权。
+
+每个线程的休眠互不影响。
+
+#### 2)、使用TimeUnit代替Thread.sleep
+
+JDKE 引入了一个枚举 TimeUnit，**其对 sleep 方法提供了很好的封装**，使用它可以省去时间单位的换算步骤，比如线程想休眠 3小时24分17秒 88 毫秒，使用TimeUnit 来实现就非常的简便优雅了:
+
+Thread.sleep(12257088L)；
+
+TimeUnit.HOURS.sleep(3)；
+
+TimeUnit.MINUTES.sleep(24) ；
+
+TimeUnit.SECONDS.sleep(17) ;
+
+TimeUnit .MILLISECONDS.sleep(88)；
+
+同样的时间表达，TimeUnit 显然清晰很多，强烈建议，在使用 Thread.sleep 的地方，完全使用TimeUnit 来代替，因为 sleep 能做的事，TimeUnit 全部都能完成，并且功能更加的强大。
+
+### 2、线程yield
+
+#### 1)、简单介绍
+
+* 这也是一个静态方法，调用该方法，是告诉操作系统的调度器，**我现在不着急占用CPU，你可以先让其他线程运行**。不过，**这对调度器也仅仅是建议，调度器如何处理是不一定的**，它可能完全忽略该调用；
+* 调用`yield()`方法会使得当前线程从`RUNNING`状态切换到`RUNNABLE`状态，这个方法不太常用；
+
+例子:
+
+```java
+public class Code_06_YieldTest {
+
+    public static void main(String[] args){
+        for(int i = 0; i < 2; i++)
+            create(i).start();
+    }
+
+    static Thread create(int index){
+        return new Thread(() -> {
+//           if(index == 0)
+//               Thread.yield();
+            System.out.println(index);
+        });
+    }
+}
+
+```
+
+上面的程序运行很多次，你会发现输出的结果不一致，有时候是 0 最先打印出来，有时候是 1 最先打印出来，但是当你打开代码的注释部分，你会发现，顺序始终是0，1。
+
+因为第一个线程如果最先获得了 CPU 资源，它会比较谦虚，主动告诉 CPU 调度器释放了原本属于自己的资源，但是 `yield` 只是一个提示 (`hint`)，CPU 调度器并不会担保每次都能满足 `yield` 提示；
+
+#### 2)、yield和sleep的区别
+
+看过前面的内容之后，会发现 yield 和 sleep 有一些混淆的地方， 在 JDK1.5 以前的版本中 yield 的方法事实上是调用了 `sleep(0)`，但是它们之间存在着本质的区别，具体如下。
+
+* `sleep` 会导致当前线程暂停指定的时间，没有 CPU 时间片的消耗。
+
+* `yield` 只是对 CPU 调度器的一个提示，如果 CPU 调度器没有忽略这个提示，它会导致线程上下文的切换。
+
+* `sleep` 会使线程短暂 block，会在给定的时间内释放 CPU 资源。
+
+* `yield` 会使RUNNING 状态的 Thread 进入RUNNABLE 状态 (如果 CPU 调度器没有
+  忽略这个提示的话)。
+
+* `sleep` 几乎百分之百地完成了给定时间的休眠，而 yield 的提示并不能一定担保。
+
+* 一个线程 sleep 另一个线程调用 interrupt 会捕获到**中断信号**，而 yield 则不会。
+
+### 3、线程优先级
+
+`setPriority(int newPriority)`、`getPriority()`方法。
+
+#### 1)、简单介绍
+
+进程有进程的优先级，线程同样也有优先级，理论上是优先级比较高的线程会获取优先被 CPU 调度的机会，**但是事实上往往并不会如你所愿**，设置线程的优先级同样也是一个**hint 操作**，有具体如下。
+
+* 对于 root 用户，它会 hint 操作系统你想要设置的优先级别，否则它会被忽略。
+* 如果 CPU 比较忙，设置优先级可能会获得更多的 CPU 时间片，但是闲时优先级的高低几乎不会有任何作用。
+
+所以，**不要在程序设计当中企图使用线程优先级绑定某些特定的业务，或者让业务严重依赖于线程优先级**，这可能会让你大失所望。
+
+代码:
+
+```java
+public class Code_07_ThreadPriority {
+    public static void main(String[] args){
+        Thread t1 = new Thread(() -> {
+            while(true){
+                System.out.println("t1");
+            }
+        });
+        t1.setPriority(3);
+        Thread t2 = new Thread(() -> {
+            while(true){
+                System.out.println("t2");
+            }
+        });
+        t2.setPriority(10);
+        t1.start();
+        t2.start();
+    }
+}
+```
+
+运行程序，会发现t2出现的频率更高一点。
+
+#### 2)、setPriority(int newPriority)源码
+
+源码如下:
+
+```java
+    public final void setPriority(int newPriority) {
+        ThreadGroup g;
+        checkAccess();
+        if (newPriority > MAX_PRIORITY || newPriority < MIN_PRIORITY) {
+            throw new IllegalArgumentException();
+        }
+        if((g = getThreadGroup()) != null) {
+            if (newPriority > g.getMaxPriority()) {
+                newPriority = g.getMaxPriority();
+            }
+            setPriority0(priority = newPriority);
+        }
+    }
+
+```
+
+可以看出
+
+* 线程的优先级不能小于 1 也不能大于 10；
+* 如果指定的线程优先级大于线程所在 group 的优先级，那么指定的优先级将会失效，取而代之的是 group 的最大优先级；
+* 另外，我们一般不会设置线程优先级，直接使用默认优先级即可，默认优先级一般是5；
+
+### 4、获取线程ID
+
+简单介绍:
+
+* `public long getId()`获取线程唯一的ID，线程的ID在整个JVM进程中都是唯一的。并且是从 0 开始逐次递增；
+* 如果你在 main 线程(main 函数) 中创建了一个唯一的线程，并且调用 getId() 后发现其并不等于0，也许你会纳闷，不应该是从 0 开始的吗? 因为在一个JVM 进程启动的时候，实际上是开辟了很多个线程，自增序列已经有了一定的消耗，因此我们自己创建的线程绝非第 0 号线程；
+
+### 5、获取当前线程
+
+很简单，就是`public static Thread currentThread()`方法。作用就是返回当前执行线程的引用。
+
+### 6、设置线程上下文类加载器
+
+* `public ClassLoader getContextClassLoader()`获取线程上下文的类加载器，简单来说就是这个线程是由哪个**类加器**加载的，如果是在没有修改线程上下文类加载器的情况下，**则保持与父线程同样的类加载器**。
+* `public void setContextClassLoader(ClassLoader cl)` 设置该线程的类加载器，这个方法可以打破 JAVA 类加载器的父委托机制，有时候该方法也被称为 JAVA 类加载器的后门。
+
+### 7、线程interrupt
+
+三个方法:
+
+```java
+public void interrupt();
+public static boolean interrupted();
+public boolean isInterrupted();
+```
+
+#### 1)、interrupt()
+
+**调用下面的方法会使得当前线程进入阻塞状态(blocked)，而调用当前线程的`interrupt()`方法，就可以打断这个阻塞**；
+
+```java
+Object 的 wait();
+Object 的 wait(long);
+Object 的 wait(long, int);
+
+Thread 的 sleep(long);
+Thread 的 sleep(long, int);
+
+Thread 的 join();
+Thread 的 join(long);
+Thread 的 join(long, int);
+
+InterruptibleChannel的io方法；
+Selector 的 wakeup();
+其他
+```
+
+上述若干方法都会使得当前线程进入阻塞状态。
+
+* 若**另外的一个线程调用被阻塞线程的`interrupt` 方法，则会打断这种阻塞**，因此这种方法有时会被称为可中断方法，记住，**打断一个线程并不等于该线程的生命周期结束**，仅仅是打断了当前线程的阻塞状态。
+* 一旦线程在阻塞的情况下被打断，都会抛出一个称为 `InterruptedException `的异常，这个异常就像一个 signal (信号) 一样通知当前线程被打断了。
+
+简单测试:
+
+```java
+public class Code_08_ThreadInterrupt {
+
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            try {
+                TimeUnit.MINUTES.sleep(1); // 企图休眠一分钟
+            } catch (InterruptedException e) {
+                System.out.println("Oh, I am be interrupted...");
+            }
+        });
+
+        t.start();
+        TimeUnit.MILLISECONDS.sleep(2); // 这里简短的休眠是为了确保线程已经启动了
+        t.interrupt(); // 打断线程休眠
+    }
+}
+
+```
+
+程序输出:
+
+```java
+Oh, I am be interrupted...
+```
+
+解释:
+
+上面的代码创建了一个线程，并且企图休眠 1 分钟的时长，不过很可惜，大约在 2 毫秒秒之后就被主线程调用 `interrupt` 方法打断。
+
+interrupt 这个方法内部到底做了什么样的事情呢? 在一个线程内部存在着名为 `interrupt flag`的标识，如果一个线程被 interrupt，那么它的 flag 将被设置。
+
+但是如果当前线程正在执行可中断方法被阻塞时(`sleep()`)，调用 interrupt 方法将其中断，反而会导致 flag 被清除。
+
+```java
+public void interrupt() {
+    if (this != Thread.currentThread())
+        checkAccess();
+
+    synchronized (blockerLock) {
+        Interruptible b = blocker;
+        if (b != null) {
+            interrupt0();           // flag , Just to set the interrupt flag
+            b.interrupt(this);
+            return;
+        }
+    }
+    interrupt0();
+}
+```
+
+另外，如果一个线程已经是死亡状态，那么尝试对其的 interrupt 会直接被忽略。
+
+#### 2)、isInterrupted
+
+作用: 判断当前线程是否被中断。
+
+给个代码:
+
+```java
+
+public class Code_08_ThreadInterrupt2 {
+
+    public static void main(String[] args) throws InterruptedException {
+//        test1();
+        test2();
+    }
+
+    static void test1() throws InterruptedException {
+        Thread t = new Thread(() -> {
+            while (true) { }
+        });
+        t.start();
+        TimeUnit.MILLISECONDS.sleep(2); // 这里简短的休眠是为了确保线程已经启动了
+        System.out.println(t.isInterrupted());
+        t.interrupt(); // 打断线程休眠
+        System.out.println(t.isInterrupted());
+    }
+
+    static void test2() throws InterruptedException {
+        Thread t = new Thread(() -> {
+            while (true) {
+                try {
+                    TimeUnit.MINUTES.sleep(1);
+                } catch (InterruptedException e) {
+                    // 忽略这个异常
+                    // 这里 interrupt flag 将会被clear
+                    System.out.println("I am be interrupted ?");
+                }
+            }
+        });
+        t.start();
+        TimeUnit.MILLISECONDS.sleep(2); // 这里简短的休眠是为了确保线程已经启动了
+        System.out.println(t.isInterrupted());
+        t.interrupt(); // 打断线程休眠
+        TimeUnit.MILLISECONDS.sleep(2); // 这里简短的休眠是为了确保线程已经启动了
+        System.out.println(t.isInterrupted());
+    }
+}
+
+```
+
+`test1()`输出:
+
+```
+false
+true
+```
+
+`test2()`输出:
+
+```
+false
+I am be interrupted ?
+false
+```
+
+解释:
+
+* `test1()`代码代码中定义了一个线程，并且在线程的执行单元中(run 方法) 写了一个空的死循环，为什么不写 sleep 呢? 因为 sleep 是可中断方法，会捕获到中断信号，从而干扰我们程序的结果；
+* `test2()`对`test1()`代码做了一些修改。中断方法补货了中断信号`signal`之后，也就是捕获了`InterruptedException`异常之后就会擦除`interrupt`的标识；
+
+#### 3)、interrupted
+
+interrupted 是一个静态方法，虽然其也用于判断当前线程是否被中断，但是它和成员方法 `isInterrupted` 还是有很大的区别的，**调用该方法会直接控除掉线程的 interrupt 标识**。
+
+需要注意的是，如果当前线程被打断了，那么第一次调用 `interrupted `方法会返回 true，并且立即清除了 interrupt 标识；第二次包括以后的调用永远都会返回 false，除非在此期间线程又一次地被打断。
+
+写一个程序简单测试:
+
+```java
+public class Code_08_ThreadInterrupt3 {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t = new Thread(() -> {
+            while(true){
+                System.out.println(Thread.interrupted());
+            }
+        });
+        t.setDaemon(true);//和主程序一起退出
+        t.start();
+        TimeUnit.MILLISECONDS.sleep(2);
+        t.interrupt();
+    }
+}
+```
+
+上面程序输出:
+
+```
+...
+false
+false
+true  // 只会输出一个true
+false
+false
+...
+```
+
+#### 4)、interrupt注意事项
+
+打开Thread的源码，发现: `isInterrupted()`和`interrupted()`方法都调用了同一个本地方法:
+
+```java
+private native boolean isInterrupted(boolean ClearInterrupted);
+```
+
+**其中参数`ClearInterrupted`主要用来控制是否擦除线程`interrupted`的标识**。
+
+`isInterrupted()`方法的源码中该参数为`false`，表示不想擦除。
+
+```java
+public boolean isInterrupted(){
+    return isInterrupted(false);// 表示不想擦除
+}
+```
+
+而`interrupted`静态方法中该参数则为`true`，表示想要擦除。
+
+```java
+public static boolean interrupted(){
+    return currentThread().isInterrupted(true); // 表示想要擦除
+}
+```
+
+### 8、线程join
 
