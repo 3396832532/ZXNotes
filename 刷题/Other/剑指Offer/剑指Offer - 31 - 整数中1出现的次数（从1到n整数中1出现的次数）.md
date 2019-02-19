@@ -12,7 +12,7 @@
 
 这题的解法非常多。很好的一道思维+拓展题。
 
-#### 1)、常规思路
+#### 1、常规思路
 
 这种方法就是每个数都求一下。显然不是好方法。
 
@@ -38,7 +38,7 @@ public class Solution {
 }
 ```
 
-#### 2)、
+#### 2、
 
 ```java
 public class Solution {
@@ -125,7 +125,7 @@ public class Solution {
 }
 ```
 
-#### 3)、
+#### 3、
 
 ```java
 public class Solution {
@@ -150,7 +150,7 @@ public class Solution {
 }
 ```
 
-#### 4)、
+#### 4、
 
 ```java
 public class Solution {
@@ -179,7 +179,7 @@ public class Solution {
 }
 ```
 
-#### 5)、
+#### 5、
 
 ```java
 public class Solution {

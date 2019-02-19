@@ -17,7 +17,7 @@
 
 ![](images/09_s.png)
 
-#### 1)、递归
+#### 1、递归
 
 ```java
 public class Solution {
@@ -31,7 +31,7 @@ public class Solution {
 }
 ```
 
-#### 2)、记忆化
+#### 2、记忆化
 
 ```java
 public class Solution {
@@ -56,7 +56,7 @@ public class Solution {
 }
 ```
 
-#### 3)、递推(DP)
+#### 3、递推(DP)
 
 ```java
 public class Solution {
@@ -77,7 +77,7 @@ public class Solution {
 }
 ```
 
-#### 4)、滚动优化
+#### 4、滚动优化
 
 上面的`dp[i]`只依赖于`dp[i-1]`和`dp[i-2]`，所以用`f1、f2`两个变量即可。
 
@@ -102,7 +102,7 @@ public class Solution {
 }
 ```
 
-#### 5)、利用矩阵快速幂
+#### 5、利用矩阵快速幂
 
 >  矩阵操作可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82822588)和[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82816131)。
 

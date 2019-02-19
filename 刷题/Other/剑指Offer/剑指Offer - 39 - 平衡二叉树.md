@@ -12,7 +12,7 @@
 
 这题在[**LeetCode**](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20110.%20Balanced%20Binary%20Tree(%E5%88%A4%E6%96%AD%E4%B8%80%E6%A3%B5%E6%A0%91%E6%98%AF%E5%90%A6%E6%98%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91).md)中也写过了。两种解法。
 
-#### 解法一
+#### 1、解法一
 
 思路
 
@@ -42,7 +42,7 @@ public class Solution {
 }
 ```
 
-#### 解法二
+#### 2、解法二
 
 上面的方法需要先求高度，然后再判断是不是平衡二叉树，能否一起做呢?
 

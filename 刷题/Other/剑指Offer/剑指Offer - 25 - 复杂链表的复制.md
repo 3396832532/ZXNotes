@@ -12,7 +12,7 @@
 
 [**LeetCode138**](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20138.%20Copy%20List%20with%20Random%20Pointer(%E5%90%AB%E6%9C%89%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8B%B7%E8%B4%9D).md)也是一样的题目。两种思路:
 
-#### 1)、思路一－Use HashMap
+#### 1、思路一－Use HashMap
 
 思路:
 
@@ -110,7 +110,7 @@ public class Solution {
 }
 ```
 
-#### 2)、思路二－O(1)空间
+#### 2、思路二－O(1)空间
 
 本题最优解法是只用`O(1)`的空间来解决。
 

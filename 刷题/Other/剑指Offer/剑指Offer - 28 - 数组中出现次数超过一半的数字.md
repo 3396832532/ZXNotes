@@ -12,7 +12,7 @@
 
 三种写法。
 
-#### 1)、思路一
+#### 1、思路一
 
 使用`map`来保存每个元素出现的次数，只要某个元素次数超过`array.length/2`就返回，很简单。
 
@@ -38,7 +38,7 @@ public class Solution {
 }
 ```
 
-#### 2)、思路二
+#### 2、思路二
 
 使用类似快速排序`partition`的思想: 
 
@@ -108,7 +108,7 @@ public class Solution {
 }
 ```
 
-#### 3)、思路三－摩尔投票解法
+#### 3、思路三－摩尔投票解法
 
 和[**这题的第四种方法一样**](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DivideConquer/LeetCode%20-%20169.%20Majority%20Element%20(%E8%AE%A1%E6%95%B0%20%2B%20%E4%BD%8D%E8%BF%90%E7%AE%97%20%2B%20Partition%20%2B%20%E5%88%86%E6%B2%BB).md#%E7%BB%B4%E6%8A%A4%E6%9B%B4%E6%96%B0%E6%96%B9%E6%B3%95)。
 
@@ -167,7 +167,7 @@ public class Solution {
 }
 ```
 
-#### 4)、摩尔投票两个变形题
+#### 4、摩尔投票两个变形题
 
 第三种解法有两种变形题目，且都可以用摩尔投票问题解决:
 
