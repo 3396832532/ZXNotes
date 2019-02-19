@@ -40,7 +40,7 @@ public class Solution {
 * 将字符串分成两部分，第一部分记为前n个字符部分记为`A`，后面的部分记为`B`；
 * 其实这个题目就是要你从`AB`转换到`BA`；
 * 做法就是 (1)、先将A部分字符串翻转；(2)、然后将B字符串翻转；(3)、最后将整个字符串翻转；
-* 也就是(A<sup>T</sup>B<sup>T</sup>)<sup></sup>T = BA；
+* 也就是(A<sup>T</sup>B<sup>T</sup>)<sup>T </sup>= BA；
 
 代码:
 
