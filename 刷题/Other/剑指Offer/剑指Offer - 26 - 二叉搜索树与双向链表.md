@@ -54,7 +54,7 @@ public class Solution {
 }
 ```
 
-上面的写法也可以改成非递归的写法，如下：
+上面的写法也可以改成递归的写法，如下：
 
 ```java
 public class Solution {
