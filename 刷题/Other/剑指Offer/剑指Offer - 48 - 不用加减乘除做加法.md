@@ -135,7 +135,7 @@ public class Solution {
 
 用位运算也可以实现乘法。做法如下:
 
-**a * b = a * 2<sup>0</sup> * b <sub>0</sub> + a * 2<sup>1</sup> * b <sub>1</sub> + ... + a * 2<sup>0</sup> * b <sub>i</sub> + ... + a * 2<sup>31</sup> * b <sub>31</sub>** 。
+**a * b = a*2<sup>0</sup> * b <sub>0</sub> + a *2<sup>1</sup> *b<sub>1</sub> + ... + a * 2<sup>i</sup> *b <sub>i</sub> + ... + a *2<sup>31</sup> *b<sub>31</sub>** 。
 
 其中`bi`为`0`或者`1`代表整数`b`的二进制数表达中第`i`位的值。
 
