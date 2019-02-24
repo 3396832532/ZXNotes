@@ -96,3 +96,38 @@ public class Solution {
 }
 ```
 
+***
+
+另外，也可以用位运算实现减法，因为`a - b = a +(-b)`，而在二进制的表示中，得到一个数的相反数，就是一个数取反然后`+1`(补码)即可。
+
+取反`+1`的代码看`negNum()`方法，而`Minus()`方法实现的是两数的减法运算。
+
+```java
+public class Solution {
+
+    public int Add(int num1, int num2) {
+        int sum = num1, carry = 0;//一开始sum = num1的原因是如果num2 == 0,后面我直接返回sum，而不是num1
+        while(num2 != 0){
+            sum = num1 ^ num2;
+            carry = (num1 & num2) << 1;
+            num1 = sum;
+            num2 = carry;
+        }
+        return sum;
+    }
+
+    // a + (-b)
+    public int Minus(int num1, int num2){
+        return Add(num1, negNum(num2));
+    }
+
+    private int negNum(int n) {
+        return Add(~n, 1); // 取反+1
+    }
+
+    public static void main(String[] args){
+        System.out.println(new Solution().Minus(1000, 100));
+    }
+}
+```
+
