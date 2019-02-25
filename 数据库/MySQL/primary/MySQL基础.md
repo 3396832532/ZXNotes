@@ -1067,163 +1067,236 @@ mysql> select lpad('hello',4,'*'),lpad('hello',10,'*'),
 +---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
 
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414112006326?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+#### 5)、重复生成,空格函数，替换函数，比较大小的函数
+
 ```mysql
 #重复生成,空格函数，替换函数，比较大小的函数
-select repeat('mysql',3),concat('(',space(6),')'),
-replace('xxx.baidu.com','x','w'),strcmp('abc','abd');
+mysql> select repeat('mysql',3),concat('(',space(6),')'),
+    -> replace('xxx.baidu.com','x','w'),strcmp('abc','abd');
+    
+效果:
+    
++-------------------+--------------------------+----------------------------------+---------------------+
+| repeat('mysql',3) | concat('(',space(6),')') | replace('xxx.baidu.com','x','w') | strcmp('abc','abd') |
++-------------------+--------------------------+----------------------------------+---------------------+
+| mysqlmysqlmysql   | (      )                 | www.baidu.com                    |                  -1 |
++-------------------+--------------------------+----------------------------------+---------------------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414133734950?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 6)、获取子串的函数
 
 ```mysql
-#获取字串的函数
-select substring('breakfast',5) as coll,
-substring('breakfast',3,5) as coll2,
-substring('breakfast',-3) as coll3, #从后面开始截取3个
-substring('breakfast',-1,4) as coll4; #从结尾开始第一个位置截取四个
-```
+#获取子串的函数
+mysql> select substring('breakfast',5) as coll,
+    -> substring('breakfast',3,5) as coll2,
+    -> substring('breakfast',-3) as coll3, #从后面开始截取3个
+    -> substring('breakfast',-1,4) as coll4; #从结尾开始第一个位置截取四个
+   
 效果:
+    
++-------+-------+-------+-------+
+| coll  | coll2 | coll3 | coll4 |
++-------+-------+-------+-------+
+| kfast | eakfa | ast   | t     |
++-------+-------+-------+-------+
 
-![这里写图片描述](https://img-blog.csdn.net/20180414134457483?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+```
 <font color = crimson>注意还有一个MID函数和substring作用是一样的</font>
-
-***
 
 ```mysql
 #匹配字串开始的位置,字符串逆序
-select locate('ball','football'),position('ball'in'football'),
-instr('football','ball'),reverse('abc');
-```
-效果
+mysql> select locate('ball','football'),position('ball'in'football'),
+    -> instr('football','ball'),reverse('abc');
+    
+效果:
 
-![这里写图片描述](https://img-blog.csdn.net/20180414140015303?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
++---------------------------+------------------------------+--------------------------+----------------+
+| locate('ball','football') | position('ball'in'football') | instr('football','ball') | reverse('abc') |
++---------------------------+------------------------------+--------------------------+----------------+
+|                         5 |                            5 |                        5 | cba            |
++---------------------------+------------------------------+--------------------------+----------------+
+
+```
+#### 7)、返回指定位置的值，返回指定字符串的位置的函数
 
 ```mysql
 #返回指定位置的值,返回指定字符串的位置的函数
-select elt(3,'a','b','c'),elt(2,'a'),
-field('Hi','hihi','Hey','Hi','bas') as coll,
-field('Hi','hihi','a','b') as coll2,
-find_in_set('Hi','hihi,Hey,Hi,bas'); #返回字串位置的函数
-```
+mysql> select elt(3,'a','b','c'),elt(2,'a'),
+    -> field('Hi','hihi','Hey','Hi','bas') as coll,
+    -> field('Hi','hihi','a','b') as coll2,
+    -> find_in_set('Hi','hihi,Hey,Hi,bas'); #返回字串位置的函数
+
 效果:
 
-![这里写图片描述](https://img-blog.csdn.net/20180414141233663?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
++--------------------+------------+------+-------+-------------------------------------+
+| elt(3,'a','b','c') | elt(2,'a') | coll | coll2 | find_in_set('Hi','hihi,Hey,Hi,bas') |
++--------------------+------------+------+-------+-------------------------------------+
+| c                  | NULL       |    3 |     0 |                                   3 |
++--------------------+------------+------+-------+-------------------------------------+
+
+```
+#### 8)、make_set()函数的使用
 
 ```mysql
 #make_set()函数的使用
-select make_set(1,'a','b','c') as coll,#0001选第一个
-make_set(1|4, 'hello','nice','word') as coll2, #0001 0100-->0101 -->选第一和第三
-make_set(1|4,'hello','nice',null,'word') as coll3,#0001 0100-->0101 -->选第一和第三
-make_set(0,'a','b','c') as coll4; 
-```
+mysql> select make_set(1,'a','b','c') as coll,#0001选第一个
+    -> make_set(1|4, 'hello','nice','word') as coll2, #0001 0100-->0101 -->选第一和第三
+    -> make_set(1|4,'hello','nice',null,'word') as coll3,#0001 0100-->0101 -->选第一和第三
+    -> make_set(0,'a','b','c') as coll4; 
+    
 效果:
+  
++------+------------+-------+-------+
+| coll | coll2      | coll3 | coll4 |
++------+------------+-------+-------+
+| a    | hello,word | hello |       |
++------+------------+-------+-------+
 
-![这里写图片描述](https://img-blog.csdn.net/20180414142118936?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
+```
 ***
 ### 3、日期和时间函数
 
+#### 1)、获取日期时间函数
+
 ```mysql
 #获取日期时间函数
-select current_date(),curdate(),curdate()+0,
-current_time(),curtime(),curtime()+0,
-current_timestamp(),localtime(),now(),sysdate();
+mysql> select current_date(),curdate(),curdate()+0,
+    -> current_time(),curtime(),curtime()+0,
+    -> current_timestamp(),localtime(),now(),sysdate();
+ 
+效果:
+ 
++----------------+------------+-------------+----------------+-----------+-------------+---------------------+---------------------+---------------------+---------------------+
+| current_date() | curdate()  | curdate()+0 | current_time() | curtime() | curtime()+0 | current_timestamp() | localtime()         | now()               | sysdate()           |
++----------------+------------+-------------+----------------+-----------+-------------+---------------------+---------------------+---------------------+---------------------+
+| 2019-02-25     | 2019-02-25 |    20190225 | 10:40:22       | 10:40:22  |      104022 | 2019-02-25 10:40:22 | 2019-02-25 10:40:22 | 2019-02-25 10:40:22 | 2019-02-25 10:40:22 |
++----------------+------------+-------------+----------------+-----------+-------------+---------------------+---------------------+---------------------+---------------------+s
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414142607410?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 2)、获取时间的数字，根据时间获取日期(互为反函数)
 
 ```mysql
 #获取时间的数字,根据时间获取日期(互为反函数)
-select unix_timestamp(),unix_timestamp(now()),now(),
-from_unixtime(1523689758);
+mysql> select unix_timestamp(),unix_timestamp(now()),now(),
+    -> from_unixtime(1523689758);
+
+效果:
+
++------------------+-----------------------+---------------------+---------------------------+
+| unix_timestamp() | unix_timestamp(now()) | now()               | from_unixtime(1523689758) |
++------------------+-----------------------+---------------------+---------------------------+
+|       1551062468 |            1551062468 | 2019-02-25 10:41:08 | 2018-04-14 15:09:18       |
++------------------+-----------------------+---------------------+---------------------------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414151053533?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 3)、返回当前时区日期和时间的函数，日期月份时间函数
 
 ```mysql
 #返回当前时区日期和时间的函数,日期月份时间函数
-select utc_time(),utc_time()+0,
-utc_date(),utc_date()+0,
-month('2016-03-04'),monthname('2016-03-04'),
-dayname('2018-04-14'),dayofweek('2018-04-14'),
-weekday('2018-04-14');
+mysql> select utc_time(),utc_time()+0,
+    -> utc_date(),utc_date()+0,
+    -> month('2016-03-04'),monthname('2016-03-04'),
+    -> dayname('2018-04-14'),dayofweek('2018-04-14'),
+    -> weekday('2018-04-14');
+   
+效果:
+    
++------------+--------------+------------+--------------+---------------------+-------------------------+-----------------------+-------------------------+-----------------------+
+| utc_time() | utc_time()+0 | utc_date() | utc_date()+0 | month('2016-03-04') | monthname('2016-03-04') | dayname('2018-04-14') | dayofweek('2018-04-14') | weekday('2018-04-14') |
++------------+--------------+------------+--------------+---------------------+-------------------------+-----------------------+-------------------------+-----------------------+
+| 02:41:56   |        24156 | 2019-02-25 |     20190225 |                   3 | March                   | Saturday              |                       7 |                     5 |
++------------+--------------+------------+--------------+---------------------+-------------------------+-----------------------+-------------------------+-----------------------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414152120121?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+注意dayofweek和weekday的差别：
 
-注意dayofweek和weekday的差别
-
-![这里写图片描述](https://img-blog.csdn.net/20180414152202919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180414152209424?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-***
+* `DAYOFWEEK(d)`函数返回d对应的一周中的索引(位置)。1表示周日，2表示周一，....，7表示周六；
+* `WEEKDAY(d)`返回d对应的工作日索引。0表示周一，1表示周二，...，6表示周日；
 
 ```mysql
 #返回是这一年的第几周
-select week('2018-4-16'),#默认0表示第一天从周末开始
-week('2018-04-16',1), #周一#返回是这一年的第几周
-dayofyear('2018-4-16'),dayofmonth('2018-4-14'), #返回一年中的第几天
-year('2018-4-14'),quarter('2018-4-14'),
-minute('10:10:02'),second("10:10:02");
+mysql> select week('2018-4-16'),#默认0表示第一天从周末开始
+    -> week('2018-04-16',1), #周一#返回是这一年的第几周
+    -> dayofyear('2018-4-16'),dayofmonth('2018-4-14'), #返回一年中的第几天
+    -> year('2018-4-14'),quarter('2018-4-14'),
+    -> minute('10:10:02'),second("10:10:02");
+    
+效果:
+
++-------------------+----------------------+------------------------+-------------------------+-------------------+----------------------+--------------------+--------------------+
+| week('2018-4-16') | week('2018-04-16',1) | dayofyear('2018-4-16') | dayofmonth('2018-4-14') | year('2018-4-14') | quarter('2018-4-14') | minute('10:10:02') | second("10:10:02") |
++-------------------+----------------------+------------------------+-------------------------+-------------------+----------------------+--------------------+--------------------+
+|                15 |                   16 |                    106 |                      14 |              2018 |                    2 |                 10 |                  2 |
++-------------------+----------------------+------------------------+-------------------------+-------------------+----------------------+--------------------+--------------------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414161034181?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 4)、获取指定日期的指定值的函数
 
 ```mysql
 #获取指定日期的指定值的函数
-select extract(year from '2018-07-06') as coll,
-extract(year_month from '2018-08-06') as coll2,
-extract(day_minute from '2018-07-06 10:11:05') as coll3;
-```
+mysql> select extract(year from '2018-07-06') as coll,
+    -> extract(year_month from '2018-08-06') as coll2,
+    -> extract(day_minute from '2018-07-06 10:11:05') as coll3;
+    
 效果:
+    
++------+--------+-------+
+| coll | coll2  | coll3 |
++------+--------+-------+
+| 2018 | 201808 | 61011 |
++------+--------+-------+
 
-
-
-![这里写图片描述](https://img-blog.csdn.net/20180414161511106?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+```
+#### 5)、时间和秒钟转换的函数
 
 ```mysql
 #时间和秒钟转换的函数
-select time_to_sec('01:00:40'),
-sec_to_time(3600);
+mysql> select time_to_sec('01:00:40'),
+    -> sec_to_time(3600);
+    
+效果:    
+
++-------------------------+-------------------+
+| time_to_sec('01:00:40') | sec_to_time(3600) |
++-------------------------+-------------------+
+|                    3640 | 01:00:00          |
++-------------------------+-------------------+
+
 ```
-效果:
-
-
-
-![这里写图片描述](https://img-blog.csdn.net/20180414174423286?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-
+#### 6)、计算日期和时间的函数
 
 ```mysql
 #计算日期和时间的函数
-select date_add('2010-12-31 23:59:59',interval 1 second) as coll,
-adddate('2010-12-31 23:59:59',interval 1 second) as coll2,
-date_add('2010-12-31 23:59:59',interval '0:0:1' hour_second) as coll3, #后面的hour_second要看表决定
-date_sub('2011-01-02',interval 31 day) as coll4,
-subdate('2011-01-02',interval 31 day) as coll5,
-date_sub('2011-01-02 00:01:00',interval '0 0:1:1' day_second) as coll6; #对应位置的相减
-```
-效果
+mysql> select date_add('2010-12-31 23:59:59',interval 1 second) as coll,
+    -> adddate('2010-12-31 23:59:59',interval 1 second) as coll2,
+    -> date_add('2010-12-31 23:59:59',interval '0:0:1' hour_second) as coll3, #后面的hour_second要看表决定
+    -> date_sub('2011-01-02',interval 31 day) as coll4,
+    -> subdate('2011-01-02',interval 31 day) as coll5,
+    -> date_sub('2011-01-02 00:01:00',interval '0 0:1:1' day_second) as coll6; #对应位置的相减
+   
+效果:
+    
++---------------------+---------------------+---------------------+------------+------------+---------------------+
+| coll                | coll2               | coll3               | coll4      | coll5      | coll6               |
++---------------------+---------------------+---------------------+------------+------------+---------------------+
+| 2011-01-01 00:00:00 | 2011-01-01 00:00:00 | 2011-01-01 00:00:00 | 2010-12-02 | 2010-12-02 | 2011-01-01 23:59:59 |
++---------------------+---------------------+---------------------+------------+------------+---------------------+
 
-![这里写图片描述](https://img-blog.csdn.net/20180414174708360?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+```
+#### 7)、直接输入两个时间，计算
 
 ```mysql
 #直接输入两个时间，计算
-select addtime('2000-12-31 23:59:59','1:1:1') as coll,
-subtime('2000-12-31 23:59:59','1:1:1')as coll2,
-datediff('2000-12-28','2001-01-03') as coll3; #前面的减后面的
+mysql> select addtime('2000-12-31 23:59:59','1:1:1') as coll,
+    -> subtime('2000-12-31 23:59:59','1:1:1')as coll2,
+    -> datediff('2000-12-28','2001-01-03') as coll3; #前面的减后面的
++---------------------+---------------------+-------+
+| coll                | coll2               | coll3 |
++---------------------+---------------------+-------+
+| 2001-01-01 01:01:00 | 2000-12-31 22:58:58 |    -6 |
++---------------------+---------------------+-------+
+
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180414175044280?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-注意看表:
-
-
+注意日期的一些区别:
 
 ![这里写图片描述](https://img-blog.csdn.net/20180414174815850?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
@@ -1233,15 +1306,24 @@ datediff('2000-12-28','2001-01-03') as coll3; #前面的减后面的
 ![这里写图片描述](https://img-blog.csdn.net/20180414174940784?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![这里写图片描述](https://img-blog.csdn.net/20180414174950614?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
+#### 8)、时间日期格式化函数
+
 ```mysql
 #时间日期格式化函数
-select date_format('1997-10-04 22:23:00','%W %M %Y') as coll,
-date_format('1997-10-04 22:23:00','%D %y %a %d %m %b %j'),
-time_format('16:00:00','%H %k %h %I %l'),
-date_format('2000-10-05 22:23:00',get_format(date,'USA'));
-```
-![这里写图片描述](https://img-blog.csdn.net/20180414175142523?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+mysql> select date_format('1997-10-04 22:23:00','%W %M %Y') as coll,
+    -> date_format('1997-10-04 22:23:00','%D %y %a %d %m %b %j'),
+    -> time_format('16:00:00','%H %k %h %I %l'),
+    -> date_format('2000-10-05 22:23:00',get_format(date,'USA'));
+    
+效果:
 
++-----------------------+-----------------------------------------------------------+------------------------------------------+-----------------------------------------------------------+
+| coll                  | date_format('1997-10-04 22:23:00','%D %y %a %d %m %b %j') | time_format('16:00:00','%H %k %h %I %l') | date_format('2000-10-05 22:23:00',get_format(date,'USA')) |
++-----------------------+-----------------------------------------------------------+------------------------------------------+-----------------------------------------------------------+
+| Saturday October 1997 | 4th 97 Sat 04 10 Oct 277                                  | 16 16 04 04 4                            | 10.05.2000                                                |
++-----------------------+-----------------------------------------------------------+------------------------------------------+-----------------------------------------------------------+
+
+```
 ### 4、条件判断函数
 
 ```mysql
