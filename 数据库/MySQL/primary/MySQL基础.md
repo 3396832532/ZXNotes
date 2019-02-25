@@ -1328,82 +1328,119 @@ mysql> select date_format('1997-10-04 22:23:00','%W %M %Y') as coll,
 
 ```mysql
 #条件约束函数
-select if(1>2,2,3),
-ifNull(null,10),ifNull(1/0,100),
-case 2 when 1 then 'one' when 2 then 'two' when 3 then 'three' else 'more' end, #2等于后面的2返回后面的then
-case when 1>2 then 'a' else 'b' end;
+mysql> select if(1>2,2,3),
+    -> ifNull(null,10),ifNull(1/0,100),
+    -> case 2 when 1 then 'one' when 2 then 'two' when 3 then 'three' else 'more' end, #2等于后面的2返回后面的then
+    -> case when 1>2 then 'a' else 'b' end;
+    
+效果:
+    
++-------------+-----------------+-----------------+--------------------------------------------------------------------------------+-------------------------------------+
+| if(1>2,2,3) | ifNull(null,10) | ifNull(1/0,100) | case 2 when 1 then 'one' when 2 then 'two' when 3 then 'three' else 'more' end | case when 1>2 then 'a' else 'b' end |
++-------------+-----------------+-----------------+--------------------------------------------------------------------------------+-------------------------------------+
+|           3 |              10 |        100.0000 | two                                                                            | b                                   |
++-------------+-----------------+-----------------+--------------------------------------------------------------------------------+-------------------------------------+
+
 ```
-效果
-
-![这里写图片描述](https://img-blog.csdn.net/20180414190109796?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
 ### 5、系统信息函数
 
 ```mysql
 #系统信息函数
-select version(),connection_id(),#版本号，连接次数
-database(),schema(), #查看当前的数据库名
-user(),current_user(),system_user(),session_user();
-show processlist;#输出当前用户的连接信息
+mysql> show processlist;#输出当前用户的连接信息
+
+效果:
+
++----+------+-----------+------------+---------+------+----------+------------------+
+| Id | User | Host      | db         | Command | Time | State    | Info             |
++----+------+-----------+------------+---------+------+----------+------------------+
+|  2 | root | localhost | learnmysql | Query   |    0 | starting | show processlist |
++----+------+-----------+------------+---------+------+----------+------------------+
+1 row in set (0.00 sec)
+
 ```
-效果
-
-![这里写图片描述](https://img-blog.csdn.net/20180414190945328?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
 ```mysql
 #获取字符串的字符集和排列方式的函数
-select charset('abc'),charset(convert('abc' using latin1)),
-charset(version()), #获取字符集
-collation('abc'),collation(convert('abc' using utf8));#获取排列方式
-```
-效果
-还要注意Last_insert_id最后自动生成的ID值:
+mysql> select charset('abc'),charset(convert('abc' using latin1)),
+    -> charset(version()), #获取字符集
+    -> collation('abc'),collation(convert('abc' using utf8));#获取排列方式
+    
+效果:    
 
-![这里写图片描述](https://img-blog.csdn.net/20180414194735908?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
++----------------+--------------------------------------+--------------------+------------------+--------------------------------------+
+| charset('abc') | charset(convert('abc' using latin1)) | charset(version()) | collation('abc') | collation(convert('abc' using utf8)) |
++----------------+--------------------------------------+--------------------+------------------+--------------------------------------+
+| utf8           | latin1                               | utf8               | utf8_general_ci  | utf8_general_ci                      |
++----------------+--------------------------------------+--------------------+------------------+--------------------------------------+
+
+```
+还要注意Last_insert_id最后自动生成的ID值。
 
 ### 6、加/解密函数
 
 ```mysql
-#加密解密函数
-select password('newpwd'),MD5('mypwd'), 
-encode('secret','cry'),length(encode('secret','cry')),
-decode(encode('secret','cry'),'cry');#加密后解密
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414195439560?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+mysql> select password('newpwd'),MD5('mypwd'), 
+    -> encode('secret','cry'),length(encode('secret','cry')),
+    -> decode(encode('secret','cry'),'cry');#加密后解密
+   
+效果:
+    
++-------------------------------------------+----------------------------------+------------------------+--------------------------------+--------------------------------------+
+| password('newpwd')                        | MD5('mypwd')                     | encode('secret','cry') | length(encode('secret','cry')) | decode(encode('secret','cry'),'cry') |
++-------------------------------------------+----------------------------------+------------------------+--------------------------------+--------------------------------------+
+| *1FA85AA204CC12B39B20E8F1E839D11B3F9E6AA4 | 318bcb4be908d0da6448a0db76908d78 | �h��                     |                              6 | secret                               |
++-------------------------------------------+----------------------------------+------------------------+--------------------------------+--------------------------------------+
 
+```
 ### 7、其他函数
 
 ```mysql
-#其他函数
-select format(123.1234,2),format(123.1,3),format(123.123,0),#格式化函数
-#不同进制数之间的转换
-conv('a',16,2),conv(15,10,2),conv(15,10,8),conv(15,10,16);
+mysql> select format(123.1234,2),format(123.1,3),format(123.123,0),#格式化函数
+    -> #不同进制数之间的转换
+    -> conv('a',16,2),conv(15,10,2),conv(15,10,8),conv(15,10,16);
+    
+效果:   
+ 
++--------------------+-----------------+-------------------+----------------+---------------+---------------+----------------+
+| format(123.1234,2) | format(123.1,3) | format(123.123,0) | conv('a',16,2) | conv(15,10,2) | conv(15,10,8) | conv(15,10,16) |
++--------------------+-----------------+-------------------+----------------+---------------+---------------+----------------+
+| 123.12             | 123.100         | 123               | 1010           | 1111          | 17            | F              |
++--------------------+-----------------+-------------------+----------------+---------------+---------------+----------------+
+
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180414200512674?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 ```mysql
 #IP地址与数字相互转换的函数
-select inet_aton('209.207.224.40'),inet_ntoa(3520061480),
-#枷锁函数和解锁函数
-get_lock('lock1',10),#这个锁持续10秒
-is_used_lock('lock1'),  #返回当前连接ID
-is_free_lock('lock1'), #是否是可用的
-release_lock('lock1');
-```
+mysql> select inet_aton('209.207.224.40'),inet_ntoa(3520061480),
+    -> #枷锁函数和解锁函数
+    -> get_lock('lock1',10),#这个锁持续10秒
+    -> is_used_lock('lock1'),  #返回当前连接ID
+    -> is_free_lock('lock1'), #是否是可用的
+    -> release_lock('lock1');
+
 效果:
 
-![这里写图片描述](https://img-blog.csdn.net/20180414201609394?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
++-----------------------------+-----------------------+----------------------+-----------------------+-----------------------+-----------------------+
+| inet_aton('209.207.224.40') | inet_ntoa(3520061480) | get_lock('lock1',10) | is_used_lock('lock1') | is_free_lock('lock1') | release_lock('lock1') |
++-----------------------------+-----------------------+----------------------+-----------------------+-----------------------+-----------------------+
+|                  3520061480 | 209.207.224.40        |                    1 |                     2 |                     0 |                     1 |
++-----------------------------+-----------------------+----------------------+-----------------------+-----------------------+-----------------------+
 
+```
 ```mysql
 #重复执行指定操作的函数
-select benchmark(5000,password('newpad')),
-charset('abc'),charset(convert('abc' using latin1)),#改变字符集的函数
-cast(100 as char(2)),convert('2010-10-11 12:12:12',time);#改变数据类型的函数
+mysql> select benchmark(5000,password('newpad')),
+    -> charset('abc'),charset(convert('abc' using latin1)),#改变字符集的函数
+    -> cast(100 as char(2)),convert('2010-10-11 12:12:12',time);#改变数据类型的函数
+  
+效果:
+    
++------------------------------------+----------------+--------------------------------------+----------------------+-------------------------------------+
+| benchmark(5000,password('newpad')) | charset('abc') | charset(convert('abc' using latin1)) | cast(100 as char(2)) | convert('2010-10-11 12:12:12',time) |
++------------------------------------+----------------+--------------------------------------+----------------------+-------------------------------------+
+|                                  0 | utf8           | latin1                               | 10                   | 12:12:12                            |
++------------------------------------+----------------+--------------------------------------+----------------------+-------------------------------------+
+
 ```
-效果
-
-![这里写图片描述](https://img-blog.csdn.net/20180414202751518?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
 ### 8、综合案列-Mysql函数的使用
 
 ```mysql
