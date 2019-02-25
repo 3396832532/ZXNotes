@@ -971,7 +971,7 @@ mysql> select sign(-21),sign(0),sign(21),pow(2,2),power(2,-2),exp(2);
 +-----------+---------+----------+----------+-------------+------------------+
 
 ```
-#### 6)、自然对数运算和以10为底的对数运算,弧度，角度 radians角度转弧度，弧度转角度
+#### 6)、自然对数运算和以10为底的对数运算，弧度，角度 radians角度转弧度，弧度转角度
 
 ```mysql
 #自然对数运算和以10为底的对数运算,弧度，角度 radians角度转弧度，弧度转角度
@@ -1003,33 +1003,69 @@ mysql> select sin(pi()/2),degrees(asin(1)),cos(pi()),degrees(acos(-1)),round(tan
 ```
 ### 2、字符串函数
 
+#### 1)、字符串函数、concat_ws忽略空值null
+
 ```mysql
 #字符串函数,concat_ws忽略空值null
-select char_length('aab'),length('aabb'),concat('My sql ','5.7'),concat('My',null,'sql'),concat_ws('-','a','b','c'),concat_ws('*','aa',null,'bb');
+mysql> select char_length('aab'),length('aabb'),concat('My sql ','5.7'),concat('My',null,'sql'),concat_ws('-','a','b','c'),concat_ws('*','aa',null,'bb');
+
+效果:
+
++--------------------+----------------+-------------------------+-------------------------+----------------------------+-------------------------------+
+| char_length('aab') | length('aabb') | concat('My sql ','5.7') | concat('My',null,'sql') | concat_ws('-','a','b','c') | concat_ws('*','aa',null,'bb') |
++--------------------+----------------+-------------------------+-------------------------+----------------------------+-------------------------------+
+|                  3 |              4 | My sql 5.7              | NULL                    | a-b-c                      | aa*bb                         |
++--------------------+----------------+-------------------------+-------------------------+----------------------------+-------------------------------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/2018041410443992?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+#### 2)、替换字符串的函数
 
 ```mysql
 #替换字符串的函数
-select insert('Quest',2,4,'What') as Coll,insert('Quest',-1,4,'What') as Coll2,insert('Quest',3,100,'Wh') as Coll3;
+mysql> select insert('Quest',2,4,'What') as Coll,insert('Quest',-1,4,'What') as Coll2,insert('Quest',3,100,'Wh') as Coll3;
+
+效果:
+
++-------+-------+-------+
+| Coll  | Coll2 | Coll3 |
++-------+-------+-------+
+| QWhat | Quest | QuWh  |
++-------+-------+-------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414110146458?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+#### 3)、大小写转换、获取指定长度字符串的函数left,right
+
 ```mysql
 #大小写转换,获取指定长度字符串的函数left,right;
-select lower('ZHENGXIN'),lcase('ZHENGXIN'),upper('zhengxin'),ucase('zhengxin'),left('football',5),right('football',5);
+mysql> select lower('ZHENGXIN'),lcase('ZHENGXIN'),upper('zhengxin'),ucase('zhengxin'),left('football',5),right('football',5);
+
+效果:
+
++-------------------+-------------------+-------------------+-------------------+--------------------+---------------------+
+| lower('ZHENGXIN') | lcase('ZHENGXIN') | upper('zhengxin') | ucase('zhengxin') | left('football',5) | right('football',5) |
++-------------------+-------------------+-------------------+-------------------+--------------------+---------------------+
+| zhengxin          | zhengxin          | ZHENGXIN          | ZHENGXIN          | footb              | tball               |
++-------------------+-------------------+-------------------+-------------------+--------------------+---------------------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414110548833?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+#### 4)、填充字符串的函数,删除空格的函数
 
 ```mysql
 #填充字符串的函数,删除空格的函数
-select lpad('hello',4,'*'),lpad('hello',10,'*'),
-rpad('hello',10,'*'),concat('(',ltrim('   book   '),')'),
-concat('(',rtrim('   book   '),')'),
-concat('(',trim('   book   '),')'),
-trim('xy' from 'xyxyabababxyxy');
+mysql> select lpad('hello',4,'*'),lpad('hello',10,'*'),
+    -> rpad('hello',10,'*'),concat('(',ltrim('   book   '),')'),
+    -> concat('(',rtrim('   book   '),')'),
+    -> concat('(',trim('   book   '),')'),
+    -> trim('xy' from 'xyxyabababxyxy');
+    
+效果:
+
++---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
+| lpad('hello',4,'*') | lpad('hello',10,'*') | rpad('hello',10,'*') | concat('(',ltrim('   book   '),')') | concat('(',rtrim('   book   '),')') | concat('(',trim('   book   '),')') | trim('xy' from 'xyxyabababxyxy') |
++---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
+| hell                | *****hello           | hello*****           | (book   )                           | (   book)                           | (book)                             | ababab                           |
++---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
+
 ```
 效果
 ![这里写图片描述](https://img-blog.csdn.net/20180414112006326?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
