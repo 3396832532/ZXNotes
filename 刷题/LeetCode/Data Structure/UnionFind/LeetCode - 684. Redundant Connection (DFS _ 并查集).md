@@ -64,56 +64,51 @@ class Solution {
 * 否则合并这两个顶点即可；
 ```java
 class Solution {
-    
-    private class UnionSet{
-        private int[] parent;
-        private int[] rank;
-        
-        public UnionSet(int n){
-            parent = new int[n+1];
-            rank = new int[n+1];
-            for(int i = 1; i <= n; i++){
-                parent[i] = i;
-                rank[i] = 1;
-            }
+
+    private int[] parent;
+    private int[] rank;
+
+    public int findRoot(int p) {
+        while (parent[p] != p) {
+            parent[p] = parent[parent[p]];
+            p = parent[p];
         }
-        
-        public int findRoot(int p){
-            while(parent[p] != p){
-                p = parent[parent[p]];
-                p = parent[p];
-            }
-            return p;
-        }
-        
-        public void union(int a, int b){
-            int aRoot = findRoot(a);
-            int bRoot = findRoot(b);
-            if(aRoot == bRoot)
-                return;
-            if(rank[aRoot] < rank[bRoot]){
-                parent[aRoot] = bRoot;
-            }else if(rank[aRoot] > rank[bRoot]){
-                parent[bRoot] = aRoot;
-            }else {
-                parent[aRoot] = bRoot;
-                rank[bRoot]++;
-            }
+        return p;
+    }
+
+    public void union(int a, int b) {
+        int aRoot = findRoot(a);
+        int bRoot = findRoot(b);
+        if (aRoot == bRoot)
+            return;
+        if (rank[aRoot] < rank[bRoot]) {
+            parent[aRoot] = bRoot;
+        } else if (rank[aRoot] > rank[bRoot]) {
+            parent[bRoot] = aRoot;
+        } else {
+            parent[aRoot] = bRoot;
+            rank[bRoot]++;
         }
     }
-    
+
     public int[] findRedundantConnection(int[][] edges) {
         if (edges == null || edges.length == 0)
             return new int[2];
         int n = edges.length;
-        UnionSet uSet = new UnionSet(n);
+        parent = new int[n + 1];
+        rank = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            parent[i] = i;
+            rank[i] = 1;
+        }
+
         for (int i = 0; i < edges.length; i++) {
             int from = edges[i][0];
             int to = edges[i][1];
-            if(uSet.findRoot(from) == uSet.findRoot(to))
+            if (findRoot(from) == findRoot(to))
                 return edges[i];
-            else 
-                uSet.union(from, to);
+            else
+                union(from, to);
         }
         return new int[2];
     }
@@ -165,7 +160,7 @@ class Solution {
 
     public int findRoot(int p){
         while(parent[p] != p){
-            p = parent[parent[p]];
+            parent[p] = parent[parent[p]];
             p = parent[p];
         }
         return p;
@@ -252,6 +247,5 @@ class Solution {
         );
     }
 }
-
 ```
 
