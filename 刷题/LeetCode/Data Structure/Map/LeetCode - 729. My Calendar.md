@@ -1,8 +1,8 @@
 ## LeetCode - 729. My Calendar(区间)
 
 * [一、LeetCode - 729. My Calendar I](#一leetcode---729-my-calendar-i)
-* [二、LeetCode - 731. My Calendar II](#二leetcode---731.-my-calendar-ii)
-* [三、LeetCode - 732. My Calendar III](#三leetcode---732.-my-calendar-iii)
+* [二、LeetCode - 731. My Calendar II](#二leetcode---731-my-calendar-ii)
+* [三、LeetCode - 732. My Calendar III](#三leetcode---732-my-calendar-iii)
 
 ### 一、LeetCode - 729. My Calendar I
 
