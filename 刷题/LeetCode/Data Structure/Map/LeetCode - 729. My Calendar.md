@@ -32,8 +32,8 @@ class MyCalendar {
 
     public boolean book(int start, int end) {
         for (int i = 0; i < n; i++)
-//                if (Math.max(L[i], R[i]) < Math.min(start, end))// 相交的四种情况
-            if(!ok(L[i], R[i], start, end))
+            if (Math.max(L[i], start) < Math.min(end, R[i]))// 相交的四种情况
+            // if(!ok(L[i], R[i], start, end))
                 return false;
         L[n] = start;
         R[n++] = end;
