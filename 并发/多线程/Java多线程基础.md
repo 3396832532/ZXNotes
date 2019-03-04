@@ -975,7 +975,7 @@ public class Code_08_ThreadInterrupt3 {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(() -> {
             while(true){
-                System.out.println(Thread.interrupted());
+                System.out.println(Thread.interrupted());//如果是继承Thread，就可以调用isInterrupted()
             }
         });
         t.setDaemon(true);//和主程序一起退出
