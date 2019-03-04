@@ -716,3 +716,274 @@ public class T {
 
 写两个线程，线程`1`添加`10`个元素到容器中，线程`2`实现监控元素的个数，当个数到`5`个时，线程`2`给出提示并结束。 
 
+先看初步版本:
+
+分析下面这个程序，能完成这个功能吗？
+答: 不能，因为虽然 `t2`线程 和` t1`线程的共享变量 list不是内存可见的(没有加` volatile`关键字)
+
+
+```java
+public class MyContainer1 {
+
+	List<Integer>list = new ArrayList<>();
+
+	public void add(Integer o) {
+        list.add(o);
+	}
+
+	public int size() {
+		return list.size();
+	}
+	
+	public static void main(String[] args) {
+		MyContainer1 c = new MyContainer1();
+
+		new Thread(() -> {
+			for(int i=0; i<10; i++) {
+				c.add(i);
+				System.out.println("add " + i);
+				
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "t1").start();
+
+		new Thread(() -> {
+			while(true) {
+				if(c.size() == 5) {
+					break;
+				}
+			}
+			System.out.println("t2 结束");
+		}, "t2").start();
+	}
+}
+```
+
+解决上面问题的方法就是在`list`前面加上一个` volatile`关键字即可。
+
+但是，还有一个问题，`t2`线程的死循环很浪费cpu，如果不用死循环，该怎么做呢？
+
+这里使用wait和notif机制，wait会释放锁，而notify不会释放锁:
+
+* 需要注意的是: 运用这种方法，必须要保证t2先执行，也就是首先让t2监听才可以；
+
+阅读下面的程序，并分析输出结果
+可以读到输出结果并不是size=5时t2退出，而是t1结束时t2才接收到通知而退出
+想想这是为什么？
+
+答: 因为notify不会放弃锁，所以最后程序结果不对，因为这个没有放弃锁，所以t2得不到执行。
+
+```java
+public class MyContainer3 {
+
+    // 添加volatile，使t2能够得到通知
+    volatile List<Integer> list = new ArrayList<>();
+
+    public void add(Integer o) {
+        list.add(o);
+    }
+
+    public int size() {
+        return list.size();
+    }
+
+    public static void main(String[] args) {
+        MyContainer3 c = new MyContainer3();
+
+        final Object lock = new Object();// 随便创建一个锁
+
+        new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("t2启动");
+                if (c.size() != 5) {
+                    try {
+                        lock.wait(); // 放入条件等待队列，放弃当前锁, 被阻塞
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("t2 结束");
+            }
+
+        }, "t2").start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+
+        new Thread(() -> {
+            System.out.println("t1启动");
+            synchronized (lock) {
+                for (int i = 0; i < 10; i++) {
+                    c.add(i);
+                    System.out.println("add " + i);
+
+                    if (c.size() == 5) {
+                        lock.notify(); // 不会放弃当前锁，所以最后程序结果不对，因为这个没有放弃锁，所以t2得不到执行
+                    }
+
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, "t1").start();
+    }
+}
+```
+
+解决办法:
+
+* `notify`之后，`t1`必须释放锁，`t2`退出后，也必须`notify`，通知`t1`继续执行；
+* 整个通信过程比较繁琐；
+
+```java
+public class MyContainer4 {
+
+    //添加volatile，使t2能够得到通知
+    volatile List<Integer> list = new ArrayList<>();
+
+    public void add(Integer o) {
+        list.add(o);
+    }
+
+    public int size() {
+        return list.size();
+    }
+
+    public static void main(String[] args) {
+        MyContainer4 c = new MyContainer4();
+
+        final Object lock = new Object();
+
+        new Thread(() -> {
+            synchronized (lock) {
+                System.out.println("t2启动");
+                if (c.size() != 5) {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println("t2 结束");
+                //t1释放锁之后，我t2得到了执行，最后我还要通知t1继续执行
+                lock.notify();
+            }
+
+        }, "t2").start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+
+        new Thread(() -> {
+            System.out.println("t1启动");
+            synchronized (lock) {
+                for (int i = 0; i < 10; i++) {
+                    c.add(i);
+                    System.out.println("add " + i);
+
+                    if (c.size() == 5) {
+                        lock.notify();
+                        //再加一个wait(), ---> 释放锁，让t2得以执行
+                        try {
+                            lock.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, "t1").start();
+    }
+}
+```
+
+更高效的方式:
+
+* 使用Latch（门闩）替代wait notify来进行通知；
+* 好处是通信方式简单，同时也可以指定等待时间；
+* 使用`await()`和`countdown()`方法替代wait和notify；
+* CountDownLatch**不涉及锁定**(这是和上面不同的，这比上面高效)， 当count的值为零时当前线程继续运行(`new CountDownCatch(count)`)；
+* **当不涉及同步，只是涉及线程通信的时候，用`synchronized + wait/notify`就显得太重了**；
+* 这时应该考虑countdownlatch/cyclicbarrier/semaphore
+
+代码:
+
+```java
+public class MyContainer5 {
+
+    //添加volatile，使t2能够得到通知
+    volatile List<Integer> list = new ArrayList<>();
+
+    public void add(Integer o) {
+        list.add(o);
+    }
+
+    public int size() {
+        return list.size();
+    }
+
+    public static void main(String[] args) {
+        MyContainer5 c = new MyContainer5();
+
+        CountDownLatch latch = new CountDownLatch(1);
+
+        new Thread(() -> {
+            System.out.println("t2启动");
+            if (c.size() != 5) {
+                try {
+                    latch.await();
+                    //也可以指定等待时间
+                    //latch.await(5000, TimeUnit.MILLISECONDS);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            System.out.println("t2 结束");
+        }, "t2").start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        }
+
+        new Thread(() -> {
+            System.out.println("t1启动");
+            for (int i = 0; i < 10; i++) {
+                c.add(i);
+                System.out.println("add " + i);
+
+                if (c.size() == 5) {
+                    // 打开门闩，让t2得以执行
+                    latch.countDown(); // 调用一次countDown，构造函数中构造的那个值就-1，到了0，门栓就开了(通知t2运行)
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, "t1").start();
+    }
+}
+```
+
