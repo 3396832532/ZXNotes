@@ -1225,6 +1225,16 @@ public class TestReentrantLock5 extends Thread{
 
 使用`wait()`和`notify()`实现:
 
+几点注意:
+
+* `wait()`一般和`while`放在一起使用，具体原因如下图。
+
+* 每次都是`notifyAll()`而不是`notify()`，因为`notify()`是通知任意一个线程，有可能通知不到**生产者/消费者**，所以需要`notifyAll()`。
+
+![thread_02.png](images/thread_02.png)
+
+代码:s
+
 ```java
 import java.util.ArrayDeque;
 import java.util.Queue;
