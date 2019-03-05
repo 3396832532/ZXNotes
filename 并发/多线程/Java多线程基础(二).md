@@ -987,3 +987,229 @@ public class MyContainer5 {
 }
 ```
 
+### 17、ReentrantLock的相关知识
+
+#### 1)、用ReentrantLock替代synchronized
+
+下面先给一个用synchronized实现同步的程序。然后演示用`ReentrantLock`来替代它。
+
+```java
+/**
+ * ReentrantLock用于替代synchronized
+ * 本例中由于m1锁定this,只有m1执行完毕的时候,m2才能执行: 这里是复习synchronized最原始的语义
+ */
+public class TestReentrantLock1 {
+
+    synchronized void m1(){
+        for(int i = 0; i < 10; i++){
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(i);
+        }
+    }
+
+    synchronized void m2(){
+        System.out.println("m2...");
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        TestReentrantLock1 r1 = new TestReentrantLock1();
+        new Thread(() -> r1.m1(), "t1").start();
+
+        TimeUnit.SECONDS.sleep(1);
+
+        new Thread(() -> r1.m2(), "t2").start(); // m2必须要等待t1的m1执行完
+    }
+}
+```
+
+用`ReentrantLock`替代`synchronized`的功能:
+
+```java
+/**
+ * 使用ReentrantLock可以完成同样的功能
+ * 需要注意的是，必须要必须要必须  要手动释放锁（重要的事情说三遍）
+ * 使用syn锁定的话如果遇到异常，jvm会自动释放锁，但是lock必须手动释放锁，因此经常在finally中进行锁的释放
+ */
+
+public class TestReentrantLock2 {
+
+    Lock lock = new ReentrantLock(); // 注意这是JDK里面的
+
+    void m1() {
+        try {
+            lock.lock(); // 相当于synchronized(this);
+            for (int i = 0; i < 10; i++) {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(i);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock(); // 这个释放锁一定要在finally中, 如果发生异常就会释放，否则如果没有手动释放,m2永远得不到执行
+        }
+    }
+
+    // 没有加synchronized
+    void m2() {
+        lock.lock();
+        System.out.println("m2...");
+        lock.unlock();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        TestReentrantLock2 r1 = new TestReentrantLock2();
+        new Thread(() -> r1.m1(), "t1").start();
+
+        TimeUnit.SECONDS.sleep(1);
+
+        new Thread(() -> r1.m2(), "t2").start(); // m2必须要等待t1的m1执行完
+    }
+}
+```
+
+#### 2)、ReentrantLock的tryLock功能
+
+```java
+/**
+ * 使用reentrantlock可以进行“尝试锁定”tryLock。
+ * 这样无法锁定，或者在指定时间内无法锁定，线程可以决定是否继续等待
+ */
+
+public class TestReentrantLock3 {
+
+    Lock lock = new ReentrantLock(); // 注意这是JDK里面的
+
+    void m1() {
+        try {
+            lock.lock(); // 相当于synchronized(this);
+            for (int i = 0; i < 10; i++) {
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println(i);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock(); // 这个释放锁一定要在finally中, 如果发生异常就会释放，否则如果没有手动释放,m2永远得不到执行
+        }
+    }
+
+
+    /**
+     * 使用tryLock进行尝试锁定，不管锁定与否，方法都将继续执行: 可以先去做边的事，不像synchronized一样死等着
+     * 可以根据tryLock的返回值来判定是否锁定
+     * 也可以指定tryLock的时间，由于tryLock(time)抛出异常，所以要注意unclock的处理，必须放到finally中
+     */
+    void m2() {
+        boolean success = false;
+        while(!success) {
+            success = lock.tryLock(); //尝试获取锁，如果获取到了返回true
+//            success = lock.tryLock(5, TimeUnit.SECONDS); //等待5秒，如果5秒还没有，我该干啥就干啥
+            if(success) {
+                System.out.println("                                                                                                                                    m2... ");
+                lock.unlock();
+                break;
+            }
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        TestReentrantLock3 r1 = new TestReentrantLock3();
+        new Thread(() -> r1.m1(), "t1").start();
+
+        TimeUnit.SECONDS.sleep(1);
+
+        new Thread(() -> r1.m2(), "t2").start(); // m2必须要等待t1的m1执行完
+    }
+}
+```
+
+#### 3)、ReentrantLock的lockInterruptibly()方法可以对interrupt做出响应
+
+```java
+/**
+ * 使用ReentrantLock还可以调用lockInterruptibly方法，可以对线程interrupt方法做出响应，
+ * 在一个线程等待锁的过程中，可以被打断
+ */
+
+public class TestReentrantLock4 {
+
+    public static void main(String[] args){
+        Lock lock = new ReentrantLock();
+
+        Thread t1 = new Thread(()->{
+            try {
+                lock.lock();
+                System.out.println("t1 start");
+                TimeUnit.SECONDS.sleep(Integer.MAX_VALUE); // 一直占有这把锁
+                System.out.println("t1 end");
+            } catch (InterruptedException e) {
+                System.out.println("interrupted!");
+            } finally {
+                lock.unlock();
+            }
+        });
+        t1.start();
+
+        Thread t2 = new Thread(()->{
+
+            try {
+                //lock.lock();
+                lock.lockInterruptibly(); //  可以对interrupt()方法做出响应
+                System.out.println("t2 start");
+                TimeUnit.SECONDS.sleep(5);
+                System.out.println("t2 end");
+            } catch (InterruptedException e) {
+                System.out.println("interrupted!");
+            } finally {
+//                lock.unlock();  //这里会抛异常，因为我没有获取到锁，肯定不能unlock
+            }
+        });
+        t2.start();
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        t2.interrupt(); //打断线程2的等待, 就是告诉t2，你别等了，t1要这么久，再怎么等也没用
+    }
+}
+```
+
+#### 4)、ReentrantLock可以实现公平锁
+
+公平锁，就是当对象释放锁的时候，其他需要拿到锁的线程中，等的最久的那个会先拿到锁。
+
+```java
+/**
+ * ReentrantLock还可以指定为公平锁
+ * 就是等的越久的就越先拿到锁
+ */
+public class TestReentrantLock5 extends Thread{
+
+    private static ReentrantLock lock = new ReentrantLock(true); //参数为true表示为公平锁，请对比输出结果
+
+    public void run() {
+        for(int i = 0 ;i < 100; i++) {
+            lock.lock();
+            try{
+                System.out.println(Thread.currentThread().getName()+"获得锁");
+            }finally{
+                lock.unlock();
+            }
+        }
+    }
+    public static void main(String[] args) {
+        TestReentrantLock5 rl = new TestReentrantLock5();
+        Thread th1 = new Thread(rl);
+        Thread th2 = new Thread(rl);
+        th1.start();
+        th2.start();
+    }
+}
+```
+
