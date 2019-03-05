@@ -89,21 +89,21 @@ public class T {
 ```java
 public class T implements Runnable {
 
-	private int count = 10;
+    private int count = 10;
 
-	// 如果不加 synchronized就会出现问题，因为我只有一个t(Thread)对象，有5个线程在同时访问count
-	// 加了这个synchronized之后就可以了，锁住了当前的对象, synchronized代码块是原子操作
+    // 如果不加 synchronized就会出现问题，因为我只有一个t(Thread)对象，有5个线程在同时访问count
+    // 加了这个synchronized之后就可以了，锁住了当前的对象, synchronized代码块是原子操作
     public /*synchronized*/ void run() {
-		count--;
-		System.out.println(Thread.currentThread().getName() + " count = " + count);
-	}
-	
-	public static void main(String[] args) {
-		T t = new T();
-		for(int i=0; i<5; i++) {
-			new Thread(t, "THREAD" + i).start();
-		}
-	}
+        count--;
+        System.out.println(Thread.currentThread().getName() + " count = " + count);
+    }
+
+    public static void main(String[] args) {
+        T t = new T();
+        for(int i=0; i<5; i++) {
+            new Thread(t, "THREAD" + i).start();
+        }
+    }
 }
 ```
 
@@ -118,44 +118,45 @@ public class T implements Runnable {
  */
 public class T  {
 
-	public synchronized void m1() {
-		System.out.println(Thread.currentThread().getName() + " m1 start...");
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println(Thread.currentThread().getName() + " m1 end");
-	}
+    public synchronized void m1() {
+        System.out.println(Thread.currentThread().getName() + " m1 start...");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + " m1 end");
+    }
 
-	public void m2() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println(Thread.currentThread().getName() + " m2 ");
-	}
+    public void m2() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + " m2 ");
+    }
 
-	public static void main(String[] args){
-		T t = new T();
+    public static void main(String[] args){
+        T t = new T();
 
-		/*new Thread(()->t.m1(), "t1").start();
-		new Thread(()->t.m2(), "t2").start();*/
+        /*new Thread(()->t.m1(), "t1").start();
+        new Thread(()->t.m2(), "t2").start();*/
 
-		new Thread(t::m1, "t1").start(); //方法推导
-		new Thread(t::m2, "t2").start();
+        new Thread(t::m1, "t1").start(); //方法推导
+        new Thread(t::m2, "t2").start();
 
-		/*
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				t.m1(); // 在run方法中调用了 m1()
-			}
-		});
-		*/
-	}
+        /*
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                t.m1(); // 在run方法中调用了 m1()
+            }
+        });
+        */
+    }
 }
+
 ```
 
 输出:
@@ -188,47 +189,47 @@ t2 m2
  */
 public class Account {
     String name;
-	double balance;
-	
-	public synchronized void set(String name, double balance) {
-		this.name = name;
+    double balance;
 
-		// 加上下面的代码，只是为了演示问题的所在
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+    public synchronized void set(String name, double balance) {
+        this.name = name;
 
-		this.balance = balance;
-	}
+        // 加上下面的代码，只是为了演示问题的所在
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-	// 如果不在下面的方法中加上synchronized，就会产生脏读的问题
-	public /*synchronized*/ double getBalance() {
-		return this.balance;
-	}
-	
+        this.balance = balance;
+    }
 
-	public static void main(String[] args) {
-		Account account = new Account();
-		new Thread(()->account.set("zhangsan", 100.0)).start();
-		
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println(account.getBalance()); // 第一次获取，结果发现不正确
-		
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		System.out.println(account.getBalance());
-	}
+    // 如果不在下面的方法中加上synchronized，就会产生脏读的问题
+    public /*synchronized*/ double getBalance() {
+        return this.balance;
+    }
+
+
+    public static void main(String[] args) {
+        Account account = new Account();
+        new Thread(()->account.set("zhangsan", 100.0)).start();
+        
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println(account.getBalance()); // 第一次获取，结果发现不正确
+        
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println(account.getBalance());
+    }
 }
 ```
 
@@ -248,7 +249,6 @@ public class Account {
 也就是说synchronized获得的锁是可重入的。
 
 ```java
-
 /**
  * 一个同步方法可以调用另外一个同步方法:
  * 一个线程已经拥有某个对象的锁，再次申请的时候仍然会得到该对象的锁.
@@ -257,24 +257,25 @@ public class Account {
 public class T {
 
     synchronized void m1() {
-		System.out.println("m1 start");
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		m2();
-	}
-	
-	synchronized void m2() {
-		try {
-			TimeUnit.SECONDS.sleep(2);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("m2");
-	}
+        System.out.println("m1 start");
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        m2();
+    }
+
+    synchronized void m2() {
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("m2");
+    }
 }
+
 ```
 
 ### 8、子类也可以调用父类的同步方法
@@ -285,28 +286,28 @@ public class T {
  */
 public class T {
     synchronized void m() {
-		System.out.println("m start");
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		System.out.println("m end");
-	}
-	
-	public static void main(String[] args) {
-		new TT().m();
-	}
+        System.out.println("m start");
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("m end");
+    }
+
+    public static void main(String[] args) {
+        new TT().m();
+    }
 }
 
 
 class TT extends T {
-	@Override
-	synchronized void m() {
-		System.out.println("child m start");
-		super.m(); // 在子类中调用父类的同步方法
-		System.out.println("child m end");
-	}
+    @Override
+    synchronized void m() {
+        System.out.println("child m start");
+        super.m(); // 在子类中调用父类的同步方法
+        System.out.println("child m end");
+    }
 }
 ```
 
@@ -326,44 +327,45 @@ public class T {
 
     int count = 0;
 
-	synchronized void m() {
-		System.out.println(Thread.currentThread().getName() + " start");
-		while(true) {
-			count ++;
-			System.out.println(Thread.currentThread().getName() + " count = " + count);
+    synchronized void m() {
+        System.out.println(Thread.currentThread().getName() + " start");
+        while(true) {
+            count ++;
+            System.out.println(Thread.currentThread().getName() + " count = " + count);
 
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			if(count == 5) {
-				int i = 1/0;  //此处抛出异常，锁将被释放，要想不被释放，可以在这里进行catch，然后让循环继续
-				System.out.println(i);
-			}
-		}
-	}
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+            if(count == 5) {
+                int i = 1/0;  //此处抛出异常，锁将被释放，要想不被释放，可以在这里进行catch，然后让循环继续
+                System.out.println(i);
+            }
+        }
+    }
 
 
-	// 如果没有t没有释放锁， t2应该是永远得不到执行，但是t1出现了异常，释放了锁，所以得到了执行
-	public static void main(String[] args) throws InterruptedException {
-		T t = new T();
+    // 如果没有t没有释放锁， t2应该是永远得不到执行，但是t1出现了异常，释放了锁，所以得到了执行
+    public static void main(String[] args) throws InterruptedException {
+        T t = new T();
 
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				t.m();
-			}
-			
-		};
-		new Thread(r, "t1").start();
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                t.m();
+            }
+            
+        };
+        new Thread(r, "t1").start();
 
-		TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(3);
 
-		new Thread(r, "t2").start();
-	}
+        new Thread(r, "t2").start();
+    }
 }
+
 ```
 
 看程序输出，本来`t2`线程是永远得不到执行的，但是`t1`发生了异常，所以`t2`得到了执行。
@@ -376,6 +378,7 @@ public class T {
 
 ```java
 /**
+ *
  * volatile: 保证线程之间的可见性
  *
  * volatile 关键字，使一个变量在多个线程间可见
@@ -395,38 +398,38 @@ public class T {
 
 public class T {
 
-	//对比一下有无volatile的情况下，整个程序运行结果的区别
+    //对比一下有无volatile的情况下，整个程序运行结果的区别
     /*volatile*/ boolean running = true;   // volatile，可以保证每次都是从内存读，读完之后就写到内存(缓存),内存可见性，禁止指令重排
-	void m() {
-		System.out.println("m start");
+    void m() {
+        System.out.println("m start");
 
-		while(running) {
+        while(running) {
 
-			// 虽然加了下面的代码（或者别的代码，可以结束程序(和volatile)一样的结果，但是还是要加volatile，因为下面的是随机性的）
-//			try {
-//				TimeUnit.MILLISECONDS.sleep(10);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-		}
+            // 虽然加了下面的代码（或者别的代码，可以结束程序(和volatile)一样的结果，但是还是要加volatile，因为下面的是随机性的）
+    //			try {
+    //				TimeUnit.MILLISECONDS.sleep(10);
+    //			} catch (InterruptedException e) {
+    //				e.printStackTrace();
+    //			}
+        }
 
-		System.out.println("m end!");
-	}
-	
-	public static void main(String[] args) {
-		T t = new T();
-		
-		new Thread(t::m, "t1").start();
-//		new Thread(()->t.m(), "t1").start();
-		
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		t.running = false;
-	}
+        System.out.println("m end!");
+    }
+
+    public static void main(String[] args) {
+        T t = new T();
+        
+        new Thread(t::m, "t1").start();
+    //		new Thread(()->t.m(), "t1").start();
+        
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        t.running = false;
+    }
 }
 ```
 
@@ -451,34 +454,34 @@ public class T {
  */
 public class T {
 
-	volatile int count = 0;
+    volatile int count = 0;
 
-	void m() {
-		for(int i=0; i<10000; i++) count++;
-	}
+    void m() {
+        for(int i=0; i<10000; i++) count++;
+    }
 
-	// 下面的程序预期输出是 100000，但是实际上达不到 100000
-	public static void main(String[] args) {
-		T t = new T();
-		
-		List<Thread> threads = new ArrayList<>();
-		
-		for(int i=0; i<10; i++) {
-			threads.add(new Thread(t::m, "thread-"+i));
-		}
-		
-		threads.forEach((o)->o.start());
-		
-		threads.forEach((o)->{
-			try {
-				o.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		});
-		
-		System.out.println(t.count);
-	}
+    // 下面的程序预期输出是 100000，但是实际上达不到 100000
+    public static void main(String[] args) {
+        T t = new T();
+        
+        List<Thread> threads = new ArrayList<>();
+        
+        for(int i=0; i<10; i++) {
+            threads.add(new Thread(t::m, "thread-"+i));
+        }
+        
+        threads.forEach((o)->o.start());
+        
+        threads.forEach((o)->{
+            try {
+                o.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        
+        System.out.println(t.count);
+    }
 }
 ```
 
@@ -645,36 +648,36 @@ public class T {
 public class T {
     Object o = new Object();
 
-	void m() {
-		synchronized(o) {
-			while(true) {
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				System.out.println(Thread.currentThread().getName());
-			}
-		}
-	}
-	
-	public static void main(String[] args) {
-		T t = new T();
-		//启动第一个线程
-		new Thread(t::m, "t1").start();
-		
-		try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+    void m() {
+        synchronized(o) {
+            while(true) {
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
+    }
 
-		//创建第二个线程
-		Thread t2 = new Thread(t::m, "t2");
-		//锁对象发生改变(指向了别的地方)，然后t1的锁就释放了, 所以t2线程得以执行，如果注释掉下面这句话，线程2将永远得不到执行机会
-		t.o = new Object();
-		t2.start();
-	}
+    public static void main(String[] args) {
+        T t = new T();
+        //启动第一个线程
+        new Thread(t::m, "t1").start();
+        
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //创建第二个线程
+        Thread t2 = new Thread(t::m, "t2");
+        //锁对象发生改变(指向了别的地方)，然后t1的锁就释放了, 所以t2线程得以执行，如果注释掉下面这句话，线程2将永远得不到执行机会
+        t.o = new Object();
+        t2.start();
+    }
 }
 ```
 
@@ -694,19 +697,18 @@ public class T {
 
 	// 这两个对象是同一个对象, 所以下面的两个方法锁定了同一个对象，就有可能产生死锁
     String s1 = "Hello";
-	String s2 = "Hello";
+    String s2 = "Hello";
 
-	void m1() {
-		synchronized(s1) {
-			
-		}
-	}
-	
-	void m2() {
-		synchronized(s2) {
-			
-		}
-	}
+    void m1() {
+        synchronized(s1) {
+        }
+    }
+
+    void m2() {
+        synchronized(s2) {
+            
+        }
+    }
 }
 ```
 
@@ -723,43 +725,47 @@ public class T {
 
 
 ```java
+/**
+ * 分析下面这个程序，能完成这个功能吗？
+ * 答: 不能，因为虽然 t2线程 和 t1线程的共享变量 list不是内存可见的(没有加 volatile关键字)
+ */
 public class MyContainer1 {
 
-	List<Integer>list = new ArrayList<>();
+    List<Integer>list = new ArrayList<>();
 
-	public void add(Integer o) {
+    public void add(Integer o) {
         list.add(o);
-	}
+    }
 
-	public int size() {
-		return list.size();
-	}
-	
-	public static void main(String[] args) {
-		MyContainer1 c = new MyContainer1();
+    public int size() {
+        return list.size();
+    }
 
-		new Thread(() -> {
-			for(int i=0; i<10; i++) {
-				c.add(i);
-				System.out.println("add " + i);
-				
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}, "t1").start();
+    public static void main(String[] args) {
+        MyContainer1 c = new MyContainer1();
 
-		new Thread(() -> {
-			while(true) {
-				if(c.size() == 5) {
-					break;
-				}
-			}
-			System.out.println("t2 结束");
-		}, "t2").start();
-	}
+        new Thread(() -> {
+            for(int i=0; i<10; i++) {
+                c.add(i);
+                System.out.println("add " + i);
+                
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "t1").start();
+
+        new Thread(() -> {
+            while(true) {
+                if(c.size() == 5) {
+                    break;
+                }
+            }
+            System.out.println("t2 结束");
+        }, "t2").start();
+    }
 }
 ```
 
