@@ -1135,6 +1135,8 @@ public class TestReentrantLock3 {
 
 #### 3)、ReentrantLock的lockInterruptibly()方法可以对interrupt做出响应
 
+注意这里t2线程没有获取到锁的话就不要`unlock`，不然会报异常，但是我这里没有很好分情况的解决，只是注释了`unlock()`。
+
 ```java
 /**
  * 使用ReentrantLock还可以调用lockInterruptibly方法，可以对线程interrupt方法做出响应，
@@ -1215,6 +1217,176 @@ public class TestReentrantLock5 extends Thread{
         Thread th2 = new Thread(rl);
         th1.start();
         th2.start();
+    }
+}
+```
+
+### 18、实现生产者消费者同步容器
+
+使用`wait()`和`notify()`实现:
+
+```java
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+public class MyBlockingQueue1<E> {
+    private Queue<E> queue = null;
+    private int Capacity;
+
+    public MyBlockingQueue1(int capacity) {
+        this.Capacity = capacity;
+        queue = new ArrayDeque<>(capacity);
+    }
+
+    public synchronized void put(E element) {
+        while (queue.size() == Capacity) { // wait和while一般在一起使用(effective java中提到)
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        queue.add(element);
+        notifyAll(); // 一定要notifyAll，不然有可能会通知不到 消费者 
+    }
+
+    public synchronized E take() {
+        while (queue.isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        E e = queue.poll();
+        notifyAll();
+        return e;
+    }
+
+    public static void main(String[] args) {
+        MyBlockingQueue1<Integer> blockingQueue = new MyBlockingQueue1<>(15);
+
+        // 生产者不停的生产
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int num = 0;
+                try {
+                    while (true) {
+                        blockingQueue.put(num);
+                        System.out.println("produce put: " + num);
+                        num++;
+                        Thread.sleep((int) (Math.random() * 100));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "P").start();
+
+        // 消费者，不停的拿
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        Integer num = blockingQueue.take();
+                        System.out.println("customer take: " + num);
+                        Thread.sleep((int) (Math.random() * 100));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "C").start();
+    }
+}
+```
+
+使用`ReentrantLock`和`Condition`实现:
+
+```java
+public class MyBlockingQueue2<E> {
+    private Queue<E> queue = null;
+    private int Capacity;
+
+    private Lock lock = new ReentrantLock();
+    private Condition prodCondi = lock.newCondition();
+    private Condition consCondi = lock.newCondition();
+
+    public MyBlockingQueue2(int capacity) {
+        this.Capacity = capacity;
+        queue = new ArrayDeque<>(capacity);
+    }
+
+    public synchronized void put(E element) {
+        try {
+            lock.lock();
+            while (queue.size() == Capacity) {
+                prodCondi.await(); // 等同于 wait()
+            }
+            queue.add(element);
+            consCondi.signalAll(); // 具体的通知，不像notifyAll通知所有的
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+    }
+
+    public synchronized E take() {
+        E element = null;
+        try {
+            lock.lock();
+            while (queue.isEmpty()) {
+                consCondi.await();
+            }
+            element = queue.poll();
+            prodCondi.signalAll(); // 具体的通知，不像notifyAll通知所有的
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+        return element;
+    }
+
+    public static void main(String[] args) {
+        MyBlockingQueue2<Integer> blockingQueue = new MyBlockingQueue2<>(15);
+
+        // 生产者不停的生产
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int num = 0;
+                try {
+                    while (true) {
+                        blockingQueue.put(num);
+                        System.out.println("produce put: " + num);
+                        num++;
+                        Thread.sleep((int) (Math.random() * 100));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "P").start();
+
+        // 消费者，不停的拿
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true) {
+                        Integer num = blockingQueue.take();
+                        System.out.println("customer take: " + num);
+                        Thread.sleep((int) (Math.random() * 100));
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "C").start();
     }
 }
 ```
