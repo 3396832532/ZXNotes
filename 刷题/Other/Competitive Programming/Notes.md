@@ -1,4 +1,6 @@
+时间复杂度:
 
+![1_2.png](images/1_2.png)
 
 ### 1、模运算
 
@@ -19,7 +21,11 @@ if (x < 0) x += m;
 
 ### 2、Generating Subsets
 
+`n = 3`的搜索图:
+
 ![1_1.png](images/1_1.png)
+
+代码:
 
 ```java
 import java.util.ArrayList;
@@ -90,4 +96,26 @@ public class Code_02_Permutation {
 
 ```
 
-### 
+### 4、Bit 
+
+It is also possible to modify single bits of numbers using similar ideas. The formula `x | (1 << k) `sets the kth bit of x to one, the formula `x & ~(1 << k) `sets the kth bit of x to zero, and the formula `x ˆ (1 << k) `inverts the kth bit of x. Then, the formula `x & (x − 1)` sets the last one bit of x to zero, and the formula `x & −x` sets all the one bits to zero, except for the last one bit. The formula `x | (x − 1)` inverts all the bits after the last one bit. Finally, a positive number x is a power of two exactly when `x & (x − 1) = 0`.
+One pitfall when using bit masks is that `1<<k` is always an int bit mask. An easy way to create a long long bit mask is `1LL<<k`.
+
+### 5、 Representing Sets
+
+```java
+public class Code_03_RepresentingSets {
+
+    public static void main(String[] args){
+        int n = 3;
+        for(int mask = 0; mask < (1 << n); mask++){
+            for(int i = 0; i < n; i++)
+//                if( ((mask >> i) & 1) != 0)
+                if( ((1 << i) & mask) != 0)
+                    System.out.print(i + " ");
+            System.out.println();
+        }
+    }
+}
+```
+

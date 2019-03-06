@@ -1,28 +1,28 @@
 # ACM模板(Java) 
 
- - [1、大数](#1大数)
- - [二分](#2)
- - [枚举排列](#3)
- - [子集生成](#4)
- - [n皇后回溯](#5)
- - [并查集](#6)
- - [树状数组](#7)
- - [KMP，Sunday，BM](#8)
- - [01背包，完全背包](#9)
- - [最长(不)上升或下降子序列](#10)
- - [最长公共子序列](#11)
- - [拓扑排序](#12)
- - [欧拉路径和回路](#13)
- - [搜索](#14)
- - [最小生成树](#15)
- - [最短路](#16)
- - [GCD和LCM](#17)
- - [埃拉托斯特尼筛法](#18)
- - [唯一分定理](#19)
- - [扩展欧几里得](#20)
- - [欧拉函数](#21)
- - [快速幂](#22)
- - [矩阵快速幂](#23)
+ - [大数](#大数)
+ - [二分](#二分)
+ - [枚举排列](#枚举排列)
+ - [子集生成](#子集生成)
+ - [n皇后](#n皇后)
+ - [并查集](#并查集)
+ - [树状数组](#树状数组)
+ - [KMP，Sunday，BM](#kmpsundaybm)
+ - [01背包，完全背包](#01背包完全背包)
+ - [最长(不)上升或下降子序列](#最长(不)上升或下降子序列)
+ - [最长公共子序列](#最长公共子序列)
+ - [拓扑排序](#拓扑排序)
+ - [欧拉路径和回路](#欧拉路径和回路)
+ - [搜索](#搜索)
+ - [最小生成树](#最小生成树)
+ - [最短路](#最短路)
+ - [GCD和LCM](#gcd和lcm)
+ - [埃拉托斯特尼筛法](#埃拉托斯特尼筛法)
+ - [唯一分定理](#唯一分定理)
+ - [扩展欧几里得](#扩展欧几里得)
+ - [欧拉函数](#欧拉函数)
+ - [快速幂](#快速幂)
+ - [矩阵快速幂](#矩阵快速幂)
 ***
 ### 1、大数
 
@@ -109,7 +109,7 @@ public class Main{
 ```
 求阶乘以及位数模板
 
-```cpp
+```java
 //http://nyoj.top/problem/28
 //大数阶乘的模板
 import java.io.*;
@@ -163,271 +163,316 @@ public class Main {
 ```
 
 ***
-### <font id = "3">枚举排列
-枚举排列的算法也有几个，包括刘汝佳书上的和经典的，还有做过的几个题[LeetCode47](https://blog.csdn.net/zxzxzx0119/article/details/81452471)。[LeetCode46](https://blog.csdn.net/zxzxzx0119/article/details/81452269)。
-```cpp
-#include <bits/stdc++.h>
+### 枚举排列
 
-using namespace std;
-const int maxn = 100 + 10;
+非去重写法:
 
-void permutation(int *arr, int n, int cur){
-    if(cur == n){  // 边界
-        for(int i = 0; i < n; i++)
-            printf("%d ",arr[i]);
-        printf("\n");
+```java
+import java.io.*;
+import java.util.*;
+
+/**
+ * 求 1 ~ n 的全排列，arr数组作为中间打印数组
+ */
+public class Main {
+
+    static PrintStream out = System.out;
+
+    static int n;
+
+    static void permutation(int[] arr, int cur){
+        if(cur == n){  // 边界
+            for(int i = 0; i < n; i++)
+                out.print(arr[i] + " ");
+            out.println();
+        }
+        else for(int i = 1; i <= n; i++){  //尝试在arr[cur]中填充各种整数 (1~n)
+            boolean flag = true;
+            for(int j = 0; j < cur; j++)if(i == arr[j]){  // 如果i已经在arr[0]~arr[cur-1]中出现过，则不能选
+                flag = false;
+                break;
+            }
+            if(flag){
+                arr[cur] = i;  //把i填充到当前位置
+                permutation(arr, cur+1);
+            }
+        }
     }
-    else for(int i = 1; i <= n; i++){  //尝试在arr[cur]中填充各种整数
-        bool flag = true;
-        for(int j = 0; j < cur; j++)if(i == arr[j]){  // 如果i已经在arr[0]~arr[cur-1]中出现过，则不能选
-            flag = false;
-            break;
-        }
-        if(flag){
-            arr[cur] = i;  //把i填充到当前位置
-            permutation(arr, n, cur+1);
-        }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        n = in.nextInt();
+        permutation(new int[n], 0);
     }
 }
-
-// 求 1 ~ n 的全排列，arr数组作为中间打印数组
-int main(int argc, char const **argv)
-{
-    int a[maxn], n;
-    scanf("%d", &n);
-    permutation(a, n, 0);
-    return 0;
-}
-
 ```
 
-```cpp
-//可重集的全排列
-#include <bits/stdc++.h>
-const int maxn = 100 + 10;
+经典写法
 
-void permutation(int *arr,int *p,int n,int cur){
-    if(cur == n){
-        for(int i = 0; i < n; i++)
-            printf("%d ",arr[i]);
-        printf("\n");
-    }else for(int i = 0; i < n; i++)if(!i || p[i] != p[i-1]){
-        int c1 = 0, c2 = 0; 
-        for(int j = 0; j < n; j++)
-            if(p[j] == p[i]) // 重复元素的个数
-                c1++;
-        for(int j = 0; j < cur; j++)
-            if(arr[j] == p[i]) // 前面已经排列的重复元素的个数 
-                c2++;
-        if(c2 < c1){
-            arr[cur] = p[i];
-            permutation(arr, p, n, cur+1);
-        }
-    }
-}
-
-int main(){
-    int a[maxn], p[maxn] = {5, 6, 7, 5};  //可以有重复元素的全排列
-    std::sort(p, p+4);
-    permutation(a, p, 4, 0);
-    return 0;
-}
-
-```
-
-```cpp
+```java
 //全排列的非去重递归算法
-#include <bits/stdc++.h>
-using namespace std;
-const int maxn = 100 + 10;
+public class Main {
 
-void permutation(int arr[], int cur, int n){
-    if( cur == n){
-        for(int i = 0; i < n; i++)
-            printf("%d ", arr[i]);
-        printf("\n");
+    static PrintStream out = System.out;
+
+    static int n;
+
+    static void permutation(int arr[], int cur){
+        if( cur == n){
+            for(int i = 0; i < n; i++)
+                out.print(arr[i] + " ");
+            out.println();
+        } else for(int i = cur; i < n; i++){
+            swap(arr, i, cur);
+            permutation(arr, cur+1);
+            swap(arr, i, cur);
+        }
     }
-    else for(int i = cur; i < n; i++){
-        swap(arr[i], arr[cur]);
-        permutation(arr, cur+1, n);
-        swap(arr[i], arr[cur]);
+    static void swap(int[] arr, int a, int b){
+        int t = arr[a];
+        arr[a] = arr[b];
+        arr[b] = t;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+
+        n = in.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) arr[i] = in.nextInt();
+        permutation(arr, 0);
     }
 }
-int main(){
-    int n, a[maxn];
-    scanf("%d", &n);
-    for(int i = 0; i < n; i++)
-        scanf("%d", &a[i]);
-    permutation(a, 0, n);
-    return 0;
-}
-
 ```
 ***
-### <font id = "4">子集生成
+### 子集生成
 增量构造法，位向量法，二进制法(常用)
 
 ```cpp
-#include <bits/stdc++.h>
-using namespace std;
-const int maxn = 100 + 10;
+public class Main {
 
-//打印0~n-1的所有子集
-//按照递增顺序就行构造子集 防止子集的重复 
-void print_subset(int *arr, int n, int cur){
-    for(int i = 0; i < cur; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-    int s = cur ? arr[cur-1] + 1 : 0;  //确定当前元素的最小可能值
-    for(int i = s; i < n; i++){
-        arr[cur] = i;
-        print_subset(arr, n, cur+1);
+    static PrintStream out = System.out;
+
+    static int n;
+    //打印0~n-1的所有子集
+    //按照递增顺序就行构造子集 防止子集的重复
+    static void print_subset(int[] arr, int cur){
+        for(int i = 0; i < cur; i++)
+            out.print(arr[i] + " ");
+        out.println();
+        int s = cur != 0 ? arr[cur-1] + 1 : 0;  //确定当前元素的最小可能值
+        for(int i = s; i < n; i++){
+            arr[cur] = i;
+            print_subset(arr, cur+1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        n = in.nextInt();
+        print_subset(new int[n],0);
     }
 }
-int main(){
-    int n, arr[maxn];
-    scanf("%d", &n);
-    print_subset(arr, n, 0);
-    return 0;
-}
-
 ```
 
 这个其实很简单，就是枚举每个位置`0`和`1`两种情况即可。
 ```cpp
-// 1~n 的所有子集：位向量法
-#include <bits/stdc++.h>
-const int maxn = 100 + 10;
-using namespace std;
-int bits[maxn];//位向量bits[i] = 1,当且仅当i在子集 A 中
+/**
+ * 1~n 的所有子集：位向量法
+ */
+public class Main {
 
-void print_subset(int n,int cur){
-    if(cur == n){
-        for(int i = 0; i < cur; i++)
-            if(bits[i])
-                printf("%d ",i);
-        printf("\n");
-        return;
+    static PrintStream out = System.out;
+
+    static boolean[] bits; //位向量bits[i] = 1,当且仅当i在子集 A 中
+
+    static int n;
+
+    static void print_subset(int cur) {
+        if (cur == n+1) {
+            for (int i = 1; i < cur; i++)
+                if (bits[i])
+                    out.print(i + " ");
+            out.println();
+            return;
+        }
+        bits[cur] = true;
+        print_subset(cur + 1);
+        bits[cur] = false;
+        print_subset(cur + 1);
     }
-    bits[cur] = 1;
-    print_subset(n,cur + 1);
-    bits[cur] = 0;
-    print_subset(n,cur + 1);
-}
 
-int main() {
-    int n;
-    scanf("%d", &n);
-    print_subset(n,0);
-    return 0;
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        n = in.nextInt();
+        bits = new boolean[n + 1];
+        print_subset(1);
+    }
 }
-
 ```
 二进制枚举子集用的多，这里举个例子 `n = 3`；则要枚举`0 - 7` 对应的是有`7`个子集，每个子集去找有哪些元素`print_subset`中的 `1<<   i `，也就是对应的那个位置是有元素的，例如`1`的二进制是`0001`也就是代表`0`位置有元素，`0010`是`2`，代表第一个位置是`1`，`0100`代表第`2`个位置上有元素，相应的`1000 = 8`对应第`3`个位置上有元素。
 总结来说也就是对应`1<< i`对应` i`上是`1`(从`0`开始)，其余位置是`0`。看图容易理解：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181222112523325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-```cpp
+
+![acm_1.png](images/acm_1.png)
+
+代码:
+
+```java
 // 0 ~ n-1的所有子集：二进制法枚举0 ~ n-1的所有子集
-#include <bits/stdc++.h>
-const int maxn = 100 + 10;
-using namespace std;
-void print_subset(int n,int cur){
-    //这一步其实就是判断 cur 的二进制的各个位上是不是1，如果是1,就输出对应的那个位置(位置从0开始)
-    for(int i = 0; i < n; i++)
-        if(1 & (cur >> i))
-            printf("%d ",i);   
-    printf("\n");
-}
-int main(int argc, char const** argv)
-{
-    int n;
-    scanf("%d",&n);
-    for(int i = 0; i < (1 << n); i++)
-        print_subset(n,i);//枚举各子集对应的编码 0,1,2...pow(2,n) - 1
-    return 0;
+public class Main {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        int n = in.nextInt();
+        for(int mask = 0; mask < (1 << n); mask++){
+            for(int i = 0; i < n; i++)
+                if( ((mask >> i) & 1) == 1)  //和下面一样
+//                if( ((1 << i) & mask) != 0)
+                    System.out.print(i + " ");
+            System.out.println();
+        }
+    }
 }
 ```
-### <font id = "5">n皇后回溯
-可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81840774)。
+### n皇后回溯
 
+求解个数:
 
-```cpp
-//n皇后问题：普通回溯法
-#include <bits/stdc++.h>
-const int maxn = 100 + 10;
-using namespace std;
-int sum,n,cnt; //解的个数，n皇后，递归次数
-int C[maxn];
+```java
+import java.io.*;
+import java.util.*;
 
-void Search(int cur){      //逐行放置皇后
-    cnt++;
-    if(cur == n)sum++;
-    else for(int i = 0; i < n; i++){   //尝试在各列放置皇后
-        bool flag = true;
-        C[cur] = i;   //尝试把第cur行的皇后放在第i列//如果 等下不行的话 就下一个 i++
-        for(int j = 0; j < cur; j++){ //检查是否和已经放置的冲突
-            if(C[cur] == C[j] || C[cur] + cur == C[j] + j || cur - C[cur] == j - C[j]){//检查列,"副对角线","主对角线"
-                flag = false;break;
+public class Main {
+
+    static PrintStream out = System.out;
+    static int n, count;
+    static boolean[] cols, d1, d2; // cols[i]代表的是 第i行的第cols列已经有了
+
+    static void dfs(int r){  // 当前是r行
+        if(r == n){
+            count++;
+        }else {
+            for(int c = 0; c < n; c++){ //考察的是每一列
+                int id1 = r + c;   //主对角线
+                int id2 = r - c + n - 1; // 副对角线
+                if(cols[c] || d1[id1] || d2[id2]) continue;
+                cols[c] = d1[id1] = d2[id2] = true;
+                dfs(r+1);
+                cols[c] = d1[id1] = d2[id2] = false;
             }
         }
-        if(flag)Search(cur+1);
     }
-}
-int main(){
-    scanf("%d",&n); //输入n皇后
-    sum = cnt = 0;//解的个数 和 递归的次数
-    Search(0);
-    printf("%d %d\n",sum,cnt);
-    return 0;
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        n = in.nextInt();
+        cols = new boolean[n];
+        d1 = new boolean[n * 2 - 1];
+        d2 = new boolean[n * 2 - 1];
+        dfs(0);
+        out.println(count);
+    }
 }
 ```
-<font color = red>优化过的</font>
 
-```cpp
-// n皇后问题：优化的回溯法
-#include <bits/stdc++.h>
-const int maxn = 100 + 10;
-using namespace std;
+可以将三个数组合成一个第一维 = 3的二维数组，同时再用一个整形`cols`记录解:
 
-int sum,n,cnt;
-int C[maxn];
-bool vis[3][maxn];
-int Map[maxn][maxn];//打印解的数组
+```java
+import java.io.*;
+import java.util.*;
 
-//一般在回溯法中修改了辅助的全局变量，一定要及时把他们恢复原状
-void Search(int cur){  //逐行放置皇后
-    cnt++;
-    if(cur == n){
-        sum++;
-        for(int i = 0; i < cur; i++)Map[i][C[i]] = 1;//打印解
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++)printf("%d ",Map[i][j]);
-            printf("\n");
+public class Main {
+
+    static PrintStream out = System.out;
+    static int n, count;
+    static boolean[][] vis;
+    static int[] cols;
+
+    static //一般在回溯法中修改了辅助的全局变量，一定要及时把他们恢复原状
+    void dfs(int r) {  //逐行放置皇后
+        if (r == n) {
+            count++;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (cols[i] == j)
+                        out.print("0 ");
+                    else
+                        out.print(". ");
+                }
+                out.println();
+            }
+            out.println("--------------");
+        } else for (int c = 0; c < n; c++) {   //尝试在 cur行的 各 列 放置皇后
+            if (vis[0][c] || vis[1][r + c] || vis[2][r - c + n - 1]) continue;//判断当前尝试的皇后的列、主对角线
+            vis[0][c] = vis[1][r + c] = vis[2][r - c + n - 1] = true;
+            cols[r] = c;     //r行的列是 c
+            dfs(r + 1);
+            vis[0][c] = vis[1][r + c] = vis[2][r - c + n - 1] = false;//切记！一定要改回来
         }
-        printf("\n");
-        memset(Map,0,sizeof(Map)); //还原
     }
-    else for(int i = 0; i < n; i++){ //尝试在 cur行的 各 列 放置皇后
-        if(!vis[0][i] && !vis[1][cur+i] && !vis[2][cur-i+n]){//判断当前尝试的皇后的列、主对角线
-            vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = true;
-            C[cur] = i;//cur 行的列是 i
-            Search(cur+1);
-            vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = false;//切记！一定要改回来
-        }
-    }
-}
 
-int main(){
-    scanf("%d",&n);
-    memset(vis,false,sizeof(vis));
-    memset(Map,0,sizeof(Map));
-    sum = cnt = 0;
-    Search(0);
-    printf("%d %d\n",sum,cnt);//输出 解决方案 和 递归次数
-    return 0;
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        n = in.nextInt();
+        cols = new int[n];
+        vis = new boolean[3][2 * n - 1];
+        dfs(0);
+        out.println(count);
+    }
 }
 ```
-### <font id = "6">并查集
+
+第二种写法(效率没有上的好):
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static PrintStream out = System.out;
+    static int n, count;
+    static int[] cols;
+
+    static void dfs(int r){  // 当前是r行
+        if(r == n){
+            count++;
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n; j++){
+                    if(cols[i] == j)
+                        out.print("0 ");
+                    else
+                        out.print(". ");
+                }
+                out.println();
+            }
+            out.println("-------------------");
+        }else {
+            for(int c = 0; c < n; c++){ // 考察的是每一列
+                cols[r] = c; // 尝试将 r行的皇后放在第c列
+                boolean ok = true;
+                for(int i = 0; i < r; i++) { //检查是否和已经放置的冲突
+                    //检查列,"副对角线","主对角线"
+                    if (cols[r] == cols[i] || r - i  == cols[r] - cols[i] || r - i == cols[i] - cols[r]){
+                        ok = false;
+                        break;
+                    }
+                }
+                if(ok) dfs(r+1);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        n = in.nextInt();
+        cols = new int[n];
+        dfs(0);
+        out.println(count);
+    }
+}
+```
+
+### 并查集
 并查集详细讲解以及每一步的优化可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81536185)。
 
 ```cpp
@@ -496,8 +541,8 @@ int main(){
 }
 
 ```
-### <font id = "7">树状数组
-树状数组的主要用于<font color = crimson>需要频繁的修改数组元素，同时又要频繁的查询数组内任意区间元素之和</font>的时候。具体一些解释看图。
+### 树状数组
+树状数组的主要用于需要频繁的修改数组元素，同时又要频繁的查询数组内任意区间元素之和的时候。具体一些解释看图。
 ![这里写图片描述](https://img-blog.csdn.net/20180407122904100?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)![这里写图片描述](https://img-blog.csdn.net/20180407122912685?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 <font  color = crimson>所以计算`2^k`次方我们可以用如下代码</font>
 
@@ -563,7 +608,11 @@ int lowbit(int x){
 ### <font id = "8">KMP，Sunday，BM
 这三个算法解决的问题都是 : <font color = red>有一个文本串 S，和一个模式串 P，现在要查找 P 在 S 中的位置</font>，三种算法的思路这里限于篇幅不多说，[这篇博客](http://wiki.jikexueyuan.com/project/kmp-algorithm/define.html)对着三种算法讲解的比较详细。
 **`KMP`的较直观的分析也可以看看[我的另一篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81430392)**
-​```cpp
+
+```cpp
+
+```
+
 //题目连接 : http://acm.hdu.edu.cn/showproblem.php?pid=1711
 //题目大意 : 找第二个数组在第一个数组中出现的位置，如果不存在，输出-1
 #include <stdio.h>
@@ -871,7 +920,7 @@ int main(){
     return 0;
 }
 ```
-### <font id = "10">最长(不)上升或下降子序列
+### 最长(不)上升或下降子序列
 [Java编写与解释的博客](https://blog.csdn.net/zxzxzx0119/article/details/81224734)。
 先说`O(N*N)`的解法，第`i`个元素之前的最长递增子序列的长度要么是`1`（单独成一个序列），要么就是第`i-1`个元素之前的最长递增子序列加`1`，这样得到状态方程：
 ```java
@@ -993,7 +1042,7 @@ int main(){
 }
 
 ```
-### <font id = "11">最长公共子序列
+### 最长公共子序列
 最长公共子序列利用动态规划的方式解决，具有最优子结构性质，和重叠子问题性质，`dp[i][j]`记录序列`Xi`和`Yi`的最长公共子序列的长度，当`i = 0`或`j  =0` 时，空序列时`Xi`和`Yi`的最长公共子序列，其余情况如下
 ![这里写图片描述](https://img-blog.csdn.net/20180407210404162?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 这里也给出一篇讲的[好的博客](https://blog.csdn.net/hrn1216/article/details/51534607)
@@ -1053,7 +1102,7 @@ int main(){
 
 ```
 ***
-### <font id = "12">拓扑排序
+### 拓扑排序
 有向无环图上的一种排序方式，我的[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81533388)也讲解了一下。可以两种写法: 
 
 ```cpp
@@ -1157,7 +1206,7 @@ int main() {
     return 0;
 }
 ```
-###  <font id = "13">欧拉路径和回路
+###  欧拉路径和回路
 
 首先看定义 : 
 
@@ -1293,7 +1342,7 @@ int main(){
 }
 
 ```
-###  <font id = "14">搜索
+###  搜索
 
 这里举几个比较好的题目: [POJ3984](http://poj.org/problem?id=3984)，这个题目要求记录BFS最短路的路径，我这里使用三种方法: 
 
