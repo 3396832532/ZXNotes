@@ -21,74 +21,99 @@
 
 ![在这里插入图片描述](images/51_s.png)
 
+代码:
+
 ```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Solution {
+    
+    private int N;
+    private boolean[] cols, d1, d2;
+    private List<String> tmp;
+    private List<List<String>> res; 
+    
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> res = new ArrayList<>();
+        res = new ArrayList<>();
         if (n == 0)
             return res;
-        dfs(0, n, new boolean[n], new boolean[n * 2 - 1], new boolean[n * 2 - 1], res, new ArrayList<>());
+        cols = new boolean[n];
+        d1 = new boolean[n * 2 - 1];
+        d2 = new boolean[n * 2 - 1];
+        tmp = new ArrayList<>();
+        N = n;
+        
+        dfs(0); 
         return res;
     }
- 
-    public void dfs(int r, int n, boolean[] cols, boolean[] d1, boolean[] d2, List<List<String>> res, List<String> temp) {
-        if (r == n) {
-            res.add(new ArrayList<>(temp));
+
+    public void dfs(int r) {
+        if (r == N) {
+            res.add(new ArrayList<>(tmp));
             return;
         }
-        for (int c = 0; c < n; c++) {  //考察每一列
-            int id1 = c + r;//福对角线  对应的　id值
-            int id2 = r - c + n - 1;
+        for (int c = 0; c < N; c++) {  //考察每一列
+            int id1 = c + r;    //主对角线
+            int id2 = r - c + N - 1;//副对角线对应的　id值
             if (cols[c] || d1[id1] || d2[id2]) continue;
-
             cols[c] = d1[id1] = d2[id2] = true;
-
-            //每一个temp是一个解　　而每一个temp中又有n行String
-            char[] help = new char[n];
+            char[] help = new char[N];    //每一个temp是一个解　而每一个temp中又有n行String
             Arrays.fill(help, '.');
             help[c] = 'Q';
-            temp.add(new String(help));
-
-            dfs(r + 1, n, cols, d1, d2, res, temp);
-
+            tmp.add(new String(help));
+            dfs(r + 1);
             cols[c] = d1[id1] = d2[id2] = false;  //递归之后还原
-            temp.remove(temp.size() - 1); // 不要选择c这一行
+            tmp.remove(tmp.size() - 1);     
         }
     }
 }
 ```
 或者改装一下，使用一个二维字符数组存储: 
 ```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Solution {
+    
+    private int N;
+    private boolean[] cols, d1, d2;
+    private List<List<String>> res;
+    private char[][] board;
+
     public List<List<String>> solveNQueens(int n) {
-        List<List<String>> res = new ArrayList<>();
+        res = new ArrayList<>();
         if (n == 0)
             return res;
+        cols = new boolean[n];
+        d1 = new boolean[n * 2 - 1];
+        d2 = new boolean[n * 2 - 1];
+        N = n;
 
-        char[][] board = new char[n][n];
-        for (char[] row : board) {
+        board = new char[n][n];
+        for (char[] row : board) 
             Arrays.fill(row, '.');
-        } 
 
-        dfs(0, n, new boolean[n], new boolean[n * 2 - 1], new boolean[n * 2 - 1], res, board);
+        dfs(0);
         return res;
     }
 
-    public void dfs(int r, int n, boolean[] cols, boolean[] d1, boolean[] d2, List<List<String>> res, char[][] board) {
-        if (r == n) {
+    public void dfs(int r) {
+        if (r == N) {
             res.add(convert(board));
             return;
         }
-        for (int c = 0; c < n; c++) {  //考察每一列
-            int id1 = c + r;//福对角线  对应的　id值
-            int id2 = r - c + n - 1;
+        for (int c = 0; c < N; c++) {  //考察每一列
+            int id1 = c + r;
+            int id2 = r - c + N - 1;
             if (cols[c] || d1[id1] || d2[id2]) continue;
-
 
             cols[c] = d1[id1] = d2[id2] = true;
             board[r][c] = 'Q';
 
-            dfs(r + 1, n, cols, d1, d2, res, board);
+            dfs(r + 1);
 
             cols[c] = d1[id1] = d2[id2] = false;
             board[r][c] = '.';
@@ -96,11 +121,10 @@ class Solution {
     }
 
     private List<String> convert(char[][] board) {
-        List<String> res = new ArrayList<>();
-        for (char[] row : board) {
-            res.add(new String(row));
-        }
-        return res;
+        List<String> ans = new ArrayList<>();
+        for (char[] row : board)
+            ans.add(new String(row));
+        return ans;
     }
 }
 ```
@@ -111,10 +135,14 @@ class Solution {
  - `cols`表示的意义和上面的不同，`cols[i] = j`，表示的是`[i,j]`上面放了一个皇后；
  - **重点是判断我这一行和之前已经放置的所有行`(0....r-1)`的主副对角线充不冲突；**
  - 而判断这个的方式就是看看主对角线和父对角线之间的下标对应关系；
- -  <font color  = red>主对角线方向满足，行之差等于列之差：`i-j　==　cols[i] - cols[j]`；
- -  <font color=  red>副对角线方向满足， 行之差等于列之差的相反数：`i-j　== cols[j]-cols[i]`；
+ - 主对角线方向满足，行之差等于列之差：`i-j　==　cols[i] - cols[j]`；
+ - 副对角线方向满足， 行之差等于列之差的相反数：`i-j　== cols[j]-cols[i]`；
+
+代码:
 
 ![这里写图片描述](images/51_s2.png)
+
+代码: 
 
 ```java
 class Solution {
@@ -193,7 +221,6 @@ public class Main{
         out.println(new Main().
             getNum(n)
         );
-
     }
 }
 ```

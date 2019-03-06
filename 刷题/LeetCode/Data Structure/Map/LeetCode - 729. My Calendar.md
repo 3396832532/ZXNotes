@@ -87,6 +87,44 @@ class MyCalendar {
 
 #### 解析
 
+`O(N^2)`的实现。
+
+注意存放重叠的和存放原始数据的`index`要区分开来，一个用了`n1`，一个是`n2`。
+
+```java
+class MyCalendarTwo {
+
+    private int[] eL, eR, overlap_L, overLap_R;
+    private int n1, n2;
+
+    public MyCalendarTwo() {
+        eL = new int[1005];
+        eR = new int[1005];
+        overlap_L = new int[1005];
+        overLap_R = new int[1005];
+        n1 = 0;
+        n2 = 0;
+    }
+
+    public boolean book(int start, int end) {
+        for(int i = 0; i < n2; i++)
+            if(Math.max(overlap_L[i], start) < Math.min(overLap_R[i], end) )
+                return false;
+        for(int i = 0; i < n1; i++){
+            int ss = Math.max(eL[i], start);
+            int ee = Math.min(eR[i], end);
+            if(ss < ee){//重叠
+                overlap_L[n2] = ss;
+                overLap_R[n2++] = ee;
+            }
+        }
+        eL[n1] = start;
+        eR[n1++] = end;
+        return true;
+    }
+}
+```
+
 ### 三、LeetCode - 732. My Calendar III
 
 #### [题目链接](https://leetcode.com/problems/my-calendar-iii/)

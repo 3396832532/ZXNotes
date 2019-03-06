@@ -1401,3 +1401,228 @@ public class MyBlockingQueue2<E> {
 }
 ```
 
+### 19、ThreadLocal线程局部变量(空间换时间)
+
+使用volatile可以实现 不同线程之间变量的可见性，但是我如果就是不要两个线程互相看到呢?
+
+```java
+public class ThreadLocal1 {
+
+	// 使用volatile可以实现 不同线程之间变量的可见性，但是我如果就是不要两个线程互相看到呢?
+    volatile static Person p = new Person();
+
+    public static void main(String[] args) {
+                
+        new Thread(()->{
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+            System.out.println(p.name);
+        }).start();
+        
+        new Thread(()->{
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            p.name = "lisi";
+        }).start();
+
+    }
+	static class Person {
+		String name = "zhangsan";
+	}
+}
+```
+
+用`ThreadLocal`可以实现两个线程的局部变量互不影响:
+
+```java
+public class ThreadLocal2 {
+
+    //volatile static Person p = new Person();
+    static ThreadLocal<Person> tl = new ThreadLocal<>(); // 这个就是在每一个线程里面都有一份独立的变量不会影响
+
+    public static void main(String[] args) {
+                
+        new Thread(()->{
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+            System.out.println(tl.get());
+        }).start();
+        
+        new Thread(()->{
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tl.set(new Person());
+        }).start(); 
+    }
+
+    static class Person {
+        String name = "zhangsan";
+    }
+}
+```
+
+## 二、并发容器
+
+引出并发容器。
+
+案例: 模拟售票。
+
+```java
+/**
+ * 有N张火车票，每张票都有一个编号
+ * 同时有10个窗口对外售票
+ * 请写一个模拟程序
+ *
+ * 分析下面的程序可能会产生哪些问题？
+ * 重复销售？超量销售？
+ * 有时候会造成 ArrayIndexOutOfBoundsException
+ */
+public class TicketSeller1 {
+
+    static List<String> tickets = new ArrayList<>();
+
+    static {
+        for(int i = 1; i <= 10000; i++)
+            tickets.add("票编号: " + i);
+    }
+
+    public static void main(String[] args){
+        for(int i = 0; i < 10; i++){
+            new Thread(() -> {
+                while(tickets.size() > 0){
+                    System.out.println("销售了 -- " + tickets.remove(0));
+                }
+            }).start();
+        }
+    }
+}
+```
+
+所以对应的就有一个`Vector`容器，可以防止并发问题。
+
+但是`Vector`还是存在问题，因为虽然单个方法是原子性的，但是两个方法之间不是原子性的。
+
+```java
+/**
+ * 使用Vector或者Collections.synchronizedXXX
+ * 分析一下，这样能解决问题吗？
+ * 　答: 还是可能造成问题，因为 tickets.size()方法和下面的tickets.remove()方法并不是同步的(原子性的)
+ */
+public class TicketSeller2 {
+
+    static Vector<String> tickets = new Vector<>();
+
+    static {
+        for(int i = 1; i <= 10000; i++)
+            tickets.add("票编号: " + i);
+    }
+
+    public static void main(String[] args){
+        for(int i = 0; i < 10; i++){
+            new Thread(() -> {
+                while(tickets.size() > 0){
+
+                    // 像如果加了下面这段话，程序就还是会出问题
+//                    try {
+//                        TimeUnit.MILLISECONDS.sleep(10);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+
+                    System.out.println("销售了 -- " + tickets.remove(0));
+                }
+            }).start();
+        }
+    }
+}
+```
+
+使用`synchronized`锁定`ticket.size()`和`tickets.remove`:
+
+```java
+/**
+ * 就算操作A和B都是同步的，但A和B组成的复合操作也未必是同步的，仍然需要自己进行同步
+ * 就像这个程序，判断size和进行remove必须是一整个的原子操作
+ * 可以用synchronized锁定，但是这样太慢了
+ * Java为我们提供了容器
+ */
+public class TicketSeller3 {
+
+    static Vector<String> tickets = new Vector<>();
+
+    static {
+        for(int i = 1; i <= 10000; i++)
+            tickets.add("票编号: " + i);
+    }
+
+    public static void main(String[] args){
+        for(int i = 0; i < 10; i++){
+
+            new Thread(() ->{
+                while(true){
+                    synchronized (tickets){
+                        if(tickets.size() <= 0)break;
+
+                        // 即使这里要操作一段时间也不会有问题
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("销售了 -- " + tickets.remove(0));
+                    }
+                }
+            }).start();
+        }
+    }
+}
+```
+
+更好的方法是使用JDK提供的并发容器:
+
+```java
+/**
+ * 使用ConcurrentQueue提高并发性
+ */
+public class TicketSeller4 {
+
+    static Queue<String> tickets = new ConcurrentLinkedQueue<>();
+
+    static {
+        for(int i = 1; i <= 10000; i++)
+            tickets.add("票编号: " + i);
+    }
+
+    public static void main(String[] args){
+        for(int i = 0; i < 10; i++){
+
+            new Thread(() ->{
+                while(true){
+                    String poll = tickets.poll(); // 因为是先取出来了
+
+                    // 假如这里被打断了，大不了我再拿一遍，拿一个空值出来
+                    if(poll == null) // 因为
+                        break;
+                    else
+                        System.out.println("销售了 -- " + poll);
+                }
+            }).start();
+        }
+    }
+}
+```
+
