@@ -1771,3 +1771,157 @@ public class CC_03_LinkedBlockingQueue {
 }
 ```
 
+`ArrayBlockingQueue`的使用:
+
+```java
+public class CC_04_ArrayBlockingQueue {
+
+    static BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
+
+    public static void main(String[] args) throws InterruptedException {
+        for (int i = 0; i < 10; i++) {
+            queue.put("a" + i);
+        }
+
+        queue.put("aaa"); //满了就会等待，程序阻塞
+        //queue.add("aaa");
+        //queue.offer("aaa");
+        //queue.offer("aaa", 1, TimeUnit.SECONDS); //等待了这么长的时间就会阻塞
+
+        System.out.println(queue);
+    }
+}
+```
+
+使用`DelayQueue`默认线程运行时间短的先执行:
+
+```java
+public class CC_05_DelayQueue {
+
+    static BlockingQueue<MyTask> tasks = new DelayQueue<>();
+
+    static Random rnd = new Random();
+
+    static class MyTask implements Delayed {
+        long runningTime;
+        String name;
+
+        MyTask(long rt, String name) {
+            this.runningTime = rt;
+            this.name = name;
+        }
+
+        // 按照运行时间短的，先运行
+        @Override
+        public int compareTo(Delayed o) {
+            return (int) (getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS) );
+        }
+
+        @Override
+        public long getDelay(TimeUnit unit) {
+
+            return unit.convert(runningTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        long curTime = System.currentTimeMillis();
+        MyTask t1 = new MyTask(curTime + 1000, "t1");
+        MyTask t2 = new MyTask(curTime + 2000, "t2");
+        MyTask t3 = new MyTask(curTime + 1500, "t3");
+        MyTask t4 = new MyTask(curTime + 2500, "t4");
+        MyTask t5 = new MyTask(curTime + 500, "t5"); // 时间最短的，先运行
+
+        tasks.put(t1);
+        tasks.put(t2);
+        tasks.put(t3);
+        tasks.put(t4);
+        tasks.put(t5);
+
+        System.out.println(tasks);
+
+        for(int i=0; i<5; i++) {
+            System.out.println(tasks.take());
+        }
+    }
+}
+```
+
+输出:
+
+```java
+[t5, t1, t3, t4, t2]
+t5
+t1
+t3
+t2
+t4
+```
+
+`LinkedTransferQueue`:
+
+```java
+/**
+ * 这个就是，如果先有消费者，我就不放在队列了，直接给消费者了，但是如果没有消费者的话就会阻塞
+ */
+public class CC_06_TransferQueue {
+
+    public static void main(String[] args){
+        LinkedTransferQueue<String> queue = new LinkedTransferQueue<>();
+
+        // 先启动消费者
+		/*new Thread(() -> {
+			try {
+				System.out.println(strs.take());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}).start();*/
+
+        //strs.transfer("aaa");  //这个就是，如果先有消费者，我就不放在队列了，直接给消费者了，但是如果没有消费者的话就会阻塞
+        queue.put("aaa");
+
+        new Thread(() -> {
+            try {
+                System.out.println(queue.take());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+}
+
+```
+
+`SynchronousQueue`: 和上面那个差不多
+
+```java
+/**
+ * 这个是一个容量为0的queue，意思就是有东西(生产者一生产就要消费掉)，你马上就要消费掉
+ */
+public class CC_07_SynchronusQueue {
+
+    public static void main(String[] args) throws InterruptedException {
+        BlockingQueue<String> queue = new SynchronousQueue<>();
+
+        new Thread(() -> {
+            try {
+                System.out.println(queue.take());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        queue.put("aaa"); // 阻塞等待消费者消费, 阻塞，一直等待消费者消费
+        //strs.add("aaa"); //这个会报错，因为 队列的容量为0
+        System.out.println(queue.size());
+    }
+}
+
+```
+
