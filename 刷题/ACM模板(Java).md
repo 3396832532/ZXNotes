@@ -24,7 +24,7 @@
  - [快速幂](#快速幂)
  - [矩阵快速幂](#矩阵快速幂)
 ***
-### 1、大数
+### 大数
 
 加法，乘法模板 
 
@@ -387,8 +387,7 @@ public class Main {
     static boolean[][] vis;
     static int[] cols;
 
-    static //一般在回溯法中修改了辅助的全局变量，一定要及时把他们恢复原状
-    void dfs(int r) {  //逐行放置皇后
+    static void dfs(int r) {  //逐行放置皇后
         if (r == n) {
             count++;
             for (int i = 0; i < n; i++) {
@@ -473,139 +472,454 @@ public class Main {
 ```
 
 ### 并查集
-并查集详细讲解以及每一步的优化可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81536185)。
+并查集。
+
+基于高度`rank`版本的。
 
 ```cpp
 //题目连接 : http://poj.org/problem?id=1611
 //题目大意 : 病毒传染，可以通过一些社团接触给出一些社团(0号人物是被感染的)问有多少人(0~n-1个人)被感染
-#include <stdio.h>
-const int maxn = 100000 + 10;
+import java.io.*;
+import java.util.*;
 
-int parent[maxn], rank[maxn];  //parent[]保存祖先,rank记录每个'树的高度'
+public class Main {
 
-void init(){
-    for(int i = 0; i < maxn; i++)parent[i] = i; //注意这里
-    for(int i = 0; i < maxn; i++)rank[i] = 1;
-}
+    static int[] f;
+    static int[] rank;
 
-//int findRoot(int v){
-//    return parent[v] == v ? v : parent[v] = findRoot(parent[v]);
-//}
-
-// 非递归
-int findRoot(int v){
-    while(parent[v] != v){
-        parent[v] = parent[parent[v]]; // 路径压缩
-        v = parent[v];
+    static int findRoot(int p) {
+        while (p != f[p]) {
+            f[p] = f[f[p]];
+            p = f[p];
+        }
+        return p;
     }
-    return v;
-}
 
-void unions(int a, int b){
-    int aRoot = findRoot(a);
-    int bRoot = findRoot(b);
-    if (aRoot == bRoot)
-        return;
-    if (rank[aRoot] < rank[bRoot])
-        parent[aRoot] = bRoot;
-    else if(rank[aRoot] > rank[bRoot]){ 
-        parent[bRoot] = aRoot;
-    }else{ 
-        parent[aRoot] = bRoot;
-        rank[bRoot]++;
+    static void union(int a, int b) {
+        int aR = findRoot(a);
+        int bR = findRoot(b);
+        if (aR == bR) return;
+        if (rank[aR] < rank[bR]) {
+            f[aR] = f[bR];
+        } else if (rank[aR] > rank[bR]) {
+            f[bR] = f[aR];
+        } else {
+            f[aR] = f[bR];
+            rank[bR]++;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        PrintStream out = System.out;
+        while (in.hasNext()) {
+            int n = in.nextInt();
+            int m = in.nextInt();
+            if(n == 0 && m == 0) break;
+            f = new int[n];
+            rank = new int[n];
+            for(int i = 0; i < n; i++) {
+                f[i] = i;
+                rank[i] = 1;
+            }
+            for(int i = 0; i < m; i++){
+                int c = in.nextInt();
+                int root = in.nextInt();
+                for(int j = 0; j < c - 1; j++) {
+                    int num = in.nextInt();
+                    union(root, num);
+                }
+            }
+            int res = 1; // 0已经感染
+            for(int i = 1; i < n; i++) if(findRoot(0) == findRoot(i)) res++;
+            out.println(res);
+        }
     }
 }
+```
+基于集合大小`size`版本的。
 
-int is_same(int x,int y){ //检查是不是在同一个集合中
-    return findRoot(x) == findRoot(y);
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static int[] f;
+    static int[] sz; // size
+
+    static int findRoot(int p) {
+        while (p != f[p]) {
+            f[p] = f[f[p]];
+            p = f[p];
+        }
+        return p;
+    }
+
+    // 将元素个数少的集合合并到元素个数多的集合上
+    static void union(int a, int b) {
+        int aR = findRoot(a);
+        int bR = findRoot(b);
+        if (aR == bR) return;
+        if (sz[aR] < sz[bR]) {
+            f[aR] = f[bR];
+            sz[bR] += sz[aR]; // 更新集合元素个数
+        }else{
+            f[bR] = f[aR];
+            sz[aR] += sz[bR];
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        PrintStream out = System.out;
+        while (in.hasNext()) {
+            int n = in.nextInt();
+            int m = in.nextInt();
+            if(n == 0 && m == 0) break;
+            f = new int[n];
+            sz = new int[n];
+            for(int i = 0; i < n; i++) {
+                f[i] = i;
+                sz[i] = 1;
+            }
+            for(int i = 0; i < m; i++){
+                int c = in.nextInt();
+                int root = in.nextInt();
+                for(int j = 0; j < c - 1; j++) {
+                    int num = in.nextInt();
+                    union(root, num);
+                }
+            }
+            int res = 1; // 0已经感染
+            for(int i = 1; i < n; i++) if(findRoot(0) == findRoot(i)) res++;
+            out.println(res);
+        }
+    }
 }
+```
 
-int main(){
-    int n,m,k,x,root;
-    while(~scanf("%d%d",&n,&m) && (n||m)){
-        init();
-        for(int i = 0; i < m; i++){
-            scanf("%d%d",&k,&root);
-            for(int j = 1; j < k; j++){
-                scanf("%d",&x);
-                unions(root,x);
+### 树状数组
+
+[**LeetCode - 307. Range Sum Query - Mutable**](https://leetcode.com/problems/range-sum-query-mutable/)例题:
+
+题目:
+
+![acm_3.png](images/acm_3.png)
+
+树状数组代码:
+
+```java
+class NumArray {
+
+    private int[] sums;// 树状数组中求和的数组
+    private int[] data;//真实存放数据的数组
+    private int n;
+
+    private int lowbit(int x) {return x & (-x);}
+
+    private int query(int i){
+        int s = 0;
+        while(i > 0){//树状数组中索引是1~n
+            s += sums[i];
+            i -= lowbit(i);
+        }
+        return s;
+    }
+
+    // fenWick update
+    private void renewal(int i, int delta){// delta是增量，不是新值
+        while(i <= n){//树状数组中索引是1~n
+            sums[i] += delta;
+            i += lowbit(i);
+        }
+    }
+
+    public NumArray(int[] nums) {
+        n = nums.length;
+        sums = new int[n+1];
+        data = new int[n];s
+        for(int i = 0; i < n; i++) {
+            data[i] = nums[i];
+            renewal(i+1, nums[i]);
+        }
+    }
+
+    public void update(int i, int val) {
+        renewal(i+1, val - data[i]);
+        data[i] = val;
+    }
+
+    public int sumRange(int i, int j) {
+        return query(j+1) - query(i);
+    }
+}
+```
+
+再看一个例题[**POJ - 2352. Stars**](http://poj.org/problem?id=2352)
+
+题目意思就是给你一些星星的坐标，每个星星的级别是他左下方的星星的数量，要你求出各个级别的星星有多少个，看样例就懂了。
+
+![acm_2.png](images/acm_2.png)
+
+题目中一个重要的信息就是输入**是按照`y`递增，如果`y`相同则`x`递增的顺序**给出的，所以，对于第`i`颗星星，它的`level`就是之前出现过的星星中，横坐标小于等于`i`的星星的数量。这里用树状数组来记录所有星星的`x`值。
+
+代码中有个小细节就是`x++`这是因为`lowbit`不能传值为`0`，否则会陷入死循环。
+
+```cpp															     
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static PrintStream out = System.out;
+
+    static class FastReader {
+        public BufferedReader br;
+        public StringTokenizer token;
+
+        public FastReader(InputStream in) {
+            br = new BufferedReader(new InputStreamReader(in), 32768);
+            token = null;
+        }
+
+        public String next() {
+            while (token == null || !token.hasMoreTokens()) {
+                try {
+                    token = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            return token.nextToken();
+        }
+
+        public int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
+
+    static int[] sums; // 注意树状数组中 索引从1开始
+
+    static int n;
+
+    static int lowbit(int x) {
+        return x & (-x);
+    }
+
+    static int query(int i) {
+        int res = 0;
+        while (i > 0) {
+            res += sums[i];
+            i -= lowbit(i);
+        }
+        return res;
+    }
+
+    // delta是增量， 不是新值
+    static void update(int i, int delta) {
+        while (i <= 32010) {   //注意这里是最大的x,没有记录所以用 32010,不能用n
+            sums[i] += delta;
+            i += lowbit(i);
+        }
+    }
+
+    // write code
+    static void solve(InputStream stream) {
+        FastReader in = new FastReader(stream);
+        n = in.nextInt();
+        sums = new int[32010]; // 用x作为索引
+        int[] level = new int[n];
+        for (int i = 1; i <= n; i++) {
+            int x = in.nextInt() + 1; //防止 x == 0的情况，lowbit会陷入死循环
+            int y = in.nextInt();
+            level[query(x)]++; // 求的是左边的和, 然后这个和就是一个级别，这个级别多了一个
+            update(x, 1);// 从x向上都+1
+        }
+        for (int i = 0; i < n; i++) System.out.println(level[i]);
+    }
+
+    public static void main(String[] args) {
+        solve(System.in);
+    }
+}
+```
+***
+### 线段树
+
+例题和上一个一样，[**LeetCode - 307. Range Sum Query - Mutable**](https://leetcode.com/problems/range-sum-query-mutable/): 线段树可以用数组来写，也可以用树引用来写。
+
+数组方式
+
+```java
+class NumArray {
+
+    class SegTree {
+
+        int[] tree;
+        int[] data;
+
+        public SegTree(int[] arr) {
+            data = new int[arr.length];
+            for (int i = 0; i < arr.length; i++) data[i] = arr[i];
+            tree = new int[4 * arr.length];   //最多需要4 * n
+            buildTree(0, 0, arr.length - 1);
+        } 
+  
+        public void buildTree(int treeIndex, int start, int end) {
+            if (start == end) {
+                tree[treeIndex] = data[start];
+                return; 
+            } 
+            int treeLid = treeIndex * 2 + 1; 
+            int treeRid = treeIndex * 2 + 2;  
+            int m = start + (end - start) / 2;
+            buildTree(treeLid, start, m);
+            buildTree(treeRid, m + 1, end);
+            tree[treeIndex] = tree[treeLid] + tree[treeRid]; //区间求和
+        }
+
+        public int query(int qL, int qR) {
+            if (qL < 0 || qL >= data.length || qR < 0 || qR >= data.length || qL > qR) return -1;
+            return query(0, 0, data.length - 1, qL, qR);
+        } 
+ 
+        private int query(int treeIndex, int start, int end, int qL, int qR) {
+            if (start == qL && end == qR) {
+                return tree[treeIndex];
+            }   
+            int mid = start + (end - start) / 2;
+            int treeLid = treeIndex * 2 + 1;
+            int treeRid = treeIndex * 2 + 2; 
+
+            if (qR <= mid) { //和右区间没关系 ,直接去左边查找 [0,4]  qR <= 2 [0,2]之间查找
+                return query(treeLid, start, mid, qL, qR);
+            } else if (qL > mid) {//和左区间没有关系，直接去右边查找 [0,4] qL > 2  --> [3,4]
+                return query(treeRid, mid + 1, end, qL, qR);
+            } else {         //在两边都有，查询的结果  合并
+                return query(treeLid, start, mid, qL, mid) + //注意是查询 [qL,m]
+                        query(treeRid, mid + 1, end, mid + 1, qR);   //查询[m+1,qR]
             }
         }
-        int sum = 1;
-        for(int i = 1; i < n; i++)
-            if(findRoot(i) == findRoot(0))
-                sum++; //找和0是一个集合的
-        printf("%d\n",sum);
+
+        public void update(int index, int val) {
+            data[index] = val; //首先修改data
+            update(0, 0, data.length - 1, index, val);
+        }
+  
+        private void update(int treeIndex, int start, int end, int index, int val) {
+            if (start == end) {
+                tree[treeIndex] = val; // 最后更新
+                return; 
+            } 
+            int m = start + (end - start) / 2; 
+            int treeLid = 2 * treeIndex + 1; 
+            int treeRid = 2 * treeIndex + 2;
+            if (index <= m) { //左边
+                update(treeLid, start, m, index, val);
+            } else {
+                update(treeRid, m + 1, end, index, val);
+            }
+            tree[treeIndex] = tree[treeLid] + tree[treeRid]; //更新完左右子树之后，自己受到影响，重新更新和
+        }
     }
-    return 0;
+
+    private SegTree segTree;
+
+    public NumArray(int[] nums) {
+        if (nums == null || nums.length == 0) return;
+        segTree = new SegTree(nums);
+    }
+
+    public void update(int i, int val) {
+        segTree.update(i, val);
+    }
+
+    public int sumRange(int i, int j) {
+        return segTree.query(i, j);
+    }
+}
+```
+
+树的引用的代码:
+
+```java
+class SegNode{
+    int start; // 表示的区间的左端点
+    int end;   // 表示区间的右端点 , 当start == end的时候就只有一个元素
+    int sum;
+    SegNode left;
+    SegNode right;
+
+    public SegNode(int start, int end, int sum, SegNode left, SegNode right) {
+        this.start = start;
+        this.end = end;
+        this.sum = sum;
+        this.left = left;
+        this.right = right;
+    }
 }
 
-```
-### 树状数组
-树状数组的主要用于需要频繁的修改数组元素，同时又要频繁的查询数组内任意区间元素之和的时候。具体一些解释看图。
-![这里写图片描述](https://img-blog.csdn.net/20180407122904100?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)![这里写图片描述](https://img-blog.csdn.net/20180407122912685?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-<font  color = crimson>所以计算`2^k`次方我们可以用如下代码</font>
+class NumArray {
 
-```cpp
-int lowbit(int x){
-    return x&(-x); //或者 return x&(x^(x-1));
+    SegNode root;
+    int[] arr;
+
+    private SegNode buildTree(int s, int e){
+        if(s == e)
+            return new SegNode(s, e, arr[s], null, null);
+        int mid = s + (e - s) / 2;
+        SegNode L = buildTree(s, mid);
+        SegNode R = buildTree(mid+1, e);
+        return new SegNode(s, e, L.sum + R.sum, L, R);
+    }
+
+    private void update(SegNode node, int i, int val){
+        if(node.start == node.end && node.start == i){
+            node.sum = val;
+            return;
+        }
+        int mid = node.start + (node.end - node.start) / 2;
+        if(i <= mid)
+            update(node.left, i, val);
+        else
+            update(node.right, i, val);
+        node.sum = node.left.sum + node.right.sum; // 记得下面的更新完之后，更新当前的和
+    }
+
+    private int query(SegNode node, int i, int j){
+        if(node.start == i && node.end == j)
+            return node.sum;
+        int mid = node.start + (node.end - node.start) / 2;
+        if(j <= mid){ // 区间完全在左边
+            return query(node.left, i, j);
+        }else if(i > mid) { // 区间完全在右边
+            return query(node.right, i, j);
+        }else {
+            return query(node.left, i, mid) + query(node.right, mid+1, j);
+        }
+    }
+
+    public NumArray(int[] nums) {
+        arr = new int[nums.length];
+        for(int i = 0; i < nums.length; i++) arr[i] = nums[i];
+        if(nums.length != 0) 
+            root = buildTree(0, nums.length-1);
+    }
+
+    public void update(int i, int val) {
+        arr[i] = val;
+        update(root, i, val);
+    }
+
+    public int sumRange(int i, int j) {
+        return query(root, i, j);
+    }
 }
 ```
 
-![这里写图片描述](https://img-blog.csdn.net/20180407122922906?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180407123210785?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+### KMP，Sunday，BM
 
-
-这里给出一个例题[POJ2352Stars](http://poj.org/problem?id=2352)
-题目意思就是给你一些星星的坐标，每个星星的级别是他左下方的星星的数量，要你求出各个级别的星星有多少个，看样例就懂了
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181222113140383.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-题目中一个重要的信息就是输入是<font color = red>按照`y`递增，如果`y`相同则`x`递增的顺序</font>给出的，所以，对于第`i`颗星星，它的`level`就是之前出现过的星星中，横坐标小于等于`i`的星星的数量。这里用树状数组来记录所有星星的`x`值。
-* 代码中有个小细节就是`x++`<font color = red>这是因为`lowbit`不能传值为`0`，否则会陷入死循环</font>。
-
-  ```cpp															     
-  #include <stdio.h>
-  #include <string.h>
-  const int maxn = 32000 + 10;
-  int n,c[maxn],level[15000+10];
-  //计算2^k
-  int lowbit(int x){
-    return x&(-x);
-  }
-  //更新数组的值
-  void update(int i,int val){
-    while(i < maxn){               //注意这里是最大的x,没有记录所以用maxn,不能用n
-        c[i] += val;
-        i += lowbit(i);           //不断的往上面更新
-    }
-  }
-  //查询
-  int sum(int i){
-    int s = 0;
-    while(i > 0){
-        s += c[i];
-        i -= lowbit(i);           //不断的往下面加
-    }
-    return s;
-  }
-  int main(){
-    int x,y;
-    scanf("%d",&n);
-    memset(c,0,sizeof(c));
-    memset(level,0,sizeof(level));
-    for(int i = 0; i < n; i++){
-        scanf("%d%d",&x,&y);
-        x++;                      //加入x+1，是为了避免0，X是可能为0的,LOWBIT无法处理0的情况，因为它的结果也是0，那么最终就是一个死循环
-        level[sum(x)]++;
-        update(x,1);              //上面的层都要+1个
-    }
-    for(int i = 0; i < n; i++)
-        printf("%d\n",level[i]);
-    return 0;
-  }
-  ```
-
-***
-### <font id = "8">KMP，Sunday，BM
 这三个算法解决的问题都是 : <font color = red>有一个文本串 S，和一个模式串 P，现在要查找 P 在 S 中的位置</font>，三种算法的思路这里限于篇幅不多说，[这篇博客](http://wiki.jikexueyuan.com/project/kmp-algorithm/define.html)对着三种算法讲解的比较详细。
 **`KMP`的较直观的分析也可以看看[我的另一篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81430392)**
 
@@ -615,50 +929,90 @@ int lowbit(int x){
 
 //题目连接 : http://acm.hdu.edu.cn/showproblem.php?pid=1711
 //题目大意 : 找第二个数组在第一个数组中出现的位置，如果不存在，输出-1
+
+```cpp
 #include <stdio.h>
+
 const int maxn = 1000000 + 10;
+
 int n,m,a[maxn], b[10000 + 10],nexts[10000 + 10];
 
 void getNext(int *p,int next[]) {   //优化后的求next数组的方法 
+
     int len = m;
+
     next[0] = -1;    //next 数组中的 最大长度值(前后缀的公共最大长度) 的第一个 赋值为  -1  
+
     int k = -1,j = 0;
+
     while (j < len - 1) {
+
         if (k == -1 || p[j] == p[k]) { //p[k]表示前缀 p[j] 表示后缀
+
             k++; j++;
+
             if(p[j] != p[k])next[j] = k;
+
             else next[j] = next[k];   //因为不能出现p[j] = p[ next[j ]]，所以当出现时需要继续递归，k = next[k] = next[next[k]]
+
         }
+
         else k = next[k];
+
     }
+
 }
 
 int KMPSerach(int *s, int *p) {
+
     int sLen = n,pLen = m;
+
     int i = 0, j = 0;
+
     while (i < sLen && j < pLen) {
+
         if (j == -1 || s[i] == p[j])i++, j++;
+
         else j = nexts[j];
+
     }
+
     if (j == pLen)return i - j;
+
     else return -1;
+
 }
 
 int main() {
+
     int T;
+
     scanf("%d", &T);
+
     while (T--) {
+
         scanf("%d%d", &n, &m);
+
         for(int i = 0; i < n; i++)scanf("%d", &a[i]);
+
         for(int i = 0; i < m; i++)scanf("%d", &b[i]);
+
         getNext(b,nexts); //获取next数组
+
         int ans = KMPSerach(a, b);
+
         if (ans != -1)printf("%d\n", ans + 1);
+
         else printf("-1\n");
+
     }
+
     return 0;
+
 }
+
 ```
+
 **`BM`算法，主要是根据两个规则去执行**
 ![这里写图片描述](https://img-blog.csdn.net/20180407140141237?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ​```cpp
@@ -712,7 +1066,7 @@ int main() {
 `Sunday`算法也是两个规则
 ![这里写图片描述](https://img-blog.csdn.net/20180407141122454?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-```cpp
+​```cpp
 //题目链接：http://acm.hrbust.edu.cn/index.php?m=ProblemSet&a=showProblem&problem_id=1551
 //题目大意: 找一串字符中是否出现"bkpstor"这段字符
 #include <stdio.h>

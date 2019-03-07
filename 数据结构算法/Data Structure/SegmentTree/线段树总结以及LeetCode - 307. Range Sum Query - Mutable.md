@@ -36,7 +36,7 @@
 
 
 ![在这里插入图片描述](images/sg5.png)
-<font color = red>**我们保存树的结构是类似和堆一样的使用数组来保存，使用下标来对应左右孩子**: </font>
+**我们保存树的结构是类似和堆一样的使用数组来保存，使用下标来对应左右孩子**: </font>
 
 ```java
 public class SegmentTree<E> {
@@ -68,7 +68,7 @@ public class SegmentTree<E> {
  - `buildSegmentTree()`函数是创建线段树。
 
 
-<font color = red>然后就是对线段树的创建: </font>
+然后就是对线段树的创建: </font>
 要注意的是: 
 
  - 我创建的时候二分是左区间`[L,m]`，右区间`[m+1,R]`，当然也可以右区间多一个元素；
@@ -77,7 +77,7 @@ public class SegmentTree<E> {
 
 ![这里写图片描述](images/sg6.png) 
 
-
+建树代码:
 
 ```java
 	 // tree是树的结构(类似堆的存储)
@@ -397,6 +397,175 @@ class NumArray {
         return segTree.query(i, j);
     }
 
+}
+```
+
+将上面的代码改的简单一点(不用泛型):
+
+```java
+class NumArray {
+
+    class SegTree {
+
+        int[] tree;
+        int[] data;
+
+        public SegTree(int[] arr) {
+            data = new int[arr.length];
+            for (int i = 0; i < arr.length; i++) data[i] = arr[i];
+            tree = new int[4 * arr.length];   //最多需要4 * n
+            buildTree(0, 0, arr.length - 1);
+        } 
+  
+        public void buildTree(int treeIndex, int start, int end) {
+            if (start == end) {
+                tree[treeIndex] = data[start];
+                return; 
+            } 
+            int treeLid = treeIndex * 2 + 1; 
+            int treeRid = treeIndex * 2 + 2;  
+            int m = start + (end - start) / 2;
+            buildTree(treeLid, start, m);
+            buildTree(treeRid, m + 1, end);
+            tree[treeIndex] = tree[treeLid] + tree[treeRid]; //区间求和
+        }
+
+        public int query(int qL, int qR) {
+            if (qL < 0 || qL >= data.length || qR < 0 || qR >= data.length || qL > qR) return -1;
+            return query(0, 0, data.length - 1, qL, qR);
+        } 
+ 
+        private int query(int treeIndex, int start, int end, int qL, int qR) {
+            if (start == qL && end == qR) {
+                return tree[treeIndex];
+            }   
+            int mid = start + (end - start) / 2;
+            int treeLid = treeIndex * 2 + 1;
+            int treeRid = treeIndex * 2 + 2; 
+
+            if (qR <= mid) { //和右区间没关系 ,直接去左边查找 [0,4]  qR <= 2 [0,2]之间查找
+                return query(treeLid, start, mid, qL, qR);
+            } else if (qL > mid) {//和左区间没有关系，直接去右边查找 [0,4] qL > 2  --> [3,4]
+                return query(treeRid, mid + 1, end, qL, qR);
+            } else {         //在两边都有，查询的结果  合并
+                return query(treeLid, start, mid, qL, mid) + //注意是查询 [qL,m]
+                        query(treeRid, mid + 1, end, mid + 1, qR);   //查询[m+1,qR]
+            }
+        }
+
+        public void update(int index, int val) {
+            data[index] = val; //首先修改data
+            update(0, 0, data.length - 1, index, val);
+        }
+  
+        private void update(int treeIndex, int start, int end, int index, int val) {
+            if (start == end) {
+                tree[treeIndex] = val; // 最后更新
+                return; 
+            } 
+            int m = start + (end - start) / 2; 
+            int treeLid = 2 * treeIndex + 1; 
+            int treeRid = 2 * treeIndex + 2;
+            if (index <= m) { //左边
+                update(treeLid, start, m, index, val);
+            } else {
+                update(treeRid, m + 1, end, index, val);
+            }
+            tree[treeIndex] = tree[treeLid] + tree[treeRid]; //更新完左右子树之后，自己受到影响，重新更新和
+        }
+    }
+
+    private SegTree segTree;
+
+    public NumArray(int[] nums) {
+        if (nums == null || nums.length == 0) return;
+        segTree = new SegTree(nums);
+    }
+
+    public void update(int i, int val) {
+        segTree.update(i, val);
+    }
+
+    public int sumRange(int i, int j) {
+        return segTree.query(i, j);
+    }
+}
+```
+
+再附上后来写的用树的引用的代码:
+
+```java
+class SegNode{
+    int start; // 表示的区间的左端点
+    int end;   // 表示区间的右端点 , 当start == end的时候就只有一个元素
+    int sum;
+    SegNode left;
+    SegNode right;
+
+    public SegNode(int start, int end, int sum, SegNode left, SegNode right) {
+        this.start = start;
+        this.end = end;
+        this.sum = sum;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+class NumArray {
+
+    SegNode root;
+    int[] arr;
+
+    private SegNode buildTree(int s, int e){
+        if(s == e)
+            return new SegNode(s, e, arr[s], null, null);
+        int mid = s + (e - s) / 2;
+        SegNode L = buildTree(s, mid);
+        SegNode R = buildTree(mid+1, e);
+        return new SegNode(s, e, L.sum + R.sum, L, R);
+    }
+
+    private void update(SegNode node, int i, int val){
+        if(node.start == node.end && node.start == i){
+            node.sum = val;
+            return;
+        }
+        int mid = node.start + (node.end - node.start) / 2;
+        if(i <= mid)
+            update(node.left, i, val);
+        else
+            update(node.right, i, val);
+        node.sum = node.left.sum + node.right.sum; // 记得下面的更新完之后，更新当前的和
+    }
+
+    private int query(SegNode node, int i, int j){
+        if(node.start == i && node.end == j)
+            return node.sum;
+        int mid = node.start + (node.end - node.start) / 2;
+        if(j <= mid){ // 区间完全在左边
+            return query(node.left, i, j);
+        }else if(i > mid) { // 区间完全在右边
+            return query(node.right, i, j);
+        }else {
+            return query(node.left, i, mid) + query(node.right, mid+1, j);
+        }
+    }
+
+    public NumArray(int[] nums) {
+        arr = new int[nums.length];
+        for(int i = 0; i < nums.length; i++) arr[i] = nums[i];
+        if(nums.length != 0) 
+            root = buildTree(0, nums.length-1);
+    }
+
+    public void update(int i, int val) {
+        arr[i] = val;
+        update(root, i, val);
+    }
+
+    public int sumRange(int i, int j) {
+        return query(root, i, j);
+    }
 }
 ```
 

@@ -1477,6 +1477,8 @@ public class ThreadLocal2 {
 
 ## 二、并发容器
 
+### 1、引入并发容器
+
 引出并发容器。
 
 案例: 模拟售票。
@@ -1621,6 +1623,149 @@ public class TicketSeller4 {
                         System.out.println("销售了 -- " + poll);
                 }
             }).start();
+        }
+    }
+}
+```
+
+### 2、JDK并发容器
+
+先看`HashTable`和`ConcurrentHashMap` (支持并发)的性能对比:
+
+```java
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * http://blog.csdn.net/sunxianghuang/article/details/52221913
+ * 阅读concurrentskiplistmap
+ */
+public class CC_01_ConcurrentMap {
+
+    public static void main(String[] args) {
+        Map<String, String> map = new ConcurrentHashMap<>();  //高并发 (里面是分段的，将大锁分成了小锁)
+//        Map<String, String> map = new ConcurrentSkipListMap<>(); //高并发并且排序
+
+//        Map<String, String> map = new Hashtable<>();
+        //Map<String, String> map = new HashMap<>(); //要通过Collections.synchronizedXXX才能得到同步容器
+        //TreeMap
+
+        Random rnd = new Random();
+        Thread[] ths = new Thread[100];
+        CountDownLatch latch = new CountDownLatch(ths.length);
+        long start = System.currentTimeMillis();
+
+        for (int i = 0; i < ths.length; i++) {
+            ths[i] = new Thread(() -> {
+                for (int j = 0; j < 10000; j++) map.put("a" + rnd.nextInt(100000), "a" + rnd.nextInt(100000));
+                latch.countDown();
+            });
+        }
+        Arrays.asList(ths).forEach(t -> t.start());
+        try {
+            latch.await(); //等待100个线程结束
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+    }
+}
+```
+
+
+
+关于`CopyOnWriteList`:
+
+```java
+/**
+ * 写时复制容器 copy on write
+ * 多线程环境下，写时效率低，读时效率高
+ * 适合写少读多的环境
+ */
+public class CC_02_CopyOnWriteList {
+
+    public static void main(String[] args) {
+        List<String> lists =
+                //new ArrayList<>(); //这个会出并发问题！
+                //new Vector(); //读的时候要加锁
+                new CopyOnWriteArrayList<>(); //好处就是读的时候不要加锁
+
+        Random r = new Random();
+        Thread[] ths = new Thread[100];
+        for (int i = 0; i < ths.length; i++) {
+            Runnable task = new Runnable() {
+                @Override
+                public void run() {
+                    for (int i = 0; i < 1000; i++) lists.add("a" + r.nextInt(10000));
+                }
+            };
+            ths[i] = new Thread(task);
+        }
+
+        // 启动这些线程，并且使用main.join来等待结束
+        runAndComputeTime(ths);
+
+        System.out.println(lists.size());
+    }
+
+    static void runAndComputeTime(Thread[] ths) {
+        long s1 = System.currentTimeMillis();
+
+        Arrays.asList(ths).forEach(t -> t.start());
+        Arrays.asList(ths).forEach(t -> {
+            try {
+                t.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        long s2 = System.currentTimeMillis();
+        System.out.println(s2 - s1);
+    }
+}
+```
+
+使用`LinkeBlockingQueue`实现生产者消费者模式:
+
+```java
+/**
+ * 生产者消费者模式，可以直接使用LinkedBlockingQueue来实现
+ */
+public class CC_03_LinkedBlockingQueue {
+
+    static BlockingQueue<String> queue = new LinkedBlockingQueue<>(); // 如果队列是空就会等待
+
+    static Random r = new Random();
+
+    public static void main(String[] args) {
+        new Thread(() -> {
+            for (int i = 0; i < 100; i++) {
+                try {
+                    queue.put("" + i); //如果满了，就会等待
+                    System.out.println(Thread.currentThread().getName() + " put - " + i);
+                    TimeUnit.MILLISECONDS.sleep(r.nextInt(1000));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "P").start();
+
+
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> {
+                for (; ;) {
+                    try {
+                        System.out.println(Thread.currentThread().getName() + " take - " + queue.take()); //如果空了，就会等待
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, "C" + i).start();
         }
     }
 }
