@@ -10,7 +10,15 @@
 
 ### 解析
 
+这题主要是练习链表的操作。
+
 非递归:
+
+用三个变量`pre、cur、next`操作即可。注意用`dummyHead`操作会方便一些。
+
+![56_s.png](images/56_s.png)
+
+代码:
 
 ```java
 public class Solution {
@@ -25,10 +33,8 @@ public class Solution {
             next = cur.next;
             if(next == null) break;
             if(cur.val == next.val){
-                while(next != null && cur.val == next.val){//重复的一截
-                    cur = cur.next;
+                while(next != null && cur.val == next.val)//重复的一截
                     next = next.next;
-                }
                 pre.next = next;// 减掉中间重复的
                 cur = next;
             }else {
@@ -37,6 +43,26 @@ public class Solution {
             }
         }
         return dummyHead.next;
+    }
+}
+```
+
+递归写法: 原理一样。
+
+```java
+public class Solution {
+
+    public ListNode deleteDuplication(ListNode pHead) {
+        if (pHead == null || pHead.next == null) return pHead;
+        ListNode cur = pHead, next = pHead.next;
+        if (cur.val != next.val) {
+            cur.next = deleteDuplication(next);
+            return cur;
+        } else {
+            while (next != null && cur.val == next.val)
+                next = next.next;
+            return deleteDuplication(next);
+        }
     }
 }
 ```
