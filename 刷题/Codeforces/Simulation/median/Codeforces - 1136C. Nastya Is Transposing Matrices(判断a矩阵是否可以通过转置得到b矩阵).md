@@ -1,4 +1,4 @@
-## Codeforces - 1136C. Nastya Is Transposing Matrices(判断a矩阵是否可以通过转置b)
+## Codeforces - 1136C. Nastya Is Transposing Matrices(判断a矩阵是否可以通过转置得到b矩阵)
 
 #### [题目链接](https://codeforces.com/problemset/problem/1136/C)
 
