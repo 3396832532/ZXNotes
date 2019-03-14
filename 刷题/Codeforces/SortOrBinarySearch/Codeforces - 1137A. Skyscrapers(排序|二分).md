@@ -20,7 +20,7 @@
 
 ### 解析
 
-这题感觉和[NowCoder-发奖金](../../Other/nowcoder/2016校招真题/Nowcoder - 发奖金.md)有点类似。
+这题感觉和[NowCoder-发奖金](https://github.com/ZXZxin/ZXNotes/blob/master/%E5%88%B7%E9%A2%98/Other/nowcoder/2016%E6%A0%A1%E6%8B%9B%E7%9C%9F%E9%A2%98/Nowcoder%20-%20%E5%8F%91%E5%A5%96%E9%87%91.md)有点类似。
 
 因为行大小关系不变，列大小关系不变，我们考虑分别考虑每行每列，并统计每个数在行内和列内的排名。
 
