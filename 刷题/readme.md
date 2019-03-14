@@ -1,8 +1,6 @@
 ## 刷题模板
 
-#### 普通Java读入
-
-`Main.java`
+#### Java读入
 
 ```java
 import java.io.*;
@@ -10,34 +8,64 @@ import java.util.*;
 
 public class Main {
 
-    static PrintStream out = System.out;
+    static class FR {
+        BufferedReader br;
+        StringTokenizer tk;
 
-    static void solve(Scanner in) {
+        FR(InputStream stream) {
+            br = new BufferedReader(new InputStreamReader(stream), 32768);
+            tk = null;
+        }
 
+        String next() {
+            while (tk == null || !tk.hasMoreElements()) {
+                try {
+                    tk = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return tk.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
+
+    static void solve(InputStream stream, PrintWriter out) {
+        FR in = new FR(stream);
+   
     }
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(new BufferedInputStream(System.in));
-        solve(in);
+        OutputStream os = System.out;
+        InputStream is = System.in;
+        PrintWriter out = new PrintWriter(os);
+        solve(is, out);
+        out.close(); // 不关闭就没有输出
     }
 }
+
 ```
 
 `MainTest.java` : 从`in.txt`中读入测试用例:
 
 ```java
 import java.io.*;
-import java.util.*;
 
 public class MainTest {
 
     public static void main(String[] args) throws FileNotFoundException {
         long start = System.currentTimeMillis();
         String src = "/home/zxzxin/Java_Maven/Algorithm/src/main/java/in.txt";
-        Scanner in = new Scanner(new FileInputStream(src));
+        FileInputStream in = new FileInputStream(src);
+        OutputStream os = System.out;
+        PrintWriter out = new PrintWriter(os);
 
-        Main.solve(in);//调用solve
+        Main.solve(in, out);//调用solve
 
+        out.close();
         long end = System.currentTimeMillis();
         System.err.println("Time elapsed: " + (end - start) * 1.0 / 1000);
     }
@@ -75,75 +103,6 @@ public class GenerateInTxt {
     }
 }
 ```
-
-#### 快速Java读入
-
-`Main.java`
-
-```java
-import java.io.*;
-import java.util.*;
-
-public class Main {
-
-    static PrintStream out = System.out;
-
-    static class FastReader {
-        public BufferedReader br;
-        public StringTokenizer token;
-
-        public FastReader(InputStream in) {
-            br = new BufferedReader(new InputStreamReader(in), 32768);
-            token = null;
-        }
-
-        public String next() {
-            while (token == null || !token.hasMoreTokens()) {
-                try {
-                    token = new StringTokenizer(br.readLine());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            return token.nextToken();
-        }
-
-        public int nextInt() {
-            return Integer.parseInt(next());
-        }
-    }
-	// write the solution
-    static void solve(InputStream stream) {
-        FastReader in = new FastReader(stream);
-
-
-    }
-    public static void main(String[] args) {
-        solve(System.in);
-    }
-}
-```
-
-`MainTest.java`:
-
-```java
-import java.io.*;
-
-public class MainTest {
-
-    public static void main(String[] args) throws FileNotFoundException {
-        long start = System.currentTimeMillis();
-        String src = "/home/zxzxin/Java_Maven/Algorithm/src/main/java/in.txt";
-        FileInputStream in = new FileInputStream(src);//这里稍有改动
-
-        Main.solve(in);//调用solve
-
-        long end = System.currentTimeMillis();
-        System.err.println("Time elapsed: " + (end - start) * 1.0 / 1000);
-    }
-}
-```
-
 
 
 ## C++
