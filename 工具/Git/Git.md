@@ -73,6 +73,8 @@ Git是分布式的。
 
 ### 5、实际操作Git
 
+#### 1、基本命令
+
 ![1_4.png](images/1_4.png)
 
 关于配置`user.name`和`user.email`:
@@ -102,3 +104,47 @@ Config file location
 
 > git 提交的id(`commit id`)是一个摘要值，这个摘要值实际上是一个`sha1`计算出来的。
 
+#### 2、git rm 和rm的区别
+
+**git rm** : 
+
+* 1、删除了一个文件
+* 2、将被删除的文件纳入到了暂存区(stage)；(可以直接调用`git commit`来提交)
+
+若想恢复被删除的文件，需要进行两个动作:
+
+* 1、`git reset HEAD test2.txt`，将待删除的文件从暂存区恢复到工作区；
+* 2、`git checkout -- test2.txt`， 将工作区的修改丢弃掉；
+
+**rm **:
+
+* 只是将文件删除；注意: 这时，被删除的文件并未纳入到暂存区当中。
+* 这时是提交(`git commit`)不了的。要想纳入暂存区，必须要再调用一次`git add`。
+
+实战对比:
+
+![1_7.png](images/1_7.png)
+
+
+
+
+
+#### 3、git mv 和 mv的对比
+
+git mv(和`git rm `类似)：
+
+* 先完成重命名；
+* 然后提交到暂存区；
+
+`git mv`演示:
+
+![1_8.png](images/1_8.png)
+
+而  mv:
+
+* 只是完成重命名；
+* 需要自己调用`git add`提交到暂存区；
+
+![1_9.png](images/1_9.png)
+
+​	
