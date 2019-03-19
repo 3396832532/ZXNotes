@@ -308,5 +308,26 @@ git log --graph
 
 ## 四、Git版本回退
 
+Git的另外一个强大之处在于可以回退到之前的任意一个版本：
 
+![1_30.png](images/1_30.png)
+
+主要看下面的命令:
+
+* `git reset --hard HEAD^`， 往后回退1个版本；
+* `git reset --hard HEAD~3`，往后回退3个版本；
+* `git reset --hard commit-id`，直接回退到某个`commit-id`；(如果当前在靠前面，就可以通过`git log`查看)；
+* 如果在后面，不能查看到前面的`git log 得到 commit-id`怎么办呢？可以用`git reflog`查看自己的操作日志；
+
+实战演示:
+
+![1_28.png](images/1_28.png)
+
+查看修改和提交日志:
+
+![1_29.png](images/1_29.png)
+
+下面演示怎么回退:
+
+![1_31.png](images/1_31.png)
 
