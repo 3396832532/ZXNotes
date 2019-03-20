@@ -124,9 +124,32 @@ show variables like '%storage engine%';// 查看默认的存储引擎
 
 ![ad5_存储引擎对比.png](images/ad5_存储引擎对比.png)
 
+> 问：MyISAM和InnoDB引擎的区别
+>
+> - MyISAM 不支持外键，而 InnoDB 支持
+>
+> - MyISAM 是非事务安全型的，而 InnoDB 是事务安全型的。
+>
+> - **MyISAM 锁的粒度是表级，而 InnoDB 支持行级锁定**。
+>
+> - MyISAM 支持全文类型索引，而 InnoDB 不支持全文索引。
+>
+> - MyISAM 相对简单，所以在效率上要优于 InnoDB，小型应用可以考虑使用 MyISAM。
+>
+> - MyISAM 表是保存成文件的形式，在跨平台的数据转移中使用 MyISAM 存储会省去不少的麻烦。
+>
+> - InnoDB 表比 MyISAM 表更安全，可以在保证数据不会丢失的情况下，切换非事务表到事务表（`alter  table tablename type=innodb`）。
+>
+> 应用场景:
+> * MyISAM 管理非事务表。它提供高速存储和检索，以及全文搜索能力。如果应用中需要执行大量的 SELECT 查询，那么 MyISAM 是更好的选择。
+> * InnoDB 用于事务处理应用程序，具有众多特性，包括 ACID 事务支持。如果应用中需要执行大量的 INSERT 或 UPDATE 操作，则应该使用 InnoDB，这样可以提高多用户并发操作的性能。
+>
+
 ## 二、索引优化分析
 
-需要优化的原因：性能低、执行时间太长、等待时间太长、SQL语句欠佳（连接查询）、索引失效、服务器参数设置不合理（缓冲、线程数）	
+需要优化的原因：性能低、执行时间太长、等待时间太长、SQL语句欠佳（连接查询）、索引失效、服务器参数设置不合理（缓冲、线程数）	。
+
+<div align="center"><img src="images/ad8_性能下降原因.png"></div><br>
 
 先看SQL执行的顺序:
 
@@ -137,6 +160,11 @@ select dinstinct  ..from  ..join ..on ..where ..group by ...having ..order by ..
 解析过程：			
 from .. on.. join ..where ..group by ....having ...select dinstinct ..order by limit ...
 ```
+
+解析图:
+
+![ad9_索引.png](images/ad9_索引.png)
+> 详细参考这篇博客: https://www.cnblogs.com/annsshadow/p/5037667.html
 
 SQL优化， 主要就是在优化索引
 
@@ -199,4 +227,5 @@ drop index name_index on tb ;
 show index from 表名 ;
 show index from 表名 \G
 ```
-> 详细参考这篇博客: https://www.cnblogs.com/annsshadow/p/5037667.html
+
+

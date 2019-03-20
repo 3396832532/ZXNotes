@@ -233,6 +233,10 @@ Union 文件系统是 Docker 镜像的基础。**镜像可以通过分层来进�
 
 特性：一次同时加载多个文件系统，但从外面看起来，只能看到一个文件系统，联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录。
 
+<div align="center"><img src="images/1_10.png"></div><br>
+
+<div align="center"><img src="images/1_9.png"></div><br>
+
 ### 1、docker commit
 
 特点: (`commit`的只是一个副本容器。原来的不能修改)
@@ -304,3 +308,51 @@ docker run -it -v /宿主机目录:/容器内目录 centos /bin/bash
 
 ![1_7.png](images/1_7.png)
 
+#### 2)、Docker File添加
+
+这部分具体在下面说。
+
+根目录下新建mydocker文件夹并进入。
+
+可在Dockerfile中使用VOLUME指令来给镜像添加一个或多个数据卷。
+
+```shell
+volume test
+FROM centos
+VOLUME ["/dataVolumeContainer1","/dataVolumeContainer2"]
+CMD echo "finished,--------success1"
+CMD /bin/bash
+```
+
+build后生成镜像。
+
+> Docker挂载主机目录Docker访问出现cannot open directory .: Permission denied 解决办法：在挂载目录后多加一个`--privileged=true`参数即可。
+
+### 3、数据卷容器
+
+命名的容器挂载数据卷，其它容器通过挂载这个(父容器)实现数据共享，挂载数据卷的容器，称之为数据卷容器。
+
+以上一步新建的镜像`zxzxin/centos`为模板并运行容器`dc01`、`dc02`、`dc03`。
+
+假设他们都有了容器卷: `/dataVolumeContainer1、/dataVolumeContainer2`。
+
+其中`dc02、dc03`会继承`dc01`。我们在其中任意一个容器内加数据，另外两个容器内部都可以看到。
+
+* 先启动一个父容器dc01；并在dataVolumeContainer2新增内容。
+* dc02/dc03继承自dc01；`--volumes-from`，具体是`docker run -it --name dc02 --volumes-from dc01 zxzxin/centos`。
+* 回到dc01可以看到02/03各自添加的都能共享了。
+* 删除dc01，dc02修改后dc03可否访问。
+* 删除dc02后dc03可否访问。
+* 新建dc04继承dc03后再删除dc03。
+
+**结论：容器之间配置信息的传递，数据卷的生命周期一直持续到没有容器使用它为止**。
+
+
+
+
+
+### 八、Docker File
+
+
+
+![1_8.png](images/1_8.png)
