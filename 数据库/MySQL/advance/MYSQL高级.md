@@ -1,6 +1,6 @@
 # MYSQL高级
 
-* 一、Mysql的架构介绍
+* [一、Mysql的架构介绍](#一mysql的架构介绍)
   * [1、Mysql在Linux下的基本安装配置](#1mysql在linux下的基本安装配置)
   * [2、主要配置文件](#2主要配置文件)
   * [3、Mysql逻辑架构介绍](#3mysql逻辑架构介绍)
@@ -147,6 +147,8 @@ show variables like '%storage engine%';// 查看默认的存储引擎
 
 ## 二、索引优化分析
 
+### 1、性能下降分析
+
 需要优化的原因：性能低、执行时间太长、等待时间太长、SQL语句欠佳（连接查询）、索引失效、服务器参数设置不合理（缓冲、线程数）	。
 
 <div align="center"><img src="images/ad8_性能下降原因.png"></div><br>
@@ -171,21 +173,23 @@ SQL优化， 主要就是在优化索引
 *  相当于书的目录；
 *  index是帮助MYSQL高效获取数据的数据结构。索引是数据结构（树：B树(默认)、Hash树...）；
 
-> 索引的弊端：
->
-> * 索引本身很大， 可以存放在内存/硬盘（通常为 硬盘）
-> * 索引不是所有情况均适用： a.少量数据  b.频繁更新的字段   c.很少使用的字段
-> * 索引会降低增删改的效率（增删改  查）
->
-> 优势：
->
-> * 提高查询效率（降低IO使用率）
-> * 降低CPU使用率 （...order by age desc，因为 B树索引 本身就是一个 好排序的结构，因此在排序时  可以直接使用）
+### 2、索引优缺点
 
-索引分类:
+索引的弊端：
 
-* 主键索引：  不能重复。id    不能是null
-* 唯一索引  ：不能重复。id    可以是null
+ * 索引本身很大， 实际上索引也是一张表，该表保存了主键与索引字段，并指向实体表的记录，所以索引列也是要占用空间的；
+ * 索引不是所有情况均适用： a. 少量数据，b.频繁更新的字段，c.很少使用的字段
+ * 索引会降低增删改的效率；MySQL不仅要保存数据，还要保存一下索引文件每次更新添加了索引列的字段， 都会调整因为更新所带来的键值变化后的索引信息。
+
+ 优势：
+
+ * 提高查询效率（降低IO使用率）
+ * 降低CPU使用率 （...order by age desc，因为 B树索引 本身就是一个 好排序的结构，因此在排序时  可以直接使用）
+
+### 3、索引分类
+
+* 主键索引：  不能重复。**id  不能是null** (设定为主键后数据库会**自动建立索引**，innodb为聚簇索引)；
+* 唯一索引  ：不能重复。**id   可以是null**
 * 单值索引  ： 单列， 一个表可以多个单值索引。
 * 复合索引  ：多个列构成的索引 （相当于二级目录 ：  z: zhao）  (name,age)   (a,b,c,d,...,n)
 
@@ -193,25 +197,29 @@ SQL优化， 主要就是在优化索引
 
 ```mysql
 创建索引：
-	方式一：
-	create 索引类型  索引名  on 表(字段)
-	单值：
-	create index   dept_index on  tb(dept);
-	唯一：
-	create unique index  name_index on tb(name) ;
-	复合索引
-	create index dept_name_index on tb(dept,name);
+	方式一(创建)：
+        create 索引类型  索引名  on 表(字段)
+            单值(普通索引)：
+            create index dept_index on tb(dept);
+            唯一：
+            create unique index name_index on tb(name) ;
+            复合索引
+            create index dept_name_index on tb(dept,name);
 
-	方式二：alter table 表名 索引类型  索引名（字段）
-	
-	单值：
-	alter table tb add index dept_index(dept) ;
-	唯一：
-	alter table tb add unique index name_index(name);
-	复合索引
-	alter table tb add index dept_name_index(dept,name);
-
-	注意：如果一个字段是primary key，则改字段默认就是 主键索引	
+	方式二(添加)：
+		alter table 表名 索引类型  索引名（字段）
+            主键索引:
+            ALTER TABLE `table_name` ADD PRIMARY KEY ( `column` ) 
+            单值：
+            alter table tb add index dept_index(dept) ;
+            唯一：
+            alter table tb add unique index name_index(name);
+            复合索引
+            alter table tb add index dept_name_index(dept,name);
+            全文索引
+            ALTER TABLE `table_name` ADD FULLTEXT ( `column`) 
+            
+    注意：如果一个字段是primary key，则改字段默认就是 主键索引	
 ```
 
 删除索引
@@ -228,4 +236,166 @@ show index from 表名 ;
 show index from 表名 \G
 ```
 
+### 4、哪些情况需要建立索引，哪些不需要
+
+需要建立索引的情况: 
+
+* 主键自动建立唯一索引(`primary key`)；
+* 频繁作为查询条件的字段应该创建索引(`where` 后面的语句)；
+* 查询中与其它表关联的字段，**外键关系建立索引**；
+* 单键/组合索引的选择问题，`who？`(在高并发下倾向创建组合索引)；
+* 查询中排序的字段，排序字段若通过索引去访问将大大提高排序速度；
+* 查询中统计或者分组字段；(`group by....`)
+
+不需要建立索引的情况:
+
+* 表记录太少；
+* 经常增删改的表；
+* **Where条件里用不到的字段不创建索引**；
+* 数据重复且**分布平均**的表字段，因此应该只为最经常查询和最经常排序的数据列建立索引。 注意，如果某个数据列包含许多重复的内容，为它建立索引就没有太大的实际效果(有一个比值，不同的个数和总个数的比值越大越好)；
+
+### 5、Explain
+
+#### 1)、概念和作用
+
+概念: 使用EXPLAIN关键字可以模拟优化器执行SQL查询语句，从而知道MySQL是 如何处理你的SQL语句的。分析你的查询语句或是表结构的性能瓶颈；
+
+作用: 
+
+* 表的读取顺序；
+* 哪些索引可以使用；
+* 哪些索引被实际使用；
+* 数据读取操作的**操作类型**；
+* 表之间的引用；
+* 每张表有多少行被优化器查询；
+
+
+
+下面给出四张表，演示下面各个字段的作用：
+
+```mysql
+CREATE TABLE t1(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
+
+ CREATE TABLE t2(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
+
+ CREATE TABLE t3(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
+
+ CREATE TABLE t4(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
+
+
+INSERT INTO t1(content) VALUES(CONCAT('t1_',FLOOR(1+RAND()*1000)));
+
+INSERT INTO t2(content) VALUES(CONCAT('t2_',FLOOR(1+RAND()*1000)));
+
+INSERT INTO t3(content) VALUES(CONCAT('t3_',FLOOR(1+RAND()*1000)));
+
+INSERT INTO t4(content) VALUES(CONCAT('t4_',FLOOR(1+RAND()*1000)));
+```
+
+表如下:
+
+![ad12_.png](images/ad12_.png)
+
+#### 2)、id
+
+表示：**`select`查询的序列号**，包含一组数字，表示**查询中执行select子句或操作表的顺序**。
+
+分为三种情况:
+
+a)、第一种情况: **id相同，执行顺序由上至下**。
+
+![ad11_.png](images/ad11_.png)
+
+此例中 先执行where 后的第一条语句 `t1.id = t2.id` 通过 `t1.id` 关联 `t2.id` 。 而  t2.id 的结果建立在 `t2.id=t3.id` 的基础之上。
+
+b)、**id不同，如果是子查询，id的序号会递增，id值越大优先级越高，越先被执行**。
+
+c)、id相同不同，同时存在。
+
+id如果相同，可以认为是一组，从上往下顺序执行；在所有组中，id值越大，优先级越高，越先执行。
+
+衍生表 = `derived2 --> derived + 2` （2 表示由 id =2 的查询衍生出来的表。type 肯定是 all ，因为衍生的表没有建立索引）
+
+#### 3)、select_type
+
+![ad14_.png](images/ad14_.png)
+
+#### 4)、type
+
+
+
+![ad15_.png](images/ad15_.png)
+
+### 6、B+Tree与B-Tree 的区别
+
+结论在内存有限的情况下，B+TREE 永远比 B-TREE好。无限内存则后者方便。 
+
+* 1)、B-树的关键字和记录是放在一起的，叶子节点可以看作外部节点，不包含任何信息；**B+树叶子节点中只有关键字和指向下一个节点的索引**，记录只放在叶子节点中。(一次查询可能进行两次i/o操作)
+
+* 2)、在B-树中，越靠近根节点的记录查找时间越快，只要找到关键字即可确定记录的存在；而B+树中每个记录的查找时间基本是一样的，都需要从根节点走到叶子节点，而且在叶子节点中还要再比较关键字。从这个角度看B-树的性能好像要比B+树好，而在实际应用中却是B+树的性能要好些。因为B+树的非叶子节点不存放实际的数据，**这样每个节点可容纳的元素个数比B-树多**，树高比B-树小，这样带来的好处是减少磁盘访问次数。尽管B+树找到一个记录所需的比较次数要比B-树多，但是一次磁盘访问的时间相当于成百上千次内存比较的时间，因此实际中B+树的性能可能还会好些，**而且B+树的叶子节点使用指针连接在一起，方便顺序遍历**（例如查看一个目录下的所有文件，一个表中的所有记录等），这也是很多数据库和文件系统使用B+树的缘故。 
+
+思考：为什么说B+树比B-树更适合实际应用中操作系统的文件索引和数据库索引？ 
+
+1) B+树的磁盘读写代价更低 
+
+　　**B+树的内部结点并没有指向关键字具体信息的指针**。因此其内部结点相对B 树更小。如果把所有同一内部结点的关键字存放在同一盘块中，那么盘块所能容纳的关键字数量也越多。一次性读入内存中的需要查找的关键字也就越多。相对来说IO读写次数也就降低了。 
+
+2) B+树的查询效率更加稳定 
+
+　　由于非终结点并不是最终指向文件内容的结点，而只是叶子结点中关键字的索引。所以任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。
+
+> 索引建立成哪种索引类型？
+>
+> 根据数据引擎类型自动选择的索引类型
+>
+> * 除开 innodb 引擎主键默认为聚簇索引 外。 Innodb的索引都采用的 B+TREE。
+> * MyIsam 则都采用的 **B-TREE**索引。
+
+### 7、聚簇索引和非聚簇索引
+
+聚簇索引并不是一种单独的索引类型，而是一种数据存储方式。
+
+**术语‘聚簇’表示数据行和相邻的键值进错的存储在一起**。
+
+ 如下图，左侧的索引就是聚簇索引，因为**数据行在磁盘的排列和索引排序保持一致。**
+
+<div algin="center"> <img src="images/ad10_聚簇索引.png"></div><br>
+
+聚簇索引优点 : 按照聚簇索引排列顺序，查询显示一定范围数据的时候，**由于数据都是紧密相连，数据库不用从多个数据块中提取数据**，所以节省了大量的io操作。
+
+聚簇索引限制 : 
+
+- 对于mysql数据库目前只有innodb数据引擎支持聚簇索引，而MyIsam并不支持聚簇索引。
+- 由于*数据物理存储排序方式只能有一种*，所以每个Mysql的表只能有一个聚簇索引。一般情况下就是该表的**主键**。
+- **为了充分利用聚簇索引的聚簇的特性，所以innodb表的主键列尽量选用有序的顺序id，而不建议用无序的id，比如uuid这种。（参考聚簇索引优点。）**
+
+
+
+### 8、全文索引、Hash索引
+
+**全文索引** 
+
+* MyISAM 存储引擎支持全文索引，用于查找文本中的关键词，而不是直接比较是否相等。
+* 查找条件使用 MATCH AGAINST，而不是普通的 WHERE。
+* 全文索引使用倒排索引实现，它记录着关键词到其所在文档的映射。
+
+InnoDB 存储引擎在 MySQL 5.6.4 版本中也开始支持全文索引。
+
+```mysql
+不同于like方式的的查询：
+SELECT * FROM article WHERE content LIKE ‘%查询字符串%’;
+
+全文索引用match+against方式查询：(明显的提高查询效率。)
+SELECT * FROM article WHERE MATCH(title,content) AGAINST (‘查询字符串’);
+
+```
+
+**Hash索引**
+
+哈希索引能以 O(1) 时间进行查找，但是失去了有序性：
+
+- **无法用于排序与分组**；
+- 只支持精确查找，无法用于部分查找和范围查找。
+
+InnoDB 存储引擎有一个特殊的功能叫“自适应哈希索引”，当某个索引值被使用的非常频繁时，会在 B+Tree 索引之上再创建一个哈希索引，这样就让 B+Tree 索引具有哈希索引的一些优点，比如快速的哈希查找。
 
