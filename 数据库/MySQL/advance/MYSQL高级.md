@@ -314,8 +314,6 @@ key:
 >
 > 现在我创建了索引(username,age)，在查询数据的时候: `select username , age fromuser where username = Java' and age = 22`。要查词出的列在叶子节点都存在! 所以就不要回表。
 
-
-
 #### 6)、key_len、ref、rows
 
 key_len 
@@ -539,7 +537,87 @@ mysql> EXPLAIN SELECT * FROM class LEFT JOIN book ON class.card = book.card;
 
 ```
 
+所以总结:
 
+* 1、保证**被驱动表的join字段已经被索引**。被驱动表  join 后的表为被驱动表  (需要被查询)；
+* 2、left join 时，选择小表作为驱动表，大表作为被驱动表(建立索引的表)。但是 left join 时一定是左边是驱动表，右边是被驱动表。
+* 3、inner join 时，mysql会自己帮你把小结果集的表选为驱动表。
+* 4、**子查询尽量不要放在被驱动表**，有可能使用不到索引。
+
+#### 3)、实战三-三表
+
+![ad_22.png](images/ad_22.png)
+
+建立索引后的查询:
+
+```mysql
+mysql> alter table phone add index z(card);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table book add index y(card);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> explain select * from class left join book on class.card=book.card left join phone on book.card=phone.card;
++----+-------------+-------+------------+------+---------------+------+---------+--------------------+------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref                | rows | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+--------------------+------+----------+-------------+
+|  1 | SIMPLE      | class | NULL       | ALL  | NULL          | NULL | NULL    | NULL               |   20 |   100.00 | NULL        |
+|  1 | SIMPLE      | book  | NULL       | ref  | y             | y    | 4       | mysqlad.class.card |    1 |   100.00 | Using index |
+|  1 | SIMPLE      | phone | NULL       | ref  | z             | z    | 4       | mysqlad.book.card  |    1 |   100.00 | Using index |
++----+-------------+-------+------------+------+---------------+------+---------+--------------------+------+----------+-------------+
+3 rows in set, 1 warning (0.00 sec)
+
+```
+
+结论: 后2行的`type`都是`ref`且总`rows`优化很好，效果不错，因此索引最好设置在需要经常查询的字段中。
+
+### 7、索引失效(应该避免)
+
+表:
+
+<div align="center"> <img src="images/ad22_.png"></div><br>
+
+建表语句:
+
+```mysql
+CREATE TABLE staffs (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  NAME VARCHAR (24)  NULL DEFAULT '' COMMENT '姓名',
+  age INT NOT NULL DEFAULT 0 COMMENT '年龄',
+  pos VARCHAR (20) NOT NULL DEFAULT '' COMMENT '职位',
+  add_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '入职时间'
+) CHARSET utf8 COMMENT '员工记录表' ;
+
+INSERT INTO staffs(NAME,age,pos,add_time) VALUES('z3',22,'manager',NOW());
+INSERT INTO staffs(NAME,age,pos,add_time) VALUES('July',23,'dev',NOW());
+INSERT INTO staffs(NAME,age,pos,add_time) VALUES('2000',23,'dev',NOW());
+INSERT INTO staffs(NAME,age,pos,add_time) VALUES(null,23,'dev',NOW());
+
+ALTER TABLE staffs ADD INDEX idx_staffs_nameAgePos(name, age, pos);
+```
+
+#### 1)、全值匹配我最爱
+
+索引  idx_staffs_nameAgePos 建立索引时 以 name ， age ，pos 的顺序建立的。全值匹配表示 按顺序匹配的
+
+```mysql
+EXPLAIN SELECT * FROM staffs WHERE NAME = 'July';
+
+EXPLAIN SELECT * FROM staffs WHERE NAME = 'July' AND age = 25;
+
+EXPLAIN SELECT * FROM staffs WHERE NAME = 'July' AND age = 25 AND pos = 'dev';
+
+```
+
+结果:
+
+![ad23_.png](images/ad23_.png)
+
+
+
+ 
 
 ### 6、B+Tree与B-Tree 的区别
 
