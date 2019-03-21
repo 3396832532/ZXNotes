@@ -256,6 +256,8 @@ show index from 表名 \G
 
 ### 5、Explain
 
+具体可以参考这篇博客: [https://blog.csdn.net/drdongshiye/article/details/84546264](#https://blog.csdn.net/drdongshiye/article/details/84546264)。
+
 #### 1)、概念和作用
 
 概念: 使用EXPLAIN关键字可以模拟优化器执行SQL查询语句，从而知道MySQL是 如何处理你的SQL语句的。分析你的查询语句或是表结构的性能瓶颈；
@@ -269,33 +271,6 @@ show index from 表名 \G
 * 表之间的引用；
 * 每张表有多少行被优化器查询；
 
-
-
-下面给出四张表，演示下面各个字段的作用：
-
-```mysql
-CREATE TABLE t1(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
-
- CREATE TABLE t2(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
-
- CREATE TABLE t3(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
-
- CREATE TABLE t4(id INT(10) AUTO_INCREMENT, content  VARCHAR(100) NULL ,  PRIMARY KEY (id));
-
-
-INSERT INTO t1(content) VALUES(CONCAT('t1_',FLOOR(1+RAND()*1000)));
-
-INSERT INTO t2(content) VALUES(CONCAT('t2_',FLOOR(1+RAND()*1000)));
-
-INSERT INTO t3(content) VALUES(CONCAT('t3_',FLOOR(1+RAND()*1000)));
-
-INSERT INTO t4(content) VALUES(CONCAT('t4_',FLOOR(1+RAND()*1000)));
-```
-
-表如下:
-
-![ad12_.png](images/ad12_.png)
-
 #### 2)、id
 
 表示：**`select`查询的序列号**，包含一组数字，表示**查询中执行select子句或操作表的顺序**。
@@ -303,8 +278,6 @@ INSERT INTO t4(content) VALUES(CONCAT('t4_',FLOOR(1+RAND()*1000)));
 分为三种情况:
 
 a)、第一种情况: **id相同，执行顺序由上至下**。
-
-![ad11_.png](images/ad11_.png)
 
 此例中 先执行where 后的第一条语句 `t1.id = t2.id` 通过 `t1.id` 关联 `t2.id` 。 而  t2.id 的结果建立在 `t2.id=t3.id` 的基础之上。
 
@@ -322,9 +295,251 @@ id如果相同，可以认为是一组，从上往下顺序执行；在所有组
 
 #### 4)、type
 
-
-
 ![ad15_.png](images/ad15_.png)
+
+#### 5)、possible_keys和key
+
+possible_keys : 显示可能应用在这张表中的索引，一个或多个。 查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询实际使用。
+
+key:
+
+* 实际使用的索引。如果为NULL，则没有使用索引；
+* 查询中若使用了**覆盖索引**，则该索引和查询的select字段重叠；
+
+> 覆盖索引:
+>
+> 如果一个索引包含 (或者说覆盖) 所有需要查询的字段的值，我们就称之为“覆盖索引”。我们知道在InnoDB存情引擎中，如果不是主键索引，叶子节点存储的是主键+列值。最终还是要"回表"，也就是要通过主键再查找一次。这样就会比较慢。
+>
+> 覆盖索引就是把要查询出的列和索引是对应的，不做回表操作!  
+>
+> 现在我创建了索引(username,age)，在查询数据的时候: `select username , age fromuser where username = Java' and age = 22`。要查词出的列在叶子节点都存在! 所以就不要回表。
+
+
+
+#### 6)、key_len、ref、rows
+
+key_len 
+
+* 表示索引中使用的字节数，可通过该列计算查询中使用的索引的长度。
+* **key_len字段能够帮你检查是否充分的利用上了索引**。
+
+ref:
+
+* **显示索引的哪一列被使用了，如果可能的话，是一个常数**。哪些列或常量被用于查找索引列上的值；
+
+rows:
+
+* **rows列显示MySQL认为它执行查询时必须检查的行数**。
+* 越少越好；
+
+#### 7)、Extra
+
+![ad16_5104.png](images/ad16_5104.png)
+
+#### 8)、检测
+
+![ad17_.png](images/ad17_.png)
+
+答案:
+
+![ad18_.png](images/ad18_.png)
+
+### 6、SQL优化实战
+
+#### 1)、实战一-单表
+
+建表SQL:
+
+```mysql
+CREATE TABLE IF NOT EXISTS `article`(
+
+`id` INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+`author_id` INT(10) UNSIGNED NOT NULL,
+`category_id` INT(10) UNSIGNED NOT NULL,
+`views` INT(10) UNSIGNED NOT NULL,
+`comments` INT(10) UNSIGNED NOT NULL,
+`title` VARBINARY(255) NOT NULL,
+`content` TEXT NOT NULL
+);
+
+INSERT INTO `article` (author_id,category_id,views,comments,title,content) VALUES
+(1,1,1,1,1,1),
+(2,2,2,2,2,2),
+(1,1,3,3,3,3); 
+```
+
+表中内容:
+
+<div algin="center"><img  src="images/ad19_.png"></div><br>
+
+实战一:
+
+查询 `categoryid` 为1 且 `comments` 大于 1 的情况下，views 最多的文章。
+
+![ad_20.png](images/ad_20.png) 
+
+完整代码:
+
+```mysql
+mysql> select id, author_id from article where category_id = 1 AND comments > 1 ORDER BY views DESC LIMIT 1;
++----+-----------+
+| id | author_id |
++----+-----------+
+|  3 |         1 |
++----+-----------+
+1 row in set (0.01 sec)
+
+mysql> explain select id, author_id from article where category_id = 1 AND comments > 1 ORDER BY views DESC LIMIT 1\G
+^[[A*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: article
+   partitions: NULL
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 3
+     filtered: 33.33
+        Extra: Using where; Using filesort
+1 row in set, 1 warning (0.00 sec)
+
+```
+
+第一版优化，建立索引:
+
+![ad20_.png](images/ad20_.png)
+
+代码:
+
+```mysql
+mysql> create index idx_article_ccv on article(category_id, comments, views);
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> explain select id, author_id from article where category_id = 1 AND comments > 1 ORDER BY views DESC LIMIT 1\G
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: article
+   partitions: NULL
+         type: range
+possible_keys: idx_article_ccv
+          key: idx_article_ccv
+      key_len: 8
+          ref: NULL
+         rows: 1
+     filtered: 100.00
+        Extra: Using index condition; Using filesort
+1 row in set, 1 warning (0.02 sec)
+
+```
+
+结论:
+type 变成了 range,这是可以忍受的。但是 extra 里使用 Using filesort 仍是无法接受的。
+但是我们已经建立了索引为啥没用呢? 这是因为按照 BTree 索引的工作原理:
+先排序 category_id， 如果遇到相同的 category_id 则再排序 comments,如果遇到相同的 comments 则再排序 views。当 comments 字段在联合素引里处于中间位置时，因comments > 1 条件是一个范围值(所谓 range)，
+MySQL 无法利用索引再对后面的 views 部分进行检索,即 range 类型查询字段后面的索引无效。
+
+第二版: 先删除上面那个不是很好的索引，然后只建立`(category_id, views)`之间的索引，而没有`comments`:
+
+```mysql
+mysql> drop index idx_article_ccv on article;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create index article_cv on article(category_id, views);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> explain select id, author_id from article where category_id = 1 AND comments > 1 ORDER BY views DESC LIMIT 1\G
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: article
+   partitions: NULL
+         type: ref
+possible_keys: article_cv
+          key: article_cv
+      key_len: 4
+          ref: const
+         rows: 2
+     filtered: 33.33
+        Extra: Using where
+1 row in set, 1 warning (0.00 sec)
+
+```
+
+结论: 可以看到type变成了`ref`，Extra中的`Using fileSort`也消失了，结果非常理想。
+
+#### 2)、实战二-双表
+
+两个表:
+
+<div align="center"> <img src="images/ad21_.png"></div><br>
+
+使用
+
+```mysql
+mysql> EXPLAIN SELECT * FROM class LEFT JOIN book ON class.card = book.card;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | class | NULL       | ALL  | NULL          | NULL | NULL    | NULL |   20 |   100.00 | NULL                                               |
+|  1 | SIMPLE      | book  | NULL       | ALL  | NULL          | NULL | NULL    | NULL |   20 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0.04 sec)
+
+```
+
+结论：type 有All，不是很好。
+
+可以看到第二行的 type 变为了 ref,rows 也变成了优化比较明显。
+
+这是由左连接特性决定的。LEFT JOIN 条件用于确定如何从右表搜索行,左边一定都有,**所以右边是我们的关键点,一定需要建立索引**。(如果将索引建立在左边，不会有这么好)。
+
+```mysql
+mysql> ALTER TABLE `book` ADD INDEX Y ( `card`);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> EXPLAIN SELECT * FROM class LEFT JOIN book ON class.card = book.card;
++----+-------------+-------+------------+------+---------------+------+---------+--------------------+------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref                | rows | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+--------------------+------+----------+-------------+
+|  1 | SIMPLE      | class | NULL       | ALL  | NULL          | NULL | NULL    | NULL               |   20 |   100.00 | NULL        |
+|  1 | SIMPLE      | book  | NULL       | ref  | Y             | Y    | 4       | mysqlad.class.card |    1 |   100.00 | Using index |
++----+-------------+-------+------------+------+---------------+------+---------+--------------------+------+----------+-------------+
+2 rows in set, 1 warning (0.00 sec)
+
+```
+
+上面的索引建立在右边的表(`book`)。下面如果我们建立在`class`表，并使用左连接，就不会有这么好的效果，如下:
+
+```mysql
+mysql> DROP INDEX Y ON book;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE class ADD INDEX X (card);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> EXPLAIN SELECT * FROM class LEFT JOIN book ON class.card = book.card;
++----+-------------+-------+------------+-------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+| id | select_type | table | partitions | type  | possible_keys | key  | key_len | ref  | rows | filtered | Extra                                              |
++----+-------------+-------+------------+-------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+|  1 | SIMPLE      | class | NULL       | index | NULL          | X    | 4       | NULL |   20 |   100.00 | Using index                                        |
+|  1 | SIMPLE      | book  | NULL       | ALL   | NULL          | NULL | NULL    | NULL |   20 |   100.00 | Using where; Using join buffer (Block Nested Loop) |
++----+-------------+-------+------------+-------+---------------+------+---------+------+------+----------+----------------------------------------------------+
+2 rows in set, 1 warning (0.00 sec)
+
+
+```
+
+
 
 ### 6、B+Tree与B-Tree 的区别
 
