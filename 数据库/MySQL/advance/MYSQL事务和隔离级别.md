@@ -40,7 +40,7 @@
 
 **T1 修改一个数据，T2 随后读取这个数据。如果 T1 撤销了这次修改，那么 T2 读取的数据是脏数据**。
 
-<div algin="center"><img src="images/shiwu_3.png"></div><br>
+<div align="center"><img src="images/shiwu_3.png"></div><br>
 
 ### 3、不可重复读(Non-Repeatable Reads)
 
