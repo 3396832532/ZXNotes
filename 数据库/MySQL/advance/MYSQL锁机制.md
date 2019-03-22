@@ -81,7 +81,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 | seession_1                                                   | session_2                                                    |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 获得表mylock的WRITE锁定， 当前session对锁定表的查询+更新+插入操作都可以执行：<br>![ad39_.png](images/ad39_.png) | 其他session对锁定表的查询被阻塞，<br>需要等待锁被释放：<br><div align="center><img src="images/ad40_.png" width="350"></div><br> 在锁表前，如果session2有数据缓存，<br>锁表以后，在锁住的表不发生改变的情况下<br>session2可以读出缓存数据，一旦数据发生改变，缓存将失效，操作将被阻塞住。 |
+| 获得表mylock的WRITE锁定， 当前session对锁定表的查询+更新+插入操作都可以执行：<br>![ad39_.png](images/ad39_.png) | 其他session对锁定表的查询被阻塞，<br>需要等待锁被释放：<br><div align="center"><img src="images/ad40_.png" width="350"></div><br> 在锁表前，如果session2有数据缓存，<br>锁表以后，在锁住的表不发生改变的情况下<br>session2可以读出缓存数据，一旦数据发生改变，缓存将失效，操作将被阻塞住。 |
 | 释放锁<br>mysql> unlock tables;                              | session_2立即被释放得到锁<br>![ad41_.png](images/ad41_.png)  |
 
 通过上面的实验，可以发现：
