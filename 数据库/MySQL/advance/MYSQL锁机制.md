@@ -1,8 +1,14 @@
 # MYSQL锁机制
 
+* [一、锁概述和分类](#一锁概述和分类)
+* [二、表锁](#二表锁)
+* [三、行锁](#三行锁)
+
+## 一、锁概述和分类
+
 ![ad42_.png](images/ad42_.png)
 
-## 一、表锁
+## 二、表锁
 
 偏向MyISAM存储引擎，开销小，加锁快；无死锁；锁定粒度大，发生锁冲突的概率最高,并发度最低。
 
@@ -75,7 +81,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 | seession_1                                                   | session_2                                                    |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 获得表mylock的WRITE锁定， 当前session对锁定表的查询+更新+插入操作都可以执行：<br>![ad39_.png](images/ad39_.png) | 其他session对锁定表的查询被阻塞，需要等待锁被释放：<br>![ad40_.png](images/ad40_.png)<br> 在锁表前，如果session2有数据缓存，锁表以后，在锁住的表不发生改变的情况下session2可以读出缓存数据，一旦数据发生改变，缓存将失效，操作将被阻塞住。 |
+| 获得表mylock的WRITE锁定， 当前session对锁定表的查询+更新+插入操作都可以执行：<br>![ad39_.png](images/ad39_.png) | 其他session对锁定表的查询被阻塞，<br>需要等待锁被释放：<br><div align="center><img src="images/ad40_.png" width="350"></div><br> 在锁表前，如果session2有数据缓存，<br>锁表以后，在锁住的表不发生改变的情况下<br>session2可以读出缓存数据，一旦数据发生改变，缓存将失效，操作将被阻塞住。 |
 | 释放锁<br>mysql> unlock tables;                              | session_2立即被释放得到锁<br>![ad41_.png](images/ad41_.png)  |
 
 通过上面的实验，可以发现：
@@ -112,5 +118,55 @@ MySQL的表级锁有两种模式：
 
 `Table_locks_waited`: 出现表级锁定争用而发生等待的次数(不能立即获取锁的次数，每等待一次锁值加1)，此值高则说明存在着较严重的表级锁争用情况;
 
-总结: MyISAM的读写锁调度是写优先，这也是MyISAM不适合做写为主表的引擎。 因为写锁后，其他线程不能做任何操作，大量的更新会使查询很难得到锁，从而造成永远阻塞。
+总结: MyISAM的读写锁调度是**写**优先，这也是MyISAM不适合做写为主表的引擎。 因为写锁后，其他线程不能做任何操作，大量的更新会使查询很难得到锁，从而造成永远阻塞。
 
+## 三、行锁
+
+特点:
+
+* 偏向InnoDB存储引擎，开销大，加锁慢；
+* 会出现死锁；
+* 锁定粒度最小，发生锁冲突的概率最低，并发度也最高。
+
+> InnoDB与MyISAM的最大不同有两点：**一是支持事务（TRANSACTION）；二是采用了行级锁**。
+
+演示案例，建表SQL:
+
+```mysql
+create table test_innodb_lock (a int(11),b varchar(16))engine=innodb;
+
+insert into test_innodb_lock values(1,'b2');
+insert into test_innodb_lock values(3,'3');
+insert into test_innodb_lock values(4,'4000');
+insert into test_innodb_lock values(5,'5000');
+insert into test_innodb_lock values(6,'6000');
+insert into test_innodb_lock values(7,'7000');
+insert into test_innodb_lock values(8,'8000');
+insert into test_innodb_lock values(9,'9000');
+insert into test_innodb_lock values(1,'b1');
+
+# 创建两个索引
+create index test_innodb_a_ind on test_innodb_lock(a);
+create index test_innodb_lock_b_ind on test_innodb_lock(b);
+
+# 查询结果
+mysql> select * from test_innodb_lock;
++------+------+
+| a    | b    |
++------+------+
+|    1 | b2   |
+|    3 | 3    |
+|    4 | 4000 |
+|    5 | 5000 |
+|    6 | 6000 |
+|    7 | 7000 |
+|    8 | 8000 |
+|    9 | 9000 |
+|    1 | b1   |
++------+------+
+9 rows in set (0.00 sec)
+```
+
+测试: **读己之所写**。
+
+![ad44_.png](images/ad44_.png)

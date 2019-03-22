@@ -91,7 +91,11 @@ DNS （ Domain Name System ）服务是和 HTTP 协议一样位于应用层的�
 
 ### 4)、各种协议与Http协议的关系
 
-![](images/http/7_.png)![](images/http/8_.png)
+
+
+<div align="center"><img src="images/http/7_.png"></div><br>
+
+<div align="center"><img src="images/http/8_.png"></div><br>
 
 ### 5、URI和URL
 
