@@ -5,8 +5,6 @@
 * [三、Redis数据类型](#三redis数据类型)
 * [四、Redis.conf配置文件](#四redisconf配置文件)
 
-
-
 ## 一、NOSQL基本简介
 
 ### 1、演变
@@ -635,6 +633,7 @@ OK
 （5）volatile-ttl：移除那些TTL值最小的key，即那些最近要过期的key。
 
 （6）noeviction：不进行移除。针对写操作，只是返回错误信息。
+
 
 
 
