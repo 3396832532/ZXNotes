@@ -57,8 +57,8 @@
 
 ## MYSQL
 
-* [事务和隔离级别](#https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.md)
-* [索引](#https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E7%B4%A2%E5%BC%95.md)
+* [事务和隔离级别](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.md)
+* [索引](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E7%B4%A2%E5%BC%95.md)
 * [锁机制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E9%94%81%E6%9C%BA%E5%88%B6.md)
 * [主从复制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.md)
 
