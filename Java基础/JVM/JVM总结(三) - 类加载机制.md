@@ -16,6 +16,14 @@
   * [4、理解ClassLoader](#4理解classloader)
   * [5、自定义类加载器](#4自定义类加载器)
 
+
+
+
+
+一张总结图（来自牛客网）
+
+![j46.png](images/j46.png)
+
 ## 一、类加载时机
 
 类从被加载到虚拟机内存中开始，到旬载出内存为止，它的整个生命周期包括 : 加载 (Loading)、验 证(Verification)、准 备 (Preparation)、解 析 (Resolution)、初始化(Initialization)、使用(Using) 和卸载 (Unloading) 7 个阶段。其中验证、准备、解析 3 个部分统称为连接 (Linking)，这 7 个阶段的发生顺序如图 所示。
