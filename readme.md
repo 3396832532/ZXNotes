@@ -8,6 +8,8 @@
 
 * [JVM](Java基础/JVM)
 * [反射](Java基础/反射)
+* [多线程并发](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80(%E4%BA%8C).md)
+* 
 
 ## 刷题
 
@@ -23,7 +25,9 @@
 
 ## 数据结构与算法
 
-把个人认为写的还行的文章放在下面吧:
+[**数据结构和算法**](https://github.com/ZXZxin/ZXBlog/tree/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95)
+
+个人认为较好的文章:
 
 * [**二分查找的总结-6种变形**](数据结构算法/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
 * [**各种排序算法的总结-10多种**](数据结构算法/Algorithm/Sort/各种排序算法总结(全面).md)
@@ -52,13 +56,44 @@
 * [工厂方法](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/05%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.md)
 * [抽象工厂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/06%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md)
 
+## MYSQL
+
+* [事务和隔离级别](#https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.md)
+* [索引](#https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E7%B4%A2%E5%BC%95.md)
+* [锁机制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E9%94%81%E6%9C%BA%E5%88%B6.md)
+* [主从复制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.md)
+
+## Redis
+
+* [事务和消息订阅](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85.md)
+* [Redis持久化](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96.md)
+* [主从复制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.md)
+
 ## 操作系统
 
 [操作系统](计算机基础/操作系统)
+
+* [Linux基础](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/Linux%E7%9F%A5%E8%AF%86%E5%B0%8F%E6%80%BB%E7%BB%93.md)
+* [Vim常用总结](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%80%BB%E7%BB%93.md)
 
 ## 计算机网络
 
 [计算机网络](计算机基础/计算机网络)
 
+* [计算机网络协议](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%8D%8F%E8%AE%AE.md)
+* [物理层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_2_%E7%89%A9%E7%90%86%E5%B1%82.md)
+* [数据链路层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_3_%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82.md)
+* [网络层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_4_%E7%BD%91%E7%BB%9C%E5%B1%82.md)
+* [传输层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_5_%E8%BF%90%E8%BE%93%E5%B1%82.md)
+* [应用层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_6_%E5%BA%94%E7%94%A8%E5%B1%82.md)
 
+## 工具
 
+Git
+
+* [Git基础和入门](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Git/Git%E5%9F%BA%E7%A1%80%E5%92%8C%E5%85%A5%E9%97%A8.md)
+* [Git分支和版本回退](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Git/Git%E5%88%86%E6%94%AF%E5%92%8C%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80.md)
+
+Docker
+
+* [Docker基础](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Docker/Docker.md)
