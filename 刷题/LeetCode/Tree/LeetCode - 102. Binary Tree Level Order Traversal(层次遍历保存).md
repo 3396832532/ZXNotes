@@ -9,7 +9,7 @@
 #### 题目
 ![在这里插入图片描述](images/102_t.png)
 
-这个题目和 [LeetCode - 637](https://blog.csdn.net/zxzxzx0119/article/details/81738741)基本一样，这个可以说更简单。
+这个题目和 [LeetCode - 637](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20637.%20Average%20of%20Levels%20in%20Binary%20Tree(%E6%B1%82%E6%A0%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B1%82%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC).md)基本一样，这个可以说更简单。
 
 ### 非递归(BFS)
 

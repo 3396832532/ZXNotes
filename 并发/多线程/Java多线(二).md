@@ -65,6 +65,12 @@ public class T {
 }
 ```
 
+此作用域内的synchronized锁 ，可以防止多个线程同时访问这个对象的synchronized方法。
+
+**并且一个对象有多个synchronized方法，只要一个线程访问了其中的一个synchronized方法，其它线程不能同时访问这个对象中任何一个synchronized方法**。
+
+ **此外，不同对象实例的synchronized方法是不相干预的。也就是说，其它线程可以同时访问此类下的另一个对象实例中的synchronized方法**；
+
 ### 3、对this对象的static方法加锁
 
 ```java
@@ -90,6 +96,13 @@ public class T {
 }
 ```
 
+此作用域下，可以防止多个线程同时访问这个类中的synchronized方法。也就是说此种修饰，可以对此类的所有对象实例起作用。
+
+> 注意一点，synchronized关键字是不能继承的，也就是说，基类的方法synchronized fun(){} 在继承类中并不自动是synchronized fun(){}，而是变成了fun(){}。继承时，需要显式的指定它的某个方法为synchronized方法。
+
+
+
+
 ### 4、加锁之后的安全演示
 
 ```java
@@ -114,6 +127,43 @@ public class T implements Runnable {
 ```
 
 如果不加`synchronized`，程序可能不是按照`10、9、8、7、6`的顺序输出的。
+
+初学者容易犯错的地方:
+
+```java
+public class ErrorSyncInstance implements Runnable{
+
+    static int num = 0;
+
+    public synchronized void add(){
+        num++;
+    }
+
+    @Override
+    public void run() {
+        for(int i = 0; i < 1000000; i++)
+            add();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        // 注意下面都new了一个对象，所以是错误的，只能new一个
+        Thread t1 = new Thread(new ErrorSyncInstance());
+        Thread t2 = new Thread(new ErrorSyncInstance());
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+        System.out.println(num); // 某一次输出是 1993484, 不是2000000
+    }
+}
+```
+重点:
+
+**虽然我们使用synchronized修饰了add()。但是却new了两个不同的实例对象，这也就意味着存在着两个不同的实例对象锁，因此t1和t2都会进入各自的对象锁，也就是说t1和t2线程使用的是不同的锁，因此线程安全是无法保证的**。
+
+解决办法是可以将`add（）`方法写成静态的，这样`synchronized`锁住的就是整个类，而不是实例。
 
 ### 5、同步方法和非同步方法可以被两个线程同时调用
 

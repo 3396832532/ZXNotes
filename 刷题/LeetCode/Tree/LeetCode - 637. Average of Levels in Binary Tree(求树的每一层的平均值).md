@@ -47,7 +47,7 @@ class Solution {
 
 ***
 ### DFS(前序和中序递归)
-递归的做法就是 记录一个层数`level`，用两个`List`保存合以及个数，每次遍历到这一层的时候：
+递归的做法就是 记录一个层数`level`，用两个`List`保存和以及个数，每次遍历到这一层的时候：
 
  - 或者是这一层第一次来，那就加上第一次`val`，次数变为`1`；
  - 或者不是第一次，不是第一层就累加这一层的和以及个数；
@@ -73,7 +73,7 @@ class Solution {
         return res;
     }
 
-    private static void pre(TreeNode root, int level, List<Double> sum, List<Integer> count) {
+    private void pre(TreeNode root, int level, List<Double> sum, List<Integer> count) {
         if (root == null) return;
         if (level < sum.size()) { //回去的
             sum.set(level, sum.get(level) + root.val);
@@ -104,7 +104,7 @@ class Solution {
         return res;
     }
 
-    private static void in(TreeNode root, int level, List<Double> sum, List<Integer> count) {
+    private void in(TreeNode root, int level, List<Double> sum, List<Integer> count) {
         if (root == null)
             return;
         if (level >= sum.size()) {
@@ -133,7 +133,7 @@ class Solution {
         return res;
     }
 
-    private static void pos(TreeNode root, int level, List<Double> sum, List<Integer> count) {
+    private void pos(TreeNode root, int level, List<Double> sum, List<Integer> count) {
         if (root == null) return;
         if (level >= sum.size()) {
             sum.add(0.0);
