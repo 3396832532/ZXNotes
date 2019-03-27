@@ -26,7 +26,7 @@
 
 [**数据结构和算法**](https://github.com/ZXZxin/ZXBlog/tree/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95)
 
-相关学习和总结文章
+部分文章：
 
 * [**二分查找的总结-6种变形**](数据结构算法/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
 * [**各种排序算法的总结-10多种**](数据结构算法/Algorithm/Sort/各种排序算法总结(全面).md)
