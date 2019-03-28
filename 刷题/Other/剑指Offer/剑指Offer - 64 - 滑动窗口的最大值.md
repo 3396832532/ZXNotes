@@ -12,7 +12,7 @@
 
 也做过。。。
 
-在[LintCode - 362](../LintCode/TwoPointer/LintCode - 362. Sliding Window Maximum滑动窗口的最大值.md)。具体看那篇博客，详细介绍了单调队列的使用。
+在[LintCode - 362](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/Other/LintCode/TwoPointer/LintCode%20-%20362.%20Sliding%20Window%20Maximum%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC.md)。具体看那篇博客，详细介绍了单调队列的使用。
 
 ```java
 import java.util.*;
