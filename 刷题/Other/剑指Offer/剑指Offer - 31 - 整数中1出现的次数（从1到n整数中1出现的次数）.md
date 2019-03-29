@@ -10,35 +10,7 @@
 
 ### 解析
 
-这题的解法非常多。很好的一道思维+拓展题。
-
-#### 1、常规思路
-
-这种方法就是每个数都求一下。显然不是好方法。
-
-```java
-public class Solution {
-    
-    public int NumberOf1Between1AndN_Solution(int n) {
-        int res = 0;
-        for (int i = 1; i <= n; i++)
-            res += numbers(i);
-        return res;
-    }
-
-    private int numbers(int n) {
-        int sum = 0;
-        while (n > 0) {
-            if (n % 10 == 1)
-                sum += 1;
-            n /= 10;
-        }
-        return sum;
-    }
-}
-```
-
-#### 2、
+这题的解法非常多。很好的一道思维+拓展题。自己好好琢磨吧。
 
 ```java
 public class Solution {
@@ -125,8 +97,6 @@ public class Solution {
 }
 ```
 
-#### 3、
-
 ```java
 public class Solution {
     public int NumberOf1Between1AndN_Solution(int n) {
@@ -149,8 +119,6 @@ public class Solution {
     }
 }
 ```
-
-#### 4、
 
 ```java
 public class Solution {
@@ -178,8 +146,6 @@ public class Solution {
     }
 }
 ```
-
-#### 5、
 
 ```java
 public class Solution {
