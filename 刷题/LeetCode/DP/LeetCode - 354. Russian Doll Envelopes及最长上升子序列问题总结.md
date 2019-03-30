@@ -132,53 +132,57 @@ class Solution {
 ```
 ***
 ### 最长上升子序列NlogN法
- 这个方法是使用一个额外的数组`ends[]`，`dp[i]`记录的还是以`arr[i]`结尾的最长递增子序列，`ends[i]`记录的是<font color = red>在所有长度为`i`的递增序列中，最小的结尾数是`ends[i]`</font>。初始时整形变量`right = 1`，`ends[1...right]`为有效区，`ends[right+1...arr.length]`为无效区，然后使用<font color = red>二分</font>的方式在`ends`数组中查找。
+ 这个方法是使用一个额外的数组`ends[]`，`dp[i]`记录的还是以`arr[i]`结尾的最长递增子序列，`ends[i]`记录的是在所有长度为`i`的递增序列中，最小的结尾数是`ends[i]`。初始时整形变量`right = 1`，`ends[1...right]`为有效区，`ends[right+1...arr.length]`为无效区，然后使用二分的方式在`ends`数组中查找。
 
 
  * `dp[0]  = 1`，`ends[1] = arr[0]`表示的是，在所有长度为`1`的递增序列中，最小结尾是`arr[0]`，此时只有一个数；
- * <font color = red> `right`变量记录`ends`数组的有效范围，最后返回的就是`right`(`end`的有效范围)；
- * 遍历到某个数`arr[i]`的时候，在`ends[]`数组中二分查找<font color = red>最左边的>arr[i]的数</font>(二分查找看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82670761#t4))
-		* 如果有某个位置`l`，即`arr[l] > arr[i]`，说明`l`长度的最小结尾可以更新为`arr[i]`，且`dp[i] = right`(目前的最长长度)；
-		* 否则，如果没有找到(此时`l = right+1`)，则说明有效区长度要扩大`1`，且`end[right+1] = arr[i]`，表示长度为`right + 1`的最小结尾暂时是`arr[i]`，此时`dp[i] = right + 1`；
+ *  `right`变量记录`ends`数组的有效范围，最后返回的就是`right`(`end`的有效范围)；
+ * 遍历到某个数`arr[i]`的时候，在`ends[]`数组中二分查找最左边的`>=arr[i]`的数(二分查找看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82670761#t4))
+
+     * 如果有某个位置`l`，即`arr[l] > arr[i]`，说明`l`长度的最小结尾可以更新为`arr[i]`，且`dp[i] = right`(目前的最长长度)；
+     * 否则，如果没有找到(此时`l = right+1`)，则说明有效区长度要扩大`1`，且`end[right+1] = arr[i]`，表示长度为`right + 1`的最小结尾暂时是`arr[i]`，此时`dp[i] = right + 1`；
  - 一直遍历整个数组，最后的最长长度就是有效区的长度(`right`); 
 
 ```java
+
 /**
-* dp[i]记录的还是以arr[i]结尾的最长递增子序列
-* ends数组中 ends[i]表示的是在所有长度为i的最长递增子序列中最小结尾是什么
-*/
-class Solution { 
-    public int lengthOfLIS(int[] nums){
-        if(nums == null || nums.length == 0)
+ * dp[i]记录的还是以arr[i]结尾的最长递增子序列
+ * ends数组中 ends[i]表示的是在所有长度为i的最长递增子序列中最小结尾是什么
+ */
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        if (nums == null || nums.length == 0)
             return 0;
         int[] dp = new int[nums.length];
-        int[] ends = new int[nums.length+1];
+        int[] ends = new int[nums.length + 1];
         dp[0] = 1;
         ends[1] = nums[0];
         int right = 1;  // [1~right]为有效区　ends数组是有序的(升序), right是右边界
-        int l = 0,m = 0,r = 0;
-        for(int i = 1; i < nums.length; i++){
-            l = 1;
-            r = right;
-            while(l <= r){
-                m = l + (r-l)/2;
-                if(nums[i] > ends[m]){
-                    l = m+1;
-                }else {
-                    r = m-1;
-                }
+        int L, mid, R;
+        for (int i = 1; i < nums.length; i++) {
+            L = 1;
+            R = right;
+            // 找到第一个>=arr[i]的，返回结果是 L
+            while (L <= R) {
+                mid = L + (R - L) / 2;
+                if (ends[mid] >= nums[i])
+                    R = mid - 1;
+                else
+                    L = mid + 1;
             }
-            if(l == right+1){ //没有找到　arr[i]是最长的, 说明以arr[i]以arr[i]结尾的最长递增子序列=ends区有效长度+1
-                dp[i] = right+1;
-                ends[right+1] = nums[i]; // 扩大ends数组
+            // 说明以arr[i]以arr[i]结尾的最长递增子序列=ends区有效长度+1
+            if (L > right) { //没有找到arr[i]是最长的 (因为下标从1开始，所以判断是>right), 
+                dp[i] = right + 1;
+                ends[right + 1] = nums[i]; // 扩大ends数组
                 right += 1;  //扩大有效区
-            }else {  // 找到了arr[l] > arr[i], 更新end[l] = arr[i] ,表示l长度的最长子序列结尾可以更新为arr[i]
+            } else {  // 找到了arr[l] > arr[i], 更新end[l] = arr[i] ,表示l长度的最长子序列结尾可以更新为arr[i]
                 dp[i] = right; // dp[i]还是没有加长
-                ends[l] = nums[i];
+                ends[L] = nums[i];
             }
         }
         return right;
-    } 
+    }
 }
 ```
 一个测试用例: 
