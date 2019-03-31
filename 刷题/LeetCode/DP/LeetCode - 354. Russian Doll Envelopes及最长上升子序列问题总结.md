@@ -176,7 +176,7 @@ class Solution {
                 dp[i] = right + 1;
                 ends[right + 1] = nums[i]; // 扩大ends数组
                 right += 1;  //扩大有效区
-            } else {  // 找到了arr[l] > arr[i], 更新end[l] = arr[i] ,表示l长度的最长子序列结尾可以更新为arr[i]
+            } else {  // 找到了arr[l] >= arr[i], 更新end[l] = arr[i] ,表示l长度的最长子序列结尾可以更新为arr[i]
                 dp[i] = right; // dp[i]还是没有加长
                 ends[L] = nums[i];
             }
@@ -229,8 +229,6 @@ class Solution {
             }
         }
     }
-
-    
     
     public int maxEnvelopes(int[][] envelopes) {
         if(envelopes == null || envelopes.length == 0 || envelopes[0].length == 0)
@@ -243,20 +241,20 @@ class Solution {
         int[] ends = new int[envelopes.length+1];
         ends[1] = nodes[0].b;
         int right = 1;
-        int l = 0, m = 0, r = 0;
+        int l, m, r;
         int res = 1;
         for(int i = 1; i < nodes.length; i++){
             l = 1;
             r = right;
             while(l <= r){
                 m = l + (r-l)/2;
-                if(nodes[i].b > ends[m]){
-                    l = m + 1;
-                }else {
+                if(ends[m] >= nodes[i].b){
                     r = m - 1;
+                }else {
+                    l = m + 1;
                 }
             }
-            if(l == right+1){
+            if(l > right){
                 ends[right+1] = nodes[i].b;
                 right += 1;
             }else {
