@@ -4,6 +4,8 @@
 
 所以我在这里总结了一些(30个)常见面试和ACM**入门级别**的算法模板（其实也不只是ACM要求，大部分模板都可以在`LeetCode`中找到对应的题型），有一部分也是面试时候面试官经常要你手撕的经典算法。例如排序、二叉树非递归遍历、二分、大数等。
 
+
+
 **可能这些算法有些对初学者有点难度，但是不要慌～...～，我在每个算法代码的上方都给了一个链接，每个算法几乎都有很详细的解释(大部分带图，有些是我写的，有些是我看到的很好的文章)，大家如果不懂的可以点链接进行学习，另外有些模板配套带了一个题目，可以验证算法正确性。最后，祝大家在笔试面试手撕算法顺利。。^_^**。
 
 当然这些只是我们刷题的基础和模板，**更多的还是需要我们多多刷题**，锻炼逻辑思维和感觉～...～。
@@ -13,6 +15,92 @@
 语言用的Java，但是大部分代码和C++基本上没啥很大区别～...～。
 
 **如果觉得总结的还不错的话，给个`star`哦*╯3╰ **。
+
+## 目录
+
+* [一、排序](#一排序)
+* [二、二分](#二二分)
+* [三、二叉树非递归遍历](#三二叉树非递归遍历)
+* [四、01背包](#四01背包)
+* [五、最长递增子序列](#五最长递增子序列)
+* [六、最长公共子序列](#六最长公共子序列)
+* [七、最长公共子串](#七最长公共子串)
+* [八、大数加法](#八大数加法)
+* [九、大数乘法](#九大数乘法)
+* [十、大数阶乘](#十大数阶乘)
+* [十一、全排列](#十一全排列)
+* [十二、子集](#十二子集)
+* [十三、N皇后](#十三n皇后)
+* [十四、并查集](#十四并查集)
+* [十五、树状数组](#十五树状数组)
+* [十六、线段树](#十六线段树)
+* [十七、字典树](#十七字典树)
+* [十八、单调栈](#十八单调栈)
+* [十九、单调队列](#十九单调队列)
+* [二十、KMP](#二十kmp)
+* [二十一、Manacher算法](#二十一manacher算法)
+* [二十二、拓扑排序](#二十二拓扑排序)
+* [二十三、最小生成树](#二十三最小生成树)
+* [二十四、最短路](#二十四最短路)
+* [二十五、欧拉回路](#二十五欧拉回路)
+* [二十六、GCD和LCM](#二十六gcd和lcm)
+* [二十七、素数筛法](#二十七素数筛法)
+* [二十八、唯一分解定理](#二十八唯一分解定理)
+* [二十九、乘法快速幂](#二十九乘法快速幂)
+* [三十、矩阵快速幂](#三十矩阵快速幂)
+
+## Java快速输入
+
+先给一个干货，可能有些题用Java会超时（很少），下面是[Petr](https://en.wikipedia.org/wiki/Petr_Mitrichev)刷题时的模板，一般用了这个就不会出现C++能过Java不能过的情况了。
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    static class FR {
+        BufferedReader br;
+        StringTokenizer tk;
+
+        FR(InputStream stream) {
+            br = new BufferedReader(new InputStreamReader(stream), 32768);
+            tk = null;
+        }
+
+        String next() {
+            while (tk == null || !tk.hasMoreElements()) {
+                try {
+                    tk = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return tk.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
+
+    static void solve(InputStream stream, PrintWriter out) {
+        FR in = new FR(stream);
+
+        //  start code.....
+
+    }
+
+    public static void main(String[] args) {
+        OutputStream os = System.out;
+        InputStream is = System.in;
+        PrintWriter out = new PrintWriter(os);
+        solve(is, out);
+        out.close(); // 不关闭就没有输出
+    }
+}
+```
+
 
 ## 一、排序
 
