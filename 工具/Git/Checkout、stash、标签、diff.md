@@ -1,4 +1,4 @@
-# Checkout进阶与stash
+# Checkout、stash、标签、diff
 
 ## 一、gitcheckout和git reset --的区别
 
@@ -67,3 +67,37 @@
 下面使用`stash apply`和`stash drop`命令:
 
 ![3_12.png](images/3_12.png)
+
+## 四、标签
+
+主要是`git tag`这个标签。
+
+简单使用: 
+
+![3_13.png](images/3_13.png)
+
+## 五、diff
+
+这里先介绍一下`git blame`，作用: **找到上一次修改的人和详细信息**
+
+然后在介绍`git diff`之前，先看`linux`系统中内置的`diff`命令。
+
+![3_14.png](images/3_14.png)
+
+`git diff`有四种差别性比较:
+
+* 工作区和暂存区的差别，命令`git diff`；
+* 工作区和某一次提交的差别；
+  * 最新的提交和工作区的差别，`git diff HEAD`。
+  * 特定`commit-id`和工作区的差别，`git diff commit-id`。
+* 暂存区和某一个提交的差别；
+  * 最新的提交和暂存区之间的差别，`git diff --cached`。
+* 两个提交之间的差别；
+
+先看第一个: 工作区和暂存区的差别:
+
+![3_15.png](images/3_15.png)
+
+最近一次提交和工作区之间的差别以及最新的提交和暂存区之间的差别。
+
+![3_16.png](images/3_16.png)
