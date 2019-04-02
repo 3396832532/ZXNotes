@@ -17,8 +17,6 @@
 
 ![1_14.png](images/1_14.png)
 
-
-
 注意当我们在`dev`中更改文件之后，一定要先`add`和`commit`，不然那样就会和`master`内容同步了，我们需要的是在`dev`中更改之后，在没有进行`merge`之前，`master`不会和`dev`相同: 看下面的演示：
 
 ![1_21.png](images/1_21.png)
