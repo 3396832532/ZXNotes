@@ -24,8 +24,6 @@
 
 ## 二、协作
 
-
-
 ![4_2.png](images/4_2.png)
 
 然后我们需要再调用一次`git push`来同步远程，这样`id`就会相同了。
@@ -54,3 +52,40 @@
 
 
 <div align="center"><img src="images/4_6.png"></div><br>
+
+
+
+## 三、Git协作实战
+
+
+
+模拟环境:
+
+* 有两个人协作，一个张三，一个李四，张三的仓库就是我们之前用的那个`gitlearn`，李四是直接从张三的远程仓库`git clone`下来的；
+* 然后我们再将张三的`gitlearn`和李四的`gitlearn2`都设置一下`user.name`和`user.email`；
+
+李四先`git clone`下来:
+
+![4_7.png](images/4_7.png)
+
+然后将张三和李四的用户名和密码配置一下:
+
+![4_8.png](images/4_8.png)
+
+> 一般在`git push`之前都要进行`git pull`操作。
+>
+> `git pull = git fetch + git merge`。
+
+`git fetch`会直接将代码拉到`origin/master`，但是和当前本地的`master`不会冲突。但是`git merge`就会产生冲突。
+
+
+
+关于远程`git`分支，远程(**注意不是本地分支**)通常有如下几种: 
+
+* 1、`master`分支: 很稳定的分支；
+* 2、`test`分支: 测试分支；
+* 3、`develop`分支:  变化最频繁的分支；
+* 4、`hotfix`分支: 紧急bug需要修复；
+
+
+
