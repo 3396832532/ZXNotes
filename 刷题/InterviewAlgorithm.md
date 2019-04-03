@@ -207,7 +207,7 @@ static void binaryInsertSort(int[] arr) {
 static void shellSort(int[] arr) {
     for (int g = arr.length; g > 0; g /= 2) { // 增量序列 gap
         for (int end = g; end < arr.length; end++) { // 每一个组的结束元素, 从数组第gap个元素开始
-            // 每组没做插入排序
+            // 每组做插入排序
             int key = arr[end], i;
             for (i = end - g; i >= 0 && key < arr[i]; i -= g) arr[i + g] = arr[i];
             arr[i + g] = key;
@@ -249,7 +249,7 @@ static int[] partition(int[] arr, int L, int R) {
         }
     }
     swap(arr, L, less);
-    // 返回相等的两个下标，　less位置是我最后交换过来的花粉值，more位置是>的，所以返回more-1
+    // 返回相等的两个下标，　less位置是我最后交换过来的划分值，more位置是>的，所以返回more-1
     return new int[]{less, more - 1};
 }
 ```
@@ -332,7 +332,7 @@ static void siftDown(int[] arr, int i, int heapSize) {
 }
 ```
 
-第二种方式，使用heapfiy的优化，只需要使用`siftDown`过程即可。
+第二种方式，使用`heapfiy`的优化，只需要使用`siftDown`过程即可。
 
 ```java
 // 注意这里是size+1,因为这个不是交换了最后一个，所以要考虑arr[size]，下面不要考虑arr[size]
@@ -353,7 +353,7 @@ static void heapSort2(int[] arr) {
 其中`siftDown`过程也可以使用递归的写法: 
 
 ```java
-static void siftDown(int[] arr, int i, int heapSize) { //从A[i] 开始往下调整
+static void siftDown(int[] arr, int i, int heapSize) { //从arr[i] 开始往下调整
     int L = 2 * i + 1;
     int R = 2 * i + 2;
     int maxIdx = i;
