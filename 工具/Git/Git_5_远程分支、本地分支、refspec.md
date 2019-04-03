@@ -2,21 +2,19 @@
 
 ## 一、本地分支和远程分支
 
-别名的使用:
+### 1、别名的使用
+
+先说一下别名的使用:
 
 `git config --global alias.别名 要设置的命令` (`--globab`代表配置整个用户访问，如果是`--local`则是仓库的范围)
 
 ![4_19.png](images/4_19.png)
 
-> `git push`其实是一个简写，完整的写法是`git push origin src:dest`，`origin`是远程的别名，`src`是本地分支的名字，`dest`是远程分支的别名。
->
-> `origin`就是一个别名，它是在你clone一个托管在Github上代码库时，git为你默认创建的指向这个远程代码库的**标签**， origin指向的是repository，master只是这个repository中默认创建的第一个branch。
+### 2、本地分支和远程分支的对应关系
 
 下面开始演示本地分支和远程分支的一些操作:
 
 我们知道，分支名字实际上是一个提交的`id`，当我们使用`git checkout -b newbranch`的时候，这个`newbranch`指向的是当前创建的提交点。(当前分支和`newbranch`指向同一个`commit`点)
-
-
 
 我们还是使用两个人协作的场景，张三在`gitlearn`仓库中，李四在`gitlearn2`仓库中:
 
@@ -43,5 +41,17 @@
 下面在李四这边再将`test`分支也和远程的`test`分支对应起来。
 
 <div align="center"><img src="images/5_4.png"></div><br>
+
+下面在张三这边再演示`git checkout -b 本地分支 origin/远程分支`的替代品，我们可以使用`git checkout --track origin/test`：
+
+<div align="center"><img src="images/5_5.png"></div><br>
+
+
+### 2、删除远程分支
+
+
+> `git push`其实是一个简写，完整的写法是`git push origin src:dest`，`origin`是远程的别名，`src`是本地分支的名字，`dest`是远程分支的别名。
+>
+> `origin`就是一个别名，它是在你clone一个托管在Github上代码库时，git为你默认创建的指向这个远程代码库的**标签**， origin指向的是repository，master只是这个repository中默认创建的第一个branch。
 
 ## 二、refspec
