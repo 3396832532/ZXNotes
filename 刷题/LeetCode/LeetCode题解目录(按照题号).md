@@ -2,7 +2,7 @@
 
 LeetCode解析列表: **带图、详细解释、多种方法**。目前项目正在初期，后面会不断完善。
 
-| 题号 | 题名和解题链接ddddddddddddddddddddddddddddddddddddddddd | 分类 | 难度 |
+| 题号 | 题名和解题链接 | 分类 | 难度 |
 | ---- | ----------------------------------------------------------------------- | --------- | ------------- |
 | 1    | [Two Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%201.%20Two%20Sum(Hash).md) | Hash | Easy |
 | 2    |                                                              |      |      |
