@@ -10,6 +10,8 @@
 
 > 可以将`git branch new_branch`和`git checkout new_branch`两个命令合并成一个命令:
 > `git checkout -b new_branch`。这个命令的意思就是创建一个分支并且切换到这个分支上。
+>
+> 本地分支改名: `git branch -m 原分支名 新分支名`
 
 ### 2、合并分支merge
 

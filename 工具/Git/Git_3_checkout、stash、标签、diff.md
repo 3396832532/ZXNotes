@@ -1,4 +1,4 @@
-# Checkout、stash、标签、diff
+# checkout、stash、标签、diff
 
 ## 一、gitcheckout和git reset --的区别
 

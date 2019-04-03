@@ -101,9 +101,9 @@ Git
 
 * [Git基础和入门](工具/Git/Git_1_基础和入门.md)
 * [Git分支和版本回退](工具/Git/Git_2_分支和版本回退.md)
-* [Checkout、stash、标签、diff](工具/Git/Git_3_Checkout、stash、标签、diff.md)
+* [checkout、stash、标签、diff](工具/Git/Git_3_checkout、stash、标签、diff.md)
 * [Git远程协作和分支](工具/Git/Git_4_远程协作和分支.md)
-* [Refspec与远程标签](工具/Git/Git_5_refspec与远程标签.md)
+* [远程分支、本地分支、refspec](工具/Git/Git_5_远程分支、本地分支、refspec.md)
 
 Docker
 
