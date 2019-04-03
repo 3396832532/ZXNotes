@@ -43,6 +43,10 @@ class Solution {
 
 再顺便将`{nums[i], i}`放入哈希表，因为当前放入的元素**后面还会回过头来检查这个元素是否是目标元素**。
 
+图: 
+
+<div align="center"><img src="images/xin_1_2.png"></div><br>
+
 ```java
 class Solution {
     public int[] twoSum(int[] nums, int target) {
@@ -58,4 +62,5 @@ class Solution {
 }
 ```
 
-> **还可以使用`Hash`表解决类似的[进阶问题](https://blog.csdn.net/zxzxzx0119/article/details/81604489)**<font>
+
+> 类似的[进阶问题](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/Other/%E6%9D%82%E9%A2%98/%E5%AD%90%E6%95%B0%E7%BB%84%E7%B4%AF%E5%8A%A0%E5%92%8C%E4%B8%BAaim(%E5%B0%8F%E4%BA%8E%E7%AD%89%E4%BA%8Eaim)%E7%9A%84%E4%B8%89%E4%B8%AA%E9%97%AE%E9%A2%98.md)。
