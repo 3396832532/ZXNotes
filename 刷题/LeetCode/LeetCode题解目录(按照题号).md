@@ -4,7 +4,7 @@ LeetCode解析列表: **带图、详细解释、多种方法**。目前项目正
 
 | 题号和题名            | 详细解题链接                                                 | 分类 |
 | --------------------- | ------------------------------------------------------------ | ---- |
-| LeetCode - 1. Two Sum | [解题链接](Data Structure/Map/LeetCode - 1. Two Sum(Hash).md) | Hash |
+| LeetCode - 1. Two Sum | [解题链接](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%201.%20Two%20Sum(Hash).md) | Hash |
 |                       |                                                              |      |
 |                       |                                                              |      |
 |                       |                                                              |      |
