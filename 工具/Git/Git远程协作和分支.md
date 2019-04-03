@@ -57,8 +57,6 @@
 
 ## 三、Git协作实战
 
-
-
 模拟环境:
 
 * 有两个人协作，一个张三，一个李四，张三的仓库就是我们之前用的那个`gitlearn`，李四是直接从张三的远程仓库`git clone`下来的；
@@ -71,6 +69,28 @@
 然后将张三和李四的用户名和密码配置一下:
 
 ![4_8.png](images/4_8.png)
+
+现在我们在`gitlearn`添加一个`c.txt`文件，然后`git push`到远程仓库，然后在`gitlearn2`这边输入`git remote show origin`来查看区别:
+
+![4_9.png](images/4_9.png)
+
+> `remotes/origin/HEAD -> origin/master` 啥意思呢？  
+>
+> 在clone完成之后，Git 会自动为你将此远程仓库命名为`origin`（`origin`只相当于一个别名，运行`git remote –v`或者查看`.git/config`可以看到origin的含义），并下载其中所有的数据，建立一个指向它的master 分支的指针，我们用`(远程仓库名)/(分支名)` 这样的形式表示远程分支，所以`origin/master`指向的是一个`remote branch`（从那个branch我们clone数据到本地）
+>
+> 也就是`origin/master`是用来追踪远程分支的。
+
+然后我们在`gitlearn2`里面执行`git pull`，将远程的最新更新拉去过来。查看最新的更新信息。
+
+![4_10.png](images/4_10.png)
+
+上图的过程:
+
+![4_11.png](images/4_11.png)
+
+下面展示会发生冲突的情况:
+
+
 
 > 一般在`git push`之前都要进行`git pull`操作。
 >
@@ -86,6 +106,5 @@
 * 2、`test`分支: 测试分支；
 * 3、`develop`分支:  变化最频繁的分支；
 * 4、`hotfix`分支: 紧急bug需要修复；
-
 
 

@@ -14,8 +14,6 @@
 
 [刷题](刷题/)
 
-下面刷的题目是不包括我之前ACM写的题(都用Java实现)。
-
 * Codeforces目前写了70道左右；
 * LeetCode目前写了150道左右；
 * 其他OJ累计100道写了左右；
@@ -103,6 +101,8 @@ Git
 
 * [Git基础和入门](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Git/Git%E5%9F%BA%E7%A1%80%E5%92%8C%E5%85%A5%E9%97%A8.md)
 * [Git分支和版本回退](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Git/Git%E5%88%86%E6%94%AF%E5%92%8C%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80.md)
+* [Checkout、stash、标签、diff](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Git/Checkout%E3%80%81stash%E3%80%81%E6%A0%87%E7%AD%BE%E3%80%81diff.md)
+* [Git远程协作和分支](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Git/Git%E8%BF%9C%E7%A8%8B%E5%8D%8F%E4%BD%9C%E5%92%8C%E5%88%86%E6%94%AF.md)
 
 Docker
 
