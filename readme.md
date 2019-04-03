@@ -9,7 +9,7 @@
 * [JVM](Java基础/JVM)
 * [异常](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%BC%82%E5%B8%B8/Java%E5%BC%82%E5%B8%B8%E5%B0%8F%E6%80%BB%E7%BB%93.md)
 * [泛型](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93.md)
-* [反射](Java基础/反射)
+* [反射](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/%E5%8F%8D%E5%B0%84%E5%9F%BA%E7%A1%80.md)
 * [多线程并发](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF(%E4%BA%8C).md)
 
 ## 刷题
