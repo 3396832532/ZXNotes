@@ -46,12 +46,42 @@
 
 <div align="center"><img src="images/5_5.png"></div><br>
 
+### 3、删除远程分支
 
-### 2、删除远程分支
+先说一下`git push`完整写法:
 
-
-> `git push`其实是一个简写，完整的写法是`git push origin src:dest`，`origin`是远程的别名，`src`是本地分支的名字，`dest`是远程分支的别名。
+ `git push`其实是一个简写，完整的写法是`git push origin src:dest`，`origin`是远程的别名，`src`是本地分支的名字，`dest`是远程分支的别名。
 >
 > `origin`就是一个别名，它是在你clone一个托管在Github上代码库时，git为你默认创建的指向这个远程代码库的**标签**， origin指向的是repository，master只是这个repository中默认创建的第一个branch。
+
+`git`的老版本中只有一个删除命令，比如我们要删除`develop`分支: `git push origin :develop`：
+
+比如我们在李四这边的`gitlearn2`中删除`develop远程分支(不是本地的,本地的使用 git branch -d )`
+
+下面分别看删除本地分支和远程分支的操作: 
+
+<div align="center"><img src="images/5_6.png"></div><br>
+
+查看远程分支，develop分支已经被删除了。
+
+<div align="center"><img src="images/5_7.png"></div><br>
+
+远程分支删除了之后能不能恢复呢？当然可以，加入git版本库的一切东西都可以恢复!!
+
+我们可以使用之前将某个本地分支对应到远程分支的`--set-upstream`来创建对应的远程分支:
+
+<div align="center"><img src="images/5_9.png"></div><br>
+
+**另外，可以使用git最新提供的删除远程分支的命令: `git push origin --delete 分支名`来删除，这样更加直观**。
+
+且，我们这里可以用第二种恢复(建立)远程分支的方法，**这种方法可以指定本地分支和远程分支不同的名字**。比如本地分支叫`develop`，远程分支叫`develop2`，命令就是`git push --set-upstream origin develop:develop2`:
+
+演示:
+
+![5_10.png](images/5_10.png)
+
+但是这里出现了一个问题，上图我也说了，这种**本地分支和远程分支**不同的情况，会导致不能直接`git push`，所以`git`还是希望我们尽量将本地分支和远程分支保持同样的名字。
+
+
 
 ## 二、refspec
