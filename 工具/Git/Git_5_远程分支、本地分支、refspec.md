@@ -82,6 +82,21 @@
 
 但是这里出现了一个问题，上图我也说了，这种**本地分支和远程分支**不同的情况，会导致不能直接`git push`，所以`git`还是希望我们尽量将本地分支和远程分支保持同样的名字。
 
+所以解决问题的方式有两种，上面也提示了，使用`git push origin HEAD:develop2 `、或者`git push origin develop`。   
 
+> **`HEAD`永远指向分支，而分支指向的是具体的提交点**。
 
-## 二、refspec
+下面演示这两种方法: (最后演示了一个`git push`的完整操作语法: `git push origin src:dest`)
+
+![5_11.png](images/5_11.png)
+
+因为我们使用`git push origin develop`，此时又会在远程创建一个`develop`分支，所以我们看到远程有了三个分支:
+
+![5_12.png](images/5_12.png)
+
+### 4、重命名远程分支
+
+`git`没有直接提供重命名的方式，我们需要先删除需要重命名的远程分支，然后再重新将之前的连接起来：
+
+![5_13.png](images/5_13.png)
+
