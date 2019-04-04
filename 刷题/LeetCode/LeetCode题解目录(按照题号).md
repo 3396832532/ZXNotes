@@ -10,7 +10,7 @@
 | 2    | [Add Two Numbers](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%202.%20Add%20Two%20Numbers.md) | List | Medium |
 | 3   | [Longest Substring Without Repeating Characters]( https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%203.%20Longest%20Substring%20Without%20Repeating%20Characters(%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3).md) | 滑动窗口 | Medium |
 | 4   | [Median of Two Sorted Arrays](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/BinarySearch/LeetCode%20-%204.%20Median%20of%20Two%20Sorted%20Arrays(%E4%BA%8C%E5%88%86).md) | 二分 | Hard |
-| 5 | [Longest Palindromic Substring]( https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/Manacher/LeetCode%20-%205.%20Longest%20Palindromic%20Substring(%E4%B8%89%E7%A7%8D%E8%A7%A3%E6%B3%95%E5%8F%8AManacher%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3).md) | Dp、Manacher | Medium |
+| 5 | [Longest Palindromic Substring]( https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/Manacher/LeetCode%20-%205.%20Longest%20Palindromic%20Substring(%E4%B8%89%E7%A7%8D%E8%A7%A3%E6%B3%95%E5%8F%8AManacher%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3).md) | DP、Manacher | Medium |
 | 6   |                                                              |      |      |
 | 7   |                                                              |      |      |
 | 8 |                                                              |      |      |
