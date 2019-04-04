@@ -110,7 +110,7 @@ class Solution {
 
 ```java
 // 优化的滑动窗口
-// 其中使用last[c]保存字符c上一次出现的位置, 用于在右边界发现重复字符时, 快速移动左边界
+// 其中使用index[c]保存字符c上一次出现的位置, 用于在右边界发现重复字符时, 快速移动左边界
 // 使用这种方法, 时间复杂度依然为O(n), 但是只需要动r指针, 实际上对整个s只遍历了一次
 class Solution {
     public int lengthOfLongestSubstring(String s) {
