@@ -61,7 +61,7 @@ class Solution {
 
 能画出二维`dp`表，能搞清计算顺序就`ok`。
 
-<div align="center"><img src="images/5_s_2.png"></dvi><br>
+<div align="center"><img src="images/5_s_2.png"></div><br>
 
 代码: 
 
