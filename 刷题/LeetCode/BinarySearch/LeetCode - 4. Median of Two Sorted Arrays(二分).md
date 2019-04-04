@@ -1,11 +1,11 @@
-﻿## LeetCode - 4. Median of Two Sorted Arrays(二分)
+# LeetCode - 4. Median of Two Sorted Arrays(二分)
 #### [题目链接](https://leetcode.com/problems/median-of-two-sorted-arrays/)
 
 > https://leetcode.com/problems/median-of-two-sorted-arrays/
 
 #### 题目
 ![在这里插入图片描述](images/4_t.png)
-#### 解析
+## 解析
 假设两个数组的中间位置为`k`，其中` k=(n1 + n2 + 1)/2`，只要找到中间位置这个值，也就找到了中位数，所以我们可以把问题转换成查找两个数组中第 `k` 大的数。
 
 * 如果是总数是偶数，那么如下图，我们的中位数肯定是<font color = red>**(C<sub>k-1</sub> + C<sub>K</sub>) / 2</font>**；而<font color = red>**C<sub>k-1</sub> = max(A<sub>m<sub>1</sub> - 1</sub>，B<sub>m<sub>2</sub> - 1</sub>)**</font>，<font color = red>**C<sub>k</sub> = min(A<sub>m<sub>1</sub> </sub>，B<sub>m<sub>2</sub></sub>)**</font>；
