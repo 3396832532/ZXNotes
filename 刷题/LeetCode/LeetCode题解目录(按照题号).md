@@ -1,4 +1,4 @@
-# LeetCode题解目录
+# LeetCode Solution
 
 **带图、详细解释、多种方法**。
 
