@@ -6,7 +6,7 @@ LeetCode解析列表: **带图、详细解释、多种方法**。目前项目正
 | ---- | ----------------------------------------------------------------------- | --------- | ------------- |
 | 1    | [Two Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%201.%20Two%20Sum(Hash).md) | Hash | Easy |
 | 2    | [Add Two Numbers](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%202.%20Add%20Two%20Numbers.md) | List | Medium |
-| 3   |                                                              |      |      |
+| 3   | [Longest Substring Without Repeating Characters]( https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%203.%20Longest%20Substring%20Without%20Repeating%20Characters(%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3).md) | 滑动窗口 | Medium |
 | 4   |                                                              |      |      |
 | 5 |                                                              |      |      |
 | 6   |                                                              |      |      |
