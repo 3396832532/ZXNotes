@@ -16,7 +16,7 @@
 | 6   | [ZigZag Conversion](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%206.%20ZigZag%20Conversion(N%E5%AD%97%E5%9E%8B%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6).md) | 模拟 | Medium |
 | 7   | [Reverse Integer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%207.%20Reverse%20Integer.md) | 模拟 | Easy |
 | 8 | [String to Integer(atoi)](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%208.%20String%20to%20Integer(atoi).md) | 模拟 | Medium |
-| 9 |                                                              |      |      |
+| 9 | [Palindrome Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%209.%20Palindrome%20Number.md) | 模拟 | Medium |
 | 10 |                                                              |      |      |
 | 11 |                                                              |      |      |
 | 12 |                                                              |      |      |
