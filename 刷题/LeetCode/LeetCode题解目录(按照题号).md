@@ -14,7 +14,7 @@
 | 4   | [Median of Two Sorted Arrays](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/BinarySearch/LeetCode%20-%204.%20Median%20of%20Two%20Sorted%20Arrays(%E4%BA%8C%E5%88%86).md) | 二分 | Hard |
 | 5 | [Longest Palindromic Substring]( https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/Manacher/LeetCode%20-%205.%20Longest%20Palindromic%20Substring(%E4%B8%89%E7%A7%8D%E8%A7%A3%E6%B3%95%E5%8F%8AManacher%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3).md) | DP、Manacher | Medium |
 | 6   | [ZigZag Conversion](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%206.%20ZigZag%20Conversion(N%E5%AD%97%E5%9E%8B%E6%89%93%E5%8D%B0%E5%AD%97%E7%AC%A6).md) | 模拟 | Medium |
-| 7   |                                                              |      |      |
+| 7   | [Reverse Integer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%207.%20Reverse%20Integer.md) | 模拟 | Easy |
 | 8 |                                                              |      |      |
 | 9 |                                                              |      |      |
 | 10 |                                                              |      |      |
