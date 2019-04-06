@@ -44,7 +44,7 @@
 | 31 | [Next Permutation](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%2031.%20Next%20Permutation(%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97).md) | 模拟 | Medium |
 | 32 |                                                              |      |      |
 | 33 |                                                              |      |      |
-| 34 | [Find First and Last Position of Element in Sorted Array](test) |      | Medium |
+| 34 | [Find First and Last Position of Element in Sorted Array]() | 二分 | Medium |
 | 35 |                                                              |      |      |
 | 36 |                                                              |      |      |
 | 37 | [Sudoku Solver](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2037.%20Sudoku%20Solver%20(DFS%E3%80%81%E5%9B%9E%E6%BA%AF).md) | Search | Hard |
