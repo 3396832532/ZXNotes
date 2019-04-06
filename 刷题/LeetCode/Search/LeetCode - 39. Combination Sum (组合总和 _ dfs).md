@@ -1,4 +1,4 @@
-﻿### LeetCode - 39. Combination Sum (组合总和 | dfs)
+# LeetCode - 39. Combination Sum (组合总和 | dfs)
 
 #### [题目链接](https://leetcode.com/problems/combination-sum/)
 

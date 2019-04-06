@@ -1,12 +1,12 @@
 
-## LeetCode - 40. Combination Sum II && LeetCode - 216. Combination Sum III  (DFS)
-* [LeetCode - 40. Combination Sum II](#leetcode---40.-combination-sum-ii)
+# LeetCode - 40. Combination Sum II && LeetCode - 216. Combination Sum III  (DFS)
+* [LeetCode - 40. Combination Sum II](#leetcode---40-combination-sum-ii)
 * [LeetCode - 216. Combination Sum III](#leetcode---216-combination-sum-III)
 
 ***
 **做这题之前可以先做[LeetCode - 39.Combination Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2039.%20Combination%20Sum%20(%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%20_%20dfs).md)，并知道`dfs`求解组合数的模板**。
 
-### LeetCode - 40. Combination Sum II
+## LeetCode - 40. Combination Sum II
 #### [题目链接](https://leetcode.com/problems/combination-sum-ii/)
 
 > https://leetcode.com/problems/combination-sum-ii/
@@ -103,7 +103,7 @@ class Solution {
 
 ***
 
-### LeetCode - 216. Combination Sum III
+## LeetCode - 216. Combination Sum III
 #### [题目链接](https://leetcode.com/problems/combination-sum-iii/)
 
 > https://leetcode.com/problems/combination-sum-iii/
