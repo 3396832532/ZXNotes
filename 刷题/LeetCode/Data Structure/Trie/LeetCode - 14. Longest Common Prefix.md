@@ -121,5 +121,96 @@ class Solution {
 }
 ```
 
-### 4、二分
+### 4、Trie
+
+这题也可以用字典树来做。
+
+用字典树其实很明显：
+
+* 我们只需要找到第一个分叉的点就可以了（前面的都可以答案）；
+* 但是分叉之前的点要确保没有已经结束了的（某个字符串还没到分叉点就结束了）；
+
+看图：
+
+<div align="center"><img src="images/14_s4.png"></div><br>
+
+代码：
+
+```java
+class Solution {
+
+    class Trie {
+        class Node {
+            int size;
+            boolean end;
+            Node[] next;
+
+            public Node() {
+                size = 0;
+                end = false;
+                next = new Node[256];
+
+            }
+        }
+
+        Node root;
+
+        public Trie() {
+            root = new Node();
+        }
+
+        void insert(String s) {
+            if (s == null) return;
+            Node cur = root;
+            for (int i = 0; i < s.length(); i++) {
+                int index = s.charAt(i) - 'a';
+                if (cur.next[index] == null) {
+                    cur.size++;
+                    cur.next[index] = new Node();
+                }
+                cur = cur.next[index];
+            }
+            cur.end = true;
+        }
+
+        String lcp() { 
+            StringBuilder sb = new StringBuilder();
+            Node cur = root;
+            while (cur.size == 1 && !cur.end) { // 必须只有一个孩子，而且不能是结束点
+                boolean ok = false;
+                for (int i = 0; i < cur.next.length; i++) {
+                    if (cur.next[i] != null) {
+                        sb.append((char) ('a' + i));
+                        cur = cur.next[i];
+                        ok = true;
+                        break;
+                    }
+                }
+                if (!ok) break;
+            }
+            return sb.toString();
+        }
+    }
+
+
+    public String longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0) return "";
+        Trie trie = new Trie();
+        for (String s : strs) {
+            if (s.equals("")) return "";
+            trie.insert(s);
+        }
+        return trie.lcp();
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(new Solution().longestCommonPrefix(
+//        new String[]{"flower","flow","flight"}
+//        new String[]{"","b"}
+                new String[]{"aaa", "aa"}
+        ));
+    }
+}
+```
 
