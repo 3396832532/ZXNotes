@@ -56,8 +56,8 @@
 | 43 |                                                              |      |      |
 | 44 |                                                              |      |      |
 | 45 |                                                              |      |      |
-| 46 |                                                              |      |      |
-| 47 |                                                              |      |      |
+| 46 | [Permutations](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2046.%20Permutations(%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95).md) | Search | Medium |
+| 47 | [Permuations II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2047.%20Permutations%20II(%E4%B8%8D%E9%87%8D%E5%A4%8D%E5%85%A8%E6%8E%92%E5%88%97)(%E5%9B%9B%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AE%9E%E7%8E%B0).md) | Search | Medium |
 | 48 |                                                              |      |      |
 | 49 |                                                              |      |      |
 | 50 |                                                              |      |      |
