@@ -7,15 +7,21 @@
 #### 题目
 ![在这里插入图片描述](images/39_t.png)
 
-#### 解析
+## 解析
 
 
-**先看通过`dfs`求解排列数和组合数的代码。**
+**先看通过`dfs`求解排列数和组合数的代码**。
 
-①`dfs`求解<font color = blue>排列数
+①`dfs`求解排列数
 
 之前也做过一个求排列数的例题。
-[**LeetCode-46. Permutations用dfs排列数**](https://blog.csdn.net/zxzxzx0119/article/details/81452269#t4)
+[**LeetCode-46. Permutations用dfs排列数**](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2046.%20Permutations(%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95).md)
+
+图:
+
+![39_ss.png](images/39_ss.png)
+
+代码: 
 
 
 ```java
@@ -67,12 +73,14 @@ public class Main{
 [[2, 1], [2, 3], [1, 2], [1, 3], [3, 2], [3, 1]]
 ```
 
-②`dfs`求解<font color = blue>组合数
+②`dfs`求解组合数
 
-<font color = red>注意这里的`d`和`cur`意义不同:
+注意这里的`d`和`cur`意义不同:
 
-* <font color = green>`d`表示的还是层数，当`d == n`时，就达到了`n`个数，就可以将中间结果加入结果集；
+* `d`表示的还是层数，当`d == n`时，就达到了`n`个数，就可以将中间结果加入结果集；
 * 而`cur`存在意义就是因为组合和排列不同，不需要判断前面是否使用过（不会考虑顺序），而是只会选取指定的数，而不考虑顺序，所以`cur`表示的是当前已经选取到了这个位置，下面的选择是从`cur ~ arr.length`选择即可。这样一定不会选择重复的元素；
+代码:
+
 ```java
 import java.io.*;
 import java.util.*;
@@ -88,7 +96,7 @@ public class Main{
         }
         for(int i = cur; i < nums.length; i++){ 
             curr.add(nums[i]); //当前 d 层元素为nums[i]
-            dfs(nums, d+1, i+1, n, curr); //去考虑d+1以及后面的层
+            dfs(nums, d+1, i+1, n, curr); //去考虑d+1以及后面的层，注意下次直接从i+1开始，不会有重复的
             curr.remove(curr.size()-1);
         }
     }
@@ -120,13 +128,13 @@ public class Main{
 [[2, 1], [2, 3], [1, 3]]
 ```
 
-<font color = red>**本题和求解组合数有几分类似，但是却不是完全相同:**
+**本题和求解组合数有几分类似，但是却不是完全相同**:
 
 * 本题可以有重复元素，所以在递归的时候不能选择`i+1`（下一个元素），而是需要选择当前的`i`；
 * 那这样不就死循环了吗?，所以我们在选择当前`nums[i]`的时候，先检查当前累加`curSum + nums[i] > target`，如果满足，则当前`nums[i]`就不考虑了，考虑下一个，所以这样就不会死循环；
 * 且这里的递归终止条件就不是元素个数了，而是当前的累加和`curSum == target`；
 
-
+代码:
 
 ```java
 import java.io.*;

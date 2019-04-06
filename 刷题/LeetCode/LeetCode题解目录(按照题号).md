@@ -47,7 +47,7 @@
 | 34 | [Find First and Last Position of Element in Sorted Array](test) |      | Medium |
 | 35 |                                                              |      |      |
 | 36 |                                                              |      |      |
-| 37 |                                                              |      |      |
+| 37 | [Sudoku Solver](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2037.%20Sudoku%20Solver%20(DFS%E3%80%81%E5%9B%9E%E6%BA%AF).md) | Search | Hard |
 | 38 |                                                              |      |      |
 | 39 |                                                              |      |      |
 | 40 |                                                              |      |      |
