@@ -49,8 +49,8 @@
 | 36 |                                                              |      |      |
 | 37 | [Sudoku Solver](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2037.%20Sudoku%20Solver%20(DFS%E3%80%81%E5%9B%9E%E6%BA%AF).md) | Search | Hard |
 | 38 |                                                              |      |      |
-| 39 |                                                              |      |      |
-| 40 |                                                              |      |      |
+| 39 | [Combination Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2039.%20Combination%20Sum%20(%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%20_%20dfs).md) | Search | Medium |
+| 40 | [Combination Sum II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2040.%20Combination%20Sum%20II%20%26%26%20LeetCode%20-%20216.%20Combination%20Sum%20III%20%20(DFS).md) | Search | Medium |
 | 41 |                                                              |      |      |
 | 42 |                                                              |      |      |
 | 43 |                                                              |      |      |
