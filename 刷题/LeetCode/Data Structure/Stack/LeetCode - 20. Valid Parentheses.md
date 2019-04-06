@@ -1,8 +1,12 @@
 # LeetCode - 20. Valid Parentheses
 
-#### [题目链接]()
+#### [题目链接](https://leetcode.com/problems/valid-parentheses/)
+
+> https://leetcode.com/problems/valid-parentheses/
 
 #### 题目
+
+![20_t.png](images/20_t.png)
 
 ## 解析
 
