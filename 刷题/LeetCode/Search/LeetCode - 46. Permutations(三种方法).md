@@ -1,9 +1,5 @@
-﻿## LeetCode - 46. Permutations(三种方法)
- - 方法一: 普通递归
- - 方法二: 使用`dfs`记录是否使用，并填充
- - 方法三: 非递归实现
+# LeetCode - 46. Permutations
 
-***
 #### [题目链接](https://leetcode.com/problems/permutations/description/)
 
 > https://leetcode.com/problems/permutations/description/
@@ -12,10 +8,14 @@
 
 ![在这里插入图片描述](images/46_t.png)
 
-### 方法一: 普通递归
+### 1、经典排列
 ![在这里插入图片描述](images/46_s.png)
 
-这种方法采用的是位置两两交换，交换后出现一种新的组合，将这种新的组合添加到中间集，再将中间集添加到结果集中。这个方法不太明白的照着代码把过程写一写就懂了，另外[这篇博客](https://blog.csdn.net/summerxiachen/article/details/60579623)讲的不错。
+这种方法采用的是位置两两交换，交换后出现一种新的组合。
+
+将这种新的组合添加到中间集，再将中间集添加到结果集中。
+
+另外，[这篇博客](https://blog.csdn.net/summerxiachen/article/details/60579623)讲的不错。
 
 ```java
 class Solution {
@@ -46,9 +46,14 @@ class Solution {
 }
 ```
 ***
-### 使用`dfs`记录是否使用，并填充
-这种方法就是使用一个`bool`数组，记录是否填过，如果没有填过就填(向中间集添加元素)，然后递归，填到`n`个数就得到一个排列，时间复杂度O(`n* n`<sup>`n-1`</sup>)。
-![这里写图片描述](images/46_s2.png)
+### 2、`dfs`记录是否使用
+这种方法就是使用一个`bool`数组，记录是否填过，如果没有填过就填(向中间集添加元素)。
+
+然后递归，填到`n`个数就得到一个排列，时间复杂度O(`n* n`<sup>`n-1`</sup>)。
+
+![这里写图片描述](images/39_ss.png)
+
+代码:
 
 ```java
 class Solution {
@@ -78,13 +83,14 @@ class Solution {
 }
 ```
 ***
-### 方法三: 非递归实现
+### 3、非递归实现
 
 这个方法就是每次在已经有的集合中，每个集合的每个可以放置的位置，我们都放置一遍，并且把原来的移除掉，这样就能得到所有的排列
 看下图，如果集合中有两个子集合`[1,2]`,和`[2,1]`，就可以分别生成下面的集合
 
-
 ![这里写图片描述](https://img-blog.csdn.net/20180806123207168?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+代码:
 
 ```java
 class Solution {
