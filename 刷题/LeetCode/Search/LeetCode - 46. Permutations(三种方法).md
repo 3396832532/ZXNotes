@@ -53,6 +53,8 @@ class Solution {
 
 ![这里写图片描述](images/39_ss.png)
 
+<div align="center"><img src="images/46_ss.png"></div><br>
+
 代码:
 
 ```java
@@ -85,29 +87,29 @@ class Solution {
 ***
 ### 3、非递归实现
 
-这个方法就是每次在已经有的集合中，每个集合的每个可以放置的位置，我们都放置一遍，并且把原来的移除掉，这样就能得到所有的排列
+这个方法就是每次在已经有的集合中，每个集合的每个可以放置的位置，我们都放置一遍，并且把原来的移除掉，这样就能得到所有的排列。
 看下图，如果集合中有两个子集合`[1,2]`,和`[2,1]`，就可以分别生成下面的集合
 
-![这里写图片描述](https://img-blog.csdn.net/20180806123207168?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![这里写图片描述](images/46_ss2.png)
 
 代码:
 
 ```java
+import java.util.*;
+
 class Solution {
 
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         if (nums == null || nums.length == 0)
             return res;
-        List<Integer> first = new ArrayList<>();
-        first.add(nums[0]);
-        res.add(first);     //res.add(new ArrayList<>(nums[0]));//不能这样写
+        res.add(Arrays.asList(nums[0]));
         List<List<Integer>> newRes;
         for (int i = 1; i < nums.length; i++) {
             newRes = new ArrayList<>();
-            for (List<Integer> item : res) {
-                for (int j = 0; j <= item.size(); j++) { //注意这里是<= 有这么多个位置可以插入
-                    List<Integer> temp = new ArrayList<>(item);
+            for (List<Integer> list : res) { 
+                for (int j = 0; j <= list.size(); j++) { //注意这里是<= 有这么多个位置可以插入
+                    List<Integer> temp = new ArrayList<>(list);
                     temp.add(j, nums[i]); //在j位置放入nums[i]
                     newRes.add(temp);
                 }
@@ -123,14 +125,15 @@ class Solution {
 上面的非递归可以简写成下面的形式，意思是差不多的，每次都全部取出来。
 
 ```java
+import java.util.*;
+
 class Solution {
 
     public List<List<Integer>> permute(int[] nums) {
         LinkedList<List<Integer>> res = new LinkedList<List<Integer>>();
         res.add(new ArrayList<>());
         for (int i = 0; i < nums.length; i++) {
-            int size = res.size();
-            for (; size > 0; size--) {
+            for (int size = res.size(); size > 0; size--) {
                 List<Integer> item = res.pollFirst(); //每次取出来一个并且弹出
                 for (int j = 0; j <= item.size(); j++) {
                     List<Integer> temp = new ArrayList<>(item);
