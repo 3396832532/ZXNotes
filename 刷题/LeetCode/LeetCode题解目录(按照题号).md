@@ -4,7 +4,7 @@
 
 * 几乎每个题目(除个别极简单题目)用**图的方式**结合部分文字解释展现出来。大部分题目多种解法；
 * 如果要定位到某个题目，`chrome`浏览器按`ctrl + f`然后搜索序号或者题目名字即可；
-* 目前项目正在初期，后面会不断完善(很多题目我都写过了，正在完善一些解析)；
+* 目前项目正在初期，后面会不断完善(很多题目我都写过了，正在完善一些解析)。以后大概每天增加`2~4`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
 列表
@@ -24,7 +24,7 @@
 | 11 | [Container With Most Water](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2011.%20Container%20With%20Most%20Water.md) | 双指针 | Medium |
 | 12 | [Integer to Roman](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%2012.%20Integer%20to%20Roman.md) | 模拟 | Medium |
 | 13 | [Roman to Integer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%2013.%20Roman%20to%20Integer.md) | 模拟 | Easy |
-| 14 | [Longest Comman Prefix]() | 分治、二分、Trie | Easy |
+| 14 | [Longest Comman Prefix](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%2014.%20Longest%20Common%20Prefix.md) | 分治、二分、Trie | Easy |
 | 15 |                                                              |      |      |
 | 16 |                                                              |      |      |
 | 17 |                                                              |      |      |
