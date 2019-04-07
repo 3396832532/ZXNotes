@@ -59,30 +59,33 @@ class Solution {
 
 ```java
 class Solution {
-    
+
+    private List<List<Integer>> res;
+
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        dfs(res, new ArrayList<>(), nums, new boolean[nums.length]);
+        res = new ArrayList<>();
+        dfs(new ArrayList<>(), nums, new boolean[nums.length]);
         return res;
     }
 
-    public void dfs(List<List<Integer>> res, List<Integer> temp, int[] nums, boolean[] used) {
-        if (temp.size() == nums.length) {
+    public void dfs(List<Integer> curr, int[] arr, boolean[] used) {
+        if (curr.size() == arr.length) {
             //注意不能直接添加temp
-            res.add(new ArrayList<>(temp)); //以一个集合或数组初始化ArrayList al = new ArrayList(a);//a为集合或数组
+            res.add(new ArrayList<>(curr)); //以一个集合或数组初始化ArrayList al = new ArrayList(a);//a为集合或数组
             return;
         }
-        for (int i = 0; i < nums.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (!used[i]) {//记录某个下标的数是否被使用过
-                temp.add(nums[i]);
+                curr.add(arr[i]);
                 used[i] = true;
-                dfs(res, temp, nums, used);
-                temp.remove(temp.size() - 1); //移除最后一个
+                dfs(curr, arr, used);
+                curr.remove(curr.size() - 1); //移除最后一个
                 used[i] = false;
             }
         }
     }
 }
+
 ```
 ***
 ### 3、非递归实现
