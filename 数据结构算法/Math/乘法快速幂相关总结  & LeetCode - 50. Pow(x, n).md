@@ -1,4 +1,4 @@
-# 乘法快速幂相关总结  & LeetCode - 50. Pow(x, n)
+# 乘法快速幂相关总结 & LeetCode - 50. Pow(x, n)
 * 递归计算 (a <sup>n</sup>) % mod
 * 非递归计算 (a <sup>n</sup>) % mod
 * 计算 ( a * b ) % mod

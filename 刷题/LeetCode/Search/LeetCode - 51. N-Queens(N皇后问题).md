@@ -12,7 +12,7 @@
 ![在这里插入图片描述](images/51_t.png)
 
 
-### 数组标记法
+### 1、数组标记法
 
  - 这里使用三个数组分别标记那些不能访问的列，主对角线，和副对角线。注意`cols[c] = true`表示`c`列已经有了皇后；
  - **而`d1[]`表示的是副对角线，拿`8`皇后来说，我们把`n`正方形划分成`14`根对角线，每个对角线上有一个值，就是这根对角线上任意一个点的`x + y`的值(从右上角到左下角)；**
@@ -129,7 +129,7 @@ class Solution {
 }
 ```
 ***
-### 下标判断法
+### 2、下标判断法
 这个就是通过下标对应关系: 
 
  - `cols`表示的意义和上面的不同，`cols[i] = j`，表示的是`[i,j]`上面放了一个皇后；
@@ -140,7 +140,7 @@ class Solution {
 
 代码:
 
-![这里写图片描述](images/51_s2.png)
+<div align="center"><img src="images/51_ss.png"></div><br>
 
 代码: 
 
@@ -182,45 +182,5 @@ class Solution {
 }
 ```
 
-最后再附上一个求方法数的不同的写法: 
 
-```java
-import java.io.*;
-import java.util.*;
 
-public class Main{
-
-    public int getNum(int n) {
-        if(n < 1)return 0;
-        int[] cols = new int[n];
-        return dfs(0, n, cols);
-    }
-
-    public int dfs(int r, int n, int[] cols) {
-        if(r == n)
-            return 1;
-        int res = 0;
-        for(int c = 0; c < n; c++){
-            if(!isValid(cols, r, c))continue;
-            cols[r] = c;
-            res += dfs(r+1, n, cols);
-        }
-        return res;
-    }
-
-    private boolean isValid(int[] cols, int r, int c){
-        for(int i = 0; i < r; i++)
-            if(c == cols[i] || r - i == c - cols[i] || r - i == cols[i] - c)
-                return false;
-        return true;
-    }
-    public static void main(String[] args) {
-        Scanner cin = new Scanner(new BufferedInputStream(System.in));
-        PrintStream out = System.out;
-        int n = cin.nextInt();
-        out.println(new Main().
-            getNum(n)
-        );
-    }
-}
-```

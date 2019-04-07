@@ -13,8 +13,17 @@
 #### 题目
 ![在这里插入图片描述](images/53_t.png)
 
-### 递归写法
-我们可以从数组的最后开始往前看，对于当前数`nums[i]`，以这个`nums[i]`结尾的最大值一定是<font color = red>你前面的所有数求出一个最大的子序和(但是由于是子数组，所以必须是判断前一个数)`+`我自己(`nums[i]`)，所以这是一个递归的过程，边界条件就是`i = 0`时，最大子序和就是自己。</font>
+### 1、递归写法
+我们可以从数组的最后开始往前看：
+
+* 对于当前数`nums[i]`，以这个`nums[i]`结尾的最大值一定是**你前面的所有数求出一个最大的子序和**(但是由于是子数组，所以必须是判断前一个数)`+`我自己(`nums[i]`)。
+* 所以这是一个递归的过程，边界条件就是`i = 0`时，最大子序和就是自己。
+
+图: 
+
+<div align="center"><img src="images/53_ss.png"></div><br>
+
+代码:
 
 ```java
 class Solution {
@@ -41,9 +50,12 @@ class Solution {
 
 ```
 ***
-### 一维dp数组
-动态规划就是从小问题到大问题，递归相反的方向，我们可以正向的保存一个<font color = red>以每一个数结尾的最大子序和的数组</font>，然后递推到最后一个，其中使用个`max`保存最大值；
-![这里写图片描述](images/53_s.png)
+### 2、一维dp数组
+动态规划就是从小问题到大问题，递归相反的方向，我们可以正向的保存一个**以每一个数结尾的最大子序和的数组**，然后递推到最后一个，其中使用个`max`保存最大值；
+
+<div align="center"><img src="images/53_ss2.png"><div><br>
+
+代码: 
 
 ```java
 class Solution {
@@ -61,7 +73,7 @@ class Solution {
 }
 
 ```
-### 滚动优化
+### 3、滚动优化
 类似二维dp的滚动数组优化，因为每个位置只需要它前面的一个位置，所以我们只需要用一个变量保存即可。
 
 ```java
@@ -79,13 +91,22 @@ class Solution {
 }
 
 ```
-### 分治解法
+### 4、分治解法
+
+
+
 思路: 
 * 找到中间位置，所求子串不是在中间位置的左边，就是右边，还有中间位置两边；
 * 中间位置左边右边的和最大的子串可以递归地求得；
 * 再求中间位置往左挨个加的最大和以及中间位置往右挨个数的最大和，这两个和就是子串跨越中间位置时的最大和；
 * 这三个最大和中的最大值就是所求最大值；
-* <font color = red>这里要注意`LMax = process(arr,L,mid)`，这里的右边界不是`mid-1`，而是`mid`，因为边界是`L==R`的时候返回`arr[L]`，而且我们计算`crossMax`的时候包括了`arr[mid]`，就不需要再加上`arr[mid]`。</font>
+* **这里要注意`LMax = process(arr,L,mid)`，这里的右边界不是`mid-1`，而是`mid`，因为边界是`L==R`的时候返回`arr[L]`，而且我们计算`crossMax`的时候包括了`arr[mid]`，就不需要再加**上`arr[mid]`。
+
+图:
+
+![53_ss3.png](images/53_ss3.png)
+
+代码:
 
 ```java
 class Solution {
@@ -132,7 +153,7 @@ class Solution {
 ```
 
 ***
-### Hdu - 1003. Max Sum
+### 5、Hdu - 1003. Max Sum
 #### [题目链接](http://acm.hdu.edu.cn/showproblem.php?pid=1003)
 
 > http://acm.hdu.edu.cn/showproblem.php?pid=1003
@@ -143,101 +164,94 @@ class Solution {
 
 
 #### 解析
-这个和上面有点不同的是要我们求出求得最大字段和的同时，要求出左右边界，其实很简单，先记录一下右边界，然后从后往前递推左边界即可；
-* 思路一: 一维`dp`；
-* 思路二: 滚动优化；
+这个和上面有点不同的是要我们求出求得最大字段和的同时，要**求出左右边界，其实很简单，先记录一下右边界，然后从后往前递推左边界即可**；
 
 一维dp: 
 
 ```java
-import java.io.BufferedInputStream;
+import java.io.*;
 import java.util.Scanner;
-
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner cin = new Scanner(new BufferedInputStream(System.in));
-        int T = cin.nextInt();
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        int T = in.nextInt();
         int kase = 0;
-        while(T-- > 0){
-            int n = cin.nextInt();
-            int[] nums = new int[n];
-            for(int i = 0; i < n; i++)
-                nums[i] = cin.nextInt();
+        while (T-- > 0) {
+            int n = in.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+                arr[i] = in.nextInt();
 
-            int[] ends = new int[nums.length];
-            ends[0] = nums[0];
-            int max = ends[0],maxi = 0;
-            for(int i = 1; i < nums.length; i++){
-                ends[i] = ends[i-1] > 0 ? ends[i-1] + nums[i] : nums[i];
-                if(ends[i] > max){
+            int[] ends = new int[arr.length];
+            ends[0] = arr[0];
+            int max = ends[0], maxi = 0;
+            for (int i = 1; i < arr.length; i++) {
+                ends[i] = ends[i - 1] > 0 ? ends[i - 1] + arr[i] : arr[i];
+                if (ends[i] > max) {
                     max = ends[i];
                     maxi = i;
                 }
             }
-
-            int curSum = max,L = maxi; // L 是左边界 
-
-            for(int i = maxi; i >= 0; i--){
-                curSum -= nums[i];
-                if(curSum == 0){
-                    L = Math.min(L,i);
-                } 
+            int curSum = max, L = maxi; // L 是左边界 
+            for (int i = maxi; i >= 0; i--) {
+                curSum -= arr[i];
+                if (curSum == 0) {
+                    L = Math.min(L, i);
+                }
             }
-
-            System.out.println("Case "+(++kase)+":");
-
-            System.out.println(max+" "+(L+1)+" "+(maxi+1));
-            if(T != 0)System.out.println();
+            out.println("Case " + (++kase) + ":");
+            out.println(max + " " + (L + 1) + " " + (maxi + 1));
+            if (T != 0) out.println();
         }
+        out.close();
     }
 }
 ```
 滚动优化: 
 
 ```java
-import java.io.BufferedInputStream;
+import java.io.*;
 import java.util.Scanner;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner cin = new Scanner(new BufferedInputStream(System.in));
-
-        int T = cin.nextInt();
+        Scanner in = new Scanner(new BufferedInputStream(System.in));
+        PrintWriter out = new PrintWriter(System.out);
+        int T = in.nextInt();
         int kase = 0;
-        while(T-- > 0){
-            int n = cin.nextInt();
-            int[] nums = new int[n];
-            for(int i = 0; i < n; i++)
-                nums[i] = cin.nextInt();
+        while (T-- > 0) {
+            int n = in.nextInt();
+            int[] arr = new int[n];
+            for (int i = 0; i < n; i++)
+                arr[i] = in.nextInt();
 
-            int preMax = nums[0];
-            int max = preMax,maxi = 0;
-            for(int i = 1; i < nums.length; i++){
-                preMax = preMax > 0 ? preMax + nums[i] : nums[i];
-                if(preMax > max){
+            int preMax = arr[0];
+            int max = preMax, maxi = 0;
+            for (int i = 1; i < arr.length; i++) {
+                preMax = preMax > 0 ? preMax + arr[i] : arr[i];
+                if (preMax > max) {
                     max = preMax;
                     maxi = i;
                 }
             }
 
-            int curSum = max,L = maxi;
-
-            for(int i = maxi; i >= 0; i--){
-                curSum -= nums[i];
-                if(curSum == 0){
-                    L = Math.min(L,i); 
+            int curSum = max, L = maxi;
+            for (int i = maxi; i >= 0; i--) {
+                curSum -= arr[i];
+                if (curSum == 0) {
+                    L = Math.min(L, i);
                 }
             }
-
-            System.out.println("Case "+(++kase)+":");
-
-            System.out.println(max+" "+(L+1)+" "+(maxi+1));
-            if(T != 0)System.out.println();
+            out.println("Case " + (++kase) + ":");
+            out.println(max + " " + (L + 1) + " " + (maxi + 1));
+            if (T != 0) out.println();
         }
+        out.close();
     }
 }
 ```
