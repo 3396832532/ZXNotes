@@ -85,7 +85,7 @@
 | 72 | [Edit Distance](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2072.%20Edit%20Distance(%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98)(%E4%B8%89%E4%B8%AA%E4%BE%9D%E8%B5%96%E7%9A%84%E6%BB%9A%E5%8A%A8%E4%BC%98%E5%8C%96).md) | DP | Hard |
 | 73 |                                                              |      |      |
 | 74 |                                                              |      |      |
-| 75 |                                                              |      |      |
+| 75 | [Sort Colors](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Sort/LeetCode%20-%2075.%20Sort%20Colors(%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E5%92%8C%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%8F%98%E5%BD%A2).md) | Sort、双指针 | Medium |
 | 76 |                                                              |      |      |
 | 77 |                                                              |      |      |
 | 78 |                                                              |      |      |
