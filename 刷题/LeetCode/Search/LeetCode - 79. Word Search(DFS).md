@@ -1,6 +1,4 @@
-﻿## LeetCode - 79. Word Search(DFS)
-
-
+# LeetCode - 79. Word Search(DFS)
 
 #### [题目链接](https://leetcode.com/problems/word-search/)
 
@@ -9,8 +7,7 @@
 #### 题目
 ![在这里插入图片描述](images/79_t.png)
 
-***
-#### 解析
+## 解析
 这个题目很明显是使用搜索来做，这里使用`DFS`来做会比较方便: 
 
 
@@ -18,6 +15,12 @@
 * 四个方向只需要一个即可，遍历每一个位置，从每个位置开始`DFS`即可，注意边界的判断；
 * 这里在递归的时候使用`board[i][j] = '#'`，然后递归，就标识了已经访问了，就省去了一个`vis`数组，当然也可以使用`vis`数组；
 * 时间复杂度O(n * m * 4<sup>`word.length()`</sup>)；其中`n = board.length`，`m = board[0].length`；
+
+图: 
+
+![1554651307629](assets/1554651307629.png)
+
+代码: 
 
 ```java
 class Solution {
@@ -98,6 +101,7 @@ class Solution {
 ```
 
 ***
+
 其他代码: 
 
 `C++`代码： 
@@ -139,7 +143,7 @@ private:
 
 `Python`: 
 
-```py
+```python
 class Solution:
     def exist(self, board, word):
         if len(board) == 0:
@@ -166,5 +170,4 @@ class Solution:
         return False
 ```
 
-
-备注: `BFS`用`Java`写了超时，暂时放着，给出一个`Python`的[链接](https://leetcode.com/problems/word-search/discuss/195834/Two-python-solutions-(iteration-and-recursion))。
+>  给出一个`Python`的BFS[链接](https://leetcode.com/problems/word-search/discuss/195834/Two-python-solutions)。
