@@ -1,8 +1,12 @@
 # LeetCode - 52. N-Queens
 
-#### [题目链接]()
+#### [题目链接](https://leetcode.com/problems/n-queens-ii/)
+
+> https://leetcode.com/problems/n-queens-ii/
 
 #### 题目
+
+![52_t.png](images/52_t.png)
 
 ## 解析
 

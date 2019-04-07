@@ -1,4 +1,4 @@
-﻿## LeetCode - 63. Unique Paths II(有障碍物的不同路径)
+# LeetCode - 63. Unique Paths II(有障碍物的不同路径)
 
  - 记忆化
  - 二维dp
@@ -11,17 +11,14 @@
 #### 题目
 ![在这里插入图片描述](images/63_t.png)
 
-
-
-***
-### 记忆化
-**[LeetCode - 62](https://blog.csdn.net/zxzxzx0119/article/details/81807910)和这题也很像。**
+## 1、记忆化
+和`LeetCode - 62`唯一不同的就是这里当格子是`1`的时候直接不能走。返回`0`即可。
 
 递归思路如下。
 
-![在这里插入图片描述](images/63_s.png)
+<div align="center"><img src="images/63_ss.png"></div><br>
 
-
+代码:
 
 ```java
 class Solution {
@@ -39,19 +36,17 @@ class Solution {
         return rec(obstacleGrid, 0, 0);
     }
 
-    public int rec(int[][] grid, int i, int j) {
-        if (i == n - 1 && j == m - 1) 
-            return grid[i][j] == 0 ? 1 : 0;
-        if (dp[i][j] != -1)
-            return dp[i][j];
-        if (i == n - 1) 
-            dp[i][j] = grid[i][j] == 1 ? 0 : (grid[i][j + 1] == 0 ? rec(grid, i, j + 1) : 0);
+    public int rec(int[][] G, int i, int j) {
+        if (i == n - 1 && j == m - 1) return G[i][j] == 0 ? 1 : 0;
+        if (dp[i][j] != -1) return dp[i][j];
+        if (i == n - 1)
+            dp[i][j] = G[i][j] == 1 ? 0 : (G[i][j + 1] == 0 ? rec(G, i, j + 1) : 0);
         else if (j == m - 1) {
-            dp[i][j] = grid[i][j] == 1 ? 0 : (grid[i + 1][j] == 0 ? rec(grid, i + 1, j) : 0);
-        }else {
-            int right = grid[i][j + 1] == 0 ? rec(grid, i, j + 1) : 0;
-            int down = grid[i + 1][j] == 0 ? rec(grid, i + 1, j) : 0;
-            dp[i][j] = (grid[i][j] == 1) ? 0 : (right + down);
+            dp[i][j] = G[i][j] == 1 ? 0 : (G[i + 1][j] == 0 ? rec(G, i + 1, j) : 0);
+        } else {
+            int right = G[i][j + 1] == 0 ? rec(G, i, j + 1) : 0;
+            int down = G[i + 1][j] == 0 ? rec(G, i + 1, j) : 0;
+            dp[i][j] = (G[i][j] == 1) ? 0 : (right + down);
         }
         return dp[i][j];
     }
@@ -59,8 +54,8 @@ class Solution {
 ```
 简单优化: 
 
- - <font color = red>由于右边和下面的不管是`0`还是真的`>0`的值，都是一个值，不影响；
- - <font color = red>或者说每一个`(i,j)`没有必要重复判断`(i,j+1)`或者`(i+1,j)`位置的值，所以只需要判断自己`(i,j)`；</font>
+ - 由于右边和下面的不管是`0`还是真的`>0`的值，都是一个值，不影响；
+ - 或者说每一个`(i,j)`没有必要重复判断`(i,j+1)`或者`(i+1,j)`位置的值，所以只需要判断自己`(i,j)`；
 
 ```java
 class Solution {
@@ -78,50 +73,25 @@ class Solution {
         return rec(obstacleGrid, 0, 0);
     }
 
-    public int rec(int[][] grid, int i, int j) {
-        if (i == n - 1 && j == m - 1)
-            return grid[i][j] == 0 ? 1 : 0;
-        if (dp[i][j] != -1)
-            return dp[i][j];
+    public int rec(int[][] G, int i, int j) {
+        if (i == n - 1 && j == m - 1) return G[i][j] == 0 ? 1 : 0;
+        if (dp[i][j] != -1) return dp[i][j];
         if (i == n - 1)
-            dp[i][j] = grid[i][j] == 1 ? 0 : rec(grid, i, j + 1);
+            dp[i][j] = G[i][j] == 1 ? 0 : rec(G, i, j + 1);
         else if (j == m - 1)
-            dp[i][j] = grid[i][j] == 1 ? 0 : rec(grid, i + 1, j);
+            dp[i][j] = G[i][j] == 1 ? 0 : rec(G, i + 1, j);
         else
-            dp[i][j] = (grid[i][j] == 1) ? 0 : (rec(grid, i, j + 1) + rec(grid, i + 1, j));
+            dp[i][j] = (G[i][j] == 1) ? 0 : (rec(G, i, j + 1) + rec(G, i + 1, j));
         return dp[i][j];
     }
 } 
 ```
 
-***
-### 二维dp
-第一种未优化的二维`dp`，完全根据记忆化的逆向改造: 
-```java
-class Solution {
 
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int n = obstacleGrid.length;
-        int m = obstacleGrid[0].length;
-        int[][] dp = new int[n][m];
-        dp[n - 1][m - 1] = obstacleGrid[n - 1][m - 1] == 1 ? 0 : 1;
-        for (int i = n - 2; i >= 0; i--)
-            dp[i][m - 1] = obstacleGrid[i][m - 1] == 1 ? 0 : (obstacleGrid[i + 1][m - 1] == 1 ? 0 : dp[i + 1][m - 1]);
-        for (int j = m - 2; j >= 0; j--)
-            dp[n - 1][j] = obstacleGrid[n - 1][j] == 1 ? 0 : (obstacleGrid[n - 1][j + 1] == 1 ? 0 : dp[n - 1][j + 1]);
-        int right, down;
-        for (int i = n - 2; i >= 0; i--) {
-            for (int j = m - 2; j >= 0; j--) {
-                right = obstacleGrid[i][j + 1] == 1 ? 0 : dp[i][j + 1];
-                down = obstacleGrid[i + 1][j] == 1 ? 0 : dp[i + 1][j];
-                dp[i][j] = obstacleGrid[i][j] == 1 ? 0 : (right + down);
-            }
-        }
-        return dp[0][0];
-    }
-}
-```
-优化版本: 
+## 2、二维dp
+
+根据递归可以改成dp。(下面从从右下角到左上角，也可以反过来)
+
 ```java
 class Solution {
 
@@ -133,41 +103,16 @@ class Solution {
         for (int i = n - 2; i >= 0; i--) dp[i][m - 1] = obstacleGrid[i][m - 1] == 1 ? 0 : dp[i + 1][m - 1];
         for (int j = m - 2; j >= 0; j--) dp[n - 1][j] = obstacleGrid[n - 1][j] == 1 ? 0 : dp[n - 1][j + 1];
         for (int i = n - 2; i >= 0; i--) {
-            for (int j = m - 2; j >= 0; j--) {
+            for (int j = m - 2; j >= 0; j--)
                 dp[i][j] = obstacleGrid[i][j] == 1 ? 0 : (dp[i][j + 1] + dp[i + 1][j]);
-            }
         }
         return dp[0][0];
     }
 }
 ```
 
-***
-### 一维dp
+## 3、一维dp
 滚动优化。
-```java
-class Solution {
-
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int n = obstacleGrid.length;
-        int m = obstacleGrid[0].length;
-        int[] dp = new int[m];
-        dp[m - 1] = obstacleGrid[n - 1][m - 1] == 1 ? 0 : 1;
-        for (int j = m - 2; j >= 0; j--)
-            dp[j] = obstacleGrid[n - 1][j] == 1 ? 0 : (obstacleGrid[n - 1][j + 1] == 1 ? 0 : dp[j + 1]);
-        int right, down;
-        for (int i = n - 2; i >= 0; i--) {
-            dp[m - 1] = obstacleGrid[i][m - 1] == 1 ? 0 : (obstacleGrid[i + 1][m - 1] == 1 ? 0 : dp[m - 1]);
-            for (int j = m - 2; j >= 0; j--) {
-                right = obstacleGrid[i][j + 1] == 1 ? 0 : dp[j + 1];
-                down = obstacleGrid[i + 1][j] == 1 ? 0 : dp[j];
-                dp[j] = obstacleGrid[i][j] == 1 ? 0 : (right + down);
-            }
-        }
-        return dp[0];
-    }
-}
-```
 
 ```java
 class Solution {
@@ -189,4 +134,3 @@ class Solution {
 }
 ```
 
-***
