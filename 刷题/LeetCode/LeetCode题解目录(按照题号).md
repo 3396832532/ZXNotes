@@ -61,9 +61,9 @@
 | 48 |                                                              |      |      |
 | 49 |                                                              |      |      |
 | 50 | [Pow(x, n)](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Math/%E4%B9%98%E6%B3%95%E5%BF%AB%E9%80%9F%E5%B9%82%E7%9B%B8%E5%85%B3%E6%80%BB%E7%BB%93%20%20%26%20LeetCode%20-%2050.%20Pow(x%2C%20n).md) | Math | Medium |
-| 51 |                                                              |      |      |
-| 52 |                                                              |      |      |
-| 53 |                                                              |      |      |
+| 51 | [N-Queens](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2051.%20N-Queens(N%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98).md) | Search | Hard |
+| 52 | [N-Queens II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2052.%20N-Queens%20II.md) | Search | Hard |
+| 53 | [Maximum Subarray](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2053.%20Maximum%20Subarray(%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C)(%E4%B8%80%E7%BB%B4dp).md) | DP | Easy |
 | 54 |                                                              |      |      |
 | 55 |                                                              |      |      |
 | 56 |                                                              |      |      |
