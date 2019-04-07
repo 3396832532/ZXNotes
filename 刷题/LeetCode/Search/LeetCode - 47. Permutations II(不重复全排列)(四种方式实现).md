@@ -118,7 +118,7 @@ class Solution {
             for (Integer num : nums) temp.add(num);
             res.add(temp); 
         } else {
-            Set<Integer> set = new HashSet<>();
+            Set<Integer> set = new HashSet<>();//去重的
             for (int i = cur; i < nums.length; i++) {
                 if (!set.contains(nums[i])) {
                     set.add(nums[i]);
@@ -143,6 +143,10 @@ class Solution {
  * 主要是如何判断重复，这里要先排序，保证重复的元素会贴在一块。
  * 对与重复的元素循环时跳过递归的调用只对第一个未被使用的进行递归，那么这一次的结果将会唯一出现在结果集中，而后重复的元素将会被略过；
  * 如果第一个重复元素还没在当前结果中，那么我们就不需要进行递归。
+
+图: 
+
+<div align="center"><img src="images/47_ss.png"></div><br>
 
 代码:
 

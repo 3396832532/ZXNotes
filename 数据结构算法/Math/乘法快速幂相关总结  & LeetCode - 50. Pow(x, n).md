@@ -1,41 +1,44 @@
-﻿## 乘法快速幂相关总结  & LeetCode - 50. Pow(x, n)
-* 递归计算<font color = red> (a <sup>n</sup>) % mod
-* 非递归计算  <font color = red>(a <sup>n</sup>) % mod
-* 计算<font color = red> ( a * b ) % mod
-* 配合<font color = red> ( a * b ) % mod</font>和乘法快速幂
+# 乘法快速幂相关总结  & LeetCode - 50. Pow(x, n)
+* 递归计算 (a <sup>n</sup>) % mod
+* 非递归计算 (a <sup>n</sup>) % mod
+* 计算 ( a * b ) % mod
+* 配合 ( a * b ) % mod和乘法快速幂
 * XYNUOJ - 1872. 次方求模题解
 * LeetCode - 50. Pow(x, n)题解
 
-***
-### 递归计算 (a <sup>n</sup>) % mod
+
+## 1、递归计算 (a <sup>n</sup>) % mod
 递归计算其实是更容易理解的: 
-* 为了求<font color = red>a<sup>n</sup></font>，我们先递归去求出<font color = red>a<sup>n/2</sup></font>，得到结果记录为`halfRes`；
+* 为了求a<sup>n</sup>，我们先递归去求出a<sup>n/2</sup>，得到结果记录为`halfRes`；
 * 然后如果`n`为偶数，很好办，再乘以一个`halfRes`就可以了(再取模一下)，也就是可以返回`halfRes*halfRes`；
 * 但是如果`n`为奇数的话，就需要再乘以一个`a`，然后再返回；
 
 ![幂分解](images/m14.png)
+
 ![在这里插入图片描述](images/m26.png)
 
 代码:
 
 ```java
-    static long pow_mod(long a, long n, long mod) {
-        if (n == 0)      // a^0 = 1
-            return 1;
-        // 先求一半的 --> 你先给我求出 a ^ (n/2) 的结果给我
-        long halfRes = pow_mod(a, n >> 1, mod); // n >> 1 --> n/2
+static long pow_mod(long a, long n, long mod) {
+    if (n == 0)      // a^0 = 1
+        return 1;
+    // 先求一半的 --> 你先给我求出 a ^ (n/2) 的结果给我
+    long halfRes = pow_mod(a, n >> 1, mod); // n >> 1 --> n/2
 
-        long res = halfRes * halfRes % mod;
+    long res = halfRes * halfRes % mod;
 
-        if ((n & 1) != 0)       // odd num
-            res = res * a % mod;
-        return res;
-    }
+    if ((n & 1) != 0)       // odd num
+        res = res * a % mod;
+    return res;
+}
 ```
 ***
-### 非递归计算 <font color = red> (a <sup>n</sup>) % mod
-![在这里插入图片描述](https://img-blog.csdn.net/201809222010339?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+## 2、非递归计算  (a <sup>n</sup>) % mod
+![在这里插入图片描述](images/m27_.png)
 ![在这里插入图片描述](images/m13.png)![在这里插入图片描述](images/m18.png)
+
+
 假设一个整数是`10`，如何最快的求解`10`的`75`次方。
 
 * ① `75`的二进制形式为`1001011`；
@@ -61,7 +64,7 @@
 
 
 
-### 计算 <font color = red>( a * b ) % mod
+## 3、计算 ( a * b ) % mod
 
 
 
@@ -85,7 +88,7 @@
     }
 ```
 ***
-### 配合<font color = red> ( a * b ) % mod</font>和乘法快速幂
+## 4、配合 ( a * b ) % mod和乘法快速幂
 可以使用非递归的乘法快速幂和上面的` (a*b) % mod` 来计算快速幂，差别不大: 
 ```java
     // 计算 (a * b) % mod
@@ -114,7 +117,7 @@
 
 ```
 ***
-### XYNUOJ - 1872. 次方求模题解
+## 5、XYNUOJ - 1872. 次方求模题解
 #### [题目链接](http://xyoj.xynu.edu.cn/problem.php?id=1872)
 
 > http://xyoj.xynu.edu.cn/problem.php?id=1872
@@ -206,13 +209,13 @@ public class Main {  //提交时改成Main
 
 ```
 ***
-### LeetCode - 50. Pow(x, n)题解
+## 6、LeetCode - 50. Pow(x, n)题解
 #### [题目链接](https://leetcode.com/problems/powx-n/description/)
 
 > https://leetcode.com/problems/powx-n/description/
 
 #### 题目
-![](images/m15.png)
+![ddd](images/m15.png)
 #### 解析
 这个题目和普通的求幂不同的是: 
 * **其中`x`(底数)是`double`类型的，且`n`是范围是`Integer`范围的(可正可负) :** 
@@ -266,7 +269,7 @@ class Solution {
 }
 ```
 ##### 非递归求解: 
-<font color = red>三种写法的意思都是一样，只不过处理`Integer.MIN_VALUE`的方式不同而已。</font>
+三种写法的意思都是一样，只不过处理`Integer.MIN_VALUE`的方式不同而已。
 ```java
 class Solution {
     public double myPow(double x, int n) {
