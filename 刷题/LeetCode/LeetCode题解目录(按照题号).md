@@ -72,9 +72,9 @@
 | 59 |                                                              |      |      |
 | 60 |                                                              |      |      |
 | 61 |                                                              |      |      |
-| 62 |                                                              |      |      |
-| 63 |                                                              |      |      |
-| 64 |                                                              |      |      |
+| 62 | [Unique Paths](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2062.%20Unique%20Paths(%E4%B8%8D%E5%90%8C%E7%9A%84%E8%B7%AF%E5%BE%84%E6%95%B0%E9%87%8F)(%E7%AE%80%E5%8D%95dp).md) | DP | Medium |
+| 63 | [Unique Paths II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2063.%20Unique%20Paths%20II(%E6%9C%89%E9%9A%9C%E7%A2%8D%E7%89%A9%E7%9A%84%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84).md) | DP | Medium |
+| 64 | [Minimum Path Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2064.%20Minimum%20Path%20Sum(%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C).md) | DP | Medium |
 | 65 |                                                              |      |      |
 | 66 |                                                              |      |      |
 | 67 |                                                              |      |      |
