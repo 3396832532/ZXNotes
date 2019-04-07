@@ -82,7 +82,7 @@
 | 69 |                                                              |      |      |
 | 70 |                                                              |      |      |
 | 71 |                                                              |      |      |
-| 72 |                                                              |      |      |
+| 72 | [Edit Distance](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2072.%20Edit%20Distance(%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB%E9%97%AE%E9%A2%98)(%E4%B8%89%E4%B8%AA%E4%BE%9D%E8%B5%96%E7%9A%84%E6%BB%9A%E5%8A%A8%E4%BC%98%E5%8C%96).md) | DP | Hard |
 | 73 |                                                              |      |      |
 | 74 |                                                              |      |      |
 | 75 |                                                              |      |      |
