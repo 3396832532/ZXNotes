@@ -88,7 +88,7 @@
 | 75 | [Sort Colors](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Sort/LeetCode%20-%2075.%20Sort%20Colors(%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F%E5%92%8C%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E5%8F%98%E5%BD%A2).md) | Sort、双指针 | Medium |
 | 76 |                                                              |      |      |
 | 77 |                                                              |      |      |
-| 78 |                                                              |      |      |
+| 78 | [Subsets](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2078.%20Subsets.md) | Search | Medium |
 | 79 |                                                              |      |      |
 | 80 |                                                              |      |      |
 | 81 |                                                              |      |      |
@@ -100,7 +100,7 @@
 | 87 |                                                              |      |      |
 | 88 |                                                              |      |      |
 | 89 |                                                              |      |      |
-| 90 |                                                              |      |      |
+| 90 | [Subset II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2090.%20Subsets%20II.md) | Search | Medium |
 | 91 |                                                              |      |      |
 | 92 |                                                              |      |      |
 | 93 |                                                              |      |      |

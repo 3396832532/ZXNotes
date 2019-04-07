@@ -8,7 +8,7 @@
 
 ## 解析
 
-在[LeetCode - 78. Subsets](LeetCode - 78. Subsets.md)的基础上加上去重就好了。
+在[LeetCode - 78. Subsets](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2078.%20Subsets.md)的基础上加上去重就好了。
 
 方法: 
 
@@ -21,7 +21,7 @@
 
 ![1554645724343](assets/1554645724343.png)
 
-这里提供两种写法，一种是[LeetCode - 78. Subsets](LeetCode - 78. Subsets.md)的第三种增量写法，然后还要标记每一个元素是否被使用了。
+这里提供两种写法，一种是[LeetCode - 78. Subsets](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2078.%20Subsets.md)的第三种增量写法，然后还要标记每一个元素是否被使用了。
 
 ```java
 class Solution {
@@ -56,7 +56,7 @@ class Solution {
 }
 ```
 
-然后就是改进[LeetCode - 78. Subsets](LeetCode - 78. Subsets.md)的第一种写法，我们这里可以省略一个`used`数组，直接使用一个`preTaken`变量表示前一个有没有使用过即可。
+然后就是改进[LeetCode - 78. Subsets](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2078.%20Subsets.md)的第一种写法，我们这里可以省略一个`used`数组，直接使用一个`preTaken`变量表示前一个有没有使用过即可。
 
 ```java
 class Solution {
