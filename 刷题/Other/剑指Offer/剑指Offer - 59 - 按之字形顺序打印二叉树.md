@@ -10,6 +10,8 @@
 
 这题是[剑指Offer - 60 - 把二叉树打印成多行](剑指Offer - 60 - 把二叉树打印成多行.md)的加强版，可以先做那一题。
 
+另外在[LeetCode - 103](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20103.%20Binary%20Tree%20Zigzag%20Level%20Order%20Traversal.md)我也写过。可以看那一篇。
+
 然后只需要将偶数层的翻转一下即可。
 
 非递归：
