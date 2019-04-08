@@ -123,8 +123,8 @@
 | 109 | | | |
 | 110 | [Balanced Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20110.%20Balanced%20Binary%20Tree(%E5%88%A4%E6%96%AD%E4%B8%80%E6%A3%B5%E6%A0%91%E6%98%AF%E5%90%A6%E6%98%AF%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91).md) | Tree | Easy |
 | 111 | | | |
-| 112 | | | |
-| 113 | | | |
+| 112 | [Path Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20112.%20PathSum.md) | Tree | Easy |
+| 113 | [Path Sum II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20113.%20Path%20Sum%20II.md) | Tree | Medium |
 | 114 | | | |
 | 115 | | | |
 | 116 | | | |
