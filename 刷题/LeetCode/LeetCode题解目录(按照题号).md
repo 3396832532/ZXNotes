@@ -115,8 +115,8 @@
 | 102 | [Binary Tree Level Order Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20102.%20Binary%20Tree%20Level%20Order%20Traversal(%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E4%BF%9D%E5%AD%98).md) | Tree | Medium |
 | 103 | [Binary Tree Zigzag Level Order Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20103.%20Binary%20Tree%20Zigzag%20Level%20Order%20Traversal.md) | Tree | Medium |
 | 104 | [Maximum Depth of Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20104.%20Maximum%20Depth%20of%20Binary%20Tree.md) | Tree | Easy |
-| 105 | [Construct Binary Tree from Preorder and Inorder Traversal]() | Tree | Medium |
-| 106 | [Construct Binary Tree from Inorder and Postorder Traversal]() | Tree | Medium |
+| 105 | [Construct Binary Tree from Preorder and Inorder Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20105.%20Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal.md) | Tree | Medium |
+| 106 | [Construct Binary Tree from Inorder and Postorder Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20106.%20Construct%20Binary%20Tree%20from%20Inorder%20and%20Postorder%20Traversal.md) | Tree | Medium |
 | 107 | | | |
 | 108 | | | |
 | 109 | | | |
