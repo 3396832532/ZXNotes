@@ -94,8 +94,8 @@
 | 81 |                                                              |      |      |
 | 82 |                                                              |      |      |
 | 83 |                                                              |      |      |
-| 84 |                                                              |      |      |
-| 85 |                                                              |      |      |
+| 84 | [Largest Rectangle in Histogram](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Stack/LeetCode%20-%2084.%20Largest%20Rectangle%20in%20Histogram(%E5%8D%95%E8%B0%83%E6%A0%88).md) | 单调栈 | Hard |
+| 85 | [Maximal Rectangle](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Stack/LeetCode%20-%2085.%20Maximal%20Rectangle.md) | 单调栈 | Hard |
 | 86 |                                                              |      |      |
 | 87 |                                                              |      |      |
 | 88 |                                                              |      |      |
