@@ -8,27 +8,34 @@
 ![在这里插入图片描述](images/113_t.png)
 ## 解析
 
-这题和上面唯一的不同，就是需要记录路径，递归写法很简单：　
+递归，和上面唯一的不同，就是需要记录路径，递归写法很简单：　
 
 
 * 就是每次先将当前节点加入中间集合(`path`)，然后深度优先遍历；
 * 遍历完记得回溯的时候要在`path`集合中移除当前节点；
 * 注意递归条件哪里一定不要`return `；
 
+图:
+
+![1554740023967](assets/1554740023967.png)
+
+代码：
+
 
 ```java
 class Solution {
+
+    private List<List<Integer>> res;
+
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null)
-            return res;
-        helper(root, 0, sum, new ArrayList<>(), res);
+        res = new ArrayList<>();
+        if (root == null) return res;
+        helper(root, 0, sum, new ArrayList<>());
         return res;
     }
 
-    private void helper(TreeNode node, int curSum, int sum, List<Integer> path, List<List<Integer>> res) {
-        if (node == null)
-            return;
+    private void helper(TreeNode node, int curSum, int sum, List<Integer> path) {
+        if (node == null) return;
         path.add(node.val);
         if (node.left == null && node.right == null && curSum + node.val == sum) {
             // why do we need new arrayList here?if we are using the same path variable path
@@ -36,19 +43,20 @@ class Solution {
             res.add(new ArrayList<>(path));
             // return ; // can't do this
         }
-        helper(node.left, curSum + node.val, sum, path, res);
-        helper(node.right, curSum + node.val, sum, path, res);
+        helper(node.left, curSum + node.val, sum, path);
+        helper(node.right, curSum + node.val, sum, path);
         path.remove(path.size() - 1);
     }
 }
 ```
 
-非递归写法自己没有出来，看了讨论区，方法很好: 
+非递归写法:
 
 * 当前节点`cur`只要不为空，先走到树的最左边节点(第一个`while`循环)；
 * 然后取栈顶元素，但是此时还要继续判断栈顶的右孩子的左子树，此时不能`pop()`，因为有孩子还有可能也是有左子树的；
 * `pre`节点的作用是为了回溯，记录前一个访问的节点，如果`cur.right == pre`，则说明右子树正在回溯，下面的已经访问完了；
-* 实在不懂可以画一个图看看。。。。
+
+代码:
 
 ```java
 class Solution {
