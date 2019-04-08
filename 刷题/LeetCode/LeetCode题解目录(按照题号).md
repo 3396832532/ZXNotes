@@ -3,7 +3,7 @@
 说明:
 
 * 几乎每个题目(除极简单或者不好画图的题目)用**图的方式**结合部分文字解释展现出来。大部分题目多种解法；
-* 如果要定位到某个题目，`chrome`浏览器按`ctrl + f`然后搜索序号或者题目名字即可；
+* 如果要**定位**到某个题目，`chrome`浏览器按`ctrl + f`然后搜索序号或者题目名字即可；
 * 目前项目正在初期，后面会不断完善(很多题目我都写过了，正在完善一些解析)。以后大概每天增加`2~5`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
@@ -115,7 +115,7 @@
 | 102 | [Binary Tree Level Order Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20102.%20Binary%20Tree%20Level%20Order%20Traversal(%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E4%BF%9D%E5%AD%98).md) | Tree | Medium |
 | 103 | [Binary Tree Zigzag Level Order Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20103.%20Binary%20Tree%20Zigzag%20Level%20Order%20Traversal.md) | Tree | Medium |
 | 104 | [Maximum Depth of Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20104.%20Maximum%20Depth%20of%20Binary%20Tree.md) | Tree | Easy |
-| 105 | | Tree | |
+| 105 | [Construct Binary Tree from Preorder and Inorder Traversal]() | Tree | Medium |
 | 106 | [Construct Binary Tree from Inorder and Postorder Traversal]() | Tree | Medium |
 | 107 | | | |
 | 108 | | | |
