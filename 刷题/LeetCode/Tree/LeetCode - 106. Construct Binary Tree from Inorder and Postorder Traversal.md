@@ -10,11 +10,13 @@
 
 ## 解析
 
-和上一题[LeetCode - 105. ]
+和上一题[LeetCode - 105. Construct Binary Tree from Preorder and Inorder Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20105.%20Construct%20Binary%20Tree%20from%20Preorder%20and%20Inorder%20Traversal.md)类似，我们只需要每次递归的时候在`in`数组中找到`post`数组的最后一个元素，然后递归建立左右子树即可。
+
+图:
 
 ![1554711504651](assets/1554711504651.png)
 
-
+代码:
 
 ```java
 class Solution {
