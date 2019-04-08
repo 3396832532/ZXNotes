@@ -7,7 +7,13 @@
 * 目前项目正在初期，后面会不断完善(很多题目我都写过了，正在完善一些解析)。以后大概每天增加`2~4`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
-列表
+刷题策略(仅供参考):
+
+* 第一遍，先写出暴力解法。然后在花`5~10`分钟想最优解，想不出来就看答案。
+* 第二遍，尽量写出最优解，超过`30`分钟想不出来再看答案；
+* 第三遍，尽量写出最优解，超过`20`分钟想不出来再看答案；
+
+列表(之前不是按照顺序写的，但是后面我会补上前面空缺的)
 
 | 题号 | 题名和解题链接 | 分类 | 难度 |
 | ---- | ----------------------------------------------------------------------- | --------- | ------------- |
@@ -114,9 +120,9 @@
 | 101 | [Symmetric Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20101.%20Symmetric%20Tree.md) | Tree | Easy |
 | 102 | [Binary Tree Level Order Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20102.%20Binary%20Tree%20Level%20Order%20Traversal(%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E4%BF%9D%E5%AD%98).md) | Tree | Medium |
 | 103 | [Binary Tree Zigzag Level Order Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20103.%20Binary%20Tree%20Zigzag%20Level%20Order%20Traversal.md) | Tree | Medium |
-| 104 | | | |
-| 105 | | | |
-| 106 | [Construct Binary Tree from Inorder and Postorder Traversal](testtest) | | Medium |
+| 104 | [Maximum Depth of Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20104.%20Maximum%20Depth%20of%20Binary%20Tree.md) | Tree | Easy |
+| 105 | | Tree | |
+| 106 | [Construct Binary Tree from Inorder and Postorder Traversal]() | Tree | Medium |
 | 107 | | | |
 | 108 | | | |
 | 109 | | | |
