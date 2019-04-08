@@ -89,7 +89,7 @@
 | 76 |                                                              |      |      |
 | 77 |                                                              |      |      |
 | 78 | [Subsets](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2078.%20Subsets.md) | Search | Medium |
-| 79 | [Word Search](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2079.%20Word%20Search(DFS).md) |      |      |
+| 79 | [Word Search](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2079.%20Word%20Search(DFS).md) | Search | Medium |
 | 80 |                                                              |      |      |
 | 81 |                                                              |      |      |
 | 82 |                                                              |      |      |
