@@ -108,7 +108,7 @@
 | 95 |                                                              |      |      |
 | 96 |                                                              |      |      |
 | 97 |                                                              |      |      |
-| 98 | | | |
+| 98 | [Validate Binary Search Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%2098.%20Validate%20Binary%20Search%20Tree(%E5%88%A4%E6%96%AD%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E9%A2%97%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%BB%A5%E5%8F%8A%E5%88%A4%E6%96%AD%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91).md) | Tree | Medium |
 | 99 | | | |
 | 100 | | | |
 | 101 | | | |
