@@ -101,7 +101,7 @@
 | 88 |                                                              |      |      |
 | 89 |                                                              |      |      |
 | 90 | [Subset II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2090.%20Subsets%20II.md) | Search | Medium |
-| 91 |                                                              |      |      |
+| 91 | [Decode Ways](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2091.%20Decode%20Ways.md) | DP | Medium |
 | 92 |                                                              |      |      |
 | 93 |                                                              |      |      |
 | 94 |                                                              |      |      |
@@ -648,7 +648,7 @@
 | 636 | | | |
 | 637 | | | |
 | 638 | | | |
-| 639 | | | |
+| 639 | [Decode Ways II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20639.%20Decode%20Ways%20II.md) | DP | Hard |
 | 640 | | | |
 | 641 | | | |
 | 642 | | | |
