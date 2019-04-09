@@ -150,8 +150,8 @@
 | 136 | [Single Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Bit/LeetCode%20-%20136.%20Single%20Number.md) | Bit | Easy |
 | 137 | [Single Number II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Bit/LeetCode%20-%20137.%20Single%20Number%20II.md) | Bit | Medium |
 | 138 | [Copy List with Random Pointer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20138.%20Copy%20List%20with%20Random%20Pointer(%E5%90%AB%E6%9C%89%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8B%B7%E8%B4%9D).md) | List | Medium |
-| 139 | | | |
-| 140 | | | |
+| 139 | [Word Break](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20139.%20Word%20Break.md) | DP | Medium |
+| 140 | [Word Break II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20140.%20Word%20Break%20II.md) | DP | Hard |
 | 141 | | | |
 | 142 | | | |
 | 143 | | | |

@@ -1,10 +1,5 @@
-﻿## LeetCode - 145. Binary Tree Postorder Traversal(实现后序遍历)(三种非递归方式)
- - 递归
- - 双栈法
- - 设置`pre`结点法
- -  `morris`遍历
+# LeetCode - 145. Binary Tree Postorder Traversal
 
-***
 #### [题目链接](https://leetcode.com/problems/binary-tree-postorder-traversal/description/)
 
 > https://leetcode.com/problems/binary-tree-postorder-traversal/description/
@@ -12,8 +7,9 @@
 #### 题目
 ![在这里插入图片描述](images/145_t.png)
 
-### 递归
-这个很简单。
+## 1、递归
+
+第一种方法，递归。这个很简单。
 ```cpp
 class Solution {
 
@@ -71,16 +67,17 @@ public:
 };
 ```
 
-### 双栈法
+## 2、双栈法
+
+思路:
+
  - 我们前序遍历是：`中->左->右`，所以压栈的顺序是 `右->左`；
  - 我们可以实现遍历: `中->右->左`，所以压栈的顺序是  `左->右`；
- - 利用上面这个 ，我们遍历的时候是`中->右->左`，但是我们不遍历，将<font color = red>**这个压入另一个栈，最后逆序回来，就能得到左->右->中；**</font>
+ - 利用上面这个 ，我们遍历的时候是`中->右->左`，但是我们不遍历，将**这个压入另一个栈，最后逆序回来，就能得到左->右->中**；
 
-![这里写图片描述](images/145_s.png)
+图:
 
-![在这里插入图片描述](images/145_s2.png)
-
-
+<div algin="center"><img src="images/145_s2.png"></div><br>
 
 注意: 本来后面还需要用一个栈来逆序的，但是由于`List`有一个`addFirst`方法，所以可以省掉一个栈。两个栈的可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/79808127#t4)。
 ```java
@@ -111,37 +108,15 @@ class Solution {
     }
 }
 ```
-在`C++`中，可以使用`deque`来处理: 
-`C++`代码: 
 
-```cpp
-class Solution {
-public:
-    vector<int> postorderTraversal(TreeNode* root) {
-        if(!root)
-            return {};
-        deque<int>res; // 使用双端队列
-        stack<TreeNode*>s;        
-        s.push(root);
-        while(!s.empty()){
-            TreeNode* cur = s.top();
-            s.pop();
-            //下面这一步就是 reverse(print(root), visit(right), visit(left))
-            res.push_front(cur->val);  // 模拟最后逆转的过程,(从头部插入) 
-            if(cur->left)
-                s.push(cur->left);
-            if(cur->right)
-                s.push(cur->right);
-        }
-        return vector<int>(res.begin(), res.end());  // vector(begin,end):复制[begin,end)区间内另一个数组的元素到vector中        
-    }
-};
-```
-***
-### 设置`pre`结点
+## 3、设置`pre`结点
+
+思路:
 
  - 对于任一结点`p`，先将其入栈。若`p`不存在左孩子和右孩子，则可以直接访问它。或者`p`存在左孩子或者右孩子，但是左孩子和右孩子都已经被访问过了，则可以直接访问该结点。 
  - 若非上述两种情况，则将右孩子和左孩子依次入栈。这样可以保证每次取栈顶元素时，左孩子在右孩子前面被访问，根结点在左孩子和右孩子访问之后被访问。
+
+代码:
 
 ```java
 class Solution {
@@ -170,11 +145,10 @@ class Solution {
 }
 ```
 
+## 4、morris遍历
 
+`morris` 遍历看[这篇博客](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Tree/%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B9%8BMorris%E9%81%8D%E5%8E%86.md)。
 
-***
-### `morris`遍历
-`morris` 遍历看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/81669909)。
 ```java
 class Solution {
     //morris后续
