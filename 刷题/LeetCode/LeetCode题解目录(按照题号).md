@@ -136,7 +136,7 @@
 | 122 | | | |
 | 123 | | | |
 | 124 | [Binary Tree Maximum Path Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20124.%20Binary%20Tree%20Maximum%20Path%20Sum.md) | Tree | Hard |
-| 125 | | | |
+| 125 | [Valid Palindrome](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20125.%20Valid%20Palindrome.md) | 双指针 | Easy |
 | 126 | | | |
 | 127 | | | |
 | 128 | | | |
