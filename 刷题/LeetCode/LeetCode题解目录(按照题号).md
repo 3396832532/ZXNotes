@@ -163,7 +163,7 @@
 | 149 | [Max Points on a Line](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Math/LeetCode%20-%20149.%20Max%20Points%20on%20a%20Line(%E5%93%88%E5%B8%8C%E8%A1%A8%20%E3%80%81%E6%95%B0%E5%AD%A6).md) | Math、Map | Hard |
 | 150 | | | |
 | 151 | | | |
-| 152 | | | |
+| 152 | [Maximum Product Subarray](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20152.%20Maximum%20Product%20Subarray(%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E7%B4%AF%E4%B9%98%E7%A7%AF).md) | DP | Medium |
 | 153 | | | |
 | 154 | | | |
 | 155 | | | |
