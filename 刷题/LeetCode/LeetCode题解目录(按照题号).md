@@ -180,7 +180,7 @@
 | 166 | | | |
 | 167 | [Two Sum II - Input array is sorted](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20167.%20Two%20Sum%20II%20-%20Input%20array%20is%20sorted.md) | 双指针 | Easy |
 | 168 | | | |
-| 169 | | | |
+| 169 | [Majority Element](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DivideConquer/LeetCode%20-%20169.%20Majority%20Element%20(%E8%AE%A1%E6%95%B0%20%2B%20%E4%BD%8D%E8%BF%90%E7%AE%97%20%2B%20Partition%20%2B%20%E5%88%86%E6%B2%BB).md) | Bit、分治 | Easy |
 | 170 | | | |
 | 171 | | | |
 | 172 | | | |
