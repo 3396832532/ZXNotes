@@ -50,6 +50,11 @@ class Solution {
 }
 ```
 **这个就是设置一个虚拟的头结点，让我们不再需要特判链表的第一个元素**。
+
+<div align="center"><img src="assets/1554806021146.png"></div><br>
+
+代码:
+
 ```java
 class Solution {
 
