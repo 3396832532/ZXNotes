@@ -178,7 +178,7 @@
 | 164 | [Maximum Gap](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Bucket/LeetCode%20-%20164.%20Maximum%20Gap(%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D)(%E6%A1%B6).md) | Buckets | Hard |
 | 165 | | | |
 | 166 | | | |
-| 167 | | | |
+| 167 | [Two Sum II - Input array is sorted](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20167.%20Two%20Sum%20II%20-%20Input%20array%20is%20sorted.md) | 双指针 | Easy |
 | 168 | | | |
 | 169 | | | |
 | 170 | | | |

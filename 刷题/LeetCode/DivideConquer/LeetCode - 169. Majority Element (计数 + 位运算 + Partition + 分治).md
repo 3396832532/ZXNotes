@@ -14,9 +14,9 @@
 #### 题目
 ![在这里插入图片描述](images/169_t.png)
 
-***
-#### <font id = "1">直接排序
-<font color = red>方法一</font>: 直接排序，取中间的数，最简单的方法。
+
+## 1、直接排序
+方法一: 直接排序，取中间的数，最简单的方法。
 
 ```java
 class Solution{
@@ -26,9 +26,8 @@ class Solution{
     }
 }
 ```
-
-#### <font id = "2">`HashMap`计数
-<font color = red>方法二</font>: `HashMap`计数，然后检查`value(次数) >  n/2`即可。
+## 2、`HashMap`计数
+方法二: `HashMap`计数，然后检查`value(次数) >  n/2`即可。
 ```java
 class Solution {
     // HashMap count
@@ -43,32 +42,35 @@ class Solution {
     }
 }
 ```
-#### <font id = "3">利用二进制位运算
-<font color = red>方法三: 利用二进制位运算，检查每一个二进制位是否为`1`，如果是就累加`count`， 如果`>n/2`就置为`1`。</font>
+## 3、利用二进制位运算
+方法三: 利用二进制位运算，检查每一个二进制位是否为`1`，如果是就累加`count`， 如果`>n/2`就置为`1`。
 
 ![在这里插入图片描述](images/169_s.png)
+
+代码:
+
 ```java
 class Solution {
     // bit
     public int majorityElement(int[] nums) {
         int major = 0;
         for(int i = 0; i < 32; i++){ 
-            int mask = 1 << i;
             int count = 0;
-            for(int num : nums) if( (num&mask) != 0)
+            for(int num : nums) if( (num & (1 << i)) != 0)
                 count++;
-            if(count > nums.length/2)
-                major |= mask;
+            if(count > nums.length/2) major |= (1 << i);
         }
         return major;
     }
 }
 ```
-#### <font id = "4">维护更新方法
-<font color = red>方法四: </font>很巧妙的方法: 
+## 4、维护更新方法
+方法四: 很巧妙的方法: 
 
 * 维护一个`count`值和当前最多`major`，然后如果当前值 `==major`，则累加`count`；
 * 如果不是，就`--count`，最后的答案就是`major`，这是最好的方法，时间复杂度`O(N)`，空间`O(1)`；
+
+代码:
 
 ```java
 class Solution{
@@ -87,8 +89,11 @@ class Solution{
     }
 }
 ```
-#### <font id = "5">利用快排的Partition
-<font color = red>方法五: 利用快排的[**双路快速排序**](https://blog.csdn.net/zxzxzx0119/article/details/79826380#t8)</font>，也就是按照`key`将数组划分成，<font color  = blue>左边都<=key，右边都>=key</font>的数组，然后看返回的这个划分索引是不是等于`n/2`即可，如果不是，就按照类似二分的思想继续查找。
+## 5、利用快排的Partition
+方法五: 利用快排的[**双路快速排序**](https://blog.csdn.net/zxzxzx0119/article/details/79826380#t8)，也就是按照`key`将数组划分成，左边都`<=`key，右边都`>=`key的数组，然后看返回的这个划分索引是不是等于`n/2`即可，如果不是，就按照类似二分的思想继续查找。
+
+代码:
+
 ```java
 class Solution {
     // use partition 
@@ -131,11 +136,16 @@ class Solution {
 }
 ```
 
-#### <font id = "6">分治方法
-<font color = red>方法六: 分治解法</font>
+## 6、分治方法
+
+方法六: 分治解法
 
 * 递归求出左边的值`LS`和右边的值`RS`，如果左右相等，则直接返回；
 * 否则，统计当前`[L, R]`区间中`LS`和`RS`哪一个更多，哪个多就返回哪个；
+
+![1554798022404](assets/1554798022404.png)
+
+代码:
 
 ```java
 class Solution {
