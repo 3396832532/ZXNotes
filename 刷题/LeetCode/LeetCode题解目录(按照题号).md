@@ -131,7 +131,7 @@
 | 117 | | | |
 | 118 | | | |
 | 119 | | | |
-| 120 | | | |
+| 120 | [Traingle](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20120.%20Traingle%20%26%20Hdu%20-%202084.%20%E6%95%B0%E5%A1%94%E9%97%AE%E9%A2%98(%E7%AE%80%E5%8D%95dp).md) | DP | Medium |
 | 121 | | | |
 | 122 | | | |
 | 123 | | | |
