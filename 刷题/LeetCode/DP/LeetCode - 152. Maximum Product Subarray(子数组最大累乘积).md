@@ -10,17 +10,21 @@
 
 #### 题目
 ![在这里插入图片描述](images/152_t.png)
-##### <font color = red>这题和[LeetCode - 53](https://blog.csdn.net/zxzxzx0119/article/details/81807083)类似。</font>
+
+这题和[LeetCode - 53](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%2053.%20Maximum%20Subarray(%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%92%8C)(%E4%B8%80%E7%BB%B4dp).md)类似。
+
 ### 一维dp
 使用一个一维数组记录以每个位置结尾的最大累乘积，再使用一个`res`变量(记录结果)，记录每一个位置结尾`ends[i]`的最大值。
 
-如何快速求出所有以i位置结尾(`nums[i]`)的子数组的最大累乘积? 　**假设以`nums[i-1]`结尾的最大累乘积为`maxEnds[i-1]`，以`nums[i-1]`记为的最小累乘积为`minEnds[i-1]`，那么以`nums[i]`结尾的最大累乘积只有三种可能**
+如何快速求出所有以`i`位置结尾(`nums[i]`)的子数组的最大累乘积? 　**假设以`nums[i-1]`结尾的最大累乘积为`maxEnds[i-1]`，以`nums[i-1]`记为的最小累乘积为`minEnds[i-1]`，那么以`nums[i]`结尾的最大累乘积只有三种可能**
 
 *  可能是` maxEnds[i-1] * nums[i]`，这个是显然的，因为记录前面的最大值，如`[3,4,5]`；
-* 可能是 `minEnds[i-1] * nums[i]`，因为`minEnds[i-1]`和`nums[i]`都有可能是负数，如`[-2,-4]`；
-* 也有可能是 `nums[i]`自己；
+*  可能是 `minEnds[i-1] * nums[i]`，因为`minEnds[i-1]`和`nums[i]`都有可能是负数，如`[-2,-4]`；
+*  也有可能是 `nums[i]`自己；
 
-<font color = green>**则以这个结尾的最大值`maxEnds[i]`就是这三者中的最大的一个。 <font color = blue>而`minEnds[i]`的更新就是这三者中的最小的一个。**
+<div align="center"><img src="assets/1554796481482.png"></div><br>
+
+**则以这个结尾的最大值`maxEnds[i]`就是这三者中的最大的一个。而`minEnds[i]`的更新就是这三者中的最小的一个**。
 ```java
 class Solution {
 
@@ -45,7 +49,8 @@ class Solution {
 ```
 ***
 ### 滚动优化
-这里的滚动优化就是<font color = red>当前位置只依赖前一个位置的最大和最小值，所以只需要两个变量即可。</font>
+这里的滚动优化就是**当前位置只依赖前一个位置的最大和最小值，所以只需要两个变量即可**。
+
 优化空间: 
 
 ```java
@@ -70,9 +75,13 @@ class Solution {
 ***
 ### 递归版本
 能用`dp`的基本都能写出递归，能写出递归的都可以改`dp`；
+
 但是这里要注意：
+
 * 当从最后一个计算完之后，因为在`return`前记录的`res`，所以最后一个没有记录；
 * 所以在调用完函数之后，存储返回值，再比较一下`last`和`res`的值，然后返回；
+代码:
+
 ```java
 class Solution {
 
