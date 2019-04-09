@@ -152,12 +152,12 @@
 | 138 | [Copy List with Random Pointer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20138.%20Copy%20List%20with%20Random%20Pointer(%E5%90%AB%E6%9C%89%E9%9A%8F%E6%9C%BA%E6%8C%87%E9%92%88%E7%9A%84%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8B%B7%E8%B4%9D).md) | List | Medium |
 | 139 | [Word Break](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20139.%20Word%20Break.md) | DP | Medium |
 | 140 | [Word Break II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20140.%20Word%20Break%20II.md) | DP | Hard |
-| 141 | | | |
-| 142 | | | |
+| 141 | [Linked List Cycle](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20141.%20Linked%20List%20Cycle.md) | List | Easy |
+| 142 | [Linked List Cycle II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20142.%20Linked%20List%20Cycle%20II.md) | List | Medium |
 | 143 | | | |
 | 144 | | | |
-| 145 | | | |
-| 146 | | | |
+| 145 | [Binary Tree Postorder Traversal](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20145.%20Binary%20Tree%20Postorder%20Traversal(%E5%AE%9E%E7%8E%B0%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86)(%E4%B8%89%E7%A7%8D%E9%9D%9E%E9%80%92%E5%BD%92%E6%96%B9%E5%BC%8F).md) | Tree | Hard |
+| 146 | [LRU Cache](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20146.%20LRU%20Cache(LRU%E7%BC%93%E5%AD%98%E5%8F%98%E6%9B%B4%E7%AE%97%E6%B3%95)(LinkedHashMap%E5%BA%95%E5%B1%82).md) | List、Map | Hard |
 | 147 | | | |
 | 148 | | | |
 | 149 | | | |
@@ -171,7 +171,7 @@
 | 157 | | | |
 | 158 | | | |
 | 159 | | | |
-| 160 | | | |
+| 160 | [Intersectin of Two Linked Lists](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20160.%20Intersectin%20of%20Two%20Linked%20Lists.md) | List | Easy |
 | 161 | | | |
 | 162 | | | |
 | 163 | | | |
