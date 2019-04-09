@@ -1,10 +1,10 @@
-﻿### LeetCode - 120. Traingle & Hdu - 2084. 数塔问题(简单dp)
+# LeetCode - 120. Traingle & Hdu - 2084. 数塔问题(简单dp)
 * 递归
 * 二维dp
 * 一维dp
 *  Hdu2084数塔问题
 
-***
+
 #### [题目链接](https://leetcode.com/problems/triangle/)
 
 > https://leetcode.com/problems/triangle/
@@ -12,13 +12,19 @@
 #### 题目
 
 ![在这里插入图片描述](images/120_t.png)
-#### 递归
+## 递归
 递归的思路是从上到下：
 
 * 递归函数有两个主要的参数，记录行和列，表示当前行的位置是`matrix[r][c]`，要向下去求最小路径；
 * 如果行 `r == n`，说明不需要向下求，则直接返回`matrix[r][c]`；
 * 否则先给我递归求出从`matrix[r+1][c]`求出的最大路径，和从`matrix[r+1][c+1]`的最大路径，我取最大的，和自己相加即可；
 * 然后用二维数组`map`记忆化即可；
+
+图: 
+
+![1554768710141](assets/1554768710141.png)
+
+代码:
 
 ```java
 class Solution {
@@ -51,11 +57,16 @@ class Solution {
 }
 ```
 ***
-#### 二维dp
+## 二维dp
 `dp`就是记忆化的反方向，从下到上求解: 
 
 * 初始化最后一行的就是本来的值，代表的就是从这一行往下不需要求了；
 * 然后就是往上递推即可；
+
+图:
+
+<div align="center"><img src="assets/1554769081043.png"></div><br>
+代码:
 
 ```java
 class Solution {
@@ -80,13 +91,13 @@ class Solution {
     }
 }
 ```
-#### 一维dp
+## 一维dp
 滚动优化也需要注意滚动的方向：
 
-* 因为`dp[i][j]`依赖 `dp[i+1][j]` 和<font color  = red>`dp[i+1][j+1]`</font>，所以不能先更新`dp[i+1][j+1]`；
+* 因为`dp[i][j]`依赖 `dp[i+1][j]` 和`dp[i+1][j+1]`，所以不能先更新`dp[i+1][j+1]`；
 * 所以滚动的方向是从`j = i `到`j = 0`；
 
-![在这里插入图片描述](images/120_s.png)
+代码:
 ```java
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
@@ -112,12 +123,13 @@ class Solution {
 ```
 
 ***
-#### Hdu2084数塔问题
+## Hdu2084数塔问题
 #### [题目链接](http://acm.hdu.edu.cn/showproblem.php?pid=2084)
 
 > http://acm.hdu.edu.cn/showproblem.php?pid=2084
 
-就是从求最小路径和变成求最大路径和，思想没变。
+就是从求最小路径和变成求最大路径和，做法是一样的。
+
 ```java
 import java.io.BufferedInputStream;
 import java.util.Scanner;
