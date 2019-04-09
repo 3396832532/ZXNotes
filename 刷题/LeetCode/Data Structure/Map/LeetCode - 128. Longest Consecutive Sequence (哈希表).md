@@ -1,4 +1,4 @@
-﻿## LeetCode - 128. Longest Consecutive Sequence (哈希表)
+# LeetCode - 128. Longest Consecutive Sequence (哈希表)
 
 #### [题目链接](https://leetcode.com/problems/longest-consecutive-sequence/)
 
@@ -8,13 +8,13 @@
 ![在这里插入图片描述](images/128_t.png)
 
 
-#### 解析
+## 解析
 第一种方法: 
 
 
-* 使用一个`HashSet`来存储对应的值，<font color = blue>**一开始先将所有的值都加入`set`**</font>；
+* 使用一个`HashSet`来存储对应的值，**一开始先将所有的值都加入`set`**；
 
-* 遍历数组的每一个元素，每次去检查当前元素`num`的前一个元素`num - 1`是不是在`set`中，如果是，<font color = red>说明`num`不是最长长度的起点，跳过</font>；
+* 遍历数组的每一个元素，每次去检查当前元素`num`的前一个元素`num - 1`是不是在`set`中，如果是，说明`num`不是最长长度的起点，跳过；
 
 * 如果不是，则在`set`集合中不断的每次`+1`，(也就是不断检查`num + 1、num + 2、num + 3、num + 4.....`在不在`set`中)，并记录查到的元素个数(也就是长度)，然后更新结果(记录最大长度)`res`即可；
 
@@ -23,6 +23,9 @@
 看两个例子: 
 
 ![在这里插入图片描述](images/128_s.png)
+
+代码:
+
 ```java
 import java.io.*;
 import java.util.*;
@@ -59,18 +62,19 @@ class Solution {
 
 第二种解法: 
 
-* 用一个`HashMap`记录`<key , value > = ` <font color = red><数组的值，这个值如果作为边界(左/右)时的最大长度></font>。整个过程和动态规划有点类似；
+* 用一个`HashMap`记录`<key , value > = ` <数组的值，这个值如果作为边界(左/右)时的最大长度>。整个过程和动态规划有点类似；
 
-* 遍历数组的每一个元素，先得到`num - 1`和`num + 1`在`map`中对应的`value`，如果两个`value`都为空，说明此时`num`两边都没有相邻的元素，所以`put(num, 1)`，表示`num`作为<font color = blue>左/右</font>边界的最大长度为`1`；
-* 如果`map.get(num - 1) == null && map.get(num + 1) != null`，说明此时`num`可以作为<font color= green>右边界</font>，而此时不但要更新`num`的`value`，也要更新`nums[num - map.get(num - 1)]`的`value`，这个`value`就是`map.get(num - 1) + 1`，所以说这个过程有点类似动态规划；
-* 同理，如果`map.get(num - 1) != null && map.get(num + 1) == null`，说明此时`num`可以作为<font color = green>左边界</font>，而此时不但要更新`num`的`value`，也要更新`nums[num + map.get(num + 1)]`的`value`，这个`value`就是`map.get(num + 1) + 1`。
+* 遍历数组的每一个元素，先得到`num - 1`和`num + 1`在`map`中对应的`value`，如果两个`value`都为空，说明此时`num`两边都没有相邻的元素，所以`put(num, 1)`，表示`num`作为**左/右**边界的最大长度为`1`；
+* 如果`map.get(num - 1) == null && map.get(num + 1) != null`，说明此时`num`可以作为右边界，而此时不但要更新`num`的`value`，也要更新`nums[num - map.get(num - 1)]`的`value`，这个`value`就是`map.get(num - 1) + 1`，所以说这个过程有点类似动态规划；
+* 同理，如果`map.get(num - 1) != null && map.get(num + 1) == null`，说明此时`num`可以作为**左边界**，而此时不但要更新`num`的`value`，也要更新`nums[num + map.get(num + 1)]`的`value`，这个`value`就是`map.get(num + 1) + 1`。
 
-* 如果`map.get(num - 1) != null && map.get(num + 1) != null`，则此时同时可以作为<font color= green>左右边界，说明它是连接两边的桥梁</font>，所以要同时更新`num、nums[num - map.get(num - 1)]、nums[num + map.get(num + 1)] `的值为`map.get(num - 1) + map.get(num + 1) + 1`；
+* 如果`map.get(num - 1) != null && map.get(num + 1) != null`，则此时同时可以作为**左右边界**，说明它是连接两边的桥梁，所以要同时更新`num、nums[num - map.get(num - 1)]、nums[num + map.get(num + 1)] `的值为`map.get(num - 1) + map.get(num + 1) + 1`；
 
 看一个例子:
 
-
 ![在这里插入图片描述](images/128_s2.png)
+
+代码:
 
 ```java
 import java.io.*;
@@ -118,10 +122,6 @@ class Solution {
     }
 }
 ```
-
-
-
-***
 
 `C++`代码: 
 
