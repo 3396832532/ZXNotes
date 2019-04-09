@@ -147,8 +147,8 @@
 | 133 | | | |
 | 134 | | | |
 | 135 | | | |
-| 136 | | | |
-| 137 | | | |
+| 136 | [Single Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Bit/LeetCode%20-%20136.%20Single%20Number.md) | Bit | Easy |
+| 137 | [Single Number II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Bit/LeetCode%20-%20137.%20Single%20Number%20II.md) | Bit | Medium |
 | 138 | | | |
 | 139 | | | |
 | 140 | | | |
