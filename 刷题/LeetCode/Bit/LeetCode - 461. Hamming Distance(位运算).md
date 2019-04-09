@@ -12,8 +12,6 @@
 
 ![在这里插入图片描述](images/461_t.png)
 
-
-
 ***
 ### 方法一
 思路是: 
@@ -62,18 +60,18 @@ class Solution {
 
 然后关键在`xor &= (xor - 1);`这行代码功能。
 
-<font color = red>**将`xor`的二进制值中，最后一个`1`置`0`，其它不变。即达到从`xor`的尾部，删除一个`1`的效果。**</font>
+**将`xor`的二进制值中，最后一个`1`置`0`，其它不变。即达到从`xor`的尾部，删除一个`1`的效果**。
 
-**例如  : <font color = blue>101101</font>** 
+**例如  : 101101** 
   &nbsp;&nbsp;&nbsp; `101101`
  & `101100`
 =&nbsp;`101100`
-**再如 :<font color = blue> 101100</font>**
+**再如 : 101100**
   &nbsp;&nbsp;&nbsp;  `101100`
  & `101011`
 =&nbsp;`101000`
 
-<font color = red>所以程序就变成了可以删除多少个`1`，`res`就加多少次，也就是我们要的结果。</font>
+所以程序就变成了可以删除多少个`1`，`res`就加多少次，也就是我们要的结果。
 ```java
 class Solution {
     public int hammingDistance(int x, int y) {
@@ -87,4 +85,3 @@ class Solution {
     }
 }
 ```
-***

@@ -5,7 +5,7 @@
 * 几乎每个题目(除极简单或者不好画图的题目)用**图的方式**结合部分文字解释展现出来。
 * 大部分题目我都尽我所能的总结了**尽可能多的解法**；
 * **定位**到某个题目，`chrome`浏览器按`ctrl + f`然后搜索序号或者题目名字即可(非常实用，我一般都用这个方法定位到某个题目)；
-* 目前项目正在初期，后面会不断完善(很多题目我都写过了，正在完善一些解析)。以后大概每天增加`2~5`题；
+* 目前项目正在初期，后面会不断完善(很多题目我都写过了，正在完善一些图解)。以后大概每天增加`2~5`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
 列表(**之前不是按照顺序写的，但是后面我会补上前面空缺的**)
@@ -139,7 +139,7 @@
 | 125 | [Valid Palindrome](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20125.%20Valid%20Palindrome.md) | 双指针 | Easy |
 | 126 | [Word Ladder II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%20126.%20Word%20Ladder%20II.md) | Search | Hard |
 | 127 | [Word Ladder](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%20127.%20Word%20Ladder.md) | Search | Medium |
-| 128 | | | |
+| 128 | [Longest Consecutive Sequence](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20128.%20Longest%20Consecutive%20Sequence%20(%E5%93%88%E5%B8%8C%E8%A1%A8).md) | Map | |
 | 129 | | | |
 | 130 | | | |
 | 131 | | | |

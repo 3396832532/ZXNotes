@@ -123,7 +123,66 @@ class Solution {
 }
 ```
 
-`C++`代码: 
+另外还有一种并查集的代码，和上面有点类似，就是将有`num- 1`和`num + 1`的下标都加入到同一个集合中，可以基于`size`的并查集，最后取一个最大的集合即可。
+
+```java
+import java.util.*;
+
+class Solution {
+
+    public int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        for (int num : nums) if (!map.containsKey(num)) map.put(num, count++);
+        UnionFind uf = new UnionFind(count);
+        int res = 1;
+        for (int num : nums) {
+            if (map.containsKey(num - 1)) uf.union(map.get(num), map.get(num - 1));
+            if (map.containsKey(num + 1)) uf.union(map.get(num), map.get(num + 1));
+            res = Math.max(res, uf.sz[uf.findRoot(map.get(num))]);
+        }
+        return res;
+    }
+
+    class UnionFind {
+        int[] parent;
+        int[] sz;
+
+        public UnionFind(int n) {
+            parent = new int[n];
+            sz = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                sz[i] = 1;
+            }
+        }
+
+        public int findRoot(int p) {
+            while (p != parent[p]) {
+                parent[p] = parent[parent[p]];
+                p = parent[p];
+            }
+            return p;
+        }
+
+        public void union(int a, int b) {
+            int aR = findRoot(a);
+            int bR = findRoot(b);
+            if (aR == bR) return;
+            if (sz[aR] > sz[bR]) {
+                parent[bR] = aR;
+                sz[aR] += sz[bR];
+            } else {
+                parent[aR] = bR;
+                sz[bR] += sz[aR];
+            }
+        }
+    }
+}
+```
+
+相关`C++`代码: 
 
 
 ```java
