@@ -160,7 +160,7 @@
 | 146 | [LRU Cache](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20146.%20LRU%20Cache(LRU%E7%BC%93%E5%AD%98%E5%8F%98%E6%9B%B4%E7%AE%97%E6%B3%95)(LinkedHashMap%E5%BA%95%E5%B1%82).md) | List、Map | Hard |
 | 147 | | | |
 | 148 | | | |
-| 149 | | | |
+| 149 | [Max Points on a Line](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Math/LeetCode%20-%20149.%20Max%20Points%20on%20a%20Line(%E5%93%88%E5%B8%8C%E8%A1%A8%20%E3%80%81%E6%95%B0%E5%AD%A6).md) | Math、Map | Hard |
 | 150 | | | |
 | 151 | | | |
 | 152 | | | |
