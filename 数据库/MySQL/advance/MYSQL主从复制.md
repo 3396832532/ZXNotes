@@ -40,8 +40,6 @@ Mysql的复制（replication）是一个**异步的复制**。
 
 演示主机为`Windows` (配置文件为`my.ini`文件)，从机为`Linux`（配置文件为`my.cnf`）
 
-
-
 ### 1、主机配置(windows的my.ini)
 
 * 1)、[必须]主服务器唯一ID；
