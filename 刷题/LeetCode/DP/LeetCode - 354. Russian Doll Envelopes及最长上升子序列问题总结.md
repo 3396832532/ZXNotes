@@ -1,9 +1,9 @@
 ﻿## LeetCode - 354. Russian Doll Envelopes及最长上升子序列问题总结
 
- - [最长上升子序列普通dp法](最长上升子序列普通dp法)
- - [最长上升子序列解的打印](最长上升子序列解的打印)
- - [最长上升子序列NlogN法](最长上升子序列nlogn法)
- - [LeetCode - 354. Russian Doll Envelopes](leetcode---354-russian-doll-envelopes)
+ - [最长上升子序列普通dp法](#最长上升子序列普通dp法)
+ - [最长上升子序列解的打印](#最长上升子序列解的打印)
+ - [最长上升子序列NlogN法](#最长上升子序列nlogn法)
+ - [LeetCode - 354. Russian Doll Envelopes](#leetcode---354-russian-doll-envelopes)
 
 ***
 [**LeetCode300 测试最长上升子序列**](https://leetcode.com/problems/longest-increasing-subsequence/)
