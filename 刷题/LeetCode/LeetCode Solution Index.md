@@ -315,7 +315,7 @@
 | 301 | | | |
 | 302 | | | |
 | 303 | [Range Sum Query - Immutable](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/SegmentTree/LeetCode%20-%20303.%20Range%20Sum%20Query%20-%20Immutable(%E7%AE%80%E5%8D%95dp%E6%88%96%E8%80%85%E7%BA%BF%E6%AE%B5%E6%A0%91).md) | DP、线段树 | Easy |
-| 304 | | | |
+| 304 | [Range Sum Query 2D - Immutable](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20221.%20Maximal%20Square(%E6%B1%82%E6%9C%80%E5%A4%A7%E7%9A%84%E5%85%A8%E6%98%AF1%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2).md#leetcode---304-range-sum-query-2d---immutable) | DP | Medium |
 | 305 | | | |
 | 306 | | | |
 | 307 | [Range Sum Query - Mutable](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/SegmentTree/%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8ALeetCode%20-%20307.%20Range%20Sum%20Query%20-%20Mutable.md#leetcode---307-range-sum-query---mutable) | 线段树 | Medium |
