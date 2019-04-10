@@ -245,7 +245,7 @@
 | 231 | | | |
 | 232 | | | |
 | 233 | | | |
-| 234 | | | |
+| 234 | [Palindrome Linked List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20234.%20Palindrome%20Linked%20List(%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8).md) | List | Easy |
 | 235 | | | |
 | 236 | | | |
 | 237 | | | |

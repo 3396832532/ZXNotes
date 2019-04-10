@@ -1,5 +1,5 @@
-## LeetCode - 241. Different Ways to Add Parentheses(分治、dp)
-***
+# LeetCode - 241. Different Ways to Add Parentheses(分治、dp)
+
 #### [题目链接](https://leetcode.com/problems/different-ways-to-add-parentheses/)
 
 > https://leetcode.com/problems/different-ways-to-add-parentheses/
@@ -12,14 +12,17 @@
 
 * 递归函数，遍历当前字符串，只要有符号是`+`、`-`、`*`的就将整个字符串分开成两半；
 * 然后左边一半的字符串`lstr`去递归求出那个解的集合，右边的`rstr`也求出解的集合；
-* 最后关键的是当前的字符串的解是左和右的<font color= blue>**笛卡尔积**</font>；
+* 最后关键的是当前的字符串的解是左和右的**笛卡尔积**；
 * 然后记得记忆化；
+
+图:
 
 ![在这里插入图片描述](images/241_s.png)
 
-
 代码: 
+
 Java版本: 
+
 ```java
 class Solution {
     private HashMap<String, List<Integer>> map;
