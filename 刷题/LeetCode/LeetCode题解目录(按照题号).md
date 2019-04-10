@@ -225,7 +225,7 @@
 | 211 | [Add and Search Word - Data structure design](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%20211.%20Add%20and%20Search%20Word%20-%20Data%20structure%20design(%E5%AD%97%E5%85%B8%E6%A0%91%E5%92%8C%E9%80%92%E5%BD%92).md) | Trie | Medium |
 | 212 | | | |
 | 213 | | | |
-| 214 | | | |
+| 214 | [Shortest Palindrome](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/KMP/LeetCode%20-%20214.%20Shortest%20Palindrome(KMP%E5%92%8CManacher%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3).md) | KMP、Manacher | Hard |
 | 215 | | | |
 | 216 | | | |
 | 217 | | | |

@@ -1,11 +1,10 @@
 ﻿## LeetCode - 215. Kth Largest Element in an Array(6种写法(包括BFPRT算法))
 
- - 最小堆(非递归调整)
- - 最小堆(递归调整)
+ - 最小堆
  - 最大堆
- - Hash思想
  - 分治解法(利用快排的partition过程)
  - BFPRT算法
+ - Hash
 
 ***
 #### [题目链接](https://leetcode.com/problems/kth-largest-element-in-an-array/description/)
@@ -16,12 +15,16 @@
 
 ![在这里插入图片描述](images/215_t.png)
 
+ 在未排序的数组中找到第` k `个最大的元素。注意这个和找第`K`小的数，以及求出最小(大)的`k`个数是一样的。
 
+### 最小堆
 
- 在未排序的数组中找到第` k `个最大的元素。<font color = red>注意这个和找第`K`小的数，以及求出最小(大)的`k`个数是一样的，包括剑指`Offer`里面的[找第K小的数。](https://blog.csdn.net/zxzxzx0119/article/details/79807343#t4)</font>
-
-### 最小堆(非递归调整)
 **最小堆的方法就是先用`K`个数建成一个堆，然后后面的数和堆顶(最小的数)比较，如果大于堆顶，就替换这个堆顶，然后调整堆，最后，堆顶就是答案。这个方法可以达到`O(N*logK)`的时间复杂度**
+
+<div align="center"><img src="assets/1554863091470.png"></div><br>
+
+堆的话可以用`api`的`PriorityQueue`，也可以自己写一下。
+
 ```java
 class Solution {
     public int findKthLargest(int[] nums, int k) {
@@ -70,8 +73,6 @@ class Solution {
 }  
 ```
 
-***
-### 最小堆(递归调整)
 这里只是把上面调整堆的过程改成递归写一下。
 
 ```java
@@ -169,35 +170,10 @@ class Solution {
     }
 }
 ```
-***
-### Hash思想
-这个是提交的时候，点击了最快的那个解答看了一下，觉得有点厉害。
-```java
-class Solution {
-    /** Hash思想 */
-    public int findKthLargest(int[] nums, int k) {
-        if (nums == null || nums.length == 0) return Integer.MAX_VALUE;
-        int max = nums[0], min = nums[0];
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] > max) max = nums[i];
-            if (nums[i] < min) min = nums[i];
-        }
-        int[] arr = new int[max - min + 1];
-        for (int n : nums) arr[max - n]++;
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
-            if (sum >= k) {
-                return max - i;
-            }
-        }
-        return 0;
-    }
-}
-```
+
 ***
 ### 分治解法(利用快排的partition过程)
-这个方法就是利用快排的`partition`将数组分成左边部分大于某个数，中间部分等于某个数，右边部分小于某个数(<font color = red>如果是求第`k`小的就是左边小于某个数，中间等于某个数，右边大于某个数</font>),然后我们每次划分之后，递归的从左边或者从右边去找第`K`大的数，直到找到在等于部分的。
+这个方法就是利用快排的`partition`将数组分成左边部分大于某个数，中间部分等于某个数，右边部分小于某个数(如果是求第`k`小的就是左边小于某个数，中间等于某个数，右边大于某个数),然后我们每次划分之后，递归的从左边或者从右边去找第`K`大的数，直到找到在等于部分的。
 ```java
 class Solution {
     /** 分治 */
@@ -244,13 +220,15 @@ class Solution {
 ```
 ***
 ### BFPRT算法
-这个方法其实是在上面的分治方法上面的改进，唯一的不同就是<font color = red>寻找那个划分的数的不同</font>，上面的数是随机生成的数，而`BFPRT`算法能找到那样一个数，使得划分的时候左右两边相对均匀，看下面的具体的求解过程: 
+这个方法其实是在上面的分治方法上面的改进，唯一的不同就是寻找那个划分的数的不同，上面的数是随机生成的数，而`BFPRT`算法能找到那样一个数，使得划分的时候左右两边相对均匀，看下面的具体的求解过程: 
 
-![这里写图片描述](https://img-blog.csdn.net/20180808151557153?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![1554862854102](assets/1554862854102.png)
 
 看下面的一个例子：
 
-![这里写图片描述](https://img-blog.csdn.net/20180808152258937?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+<div align="center"><img src="assets/1554862777485.png"></div><br>
+
+代码:
 
 ```java
 class Solution {
@@ -338,7 +316,34 @@ class Solution {
 }
 ```
 
-**只要得到了第`K`(小/大)的数，要得到最小(大)的`K`个数，就很简单了，再遍历一遍就可以了，如下面的函数，得到最小的`K`个数:** 
+### Hash思想
+这个是提交的时候，点击了最快的那个解答看了一下，觉得有点厉害。
+```java
+class Solution {
+    /** Hash思想 */
+    public int findKthLargest(int[] nums, int k) {
+        if (nums == null || nums.length == 0) return Integer.MAX_VALUE;
+        int max = nums[0], min = nums[0];
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > max) max = nums[i];
+            if (nums[i] < min) min = nums[i];
+        }
+        int[] arr = new int[max - min + 1];
+        for (int n : nums) arr[max - n]++;
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+            if (sum >= k) {
+                return max - i;
+            }
+        }
+        return 0;
+    }
+}
+```
+
+
+**只要得到了第`K`(小/大)的数，要得到最小(大)的`K`个数，就很简单了，再遍历一遍就可以了，如下面的函数，得到最小的`K`个数**:
 
 ```java
     public int[] getMinKNums(int[] arr, int k) {
