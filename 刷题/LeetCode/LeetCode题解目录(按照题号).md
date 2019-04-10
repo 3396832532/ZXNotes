@@ -274,9 +274,9 @@
 | 260 | | | |
 | 261 | | | |
 | 262 | | | |
-| 263 | [Ugly Number]() | | |
-| 264 | [Ugly Number II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/Other/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer%20-%2033%20-%20%E4%B8%91%E6%95%B0.md) | | |
-| 265 | | | |
+| 263 | [Ugly Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20263.%20Ugly%20Number.md) | 模拟 | Easy |
+| 264 | [Ugly Number II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/Other/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer%20-%2033%20-%20%E4%B8%91%E6%95%B0.md) | 堆、DP | Medium |
+|  | | | |
 | 266 | | | |
 | 267 | | | |
 | 268 | | | |
