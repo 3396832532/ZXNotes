@@ -1,13 +1,15 @@
 ﻿## LeetCode - 208. Implement Trie (Prefix Tree)以及实现字典树(前缀树)
  - 基础知识和结构
  - 字符串的插入
- -  统计某个字符串的数量 || 查询是否有某个字符串
+ - 统计某个字符串的数量 || 查询是否有某个字符串
  - 统计以某个字符串为前缀的字符串数量  ||  是否有某个前缀
  - 字符串的删除
  - 完整测试代码
  - 题目解析　
  - 使用Map来保存next
  - 更多字典树
+
+***
 
 
 ### 基础知识和结构
@@ -48,15 +50,10 @@ public class Trie {
 
 ![这里写图片描述](images/t2.png)
 
-
-
-再如:  **树中有`"abc","ab","ab","abd","bc","bd","cd","cde","ce"`总共`9`个字符串。如下的结构:** 
+再如:  **树中有`"abc","ab","ab","abd","bc","bd","cd","cde","ce"`总共`9`个字符串。如下的结构**: 
 
 ![这里写图片描述](images/t3.png)
 
-
-
-***
 ### 字符串的插入
 
  - 遍历每个字符，算出每个`字符-'a'`的值，表示的是在结点儿子中的位置；
@@ -142,6 +139,8 @@ public class Trie {
  - **否则只是将结点的`path--`就可以了。**
 
 ![这里写图片描述](https://img-blog.csdn.net/20180908115421994?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+代码:
 
 ```java
   public void remove(String word){
@@ -308,8 +307,6 @@ public class Trie {
 #### 题目
 ![在这里插入图片描述](images/t4.png)
 
-
-
 #### 解析
 运用上面的操作完全能解决这个问题：
 
@@ -390,9 +387,7 @@ class Trie {
 ```
 ***
 ### 使用Map来保存next
-还有一种写法就是 
-
- - 使用`Map`来保存`next`数组，这样不只可以存`26`或者`52`个孩子: 
+还有一种写法就是 : 使用`Map`来保存`next`数组，这样不只可以存`26`或者`52`个孩子: 
 
 还是上面那个题目代码: 
 ```java
@@ -490,10 +485,10 @@ class Trie {
 ***
 ### 更多字典树
 
- - **压缩字典树；**
+ - **压缩字典树**
 
 ![这里写图片描述](images/t5.png)
 
- - **三分搜索树；**
+ - **三分搜索树**
 
 ![这里写图片描述](images/t6.png)
