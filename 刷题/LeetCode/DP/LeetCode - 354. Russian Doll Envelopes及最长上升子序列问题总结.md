@@ -1,19 +1,20 @@
 ﻿## LeetCode - 354. Russian Doll Envelopes及最长上升子序列问题总结
 
- - 最长上升子序列普通dp法
- - 最长上升子序列解的打印
- - 最长上升子序列NlogN法
- - LeetCode - 354. Russian Doll Envelopes
+ - [最长上升子序列普通dp法](最长上升子序列普通dp法)
+ - [最长上升子序列解的打印](最长上升子序列解的打印)
+ - [最长上升子序列NlogN法](最长上升子序列nlogn法)
+ - [LeetCode - 354. Russian Doll Envelopes](leetcode---354-russian-doll-envelopes)
 
 ***
 [**LeetCode300 测试最长上升子序列**](https://leetcode.com/problems/longest-increasing-subsequence/)
 
 ### 最长上升子序列普通dp法
-> 生成长度为`N`的数组`dp`，`dp[i]`表示的是<font color = red>在以`arr[i]`这个数结尾的情况下，`arr[0...i]`中的最长递增子序列长度</font>。
+> 生成长度为`N`的数组`dp`，`dp[i]`表示的是在以`arr[i]`这个数结尾的情况下，`arr[0...i]`中的最长递增子序列长度。
 > 
  - 对第一个数`arr[0]`来说，`dp[0] = 1`，最长递增子序列就是自己。
- - 当计算到`dp[i]`的时候，最长递增子序列要以`arr[i]`结尾，所以我们在`arr[0....i-1]`中所有比`arr[i]`小的数可以作为最长递增子序列的倒数第二个数，这些数中，哪个的最长递增子序列更大，就选择哪个。即<font color = red>dp[i] = max(dp[j] + 1) ，0 <= j < i，arr[j] < arr[i]</font>；
-	
+ - 当计算到`dp[i]`的时候，最长递增子序列要以`arr[i]`结尾，所以我们在`arr[0....i-1]`中所有比`arr[i]`小的数可以作为最长递增子序列的倒数第二个数，这些数中，哪个的最长递增子序列更大，就选择哪个。即`dp[i] = max(dp[j] + 1) ，0 <= j < i，arr[j] < arr[i]`；
+代码:
+
 ```java
  /**
  * dp[i]表示以arr[0]结尾的情况下,arr[0...i]中的最大递增子序列
@@ -106,8 +107,10 @@ class Solution {
 >根据上面的方法可以求得`dp`数组，我们根据`dp`数组就可以得到最长上升子序列的解。
 >
  - 从`dp`数组中的最大值`dp[maxi]`表示的是以`arr[maxi]`结尾的，而且是最长的上升子序列；
- - 我们从`maxi`往前面找，如果前面的某个`dp[i]`，<font color = red>**满足arr[i] < arr[maxi] 且dp[maxi] = dp[i] + 1**</font>，就说明这个是我们找最长递增子序列时候取的值，可以作为最长递增子序列的倒数第二个数。
+ - 我们从`maxi`往前面找，如果前面的某个`dp[i]`，**满足arr[i] < arr[maxi] 且dp[maxi] = dp[i] + 1**，就说明这个是我们找最长递增子序列时候取的值，可以作为最长递增子序列的倒数第二个数。
  - 然后依次往前找，可以得到解。
+
+代码:
 
 ```java
     public static int[] getLis(int[] arr,int[] dp){
@@ -199,7 +202,7 @@ class Solution {
 
  #### 题目
 
-![](images/354_t.png)
+![img.png](images/354_t.png)
 
 ### 解析
  求解过程：先按`a`从小到大进行排序，当`a`相同时，按`b`从大到小排序。然后求解`b`的最长递增子序列。
