@@ -217,7 +217,7 @@
 | 203 |  | | |
 | 204 |  | | |
 | 205 | | | |
-| 206 | [Reverse Linked List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20206.%20Reverse%20Linked%20List%E5%8D%95%E9%93%BE%E8%A1%A8%E5%8F%8D%E8%BD%AC(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92)(%E4%BB%A5%E5%8F%8A%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E7%9A%84%E5%8F%8D%E8%BD%AC).md) | List | Medium |
+| 206 | [Reverse Linked List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20206.%20Reverse%20Linked%20List.md) | List | Medium |
 | 207 | | | |
 | 208 | | | |
 | 209 | | | |
