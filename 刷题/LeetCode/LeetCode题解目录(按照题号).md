@@ -1,4 +1,4 @@
-# 图解LeetCode
+图解LeetCode
 
 说明:
 
@@ -294,7 +294,7 @@
 | 280 | | | |
 | 281 | | | |
 | 282 | | | |
-| 283 | | | |
+| 283 | [Move Zeroes](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20283.%20Move%20Zeroes(%E7%A7%BB%E5%8A%A8%E9%9B%B6)(%E7%AE%80%E5%8D%95%E9%A2%98)(%E4%B8%89%E7%A7%8D%E5%86%99%E6%B3%95).md) | 双指针 | Easy |
 | 284 | | | |
 | 285 | | | |
 | 286 | | | |
