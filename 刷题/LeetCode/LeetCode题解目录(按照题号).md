@@ -219,7 +219,7 @@
 | 205 | | | |
 | 206 | [Reverse Linked List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20206.%20Reverse%20Linked%20List.md) | List | Easy |
 | 207 | [Course Schedule](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Graph/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/Uva%20-%2010305.%20Ordering%20Tasks%20_%20LeetCode%20-%20207.%20Course%20Schedule.md#leetcode---207-course-schedule) | 拓扑排序 | Medium |
-| 208 | | | |
+| 208 | [Implement Trie Prefix Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/Trie/LeetCode%20-%20208.%20Implement%20Trie%20(Prefix%20Tree)%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AD%97%E5%85%B8%E6%A0%91(%E5%89%8D%E7%BC%80%E6%A0%91).md) | Trie | Medium |
 | 209 | | | |
 | 210 | | | |
 | 211 | | | |
