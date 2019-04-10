@@ -1,4 +1,4 @@
-﻿### LeetCode - 283. Move Zeroes(移动零)(简单题)(三种写法)
+# LeetCode - 283. Move Zeroes(移动零)(简单题)(三种写法)
 
  - O(n)空间，O(n)时间
  - O(1)空间，O(n)时间
@@ -35,9 +35,13 @@ class Solution {
 ### O(1)空间，O(n)时间
 这个就稍微具有一点技巧性，可以说是使用了双指针吧，也就是在前面记录一个指针`k`，在我们另一个指针遍历
 
-` i `的时候，只要当前的元素` != 0`，就将这个元素放到相应的k指针指向的位置，如果`i == k` ，我们也可以放到
+` i `的时候，只要当前的元素` != 0`，就将这个元素放到相应的`k`指针指向的位置，如果`i == k` ，我们也可以放到那里，不会出错。
 
-那里，不会出错。
+图:
+
+<div algin="center"><img src="assets/1554876914333.png"></div><br>
+
+代码:
 
 ```java
 class Solution {
@@ -60,25 +64,31 @@ class Solution {
  - 我们遍历到一个元素的时候，如果`nums[i] != 0`，就可以直接`i `位置的和` k `位置的交换；
  - 这样我们最后甚至都不需要再把`0`填充进去，只需要一次遍历就可以，效率又提高一点。
 
+图:
+
+<div align="center"><img src="assets/1554877108236.png"></div><br>
+
+代码:
+
 ```java
 class Solution {
-     // [k,i]为0
-     public void moveZeroes(int[] nums) {
-         int k = 0; 
-         for(int i = 0; i < nums.length; i++){
-              if(nums[i] != 0){
-                  if(i != k)//另一个小优化
-                      swap(nums,i,k);
-                  k++;
-              }
-         }
-     }
-     
-     public void swap(int[] arr,int i,int j){
-         int t = arr[i];
-         arr[i] = arr[j];
-         arr[j] = t;
-     }
+    // [k,i]为0
+    public void moveZeroes(int[] nums) {
+        int k = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                if (i != k)//另一个小优化
+                    swap(nums, i, k);
+                k++;
+            }
+        }
+    }
+
+    public void swap(int[] arr, int i, int j) {
+        int t = arr[i];
+        arr[i] = arr[j];
+        arr[j] = t;
+    }
 }
 ```
 
