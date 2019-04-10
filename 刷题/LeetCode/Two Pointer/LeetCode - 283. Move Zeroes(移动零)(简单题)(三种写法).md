@@ -39,7 +39,7 @@ class Solution {
 
 图:
 
-<div algin="center"><img src="assets/1554876914333.png"></div><br>
+<div align="center"><img src="assets/1554876914333.png"></div><br>
 
 代码:
 
