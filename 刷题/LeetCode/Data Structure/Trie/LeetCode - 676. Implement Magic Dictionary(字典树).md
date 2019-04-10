@@ -1,11 +1,4 @@
-﻿## LeetCode - 676. Implement Magic Dictionary & 295. Find Median from Data Stream
-* [LeetCode-676. Implement Magic Dictionary](#1)
-* [LeetCode-295. Find Median from Data Stream](#leetcode-295-find-median-from-data-stream)
-
-
-
-***
-### LeetCode - 676. Implement Magic Dictionary
+# LeetCode - 676. Implement Magic Dictionary
 #### [题目链接](https://leetcode.com/problems/implement-magic-dictionary/)
 
 > https://leetcode.com/problems/implement-magic-dictionary/
@@ -14,10 +7,10 @@
 ![在这里插入图片描述](images/676_t.png)
 #### 解析 
 
-两种解法: **模糊搜索和利用字典树。**
+两种解法: **模糊搜索和利用字典树**。
 
 
-**模糊搜索:**
+**模糊搜索**:
 
 
 `buildDict`过程: 
@@ -77,9 +70,9 @@ class MagicDictionary {
 
 **字典树写法**
 
-字典树基础可以看[这里](https://blog.csdn.net/zxzxzx0119/article/details/81134479)。
+字典树基础可以看[这里](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/Trie/LeetCode%20-%20208.%20Implement%20Trie%20(Prefix%20Tree)%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AD%97%E5%85%B8%E6%A0%91(%E5%89%8D%E7%BC%80%E6%A0%91).md)。
 
-插入没什么好说的，建立字典树即可，`search`的过程要维护一个`isOneDiff`变量。表示的是<font color = blue>当前是否已经有一个不同了。</font>然后`dfs`即可。
+插入没什么好说的，建立字典树即可，`search`的过程要维护一个`isOneDiff`变量。表示的是当前是否已经有一个不同了。然后`dfs`即可。
 
 
 ```java
