@@ -1,4 +1,4 @@
-﻿## LeetCode - 206. Reverse Linked List单链表反转(递归和非递归)(以及双向链表的反转)
+# LeetCode - 206. Reverse Linked List单链表反转(递归和非递归)(以及双向链表的反转)
  - 单链表的反转
  - 双向链表的反转
  - 完整测试代码
@@ -10,8 +10,6 @@
 #### 题目
 ![在这里插入图片描述](images/206_t.png)
 
-
-
 ### 单链表的反转
 
 单链表的反转主要是利用两个辅助的结点: 
@@ -20,7 +18,7 @@
 
 可以看一下下面的两个步骤:
 
-![这里写图片描述](images/206_s.png)
+![1554854942777](assets/1554854942777.png)
 
 可以用递归版本和非递归版本的写法，代码如下 : 
 
@@ -67,39 +65,39 @@ class Solution {
 
 和单链表区别不大，不过要注意反转的时候，**`head`的`pre`域要指向`next`**，因为双向链表的任意一个结点要同时有前驱和后继，所以这里要同时给出`head`的`pre`和`next`域，可以参考下图。
 
-![在这里插入图片描述](images/206_s2.png)
+![1554855106932](assets/1554855106932.png)
 
 
 同样可以两种方式实现
 
 ```java
-	 //双向链表反转(非递归)
-    static DoubleNode reverseList(DoubleNode head){
-        DoubleNode pre = null;
-        DoubleNode next = null;
-        while(head != null) {
-            next = head.next;
-            head.next = pre;
-            head.pre = next;
-            pre = head;
-            head = next;
-        }
+//双向链表反转(非递归)
+static DoubleNode reverseList(DoubleNode head){
+    DoubleNode pre = null;
+    DoubleNode next = null;
+    while(head != null) {
+        next = head.next;
+        head.next = pre;
+        head.pre = next;
+        pre = head;
+        head = next;
+    }
+    return pre;
+}
+
+//递归
+static DoubleNode reverseList2(DoubleNode head){
+    return process(head,null);
+}
+static DoubleNode process(DoubleNode cur,DoubleNode pre){
+    if(cur == null){
         return pre;
     }
-
-	//递归
-    static DoubleNode reverseList2(DoubleNode head){
-        return process(head,null);
-    }
-    static DoubleNode process(DoubleNode cur,DoubleNode pre){
-        if(cur == null){
-            return pre;
-        }
-        DoubleNode next = cur.next;
-        cur.next = pre;
-        cur.pre = next;
-        return process(next,cur);
-    }
+    DoubleNode next = cur.next;
+    cur.next = pre;
+    cur.pre = next;
+    return process(next,cur);
+}
 ```
 
 ### 完整测试代码
