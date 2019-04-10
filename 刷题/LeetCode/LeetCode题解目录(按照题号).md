@@ -226,7 +226,7 @@
 | 212 | | | |
 | 213 | | | |
 | 214 | [Shortest Palindrome](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/KMP/LeetCode%20-%20214.%20Shortest%20Palindrome(KMP%E5%92%8CManacher%E7%AE%97%E6%B3%95%E8%A7%A3%E5%86%B3).md) | KMP、Manacher | Hard |
-| 215 | | | |
+| 215 | [Kth Largest Element in an Array]() | | |
 | 216 | | | |
 | 217 | | | |
 | 218 | | | |
