@@ -1,5 +1,8 @@
 ## 剑指Offer - 28 - 数组中出现次数超过一半的数字
 
+* [解析](#解析)
+* [LeetCode - 229. MajorityElementII](#leetcode---229-majorityelementii)
+
 #### [题目链接](https://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&tqId=11181&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking)
 
 > https://www.nowcoder.com/practice/e8a1b01a2df14cb2b228b30ee6a92163?tpId=13&tqId=11181&tPage=2&rp=1&ru=%2Fta%2Fcoding-interviews&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking
@@ -169,6 +172,8 @@ public class Solution {
 
 #### 4、摩尔投票两个变形题
 
+#### LeetCode - 229. MajorityElementII
+
 第三种解法有两种变形题目，且都可以用摩尔投票问题解决:
 
 *  求数组中`>n/3`的次数的数(最多两个)；
@@ -183,7 +188,7 @@ public class Solution {
 * 按照投票的说法，大于`n/3`次数的解题方法是: 先选出两个候选人`candi1、candi2`，如果投`candi1`，则`candi1`的票数`count1++`，如果投`candi2`，则`candi2`的票数`count2++`；
 * 如果既不投`candi1`，也不投`candi2`，那么检查此时是否`candi1`和`candi2`候选人的票数是否已经为`0`，如果为`0`，则需要更换新的候选人；如果都不为`0`，则`candi1`和`candi2`的票数都要**减一**；当然最后也需要看看是否两个候选人的票数超过`nums.length / 3`;
 
-LeetCode - 229. Majority Element II题解代码如下:
+`LeetCode - 229. Majority Element II`题解代码如下:
 
 ```java
 class Solution {

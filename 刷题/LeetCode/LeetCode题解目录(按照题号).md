@@ -233,12 +233,12 @@
 | 219 | | | |
 | 220 | | | |
 | 221 | [Maximal Square](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20221.%20Maximal%20Square(%E6%B1%82%E6%9C%80%E5%A4%A7%E7%9A%84%E5%85%A8%E6%98%AF1%E7%9A%84%E6%AD%A3%E6%96%B9%E5%BD%A2).md) | DP | Medium |
-| 222 | | | |
+| 222 | [LeetCode - 222. Count Complete Tree Nodes](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20222.%20Count%20Complete%20Tree%20Nodes(%E7%BB%9F%E8%AE%A1%E5%AE%8C%E5%85%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E7%BB%93%E7%82%B9%E4%B8%AA%E6%95%B0).md) | Tree | Medium |
 | 223 | | | |
 | 224 | | | |
 | 225 | | | |
 | 226 | | | |
-| 227 | | | |
+| 227 | [Basic Calculator II，系列计算器和栈的题目](https://github.com/ZXZxin/ZXBlog/tree/master/%E5%88%B7%E9%A2%98/Other/LintCode/Data%20Structure/Stack) | Stack | Medium |
 | 228 | | | |
 | 229 | | | |
 | 230 | | | |
