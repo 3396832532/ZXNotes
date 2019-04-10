@@ -240,7 +240,7 @@
 | 226 | | | |
 | 227 | [Basic Calculator II，系列计算器和栈的题目](https://github.com/ZXZxin/ZXBlog/tree/master/%E5%88%B7%E9%A2%98/Other/LintCode/Data%20Structure/Stack) | Stack | Medium |
 | 228 | | | |
-| 229 | | | |
+| 229 | [Majority Element II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/Other/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer%20-%2028%20-%20%E6%95%B0%E7%BB%84%E4%B8%AD%E5%87%BA%E7%8E%B0%E6%AC%A1%E6%95%B0%E8%B6%85%E8%BF%87%E4%B8%80%E5%8D%8A%E7%9A%84%E6%95%B0%E5%AD%97.md#leetcode---229-majorityelementii) | Array | Medium |
 | 230 | | | |
 | 231 | | | |
 | 232 | | | |
