@@ -7,11 +7,11 @@
 ***
 #### [题目链接](https://leetcode.com/problems/shortest-palindrome/description/)
 
+> https://leetcode.com/problems/shortest-palindrome/description/
+
 #### 题目
 
 ![](images/214_t.png)
-
-
 
 ### KMP算法解决
 **KMP基础可以先看一下[这篇文章](https://blog.csdn.net/zxzxzx0119/article/details/81430392)**。
@@ -20,9 +20,9 @@
 * 然后对整个串求出它的`next`数组(`next[i]`代表的是在`0 ~ i-1` 中，必须以`str[i-1]`结尾的后缀子串(不能包含`str[0]`)与必须以`str[0]`开头的前缀子串(不能包含`str[i-1]`)的最大匹配长度) ；
 * 然后我们要的就是整个串的最长公共前缀和后缀，然后再进行字符串的处理即可，处理的方面看代码。  
 
- **注意下面画的图所有的例子都是  `12321cba` 这个字符串。**
+ **注意下面画的图所有的例子都是  `12321cba` 这个字符串**。
 
-![这里写图片描述](images/214_s.png)
+![1554862260986](assets/1554862260986.png)
 
 代码如下: 
 
@@ -58,7 +58,8 @@ class Solution {
 ```
 ***
 ### 使用Manacher解决
-**`manacher`算法基础可以先看一下[这篇文章](https://blog.csdn.net/zxzxzx0119/article/details/81483564)**。
+
+manacher算法基础可以先看一下[这篇文章](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/Manacher/LeetCode%20-%205.%20Longest%20Palindromic%20Substring(%E4%B8%89%E7%A7%8D%E8%A7%A3%E6%B3%95%E5%8F%8AManacher%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3).md)。
 
 
 * 如果能够使用`Manacher`算法求出以`str[0]`开头的最长回文半径，如 ` 12321cba` ，如果我们可以求出`r[0]`的最大值(以`r[0]`开头的最长回文子串)，在`12321cba `这个字符串中就是`12321`；

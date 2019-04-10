@@ -222,7 +222,7 @@
 | 208 | [Implement Trie Prefix Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/Trie/LeetCode%20-%20208.%20Implement%20Trie%20(Prefix%20Tree)%E4%BB%A5%E5%8F%8A%E5%AE%9E%E7%8E%B0%E5%AD%97%E5%85%B8%E6%A0%91(%E5%89%8D%E7%BC%80%E6%A0%91).md) | Trie | Medium |
 | 209 | [Minimum Size Subarray Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20209.%20Minimum%20Size%20Subarray%20Sum(%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3).md) | 滑动窗口 | Medium |
 | 210 | | | |
-| 211 | | | |
+| 211 | [Add and Search Word - Data structure design](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%20211.%20Add%20and%20Search%20Word%20-%20Data%20structure%20design(%E5%AD%97%E5%85%B8%E6%A0%91%E5%92%8C%E9%80%92%E5%BD%92).md) | Trie | Medium |
 | 212 | | | |
 | 213 | | | |
 | 214 | | | |
