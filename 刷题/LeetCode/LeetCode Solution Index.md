@@ -323,7 +323,7 @@
 | 309 | | | |
 | 310 | | | |
 | 311 | | | |
-| 312 | | | |
+| 312 | [Burst Balloons](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20312.%20Burst%20Balloons(DP).md) | DP | Hard |
 | 313 | | | |
 | 314 | | | |
 | 315 | | | |
