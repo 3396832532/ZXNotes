@@ -21,6 +21,9 @@
 * 然后枚举的每一个正方形还需要判断这个正方形内是不是全都是`1`，时间复杂度`O(N * M )`；
 
 ![在这里插入图片描述](images/221_s.png)
+
+代码:
+
 ```java
 class Solution {
     public int maximalSquare(char[][] matrix) {
@@ -81,9 +84,9 @@ class Solution {
 ![在这里插入图片描述](images/221_s3.png)
 
 
-<font color =red>不过这里要注意代码的处理:
+不过这里要注意代码的处理:
 
-我们`sums`数组起始从`1, 1`开始会比较方便处理，<font color = blue>所以实际上下面的代码中`sums[x, y]`表示的是`[0 ~ i-1, 0 ~ j-1]`内的和。</font>不然判断边界就会比较麻烦，所以检查的时候第三层循环`size = Math.min(n-x+1, m-y+1) `开始也需要注意。 
+我们`sums`数组起始从`1, 1`开始会比较方便处理，所以实际上下面的代码中`sums[x, y]`表示的是`[0 ~ i-1, 0 ~ j-1]`内的和。不然判断边界就会比较麻烦，所以检查的时候第三层循环`size = Math.min(n-x+1, m-y+1) `开始也需要注意。 
 ```java
 class Solution {
     public int maximalSquare(char[][] matrix) {
@@ -116,7 +119,10 @@ class Solution {
 ```
 
 这里[**LeetCode - 304. Range Sum Query 2D - Immutable**](https://leetcode.com/problems/range-sum-query-2d-immutable/) 就完全是这种方法解决:
+
 ![在这里插入图片描述](images/304_t.png)
+
+代码：
 
 ```java
 class NumMatrix {
@@ -178,10 +184,12 @@ public NumMatrix(int[][] matrix) {
 * 如果当前`matrix[i][j] == 0`，则`dp[i][j] = 0`；
 * 其他一般的情况，看下图，可以得到`dp[i][j] = min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]) + 1`；
 
+图:
+
 
 ![在这里插入图片描述](images/221_s4.png)
 
-
+代码:
 
 ```java
 class Solution {
