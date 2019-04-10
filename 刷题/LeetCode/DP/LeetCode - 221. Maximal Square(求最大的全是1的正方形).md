@@ -2,7 +2,7 @@
 
 * 暴力 (`O(N^5)`)
 * 改进动态规划(`O(N^３)`)
-* [LeetCode - 304. Range Sum Query 2D - Immutable](leetcode---304-range-sum-query-2d---immutable)
+* [LeetCode - 304. Range Sum Query 2D - Immutable](#leetcode---304-range-sum-query-2d---immutable)
 * 优化动态规划(`O(N^2)`) 
 
 ***
