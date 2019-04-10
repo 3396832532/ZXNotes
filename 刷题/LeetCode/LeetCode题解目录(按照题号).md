@@ -253,7 +253,7 @@
 | 239 | | | |
 | 240 | | | |
 | 241 | [Different Ways to Add Parentheses](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20241.%20Different%20Ways%20to%20Add%20Parentheses(%E5%88%86%E6%B2%BB%E3%80%81dp).md) | 分治、DP | Medium |
-| 242 | | | |
+| 242 | [Valid Anagram](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20242.%20Valid%20Anagram.md) | Map | Easy |
 | 243 | | | |
 | 244 | | | |
 | 245 | | | |
@@ -274,8 +274,8 @@
 | 260 | | | |
 | 261 | | | |
 | 262 | | | |
-| 263 | | | |
-| 264 | | | |
+| 263 | [Ugly Number]() | | |
+| 264 | [Ugly Number II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/Other/%E5%89%91%E6%8C%87Offer/%E5%89%91%E6%8C%87Offer%20-%2033%20-%20%E4%B8%91%E6%95%B0.md) | | |
 | 265 | | | |
 | 266 | | | |
 | 267 | | | |
