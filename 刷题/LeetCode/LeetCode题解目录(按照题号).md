@@ -214,10 +214,10 @@
 | 200 | [Number of Islands](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/UnionFind/LeetCode%20-%20200.%20Number%20of%20Islands.md) | Search、并查集 | Medium |
 | 201 | | | |
 | 202 | | | |
-| 203 |  | | |
+| 203 | [Remove Linked List Elements](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20203.%20Remove%20Linked%20List%20Elements.md) | List | Easy |
 | 204 |  | | |
 | 205 | | | |
-| 206 | [Reverse Linked List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20206.%20Reverse%20Linked%20List.md) | List | Medium |
+| 206 | [Reverse Linked List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20206.%20Reverse%20Linked%20List.md) | List | Easy |
 | 207 | | | |
 | 208 | | | |
 | 209 | | | |
