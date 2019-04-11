@@ -1,6 +1,8 @@
 # LeetCode - 350. Intersection of Twoo Arrays II
 
-#### [题目链接]()
+#### [题目链接](https://leetcode.com/problems/intersection-of-two-arrays-ii/)
+
+> https://leetcode.com/problems/intersection-of-two-arrays-ii/
 
 #### 题目
 
