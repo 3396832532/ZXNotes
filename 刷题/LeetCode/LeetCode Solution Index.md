@@ -515,7 +515,7 @@
 | 501 | | | |
 | 502 | [IPO](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Heap/LeetCode%20-%20502.%20IPO(%E8%B4%AA%E5%BF%83%20%2B%20%E5%A0%86).md) | Heap、Greedy | Hard |
 | 503 | | | |
-| 504 | | | |
+| 504 | [Base 7](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20504.%20Base%207.md) | 模拟 | Easy |
 | 505 | | | |
 | 506 | | | |
 | 507 | | | |
