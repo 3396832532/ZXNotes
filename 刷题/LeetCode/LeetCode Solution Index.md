@@ -554,7 +554,7 @@
 | 540 | | | |
 | 541 | | | |
 | 542 | | | |
-| 543 | | | |
+| 543 | [Diameter of Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20687.%20Longest%20Univalue%20Path%20(%E6%A0%91%E7%9A%84%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84).md#leetcode---543-diameter-of-binary-tree) | Tree | Easy |
 | 544 | | | |
 | 545 | | | |
 | 546 | | | |

@@ -1,8 +1,12 @@
 # LeetCode - 687. Longest Univalue Path (树的最长同值路径)
 
+这三个题目有点类似，就放在一起了。
+
 * [LeetCode - 687. Longest Univalue Path](#leetcode---687-longest-univalue-path)
 * [LeetCode - 543. Diameter of Binary Tree](#leetcode---543-diameter-of-binary-tree)
 * [LeetCode - 124. Binary Tree Maximum Path Sum](#leetcode---124-binary-tree-maximum-path-sum)
+
+## LeetCode - 687. Longest Univalue Path
 
 #### [题目链接](https://leetcode.com/problems/longest-univalue-path/)
 
