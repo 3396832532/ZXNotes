@@ -513,7 +513,7 @@
 | 499 | | | |
 | 400 | | | |
 | 501 | | | |
-| 502 | | | |
+| 502 | [IPO](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Heap/LeetCode%20-%20502.%20IPO(%E8%B4%AA%E5%BF%83%20%2B%20%E5%A0%86).md) | Heap、Greedy | Hard |
 | 503 | | | |
 | 504 | | | |
 | 505 | | | |
