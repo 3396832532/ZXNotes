@@ -415,7 +415,7 @@
 | 401 | | | |
 | 402 | | | |
 | 403 | | | |
-| 404 | | | |
+| 404 | [Sum of Left Leaves](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20404.%20Sum%20of%20Left%20Leaves(%E5%B7%A6%E5%8F%B6%E5%AD%90%E7%BB%93%E7%82%B9%E4%B9%8B%E5%92%8C)(%E9%80%92%E5%BD%92%E5%92%8C%E9%9D%9E%E9%80%92%E5%BD%92).md) | Tree | Easy |
 | 405 | | | |
 | 406 | | | |
 | 407 | | | |
