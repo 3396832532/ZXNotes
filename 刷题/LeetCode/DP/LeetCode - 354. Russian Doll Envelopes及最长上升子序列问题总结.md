@@ -205,13 +205,24 @@ class Solution {
 ![img.png](images/354_t.png)
 
 ### 解析
- 求解过程：先按`a`从小到大进行排序，当`a`相同时，按`b`从大到小排序。然后求解`b`的最长递增子序列。
-> 为什么b要按从大到小排列呢？按照最长递增子序列的`O(N*logN)`方法，当前数arr[i]大于ends数组中所有的数(末尾的最大)，我们会将arr[i]添加在ends数组中；否则在ends数组中二分查找第一个大于当前数的数且替换它。所以我们的做法<font color = red>会保证在a相等的情况下，b可以有一个最小值，这样可以摞相对多的数。以达更长的序列，同时也避免了a相同b不相同时摞在一起的情况</font>。
+ 求解过程：先按`a`从小到大进行排序，当`a`相同时，按`b`从大到小排序。然后求解`b` (第二维(宽))的最长递增子序列。(一维是长度，二维是宽度)
+
+*  排序后等于把在二维(长、宽)上的最长递增子序列问题转换成一维(宽)上的最长递增子序列的查找，因为对于
+   长度来说已经满足递增, 只需要在宽度上也递增即为递增序列；
+* 同长时按宽度降序排列的原因是避免同长时宽度小的也被列入递增序列中, 例如`[3,3], [3,4]`，如果宽度也按升序来排列， `[3,3]`和`[3,4]`会形成递增序列，而实际上不行；
+
+图: 
+
+![1554952364205](assets/1554952364205.png)
+
+代码:
 
 ```java
+import java.util.Arrays;
+
 class Solution {
-    
-    private class Node{
+
+    private class Node implements Comparable<Node> {
         public int a;
         public int b;
 
@@ -219,48 +230,51 @@ class Solution {
             this.a = a;
             this.b = b;
         }
-    }
 
-    public class NodeComparator implements Comparator<Node>{
-
+        /**
+         *
+         排序后等于把在二维(长、宽)
+         上的最长递增子序列问题转换成一维(宽)上的最长递增子序列的查找, 因为对于
+         长度来说已经满足递增, 只需要在宽度上也递增即为递增序列。
+         同长时按宽度降序排列的原因是
+         避免同长时宽度小的也被列入递增序列中, 例如[3,3], [3,4]
+         如果宽度也按升序来排列, [3,3]和[3,4]会形成递增序列, 而实际上不行
+         */
         @Override
-        public int compare(Node o1, Node o2) {
-            if(o1.a == o2.a){
-                return o2.b - o1.b;
-            }else {
-                return o1.a - o2.a;
-            }
+        public int compareTo(Node o) {
+            if (o.a == a)
+                return o.b - b;
+            return a - o.a;
+
         }
     }
-    
+
     public int maxEnvelopes(int[][] envelopes) {
-        if(envelopes == null || envelopes.length == 0 || envelopes[0].length == 0)
+        if (envelopes == null || envelopes.length == 0 || envelopes[0].length == 0)
             return 0;
         Node[] nodes = new Node[envelopes.length];
-        for(int i = 0; i < envelopes.length; i++){
-            nodes[i] = new Node(envelopes[i][0],envelopes[i][1]);
-        }
-        Arrays.sort(nodes,0,nodes.length,new NodeComparator());
-        int[] ends = new int[envelopes.length+1];
+        for (int i = 0; i < envelopes.length; i++)
+            nodes[i] = new Node(envelopes[i][0], envelopes[i][1]);
+        Arrays.sort(nodes);
+        int[] ends = new int[envelopes.length + 1];
         ends[1] = nodes[0].b;
         int right = 1;
         int l, m, r;
-        int res = 1;
-        for(int i = 1; i < nodes.length; i++){
+        for (int i = 1; i < nodes.length; i++) {
             l = 1;
             r = right;
-            while(l <= r){
-                m = l + (r-l)/2;
-                if(ends[m] >= nodes[i].b){
+            while (l <= r) {
+                m = l + (r - l) / 2;
+                if (ends[m] >= nodes[i].b) {
                     r = m - 1;
-                }else {
+                } else {
                     l = m + 1;
                 }
             }
-            if(l > right){
-                ends[right+1] = nodes[i].b;
+            if (l > right) {
+                ends[right + 1] = nodes[i].b;
                 right += 1;
-            }else {
+            } else {
                 ends[l] = nodes[i].b;
             }
         }
