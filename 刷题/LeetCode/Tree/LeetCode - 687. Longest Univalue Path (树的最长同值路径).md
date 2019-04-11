@@ -1,4 +1,8 @@
-﻿### LeetCode - 687. Longest Univalue Path (树的最长同值路径)
+# LeetCode - 687. Longest Univalue Path (树的最长同值路径)
+
+* [LeetCode - 687. Longest Univalue Path](#leetcode---687-longest-univalue-path)
+* [LeetCode - 543. Diameter of Binary Tree](#leetcode---543-diameter-of-binary-tree)
+* [LeetCode - 124. Binary Tree Maximum Path Sum](#leetcode---124-binary-tree-maximum-path-sum)
 
 #### [题目链接](https://leetcode.com/problems/longest-univalue-path/)
 
@@ -16,20 +20,22 @@
 * 然后如果左孩子和右孩子和自己相同，就更新当前节点返回的最长同值路径；
 * 最终答案就是返回以根节点的最长同值路径；
 
-但是这种思路对于部分情况是错误的，见下图，因为这里的路径是<font color = red>类似只能一笔画，而不能往回走</font>。所以我们需要在递归的时候记录最长路径，而返回的时候只能返回左右孩子的其中一个。
+但是这种思路对于部分情况是错误的，见下图，因为这里的路径是**类似只能一笔画，而不能往回走**。所以我们需要在递归的时候记录最长路径，而返回的时候只能返回左右孩子的其中一个。
 
 
-即递归函数需要改变定义: `recur(node)`，返回的是<font color = blue>当前最长连续的同值路径</font>
+即递归函数需要改变定义: `recur(node)`，返回的是**当前最长连续的同值路径**
 
 
 * 如果当前节点为空或者没有左右孩子，就返回`0`；
 * 如果当前节点只有左孩子，如果左孩子的值`node.left.val`等于当前节点的值`node.val`，就先更新最大值，然后返回`L + 1`，如果不等于，就返回`0`；
 * 如果当前节点只有右孩子，如果右孩子的值`node.right.val`等于当前节点的值`node.val`，就先更新最大值，然后返回`R + 1`，如果不等于，就返回`0`；
-* 否则就是左右孩子都全，如果左右孩子的值都等于`node.val`，<font color = red>就要更新`res = Math.max(res, L + R + 2)`，但是返回的是`Math.max(L, R) + 1`，其他情况和上面类似，具体看代码。
+* 否则就是左右孩子都全，如果左右孩子的值都等于`node.val`，就要更新`res = Math.max(res, L + R + 2)`，但是返回的是`Math.max(L, R) + 1`，其他情况和上面类似，具体看代码。
+
+图:
 
 ![在这里插入图片描述](images/687_s.png)
 
-**一开始的<font color = red>错误</font>的代码:**
+**一开始的错误的代码**:
 ```java
 class Solution {
     public int longestUnivaluePath(TreeNode root) {
@@ -70,7 +76,7 @@ class Solution {
 ```
 
 
-**<font color = red>修正</font>之后的代码:** 
+**修正**之后的代码:
 ```java
 class Solution {
 
@@ -150,9 +156,14 @@ class Solution {
 
 ***
 
-<font color = red>附</font>: [**LeetCode-543. Diameter of Binary Tree**](https://leetcode.com/problems/diameter-of-binary-tree/)是这个题目的弱化版本。
+## LeetCode - 543. Diameter of Binary Tree
+
+附: [**LeetCode-543. Diameter of Binary Tree**](https://leetcode.com/problems/diameter-of-binary-tree/)是这个题目的弱化版本。
 
 ![在这里插入图片描述](images/543_t.png)
+
+代码:
+
 ```java
 class Solution {
 
@@ -186,9 +197,14 @@ class Solution {
 ```
 
 ***
-<font color = red>附</font>: [**LeetCode - 124. Binary Tree Maximum Path Sum**](https://leetcode.com/problems/binary-tree-maximum-path-sum/)也是类似的题目。
+## LeetCode - 124. Binary Tree Maximum Path Sum
+
+附: [**LeetCode - 124. Binary Tree Maximum Path Sum**](https://leetcode.com/problems/binary-tree-maximum-path-sum/)也是类似的题目。
 
 ![在这里插入图片描述](images/124_t.png)
+
+代码:
+
 ```java
 class Solution {
 
