@@ -1,4 +1,4 @@
-## LeetCode - 399. Evaluate Division(除法求值)
+# LeetCode - 399. Evaluate Division(除法求值)
 
 #### [题目链接](https://leetcode-cn.com/problems/evaluate-division/)
 
@@ -13,6 +13,8 @@
 将这个过程看做一个图:
 
 例如下图求`a / d`，只需要将`a -> d`，路径上的值相乘即可。
+
+图:
 
 ![399_s.png](images/399_s.png)
 
@@ -116,6 +118,4 @@ private:
 
 ```
 
-这题还可以用**并查集**来写，不过需要记录父亲(`parent : String`)和比值`ratio : Double`，比较麻烦，这里先放着，下次写。
-
-给一个并查集参考代码，　[代码1](https://leetcode.com/problems/evaluate-division/discuss/180282/Java-Union-Find-solution-beats-100)。[代码2](https://leetcode.com/problems/evaluate-division/discuss/183185/Java-UnionFind-VS-DFS-andand-Time-Complexity-Analysis)。
+这题还可以用**并查集**来写，不过需要记录父亲(`parent : String`)和比值`ratio : Double`，比较麻烦。给一个并查集参考代码，　[代码1](https://leetcode.com/problems/evaluate-division/discuss/180282/Java-Union-Find-solution-beats-100)。[代码2](https://leetcode.com/problems/evaluate-division/discuss/183185/Java-UnionFind-VS-DFS-andand-Time-Complexity-Analysis)。
