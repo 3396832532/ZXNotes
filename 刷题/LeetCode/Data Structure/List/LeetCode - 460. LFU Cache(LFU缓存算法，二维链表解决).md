@@ -10,7 +10,7 @@
 设计使用两个链表: 
 
  - **一个大链表表示键值对出现次数的链表**；
- - **小链表表示这条链表的次数都一样，但是由于我们的添加可以决定添加的顺序，可以达到在次数相同的情况下，先移除最近最少使用的键值对；**
+ - **小链表表示这条链表的次数都一样，但是由于我们的添加可以决定添加的顺序，可以达到在次数相同的情况下，先移除最近最少使用的键值对**；
 
 
 下面的代码中的方法: 
@@ -19,7 +19,10 @@
  - **`deleteNode()`**，大链表的结点(本身也是一个小链表)　中删除一个结点；
  - `LFU`结构中的`move()`方法，表示要当我操作了一个键值对，对应的次数增加，就需要调整结点的位置，`move()`方法就是从原来的小链表(大链表的结点)移动到一个新的小链表(也就是次数比原来次数`+1`)的新小链表；
  - `modifyHeadList()`表示的当我删除一个结点(也就是在旧的小链表中删除一个之后)有可能这个小链表本来只有这一个元素，所以要销毁这个小链表，为什么要写成`boolean`型的，因为等下在下面的代码中，在`move`的时候，要重新连接一个大链表的结点要知道`preList`，所以需要判断; 
-    ![这里写图片描述](https://img-blog.csdn.net/201808191504254?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+![1554955859170](assets/1554955859170.png)
+
+两个链表示意图:
 
 ![这里写图片描述](images/460_s.png)
 
@@ -169,7 +172,6 @@ class LFUCache {
 
     /**
      * 解耦原来的链表  并放入到一个新的链表中
-     *
      * @param node        这个node
      * @param oldNodeList node 的原来属于的list
      */
@@ -220,7 +222,6 @@ class LFUCache {
     /**
      * 这个方法的调用时机是  把一个node从一个nodelist中删掉 ，然后判断是不是要不这个nodelist给删掉
      * 就是在delete之后， 要不要把整个小链表删掉
-     *
      * @param nodeList
      */
     private boolean modifyHeadList(NodeList nodeList) {
