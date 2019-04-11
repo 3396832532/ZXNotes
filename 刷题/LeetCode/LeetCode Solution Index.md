@@ -471,7 +471,7 @@
 | 457 | | | |
 | 458 | | | |
 | 459 | | | |
-| 460 | | | |
+| 460 | [LFU Cache](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20460.%20LFU%20Cache(LFU%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95%EF%BC%8C%E4%BA%8C%E7%BB%B4%E9%93%BE%E8%A1%A8%E8%A7%A3%E5%86%B3).md) | List、Design | Hard |
 | 461 | | | |
 | 462 | | | |
 | 463 | | | |
