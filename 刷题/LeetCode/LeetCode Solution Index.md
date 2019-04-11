@@ -391,8 +391,8 @@
 | 377 | | | |
 | 378 | | | |
 | 379 | | | |
-| 380 | | | |
-| 381 | | | |
+| 380 | [Insert Delete GetRandom](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20380.%20Insert%20Delete%20GetRandom%20O(1)%20(%E5%B8%B8%E6%95%B0%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E3%80%81%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0).md) | Map | Medium |
+| 381 | [Insert Delete GetRandom O(1) - Duplicates allowed](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20381.%20Insert%20Delete%20GetRandom%20O(1)%20-%20Duplicates%20allowed(%E5%85%81%E8%AE%B8%E9%87%8D%E5%A4%8D).md) | Map | Hard |
 | 382 | | | |
 | 383 | | | |
 | 384 | | | |
