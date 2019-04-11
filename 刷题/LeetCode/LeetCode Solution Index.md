@@ -499,7 +499,7 @@
 | 485 | | | |
 | 486 | [Predict the Winner](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20486.%20Predict%20the%20Winner(%E6%8E%92%E6%88%90%E4%B8%80%E6%9D%A1%E7%BA%BF%E7%9A%84%E7%BA%B8%E7%89%8C%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98).md) | DP | Medium |
 | 487 | | | |
-| 488 | | | |
+| 488 | [Zuma Game](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%20488.%20Zuma%20Game%20(DFS).md) | Search | Hard |
 | 489 | | | |
 | 490 | | | |
 | 491 | | | |

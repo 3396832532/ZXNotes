@@ -1,4 +1,4 @@
-﻿## LeetCode - 502. IPO(贪心 + 堆)
+# LeetCode - 502. IPO(贪心 + 堆)
 #### [题目链接](https://leetcode.com/problems/ipo/description/)
 
 > https://leetcode.com/problems/ipo/description/
@@ -7,7 +7,7 @@
 
 ![在这里插入图片描述](images/502_t.png)
 ***
-#### 解析  
+## 解析  
  这个题目要用到贪心的思想，首先准备两个堆，一个按照**花费成本升序的小根堆**，另一个按照**纯利润降序的大根堆**。
 
  - 首先我们将所有的项目加入到**小根堆**中，则这个堆中的项目是按照花费成本升序的。
@@ -20,11 +20,11 @@
 
 ![这里写图片描述](images/502_s.png)
 
-
-
 代码如下 : 
 
 ```java
+import java.util.PriorityQueue;
+
 class Solution {
 
     //花费和利润的结构体
@@ -40,15 +40,12 @@ class Solution {
 
     public int findMaximizedCapital(int k, int W, int[] Profits, int[] Capital) {
         Node[] node = new Node[Profits.length];
-        for (int i = 0; i < Profits.length; i++) {
+        for (int i = 0; i < Profits.length; i++)
             node[i] = new Node(Profits[i], Capital[i]);
-        }
-        // minHeap by c
-        PriorityQueue<Node> minCostQ = new PriorityQueue<>((o1, o2) -> o1.c - o2.c);
-        // maxHeap by p
-        PriorityQueue<Node> maxProfitQ = new PriorityQueue<>((o1, o2) -> -(o1.p - o2.p));
-        for (int i = 0; i < node.length; i++)
-            minCostQ.add(node[i]);
+
+        PriorityQueue<Node> minCostQ = new PriorityQueue<>((o1, o2) -> o1.c - o2.c);// minHeap by c
+        PriorityQueue<Node> maxProfitQ = new PriorityQueue<>((o1, o2) -> -(o1.p - o2.p));// maxHeap by p
+        for (int i = 0; i < node.length; i++) minCostQ.add(node[i]);
         //最多做k个项目
         for (int i = 0; i < k; i++) {
             while (!minCostQ.isEmpty() && minCostQ.peek().c <= W)
