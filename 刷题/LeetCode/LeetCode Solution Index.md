@@ -345,10 +345,10 @@
 | 331 | | | |
 | 332 | | | |
 | 333 | | | |
-| 334 | | | |
-| 335 | | | |
+| 334 | [Reverse String](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20344.%20Reverse%20String.md) | 双指针 | Easy |
+| 335 | [Reverse Vowels of a String](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%20345.%20Reverse%20Vowels%20of%20a%20String.md) | 双指针 | Easy |
 | 336 | | | |
-| 337 | | | |
+| 337 | [Top K Frequent Elements](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Heap/LeetCode%20-%20347.%20Top%20K%20Frequent%20Elements.md) | 堆 | Medium |
 | 338 | | | |
 | 339 | | | |
 | 340 | | | |
