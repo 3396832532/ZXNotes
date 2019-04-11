@@ -360,8 +360,8 @@
 | 346 | | | |
 | 347 | | | |
 | 348 | | | |
-| 349 | [Intersection of Two Arrays](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Set/LeetCode%20-%20349.%20Intersection%20of%20Two%20Arrays.md) | HashSet | Easy |
-| 350 | | | |
+| 349 | [Intersection of Two Arrays](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Set/LeetCode%20-%20349.%20Intersection%20of%20Two%20Arrays.md) | Set | Easy |
+| 350 | [Intersection of Two Arrays](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20350.%20Intersection%20of%20Two%20Arrays%20II.md) | Map | Easy |
 | 351 | | | |
 | 352 | | | |
 | 353 | | | |
