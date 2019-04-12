@@ -28,7 +28,7 @@
 | 13 | [Roman to Integer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%2013.%20Roman%20to%20Integer.md) | 模拟 | Easy |
 | 14 | [Longest Comman Prefix](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%2014.%20Longest%20Common%20Prefix.md) | 分治、二分、Trie | Easy |
 | 15 | [3Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2015.%203Sum.md) | 双指针 | Medium |
-| 16 |                                                              |      |      |
+| 16 | [3Sum Closest](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2016.%203Sum%20Closest.md) | 双指针 | Medium |
 | 17 |                                                              |      |      |
 | 18 |                                                              |      |      |
 | 19 |                                                              |      |      |
