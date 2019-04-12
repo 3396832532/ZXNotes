@@ -693,7 +693,7 @@
 | 679 | | | |
 | 680 | [Valid Palindrome](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/Easy/LeetCode%20-%20680.%20Valid%20Palindrome%20II(%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E5%88%A4%E6%96%AD%E8%83%BD%E5%90%A6%E6%9E%84%E6%88%90%E5%9B%9E%E6%96%87).md) | String | Easy |
 | 681 | | | |
-| 682 | | | |
+| 682 | [Baseball Game](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20682.%20Baseball%20Game.md) | 模拟 | Easy |
 | 683 | | | |
 | 684 | | | |
 | 685 | | | |
