@@ -562,7 +562,7 @@
 | 548 | | | |
 | 549 | | | |
 | 550 | | | |
-| 551 | | | |
+| 551 | [Student Attendance Record I](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20551.%20Student%20Attendance%20Record%20I.md) | 模拟 | Easy |
 | 552 | | | |
 | 553 | | | |
 | 554 | | | |
