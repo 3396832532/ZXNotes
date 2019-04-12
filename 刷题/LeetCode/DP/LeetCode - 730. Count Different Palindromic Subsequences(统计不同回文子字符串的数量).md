@@ -1,4 +1,4 @@
-## LeetCode - 730. Count Different Palindromic Subsequences(统计不同回文子字符串的数量)
+# LeetCode - 730. Count Different Palindromic Subsequences(统计不同回文子字符串的数量)
 
 #### [题目链接](https://leetcode.com/problems/count-different-palindromic-subsequences/)
 
@@ -24,12 +24,16 @@
 
 * 我们的种类数就是`count(L, R) = count[L, R-1] + count(L+1, R) - count(L+1, R-1)`；
 
+图:
+
 ![730_s.png](images/730_s.png)
 
 再来看重复的情况，注意只有在`s[L] == s[R]`的时候才考虑重复的情况:
 
 * 当里面只有一个字符和`s[L]`相等的时候，就是`count(L, R) = count(L+1, R-1) + 1`，即`+2`改成了`+1`，因为有一种情况重复了；
 * 此外就是有多个和`s[L]`相同的字符，我们找到最左边的和最右边的相同的字符，我们的结果就是`2 * count(L + 1, R - 1) - count(i + 1, j - 1) `，也就是减去中间会产生重复的部分；
+
+图:
 
 ![730_s2.png](images/730_s2.png)
 
