@@ -5,11 +5,13 @@
 * 几乎每个题目(除极简单或者不好画图的题目)用**图的方式**结合部分文字解释展现出来。
 * 大部分题目我都尽我所能的总结了**尽可能多的解法**；
 * **定位**到某个题目，`chrome`浏览器按`ctrl + f`然后搜索序号或者题目名字即可(非常实用，我一般都用这个方法定位到某个题目)；
-* 目前项目正在初期，后面会不断完善，很多题目我都写过了，正在完善一些图解（大概200~300题）。
+* 目前项目正在初期，后面会不断完善，很多题目我都写过了，正在完善一些图解（大概200题左右）。
 * 完善做过的之后，以后大概每天增加`2~4`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
 列表(**之前不是按照顺序写的，但是后面我会补上前面空缺的**)
+
+> 
 
 | 题号 | 题名和解题链接 | 分类 | 难度 |
 | ---- | ----------------------------------------------------------------------- | --------- | ------------- |
@@ -29,7 +31,7 @@
 | 14 | [Longest Comman Prefix](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%2014.%20Longest%20Common%20Prefix.md) | 分治、二分、Trie | Easy |
 | 15 | [3Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2015.%203Sum.md) | 双指针 | Medium |
 | 16 | [3Sum Closest](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2016.%203Sum%20Closest.md) | 双指针 | Medium |
-| 17 |                                                              |      |      |
+| 17 | [Letter Combination of a Phone Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2017.%20Letter%20Combinations%20of%20a%20Phone%20Number.md) | Search | Medium |
 | 18 |                                                              |      |      |
 | 19 |                                                              |      |      |
 | 20 | [Valid Parentheses](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Stack/LeetCode%20-%2020.%20Valid%20Parentheses.md) | Stack | Easy |
