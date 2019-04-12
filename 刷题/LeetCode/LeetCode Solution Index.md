@@ -741,7 +741,7 @@
 | 727 | | | |
 | 728 | | | |
 | 729 | [My Calendar I](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20729.%20My%20Calendar.md) | Map | Medium |
-| 730 | | | |
+| 730 | [Count Different Palindromic Subsequences](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20730.%20Count%20Different%20Palindromic%20Subsequences(%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%90%8C%E5%9B%9E%E6%96%87%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E9%87%8F).md) | DP | Hard |
 | 731 | | | |
 | 732 | | | |
 | 733 | | | |
