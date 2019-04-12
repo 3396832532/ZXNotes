@@ -622,7 +622,7 @@
 | 608 | | | |
 | 609 | | | |
 | 610 | | | |
-| 611 | | | |
+| 611 | [Valid Triangle Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Math/LeetCode%20-%20611.%20Valid%20Triangle%20Number(%E8%B4%AA%E5%BF%83).md) | Greedy | Medium |
 | 612 | | | |
 | 613 | | | |
 | 614 | | | |
