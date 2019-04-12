@@ -675,7 +675,7 @@
 | 661 | | | |
 | 662 | | | |
 | 663 | | | |
-| 664 | | | |
+| 664 | [Strange Printer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20664.%20Strange%20Printer(DP).md) | DP | Hard |
 | 665 | | | |
 | 666 | | | |
 | 667 | | | |

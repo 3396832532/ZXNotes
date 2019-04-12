@@ -1,4 +1,4 @@
-﻿## LeetCode - 664. Strange Printer(DP)
+# LeetCode - 664. Strange Printer(DP)
 #### [题目链接](https://leetcode.com/problems/strange-printer/)
 
 > https://leetcode.com/problems/strange-printer/
