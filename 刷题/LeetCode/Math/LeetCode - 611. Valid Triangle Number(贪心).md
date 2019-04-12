@@ -1,6 +1,4 @@
-
-
-### LeetCode - 611 - Valid Triangle Number
+## LeetCode - 611. Valid Triangle Number
 
 #### [题目链接](https://leetcode.com/problems/valid-triangle-number/)
 
