@@ -644,7 +644,7 @@
 | 630 | | | |
 | 631 | | | |
 | 632 | | | |
-| 633 | | | |
+| 633 | [Sum of Square Numbers](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Math/LeetCode%20-%20633.%20Sum%20of%20Square%20Numbers(%E5%B9%B3%E6%96%B9%E6%95%B0%E4%B9%8B%E5%92%8C)(%E6%95%B0%E5%AD%A6_%E4%BA%8C%E5%88%86).md) | Math、双指针 | Easy |
 | 634 | | | |
 | 635 | | | |
 | 636 | | | |
