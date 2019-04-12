@@ -5,7 +5,7 @@
 * 几乎每个题目(除极简单或者不好画图的题目)用**图的方式**结合部分文字解释展现出来。
 * 大部分题目我都尽我所能的总结了**尽可能多的解法**；
 * **定位**到某个题目，`chrome`浏览器按`ctrl + f`然后搜索序号或者题目名字即可(非常实用，我一般都用这个方法定位到某个题目)；
-* 目前项目正在初期，后面会不断完善，很多题目我都写过了，正在完善一些图解（大概200+题）。
+* 目前项目正在初期，后面会不断完善，很多题目我都写过了，正在完善一些图解（大概200~300题）。
 * 完善做过的之后，以后大概每天增加`2~5`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
@@ -737,7 +737,7 @@
 | 723 | | | |
 | 724 | [Find Pivot Index](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20724.%20Find%20Pivot%20Index.md) | 模拟 | Easy |
 | 725 | [Split Linked List in Parts](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20725.%20Split%20Linked%20List%20in%20Parts.md) | List | Medium |
-| 726 | | | |
+| 726 | [Number of Atoms](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Other/LeetCode%20-%20726.%20Number%20of%20Atoms(TreeMap%20%2B%20%E9%80%92%E5%BD%92).md) | Map，递归 | Hard |
 | 727 | | | |
 | 728 | | | |
 | 729 | | | |
