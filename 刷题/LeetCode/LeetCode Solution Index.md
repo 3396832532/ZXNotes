@@ -687,7 +687,7 @@
 | 673 | [Number of Longest Increasing Subsequence](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20673.%20Number%20of%20Longest%20Increasing%20Subsequence(%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0).md) | DP | Medium |
 | 674 | | | |
 | 675 | [Cut Off Trees for Golf Event](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%20675.%20Cut%20Off%20Trees%20for%20Golf%20Event%20(%E6%8E%92%E5%BA%8FBFS%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF).md) | Search | Hard |
-| 676 | | | |
+| 676 | [Implement Magic Dictionary](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%20676.%20Implement%20Magic%20Dictionary(%E5%AD%97%E5%85%B8%E6%A0%91).md) | Map、Trie | Medium |
 | 677 | [Map Sum Pairs](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%20677.%20Map%20Sum%20Pairs(%E9%94%AE%E5%80%BC%E6%98%A0%E5%B0%84)(%E5%AD%97%E5%85%B8%E6%A0%91%E5%8F%98%E5%BD%A2).md) | Trie | Mediums |
 | 678 | | | |
 | 679 | | | |
