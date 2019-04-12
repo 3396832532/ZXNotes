@@ -5,11 +5,14 @@
 > https://leetcode.com/problems/number-of-longest-increasing-subsequence/
 
 #### 题目
+
+![1555036709602](assets/1555036709602.png)
+
 ![在这里插入图片描述](images/673_t.png)
 
 
 #### 解析
-做这题之前先要知道[**求一个数组的最长递增子序列**](https://blog.csdn.net/zxzxzx0119/article/details/81224734)。
+做这题之前先要知道[**求一个数组的最长递增子序列**](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20354.%20Russian%20Doll%20Envelopes%E5%8F%8A%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93.md)。
 
 做法: 
 
@@ -17,9 +20,12 @@
 * 然后遍历数组，看以哪些数结尾的序列是最长序列，然后对每一个这样的序列进行递归处理，从后往前求以这个结尾的最长序列的个数，这个递归函数记为`NLIS`；
 * `NLIS`函数递归的转移方程: `NLIS(i) = sum {NLIS(k)}  其中  lis[k] + 1 == lis[i] && nums[i] > nums[k] `，其中`k`的范围即`[0, i)`；
 
-
 一个例子: `[1, 2, 4, 2, 3]`
+
 ![在这里插入图片描述](images/673_s.png)
+
+代码:
+
 ```java
 class Solution {
     

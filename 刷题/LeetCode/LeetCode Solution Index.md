@@ -682,7 +682,7 @@
 | 668 | | | |
 | 669 | | | |
 | 670 | | | |
-| 671 | | | |
+| 671 | [Second Minimum Node In a Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20671.%20Second%20Minimum%20Node%20In%20a%20Binary%20Tree(%E5%AF%BB%E6%89%BE%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E7%BB%93%E7%82%B9).md) | Tree | Easy |
 | 672 | | | |
 | 673 | | | |
 | 674 | | | |
