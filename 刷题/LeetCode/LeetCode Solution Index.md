@@ -698,12 +698,12 @@
 | 684 | [Redundant Connection](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/UnionFind/LeetCode%20-%20684.%20Redundant%20Connection.md) | DFS、并查集 | Medium |
 | 685 | [Redundant Connection II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/UnionFind/LeetCode%20-%20685.%20Redundant%20Connection%20II.md) | 并查集 | Hard |
 | 686 | | | |
-| 687 | | | |
-| 688 | | | |
+| 687 | [Longest Univalue Path](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20687.%20Longest%20Univalue%20Path%20(%E6%A0%91%E7%9A%84%E6%9C%80%E9%95%BF%E5%90%8C%E5%80%BC%E8%B7%AF%E5%BE%84).md) | Tree | Easy |
+| 688 | [Knight Probability in Chessboard](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20688.%20Knight%20Probability%20in%20Chessboard%20(DP).md) | DP | Medium |
 | 689 | | | |
 | 690 | | | |
 | 691 | | | |
-| 692 | | | |
+| 692 | [Top K Frequent Words](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Heap/LeetCode%20-%20692.%20Top%20K%20Frequent%20Words.md) | Heap | Medium |
 | 693 | | | |
 | 694 | | | |
 | 695 | | | |
