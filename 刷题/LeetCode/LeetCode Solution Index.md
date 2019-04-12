@@ -632,7 +632,7 @@
 | 618 | | | |
 | 619 | | | |
 | 620 | | | |
-| 621 | | | |
+| 621 | [Task Scheduler](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Greedy/LeetCode%20-%20621.%20Task%20Scheduler(%E8%B4%AA%E5%BF%83).md) | Greedy | Medium |
 | 622 | | | |
 | 623 | | | |
 | 624 | | | |
