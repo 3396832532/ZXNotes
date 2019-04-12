@@ -735,7 +735,7 @@
 | 721 | | | |
 | 722 | | | |
 | 723 | | | |
-| 724 | | | |
+| 724 | [Find Pivot Index](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20724.%20Find%20Pivot%20Index.md) | 模拟 | Easy |
 | 725 | | | |
 | 726 | | | |
 | 727 | | | |
