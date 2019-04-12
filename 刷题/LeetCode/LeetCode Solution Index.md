@@ -648,7 +648,7 @@
 | 634 | | | |
 | 635 | | | |
 | 636 | | | |
-| 637 | | | |
+| 637 | [Average of Levels in Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20637.%20Average%20of%20Levels%20in%20Binary%20Tree(%E6%B1%82%E6%A0%91%E7%9A%84%E6%AF%8F%E4%B8%80%E5%B1%82%E7%9A%84%E5%B9%B3%E5%9D%87%E5%80%BC).md) | Tree | Easy |
 | 638 | | | |
 | 639 | [Decode Ways II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20639.%20Decode%20Ways%20II.md) | DP | Hard |
 | 640 | | | |

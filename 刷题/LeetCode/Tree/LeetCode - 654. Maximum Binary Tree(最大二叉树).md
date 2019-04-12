@@ -5,19 +5,26 @@
 ***
 #### [题目链接](https://leetcode.com/problems/maximum-binary-tree/)
 
+> https://leetcode.com/problems/maximum-binary-tree/
+
 #### 题目
 ![在这里插入图片描述](images/654_t.png)
 
 
 ### 递归
 
-这个题目很经典，使用类似<font color = red>分治</font>的思想，每次在数组的某个区间操作: 
+这个题目很经典，使用类似**分治**的思想，每次在数组的某个区间操作: 
 递归函数写法: 
 
 * 先找出分界点，也就是这段区间`[L， R]`内的最大值`maxx`，以及它的索引`maxi`；
 * 然后分治，这个最大值作为根，左右去递归，作为它的左右孩子即可；
 
+图:
+
 ![在这里插入图片描述](images/654_s.png)
+
+代码:
+
 ```java
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
@@ -47,15 +54,20 @@ class Solution {
 
 ***
 ### 非递归
-递归的写法没有想出来，类似<font color = blue>单调栈</font>主要思想是维持一个栈，这个栈里面的元素是要<font color = red>从栈底到栈顶保持递减</font>的: 
+递归的写法没有想出来，类似**单调栈**主要思想是维持一个栈，这个栈里面的元素是要从**栈底到栈顶保持递减**的: 
 过程:  
 * 扫描数组，将每个元素建立一个节点`cur`；
-* 每次都要判断当前元素是否比栈顶元素大，<font color=  blue>如果大，就要一直弹出元素，同时，要将当前元素的左孩子设置成弹出的节点: `cur.left = stack.pop()`；
+* 每次都要判断当前元素是否比栈顶元素大，**如果大，就要一直弹出元素**，同时，要将当前元素的左孩子设置成弹出的节点: `cur.left = stack.pop()`；
 * 弹完栈之后，此时栈中的元素都比cur大，此时我们让栈顶的节点的右孩子指向`cur`；
 * 然后压栈当前元素；
-* <font color = red>最后返回的是栈底的元素(最大的元素作为根)；
+* 最后返回的是栈底的元素(最大的元素作为根)；
+
+图:
 
 ![在这里插入图片描述](images/654_s2.png)
+
+代码:
+
 ```java
 class Solution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
