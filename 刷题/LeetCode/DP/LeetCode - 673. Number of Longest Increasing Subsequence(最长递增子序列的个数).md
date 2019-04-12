@@ -1,4 +1,4 @@
-﻿## LeetCode - 673. Number of Longest Increasing Subsequence(最长递增子序列的个数)
+# LeetCode - 673. Number of Longest Increasing Subsequence(最长递增子序列的个数)
 
 #### [题目链接](https://leetcode.com/problems/number-of-longest-increasing-subsequence/)
 

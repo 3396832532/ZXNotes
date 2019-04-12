@@ -684,9 +684,9 @@
 | 670 | | | |
 | 671 | [Second Minimum Node In a Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20671.%20Second%20Minimum%20Node%20In%20a%20Binary%20Tree(%E5%AF%BB%E6%89%BE%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E7%AC%AC%E4%BA%8C%E5%B0%8F%E7%9A%84%E7%BB%93%E7%82%B9).md) | Tree | Easy |
 | 672 | | | |
-| 673 | | | |
+| 673 | [Number of Longest Increasing Subsequence](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20673.%20Number%20of%20Longest%20Increasing%20Subsequence(%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E4%B8%AA%E6%95%B0).md) | DP | Medium |
 | 674 | | | |
-| 675 | | | |
+| 675 | [Cut Off Trees for Golf Event](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%20675.%20Cut%20Off%20Trees%20for%20Golf%20Event%20(%E6%8E%92%E5%BA%8FBFS%E6%B1%82%E6%9C%80%E7%9F%AD%E8%B7%AF).md) | Search | Hard |
 | 676 | | | |
 | 677 | | | |
 | 678 | | | |

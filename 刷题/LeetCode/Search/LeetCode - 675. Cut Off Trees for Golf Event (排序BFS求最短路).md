@@ -1,19 +1,22 @@
 
-### LeetCode - 675. Cut Off Trees for Golf Event (排序BFS求最短路) 
+# LeetCode - 675. Cut Off Trees for Golf Event (排序BFS求最短路) 
 #### [题目链接](https://leetcode.com/problems/cut-off-trees-for-golf-event/)
 
 > https://leetcode.com/problems/cut-off-trees-for-golf-event/
 
 #### 题目
 ![在这里插入图片描述](images/675_t.png)
-#### 解析
+## 解析
+比较典型的BFS题目。
 
 看下面一个例子:
 
 ![在这里插入图片描述](images/675_s.png)
 
-* 因为题目必须要按照树的高度来砍(访问)， 所以<font color = red>我们只需要将所有树按照高度`height`排序</font>，然后进行对按照顺序`bfs`访问所有的树即可；
+* 因为题目必须要按照树的高度来砍(访问)， 所以我们只需要将所有树按照高度`height`排序，然后进行对按照顺序`bfs`访问所有的树即可；
 * 结果就是所有`bfs`结果的和；
+
+代码:
 
 ```java
 class Solution {
