@@ -639,7 +639,7 @@
 | 625 | | | |
 | 626 | | | |
 | 627 | | | |
-| 628 | | | |
+| 628 | [Maximum Product of Three Numbers](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20628.%20Maximum%20Product%20of%20Three%20Numbers(%E6%95%B0%E7%BB%84%E4%B8%AD%E4%B8%89%E4%B8%AA%E6%95%B0%E7%9A%84%E6%9C%80%E5%A4%A7%E7%B4%AF%E6%88%90%E7%A7%AF)(%E7%AE%80%E5%8D%95%E9%A2%98).md) | 模拟 | Easy |
 | 629 | | | |
 | 630 | | | |
 | 631 | | | |

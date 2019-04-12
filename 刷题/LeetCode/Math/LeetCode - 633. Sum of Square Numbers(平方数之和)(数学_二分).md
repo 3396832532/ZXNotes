@@ -1,4 +1,4 @@
-﻿## LeetCode - 633. Sum of Square Numbers(平方数之和)(数学/二分)
+# LeetCode - 633. Sum of Square Numbers(平方数之和)(数学/二分)
 * [方法一-数学](#方法一-数学)
 * [方法二-Hash表](#方法二-hash表)
 * [方法三-二分](#方法三-二分)
@@ -44,7 +44,7 @@ class Solution {
     }
 }
 ```
-<font color = red>这里有个问题就是，当我们把`for`循环中的`a <= Math.sqrt( c ) `改一下，改成下面的代码，就会超时：</font>
+这里有个问题就是，当我们把`for`循环中的`a <= Math.sqrt( c ) `改一下，改成下面的代码，就会超时：
 
 ```java
 class Solution {
@@ -61,7 +61,7 @@ class Solution {
     }
 }
 ```
-这是为什么呢? <font color =red>因为当 `c `接近于`Math.Integer`的时候，`a*a`有可能会发生溢出，于是枚举的时候将`a`改成`long`类型: </font>
+这是为什么呢?因为当 `c `接近于`Math.Integer`的时候，`a*a`有可能会发生溢出，于是枚举的时候将`a`改成`long`类型:
 ```java
 class Solution {
     public boolean judgeSquareSum(int c) {
@@ -79,7 +79,7 @@ class Solution {
 ```
 ***
 ### 方法二-Hash表
-这题也可以和[LeetCode第一题 Two Sum](https://blog.csdn.net/zxzxzx0119/article/details/81904442)一样，使用`Hash`表存储答案的一边，然后遍历去寻找另一边: 
+这题也可以和`LeetCode - 1. Two Sum`一样，使用`Hash`表存储答案的一边，然后遍历去寻找另一边: 
 
 ```java
 class Solution {
@@ -99,7 +99,7 @@ class Solution {
 ```
 同样可以从`2*N`优化到`N`，只需要遍历一遍数组 ：
 但是这里要注意: 
-<font color = red> `set.add(c - a * a);`这一句和那个第一题不同，这个要放在判断的前面，因为像`1 * 1 + 1 * 1 = 2`这种情况，就要这样判断。</font>
+`set.add(c - a * a);`这一句和那个第一题不同，这个要放在判断的前面，因为像`1 * 1 + 1 * 1 = 2`这种情况，就要这样判断。
 ```java
 class Solution {
     public boolean judgeSquareSum(int c) {
@@ -119,11 +119,13 @@ class Solution {
 ### 方法三-二分
 还有一个很巧妙的方法: 
 
-* <font color = red>因为`a`和`b`都一定在`[0,sqrt( c )]`之间；
-* <font color =  red>我们可以在` [0,sqrt( c )]`，设置两个指针`L,R`，每次看这两个指针对应的平方和是否` = c`；
+* 因为`a`和`b`都一定在`[0,sqrt( c )]`之间；
+* 我们可以在` [0,sqrt( c )]`，设置两个指针`L,R`，每次看这两个指针对应的平方和是否` = c`；
 * 如果等于就返回`true`；
 * 如果 `>` ，说明右边值要缩小才有可能` = ` ，所以`R--`；
 * 如果 `<` ，说明左边值要增加才有可能` = ` ，所以`L++`；
+
+代码:
 
 ```java
 class Solution {
