@@ -736,7 +736,7 @@
 | 722 | | | |
 | 723 | | | |
 | 724 | [Find Pivot Index](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20724.%20Find%20Pivot%20Index.md) | 模拟 | Easy |
-| 725 | | | |
+| 725 | [Split Linked List in Parts](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%20725.%20Split%20Linked%20List%20in%20Parts.md) | List | Medium |
 | 726 | | | |
 | 727 | | | |
 | 728 | | | |

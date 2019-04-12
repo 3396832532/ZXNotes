@@ -1,6 +1,8 @@
 ## LeetCode - 726. Number of Atoms(TreeMap + 递归)
 
-#### [题目链接](https://leetcode.com/pr23oblems/number-of-atoms/)
+#### [题目链接](https://leetcode.com/problems/number-of-atoms/)
+
+> https://leetcode.com/problems/number-of-atoms/
 
 #### 题目
 
@@ -20,9 +22,9 @@
 * 如果遇到`(`，就去递归求解，返回的是一个`Map`(这里用`TreeMap`，因为要按照字典序)，`Map`的`key`就是原子，`value`对应的就是原子的数量；然后返回的`Map`的每一项会和右边的`)`外面的那个数字相乘；
 * 否则就不是`(`和`)`，就是正常的原子，就计算`getName`和`getCount`(普通原子的数量)；
 
+图:
 
-
-![](images/726_s.png)
+![img.png](images/726_s.png)
 
 代码: 
 
