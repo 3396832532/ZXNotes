@@ -731,7 +731,7 @@
 | 717 | | | |
 | 718 | | | |
 | 719 | [Find K-th Smallest Pair Distance](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/BinarySearch/LeetCode%20-%20719.%20Find%20K-th%20Smallest%20Pair%20Distance(%E6%9A%B4%E5%8A%9B%20_%20%E4%BA%8C%E5%88%86).md) | 二分、模拟 | Hard |
-| 720 | | | |
+| 720 | [Longest Word in Dictionary](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%20720.%20Longest%20Word%20in%20Dictionary(%E5%AD%97%E5%85%B8%E6%A0%91).md) | Trie | Easy |
 | 721 | | | |
 | 722 | | | |
 | 723 | | | |
