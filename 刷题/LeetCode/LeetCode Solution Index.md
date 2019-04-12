@@ -691,7 +691,7 @@
 | 677 | [Map Sum Pairs](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%20677.%20Map%20Sum%20Pairs(%E9%94%AE%E5%80%BC%E6%98%A0%E5%B0%84)(%E5%AD%97%E5%85%B8%E6%A0%91%E5%8F%98%E5%BD%A2).md) | Trie | Mediums |
 | 678 | | | |
 | 679 | | | |
-| 680 | | | |
+| 680 | [Valid Palindrome](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/Easy/LeetCode%20-%20680.%20Valid%20Palindrome%20II(%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E5%88%A4%E6%96%AD%E8%83%BD%E5%90%A6%E6%9E%84%E6%88%90%E5%9B%9E%E6%96%87).md) | String | Easy |
 | 681 | | | |
 | 682 | | | |
 | 683 | | | |
