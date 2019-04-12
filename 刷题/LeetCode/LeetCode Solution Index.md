@@ -32,8 +32,8 @@
 | 15 | [3Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2015.%203Sum.md) | 双指针 | Medium |
 | 16 | [3Sum Closest](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2016.%203Sum%20Closest.md) | 双指针 | Medium |
 | 17 | [Letter Combination of a Phone Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2017.%20Letter%20Combinations%20of%20a%20Phone%20Number.md) | Search | Medium |
-| 18 |                                                              |      |      |
-| 19 |                                                              |      |      |
+| 18 | [4Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2018.%204Sum.md) | 双指针 | Medium |
+| 19 | [Remove Nth Node From End of List]() |      |      |
 | 20 | [Valid Parentheses](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Stack/LeetCode%20-%2020.%20Valid%20Parentheses.md) | Stack | Easy |
 | 21 | [Merge Two Sorted Lists](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2021.%20Merge%20Two%20Sorted%20Lists(%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8)(%E9%9D%9E%E9%80%92%E5%BD%92%E5%92%8C%E9%80%92%E5%BD%92).md) | List | Easy |
 | 22 |                                                              |      |      |
