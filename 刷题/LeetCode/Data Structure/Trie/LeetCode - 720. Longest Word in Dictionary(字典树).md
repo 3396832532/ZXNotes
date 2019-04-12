@@ -1,17 +1,21 @@
-## LeetCode - 720. Longest Word in Dictionary(字典树) 
+# LeetCode - 720. Longest Word in Dictionary(字典树) 
 
-#### [题目链接](https://leetcode-cn.com/problems/longest-word-in-dictionary/)
+#### [题目链接](https://leetcode.com/problems/longest-word-in-dictionary/)
+
+> https://leetcode.com/problems/longest-word-in-dictionary/
 
 #### 题目
 
-![](images/720_t.png)
+![img.png](images/720_t.png)
 
-#### 解析
+## 解析
 
 第一种方法: 暴力。这方法没什么好说的。。
 
 * 先将`words`构建成一个`HashSet`表，这样查询快；
 * 然后对于每一个`word`，去到`HashSet`中查是不是都在，如果都在，就和最优答案比较就行了，注意长度和字典序的更新；
+
+代码:
 
 ```java
 import java.io.*;
@@ -59,7 +63,11 @@ class Solution {
 * 先构造好字典树，对`words`中的每一个`word`都`insert`进字典树；
 * 然后对于每一个`word`在字典树中遍历，看是否每个前缀都在字典树中，如果是，就更新最好答案即可；
 
+图:
+
 ![](images/720_s.png)
+
+代码:
 
 ```java
 import java.io.*;
