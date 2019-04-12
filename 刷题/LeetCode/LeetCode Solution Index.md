@@ -695,8 +695,8 @@
 | 681 | | | |
 | 682 | [Baseball Game](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20682.%20Baseball%20Game.md) | 模拟 | Easy |
 | 683 | | | |
-| 684 | | | |
-| 685 | | | |
+| 684 | [Redundant Connection](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/UnionFind/LeetCode%20-%20684.%20Redundant%20Connection.md) | DFS、并查集 | Medium |
+| 685 | [Redundant Connection II](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/UnionFind/LeetCode%20-%20685.%20Redundant%20Connection%20II.md) | 并查集 | Hard |
 | 686 | | | |
 | 687 | | | |
 | 688 | | | |
