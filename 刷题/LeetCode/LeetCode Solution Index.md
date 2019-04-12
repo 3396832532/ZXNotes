@@ -744,9 +744,9 @@
 | 730 | [Count Different Palindromic Subsequences](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/DP/LeetCode%20-%20730.%20Count%20Different%20Palindromic%20Subsequences(%E7%BB%9F%E8%AE%A1%E4%B8%8D%E5%90%8C%E5%9B%9E%E6%96%87%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%95%B0%E9%87%8F).md) | DP | Hard |
 | 731 | | | |
 | 732 | | | |
-| 733 | | | |
+| 733 | [Flood Fill](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%20733.%20Flood%20Fill.md) | Search | Easy |
 | 734 | | | |
-| 735 | | | |
+| 735 | [Asteroid Collision](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/easy/LeetCode%20-%20735.%20Asteroid%20Collision.md) | Stack | Medium |
 | 736 | | | |
 | 737 | | | |
 | 738 | | | |
