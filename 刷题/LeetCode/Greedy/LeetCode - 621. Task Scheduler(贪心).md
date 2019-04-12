@@ -1,6 +1,5 @@
-﻿## LeetCode - 621. Task Scheduler(贪心)
+# LeetCode - 621. Task Scheduler(贪心)
 
-***
 #### [题目链接](https://leetcode.com/problems/task-scheduler/)
 
 > https://leetcode.com/problems/task-scheduler/
@@ -26,6 +25,7 @@
 ![在这里插入图片描述](images/621_s3.png)
 
 按照上面的计算的方法:
+
 ```java
 class Solution {
     public int leastInterval(char[] tasks, int n) {
@@ -60,7 +60,7 @@ class Solution {
 
 ```
 
-还有一种使用优先队列(按照<font color = red>频率大的在堆顶</font>)模拟的写法: 
+还有一种使用优先队列(按照**频率大的在堆顶**)模拟的写法: 
 ```java
 class Solution {
     public int leastInterval(char[] tasks, int n) {
