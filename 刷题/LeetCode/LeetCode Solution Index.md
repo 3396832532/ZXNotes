@@ -617,7 +617,7 @@
 | 603 | | | |
 | 604 | | | |
 | 605 | | | |
-| 606 | | | |
+| 606 | [Construct String from Binary Tree](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Tree/LeetCode%20-%20606.%20Construct%20String%20from%20Binary%20Tree(%E6%A0%B9%E6%8D%AE%E4%BA%8C%E5%8F%89%E6%A0%91%E7%94%9F%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2).md) | Tree | Easy |
 | 607 | | | |
 | 608 | | | |
 | 609 | | | |
