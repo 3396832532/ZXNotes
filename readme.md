@@ -16,11 +16,15 @@
 
 [刷题](刷题/)
 
-* Codeforces目前写了70道左右；
-* LeetCode目前写了150道左右(大部分题目有详细解释和图片)；
-* 其他OJ累计100道写了左右；
+* Codeforces目前写了80道左右；
+* LeetCode目前写了200道左右(大部分题目有详细解释和图片)；
+* 其他OJ累计写了左右100道；
 
-这里推荐我的[**剑指Offer题解**](刷题/Other/剑指Offer/)，大部分题目配图，且用多种方法实现。
+下面的三个专栏得到了大部分人的点赞，推荐给大家:
+
+* [**30个笔试面试模板题**](刷题/InterviewAlgorithm.md)
+* [**图解LeetCode**](刷题/LeetCode/LeetCodeSolutionIndex.md)
+* [**图解剑指Offer**](刷题/Other/剑指Offer/)
 
 ## 数据结构与算法
 
