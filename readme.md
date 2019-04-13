@@ -16,15 +16,13 @@
 
 [刷题](刷题/)
 
-* Codeforces目前写了80道左右；
-* LeetCode目前写了200道左右(大部分题目有详细解释和图片)；
-* 其他OJ累计写了左右100道；
-
-下面的三个专栏得到了大部分人的点赞，推荐给大家:
+**下面的三个专栏得到了大部分人的点赞，推荐给大家**:
 
 * [**30个笔试面试模板题**](刷题/InterviewAlgorithm.md)
 * [**图解LeetCode**](刷题/LeetCode/LeetCodeSolutionIndex.md)
 * [**图解剑指Offer**](刷题/Other/剑指Offer/)
+
+累计: `Codeforces`80道左右，`LeetCode`200道左右，其他`OJ`100道+。
 
 ## 数据结构与算法
 
