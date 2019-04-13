@@ -1,21 +1,17 @@
-# 集合相关题目
+## 一、关于null值
 
-## 一、HasdMap和HashTable的区别
-
-### 1、关于null值
-
-#### a)、HashMap
+### 1、HashMap
 
 * HashMap中，`null`可以作为键，这样的键只有一个。
 * 可以有一个或多个键所对应的值为`null`。
 * 当`get()`方法返回`null`值时，可能是`HashMap`中没有该键，也可能是键所对应的值为`null`。
 * 因此，在`HashMap`中不能由`get()`方法来判断`HashMap`中是否存在某个键，而应该用`containsKey()`方法来判断。
 
-#### b)、HashTable
+### 2、HashTable
 
 * 既不支持`Null　Key`，也不支持`Null Value`，如果`put(null, ...)`，就会抛出空指针异常；
 
-### 2、迭代
+## 二、迭代
 
 另一个区别是HashMap的迭代器(`Iterator`)是`fail-fast`迭代器。
 
@@ -41,11 +37,33 @@ fail-fast底层: 维护`modCount == expectModCount`:
 
 比如：
 
-有两个线程（线程A，线程B），其中线程A负责遍历list、线程B修改list。线程A在遍历list过程的某个时候（此时`expectedModCount = modCount=N`，线程启动，同时线程B增加一个元素，这是modCount的值发生改变\（`modCount + 1 = N + 1`）。线程A继续遍历执行next方法时，通告checkForComodification方法发现expectedModCount  = N  ，而modCount = N + 1，两者不等，这时就抛出ConcurrentModificationException 异常，从而产生fail-fast机制。
+有两个线程（线程A，线程B），其中线程A负责遍历list、线程B修改list。线程A在遍历list过程的某个时候（此时`expectedModCount = modCount=N`，线程启动，同时线程B增加一个元素，这是modCount的值发生改变\（`modCount + 1 = N + 1`）。线程A继续遍历执行next方法时，通告checkForComodification方法发现expectedModCount  = N  ，而`modCount = N + 1`，两者不等，这时就抛出ConcurrentModificationException 异常，从而产生fail-fast机制。
+
+## 三、扩容
+
+* HashTable扩容: 默认初始size为**11**，加载因子`0.75`，`newsize = olesize*2+1`；
+* HashMap扩容: 初始size为**16**，扩容：`newsize = oldsize*2`，size一定为2的n次幂；
+
+
+
+## 四、计算index
+
+- HashMap计算index方法：`index = hash & (tab.length – 1)`；
+- HashTable计算index方法: `index = (hash & 0x7FFFFFFF) % tab.length`；
+
+## 四、其他
+
+HashTable基于Dictionary类，而HashMap是基于AbstractMap。
+
+Dictionary是什么？它是任何可将键映射到相应值的类的抽象父类，而AbstractMap是基于Map接口的骨干实现，它以最大限度地减少实现此接口所需的工作。
+
+
+
+`HashMap`中的`0`位置上放的是`null`值(键为`null`)。
 
 
 
 
 
-<https://www.cnblogs.com/heyonggang/p/9112731.html>
+
 
