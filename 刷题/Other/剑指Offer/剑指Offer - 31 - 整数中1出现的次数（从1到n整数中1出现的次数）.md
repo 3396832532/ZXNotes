@@ -50,7 +50,7 @@ public class Solution {
 }
 ```
 
-
+#### 二、其他解法
 
 ```java
 public class Solution {
@@ -136,8 +136,6 @@ public class Solution {
     }
 }
 ```
-
-
 
 ```java
 public class Solution {
