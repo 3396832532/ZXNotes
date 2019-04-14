@@ -33,7 +33,7 @@ fail-fast底层: 维护`modCount == expectModCount`:
 
 迭代器在调用`next()、remove()`方法时都是调用checkForComodification()方法。
 
-该方法主要就是检测`modCount == expectedModCount` 。 若不等则抛出ConcurrentModificationException 异常，从而产生fail-fast机制。所以要弄清楚为什么会产生fail-fast机制我们就必须要用弄明白为什么modCount != expectedModCount ，他们的值在什么时候发生改变的。
+该方法主要就是检测`modCount == expectedModCount` 。 若不等则抛出ConcurrentModificationException 异常，从而产生fail-fast机制。所以要弄清楚为什么会产生fail-fast机制我们就必须要用弄明白为什么`modCount != expectedModCount` ，他们的值在什么时候发生改变的。
 
 比如：
 
