@@ -14,6 +14,11 @@
 
 累计: `Codeforces`80道左右，`LeetCode`200道左右，其他`OJ`100道+。
 
+> 之前在牛客网发的两篇帖子，算是给自己项目做了一个推广 ^_^。
+>
+> * https://www.nowcoder.com/discuss/171791
+> * https://www.nowcoder.com/discuss/177397
+
 ## 数据结构与算法
 
 [**数据结构和算法**](https://github.com/ZXZxin/ZXBlog/tree/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95)
