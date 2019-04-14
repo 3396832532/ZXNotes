@@ -2,16 +2,6 @@
 
 目前还不完善，正在不断更新。
 
-## Java基础
-
-[Java基础](Java基础/)
-
-* [JVM](Java基础/JVM)
-* [异常](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%BC%82%E5%B8%B8/Java%E5%BC%82%E5%B8%B8%E5%B0%8F%E6%80%BB%E7%BB%93.md)
-* [泛型](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93.md)
-* [反射](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/%E5%8F%8D%E5%B0%84%E5%9F%BA%E7%A1%80.md)
-* [多线程并发](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF(%E4%BA%8C).md)
-
 ## 刷题
 
 [刷题](刷题/)
@@ -52,6 +42,8 @@
 
 ## 设计模式
 
+比较简单易懂的方式。
+
 [设计模式](杂项/设计模式/)
 
 * [动态代理1](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/11%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F(%E4%B8%80).md)
@@ -67,6 +59,17 @@
 * [简单工厂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/04%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md)
 * [工厂方法](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/05%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.md)
 * [抽象工厂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/06%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md)
+
+## Java基础
+
+[Java基础](Java基础/)
+
+* [JVM](Java基础/JVM)
+* [异常](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%BC%82%E5%B8%B8/Java%E5%BC%82%E5%B8%B8%E5%B0%8F%E6%80%BB%E7%BB%93.md)
+* [泛型](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93.md)
+* [反射](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/%E5%8F%8D%E5%B0%84%E5%9F%BA%E7%A1%80.md)
+* [多线程并发](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF(%E4%BA%8C).md)
+
 
 ## MYSQL
 
