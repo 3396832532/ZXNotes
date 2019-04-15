@@ -120,77 +120,66 @@ mysql> SELECT c_id FROM orders WHERE o_num IN
 可以看到，符合条件的o_num列的值有两个：30003和30005，然后执行外层查询，在orders表中查询订单号等于30003或30005的客户c_id。嵌套子查询语句还可以写为如下形式，实现相同的效果：
  `SELECT c_id FROM orders WHERE o_num IN (30003, 30005);`
 
-【例7.59】与前一个例子类似，但是在SELECT语句中使用NOT IN关键字，SQL语句如下：
+【例7.61】在suppliers表中查询s_city等于“Tianjin”的供应商s_id，然后在fruits表中查询所有非该供应商提供的水果的种类，SQL语句如下：
 
 ```mysql
-
-
-
- SELECT c_id FROM orders WHERE o_num NOT IN
-     (SELECT o_num  FROM orderitems WHERE f_id = 'c0');
-
- SELECT * FROM orders;
-
-【例7.60】在suppliers表中查询s_city等于“Tianjin”的供应商s_id，然后在fruits表中查询所有该供应商提供的水果的种类，SQL语句如下：
-SELECT s_id, f_name FROM fruits
-WHERE s_id =
-(SELECT s1.s_id FROM suppliers AS s1 WHERE s1.s_city = 'Tianjin');
-
-【例7.61】在suppliers表中查询s_city等于“Tianjin”的供应商s_id，然后在fruits表中查询所有非该供应商提供的水果的种类，SQL语句如下：
- SELECT s_id, f_name FROM fruits
-     WHERE s_id <>
-     (SELECT s1.s_id FROM suppliers AS s1 WHERE s1.s_city = 'Tianjin');
-
-【例7.62】查询所有价格小于9的水果的信息，查询s_id等于101和103所有的水果的信息，使用UNION连接查询结果，SQL语句如下：
-SELECT s_id, f_name, f_price 
-FROM fruits
-WHERE f_price < 9.0
-UNION ALL
-SELECT s_id, f_name, f_price 
-FROM fruits
-WHERE s_id IN(101,103);
-
-如前所述，UNION将多个SELECT语句的结果组合成一个结果集合。可以分开查看每个SELECT语句的结果：
- SELECT s_id, f_name, f_price
-     FROM fruits
-     WHERE f_price < 9.0;
-+------+-----------+---------+
-| s_id | f_name  | f_price |
-+------+-----------+---------+
-|  101 | apple   |    5.20 |
-|  103 | apricot  |    2.20 |
-|  104 | berry   |    7.60 |
-|  107 | xxxx    |    3.60 |
-|  105 | melon   |    8.20 |
-|  101 | cherry   |    3.20 |
-|  104 | lemon   |    6.40 |
-|  105 | xbabay  |    2.60 |
-|  102 | grape   |    5.30 |
-|  107 | xbababa |    3.60 |
-+------+-----------+---------+
-10 rows in set (0.00 sec)
-
- SELECT s_id, f_name, f_price
-     FROM fruits
-     WHERE s_id IN(101,103);
-+------+------------+---------+
-| s_id | f_name   | f_price |
-+------+------------+---------+
-|  101 | apple   |    5.20 |
-|  103 | apricot  |    2.20 |
-|  101 | blackberry|   10.20 |
-|  101 | cherry   |    3.20 |
-|  103 | coconut |    9.20 |
-+------+------------+---------+
-
-【例7.63】查询所有价格小于9的水果的信息，查询s_id等于101和103的所有水果的信息，使用UNION ALL连接查询结果，SQL语句如下：
-SELECT s_id, f_name, f_price 
-FROM fruits
-WHERE f_price < 9.0
-UNION ALL
-SELECT s_id, f_name, f_price 
-FROM fruits
-WHERE s_id IN(101,103);
+mysql>  SELECT s_id, f_name FROM fruits
+    ->      WHERE s_id <>
+    ->      (SELECT s1.s_id FROM suppliers AS s1 WHERE s1.s_city = 'Tianjin');
++------+---------+
+| s_id | f_name  |
++------+---------+
+|  103 | apricot |
+|  104 | berry   |
+|  107 | xxxx    |
+|  102 | orange  |
+|  105 | melon   |
+|  104 | lemon   |
+|  106 | mango   |
+|  105 | xbabay  |
+|  105 | xxtt    |
+|  103 | coconut |
+|  102 | banana  |
+|  102 | grape   |
+|  107 | xbababa |
++------+---------+
+13 rows in set (0.27 sec)
 
 ```
+
+### 3、合并查询结果
+
+【例7.62】查询所有价格小于9的水果的信息，查询s_id等于101和103所有的水果的信息，使用UNION连接查询结果，SQL语句如下：
+
+```mysql
+mysql> SELECT s_id, f_name, f_price 
+    -> FROM fruits
+    -> WHERE f_price < 9.0
+    -> UNION ALL
+    -> SELECT s_id, f_name, f_price 
+    -> FROM fruits
+    -> WHERE s_id IN(101,103);
++------+------------+---------+
+| s_id | f_name     | f_price |
++------+------------+---------+
+|  101 | apple      |    5.20 |
+|  103 | apricot    |    2.20 |
+|  104 | berry      |    7.60 |
+|  107 | xxxx       |    3.60 |
+|  105 | melon      |    8.20 |
+|  101 | cherry     |    3.20 |
+|  104 | lemon      |    6.40 |
+|  105 | xbabay     |    2.60 |
+|  102 | grape      |    5.30 |
+|  107 | xbababa    |    3.60 |
+|  101 | apple      |    5.20 |
+|  103 | apricot    |    2.20 |
+|  101 | blackberry |   10.20 |
+|  101 | cherry     |    3.20 |
+|  103 | coconut    |    9.20 |
++------+------------+---------+
+15 rows in set (0.02 sec)
+```
+
+
 
