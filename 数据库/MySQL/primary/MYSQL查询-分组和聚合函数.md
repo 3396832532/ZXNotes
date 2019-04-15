@@ -1,4 +1,4 @@
-# MYSQL查询相关
+# 分组和聚合函数
 
 演示的表和插入语句
 
@@ -99,7 +99,7 @@ mysql> select s_id, count(*) as Total from fruits group by s_id;
 
 如果要查询所有种类的名称，可以使用`GROUP_CONCAT()`函数。
 
-```java
+```mysql
 mysql> select s_id, GROUP_CONCAT(f_name) AS Names FROM fruits GROUP BY s_id;
 +------+-------------------------+
 | s_id | Names                   |
@@ -124,7 +124,7 @@ mysql>
 
 例如，查询水果种类大于`>1`的分组信息。
 
-```java
+```mysql
 mysql> select s_id, GROUP_CONCAT(f_name) as Names from fruits GROUP BY s_id HAVING count(f_name) > 1;
 +------+-------------------------+
 | s_id | Names                   |
@@ -153,7 +153,7 @@ mysql> select s_id, GROUP_CONCAT(f_name) as Names from fruits GROUP BY s_id HAVI
 
 ①都where和having都可以使用的场景:
 
-```java
+```mysql
 mysql> select f_id, f_price from fruits where f_price > 10.00;
 +------+---------+
 | f_id | f_price |
@@ -184,7 +184,7 @@ mysql> select f_id, f_price from fruits having f_price > 10.00;
 
 ②只可以使用where，不可以使用having的情况：
 
-```java
+```mysql
 mysql> select f_id, f_name from fruits where f_price > 10.00;
 +------+------------+
 | f_id | f_name     |
@@ -209,7 +209,7 @@ mysql>
 
 查询供应商供应的种类`>2`的情况。
 
-```java
+```mysql
 mysql> select s_id, GROUP_CONCAT(f_name), COUNT(f_name) as al from fruits GROUP BY s_id HAVING al > 2;
 +------+-------------------------+----+
 | s_id | GROUP_CONCAT(f_name)    | al |
@@ -271,7 +271,7 @@ mysql> select * from fruits GROUP BY s_id,f_name;
 
 要对求出来的`SUM(quantity * item_price) AS orderTotal`进行排序
 
-```java
+```mysql
 mysql> INSERT INTO orderitems(o_num, o_item, f_id, quantity, item_price)
     -> VALUES(30001, 1, 'a1', 10, 5.2),
     -> (30001, 2, 'b2', 3, 7.6),
@@ -324,7 +324,7 @@ mysql> SELECT o_num,  SUM(quantity * item_price) AS orderTotal
 
 使用`count(*)`和`count(列)`的区别: `count(*)`是统计总的行数，而`count(列)`是统计这一列不为空的数目。
 
-```java
+```mysql
 mysql> select * from customers;
 +-------+----------+---------------------+---------+--------+-----------+-------------------+
 | c_id  | c_name   | c_address           | c_city  | c_zip  | c_contact | c_email           |
@@ -356,11 +356,11 @@ mysql>
 
 ```
 
-
-
 ### 2、sum
 
-```java
+不同订单号中订购的水果种类的数目。
+
+```mysql
 mysql> select * from orderitems;
 +-------+--------+------+----------+------------+
 | o_num | o_item | f_id | quantity | item_price |
@@ -392,4 +392,55 @@ mysql> select o_num, count(f_id) from orderitems group by o_num;
 5 rows in set (0.00 sec)
 
 ```
+
+再看一个例子: 使用`sum()`函数求出这个订单号对应的总的数量
+
+```mysql
+mysql> select SUM(quantity) AS item_total from orderitems where o_num = 30005;
++------------+
+| item_total |
++------------+
+|         30 |
++------------+
+1 row in set (0.29 sec)
+
+# 求统计不同订单号的订购的水果的总数量
+mysql> select SUM(quantity) AS item_total from orderitems GROUP BY o_num;
++------------+
+| item_total |
++------------+
+|         33 |
+|          2 |
+|        100 |
+|         50 |
+|         30 |
++------------+
+5 rows in set (0.00 sec)
+
+```
+
+### 3、avg
+
+查询每一个供应商的水果价格的平均值:
+
+```mysql
+mysql> select s_id, AVG(f_price) AS avg_price from fruits GROUP BY s_id;
++------+-----------+
+| s_id | avg_price |
++------+-----------+
+|  101 |  6.200000 |
+|  102 |  8.933333 |
+|  103 |  5.700000 |
+|  104 |  7.000000 |
+|  105 |  7.466667 |
+|  106 | 15.600000 |
+|  107 |  3.600000 |
++------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> 
+
+```
+
+
 
