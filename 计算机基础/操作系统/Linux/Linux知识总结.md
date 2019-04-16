@@ -1,4 +1,4 @@
-﻿# Linux知识小总结
+﻿# Linux知识总结
 
 * [一、基础知识以及常用命令](#一基础知识以及常用命令)
 * [二、远程管理](#二远程管理)
@@ -216,7 +216,7 @@ sudo usermod -s /bin/bash zhangsan   // 指定张三用户的shell为bash，而�
 
 通过绝对路径创建的、以及移动两个软链接之后，相对路径的失效效果:
 
- 
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105201232576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
 **`注意`: 当省略了`-s`选项就是创建硬链接。**
@@ -225,7 +225,7 @@ sudo usermod -s /bin/bash zhangsan   // 指定张三用户的shell为bash，而�
 
 下面是软链接和硬链接的示意图:
 
- 
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105202902318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
 ### 3、打包压缩
