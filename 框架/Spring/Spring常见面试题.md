@@ -33,14 +33,12 @@ Bean 实例从创建到最后销毁，需要经过很多过程，执行很多生
 * 3)、若 Bean 实现了 `BeanNameAware `接口，则会执行接口方法 setBeanName(String beanId)，**使Bean 类可以获取其在容器中的 id 名称**。
 * 4)、若 Bean 实现了 `BeanFactoryAware` 接口，则执行接口方法 setBeanFactory(BeanFactory factory)，**使 Bean 类可以获取到 BeanFactory 对象**。 
 * 5)、若 定 义 并 注 册 了 Bean 后 处 理 器 BeanPostProcessor ， 则 执行接口方法`postProcessBeforeInitialization()`。 
-* 6)、若 Bean 实现了 InitializingBean 接口，则执行接口方法 afterPropertiesSet ()。 该方法
-  在 Bean 的所有属性的 set 方法执行完毕后执行，是 Bean 初始化结束的标志，即 Bean 实例
-  化结束。 
+* 6)、若 Bean 实现了 InitializingBean 接口，则执行接口方法 afterPropertiesSet ()。 该方法在 Bean 的所有属性的 set 方法执行完毕后执行，是 Bean 初始化结束的标志，即 Bean 实例化结束。 
 * 7)、若设置了 init-method 方法，则执行。 
 * 8)、若 定 义 并 注 册 了 Bean 后 处 理 器 BeanPostProcessor ， 则 执 行 接 口 方 法
   `postProcessAfterInitialization()`。 
 
-注：以上工作完成以后就可以应用这个Bean了，那这个Bean是一个Singleton的，所以一般情况下我们调用同一个id的Bean会是在内容地址相同的实例，当然在Spring配置文件中也可以配置非Singleton，这里我们不做赘述。
+注：以上工作完成以后就可以应用这个Bean了，**这个Bean是一个Singleton的，所以一般情况下我们调用同一个id的Bean会是在内容地址相同的实例，当然在Spring配置文件中也可以配置非Singleton**，这里我们不做赘述。
 
 * 9)、执行业务方法(就是应用Bean)。 
 * 10)、若 Bean 实现了 DisposableBean 接口，则执行接口方法 destroy()。
