@@ -15,7 +15,7 @@
 
 另一个区别是HashMap的迭代器(`Iterator`)是`fail-fast`迭代器。
 
-而Hashtable的`enumerator`迭代器不是fail-fast的。
+而Hashtable的`enumerator`迭代器不是`fail-fast`的。
 
 所以当有其它线程改变了HashMap的结构（增加或者移除元素），将会抛出`ConcurrentModificationException`，但迭代器本身的`remove()`方法移除元素则不会抛出`ConcurrentModificationException`异常。
 
@@ -37,14 +37,12 @@ fail-fast底层: 维护`modCount == expectModCount`:
 
 比如：
 
-有两个线程（线程A，线程B），其中线程A负责遍历list、线程B修改list。线程A在遍历list过程的某个时候（此时`expectedModCount = modCount=N`，线程启动，同时线程B增加一个元素，这是modCount的值发生改变\（`modCount + 1 = N + 1`）。线程A继续遍历执行next方法时，通告checkForComodification方法发现expectedModCount  = N  ，而`modCount = N + 1`，两者不等，这时就抛出ConcurrentModificationException 异常，从而产生fail-fast机制。
+有两个线程（线程A，线程B），其中线程A负责遍历list、线程B修改list。线程A在遍历list过程的某个时候（此时`expectedModCount = modCount=N`，线程启动，同时线程B增加一个元素，这是modCount的值发生改变（`modCount + 1 = N + 1`）。线程A继续遍历执行next方法时，通告checkForComodification方法发现expectedModCount  = N  ，而`modCount = N + 1`，两者不等，这时就抛出ConcurrentModificationException 异常，从而产生fail-fast机制。
 
 ## 三、扩容
 
 * HashTable扩容: 默认初始size为**11**，加载因子`0.75`，`newsize = olesize*2+1`；
 * HashMap扩容: 初始size为**16**，扩容：`newsize = oldsize*2`，size一定为2的n次幂；
-
-
 
 ## 四、计算index
 
@@ -56,8 +54,6 @@ fail-fast底层: 维护`modCount == expectModCount`:
 HashTable基于Dictionary类，而HashMap是基于AbstractMap。
 
 Dictionary是什么？它是任何可将键映射到相应值的类的抽象父类，而AbstractMap是基于Map接口的骨干实现，它以最大限度地减少实现此接口所需的工作。
-
-
 
 `HashMap`中的`0`位置上放的是`null`值(键为`null`)。
 

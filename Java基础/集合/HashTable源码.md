@@ -87,34 +87,34 @@ private void addEntry(int hash, K key, V value, int index) {
 
 ```java
 protected void rehash() {
-        int oldCapacity = table.length;
-        Entry<?,?>[] oldMap = table;
+    int oldCapacity = table.length;
+    Entry<?,?>[] oldMap = table;
 
-        // overflow-conscious code
-        int newCapacity = (oldCapacity << 1) + 1;
-        if (newCapacity - MAX_ARRAY_SIZE > 0) {
-            if (oldCapacity == MAX_ARRAY_SIZE)
-                // Keep running with MAX_ARRAY_SIZE buckets
-                return;
-            newCapacity = MAX_ARRAY_SIZE;
-        }
-        Entry<?,?>[] newMap = new Entry<?,?>[newCapacity];
+    // overflow-conscious code
+    int newCapacity = (oldCapacity << 1) + 1;
+    if (newCapacity - MAX_ARRAY_SIZE > 0) {
+        if (oldCapacity == MAX_ARRAY_SIZE)
+            // Keep running with MAX_ARRAY_SIZE buckets
+            return;
+        newCapacity = MAX_ARRAY_SIZE;
+    }
+    Entry<?,?>[] newMap = new Entry<?,?>[newCapacity];
 
-        modCount++;
-        threshold = (int)Math.min(newCapacity * loadFactor, MAX_ARRAY_SIZE + 1);
-        table = newMap;
+    modCount++;
+    threshold = (int)Math.min(newCapacity * loadFactor, MAX_ARRAY_SIZE + 1);
+    table = newMap;
 
-        for (int i = oldCapacity ; i-- > 0 ;) {
-            for (Entry<K,V> old = (Entry<K,V>)oldMap[i] ; old != null ; ) {
-                Entry<K,V> e = old;
-                old = old.next;
+    for (int i = oldCapacity ; i-- > 0 ;) {
+        for (Entry<K,V> old = (Entry<K,V>)oldMap[i] ; old != null ; ) {
+            Entry<K,V> e = old;
+            old = old.next;
 
-                int index = (e.hash & 0x7FFFFFFF) % newCapacity;
-                e.next = (Entry<K,V>)newMap[index];
-                newMap[index] = e;
-            }
+            int index = (e.hash & 0x7FFFFFFF) % newCapacity;
+            e.next = (Entry<K,V>)newMap[index];
+            newMap[index] = e;
         }
     }
+}
 ```
 
 `rehash()`方法中我们可以看到容量扩大两倍+1，同时需要将原来HashTable中的元素一一复制到新的HashTable中，这个过程是比较消耗时间的，同时还需要重新计算hashSeed的，毕竟容量已经变了。

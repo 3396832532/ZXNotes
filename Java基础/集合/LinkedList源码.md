@@ -38,10 +38,3 @@ transient Node<E> last;
 
 
 
-
-
-<http://www.cnblogs.com/chengxiao/p/6842045.html>
-
-
-
-<https://juejin.im/post/5ab0568b5188255580020e56>

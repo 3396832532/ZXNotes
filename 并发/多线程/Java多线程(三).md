@@ -171,6 +171,8 @@ public class AtomicReferenceTest {
 
 ### 3、AtomicStampReference
 
+解决ABA问题。
+
 解决CAS的不足:
 
 线程1准备用CAS将变量的值由A替换为B，在此之前，线程2将变量的值由A替换为C，又由C替换为A，然后线程1执行CAS时发现变量的值仍然为A，所以CAS成功。但实际上这时的现场已经和最初不同了，尽管CAS成功，但可能存在潜藏的问题，例如下面的例子：
