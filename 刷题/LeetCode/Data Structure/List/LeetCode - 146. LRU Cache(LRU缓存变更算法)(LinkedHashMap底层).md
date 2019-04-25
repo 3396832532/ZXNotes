@@ -1,4 +1,4 @@
-﻿## LeetCode - 146. LRU Cache(LRU缓存变更算法)(LinkedHashMap底层)
+# LeetCode - 146. LRU Cache(LRU缓存变更算法)(LinkedHashMap底层)
 
 #### [题目链接](https://leetcode.com/problems/lru-cache/description/)
 

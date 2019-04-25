@@ -2,11 +2,57 @@
 
 答：MyBatis 是一个可以自定义 SQL、存储过程和高级映射的持久层框架。
 
+
+
+### 插一个: statement 、prepareStatement区别
+
+reparedStatement是预编译的,对于批量处理可以大大提高效率. 也叫JDBC存储过程。
+
+使用 Statement 对象。在对数据库只执行一次性存取的时侯，用 Statement 对象进行处理。
+
+PreparedStatement 对象的开销比Statement大，对于一次性操作并不会带来额外的好处。
+
+statement每次执行sql语句，相关数据库都要执行sql语句的编译，preparedstatement是预编译得, preparedstatement支持批处理。
+
+prepareStatement会先初始化SQL，先把这个SQL提交到数据库中进行预处理，多次使用可提高效率。   Statement不会初始化，没有预处理，没次都是从0开始执行SQL。
+
+
+
+**ParperStatement提高了代码的灵活性和执行效率。**
+
+关于SQL注入: 
+
+**最后但也是最重要的一个大大的比Statement好的优点，那就是安全！**
+
+```java
+String sql ="select * from user where username= '"+varname+"' anduserpwd='"+varpasswd+"'";
+
+stmt =conn.createStatement();
+
+rs =stmt.executeUpdate(sql);
+```
+
+这是验证用户名密码的，对吧。但要是我们把'or '1' = 1'当作密码传进去，你猜猜会发生啥。
+
+`select * fromuser where username = 'user' and userpwd = '' or '1' = '1';` 
+
+发现了吧！这是个永真式，因为1永远等于1。所以不管怎样都能获取到权限。哇。这就坏咯！这还不是最坏的，你再看！
+
+String sql ="select * from user where username= '"+varname+"' and userpwd='"+varpasswd+"'";
+
+stmt =conn.createStatement();
+
+rs =stmt.executeUpdate(sql);
+
+依旧是这行代码。这次我们把'or '1' = 1';drop table book;当成密码传进去。哇！又坏了！这次直接把表给删了。但是，你如果用PrepareStatement的话就不会出现这种问题。你传入的这些数据根本不会跟原来的数据有任何的交集，也不会发生这些问题。
+
+
+
 ### 2 、讲下 MyBatis 的缓存
 
 答：**MyBatis 的缓存分为一级缓存和二级缓存, 一级缓存放在 session 里面, 默认就有, 二级缓**
 **存放在它的命名空间里, 默认是不打开的, 使用二级缓存属性类需要实现 Serializable 序列化**
-**接口**( 可用来保存对象的状态),可在它的映射文件中配置<cache/>
+**接口**( 可用来保存对象的状态),可在它的映射文件中配置。
 
 ### 3 、 Mybatis 是如何进行分页的？分页插件的原理是什么？
 
@@ -40,13 +86,11 @@ trim|where|set|foreach|if|choose|when|otherwise|bind。
 
 ### 6 、 #{}和 ${}的区别是什么？
 
-1 ） #{}是预编译处理，${}是字符串替换。
+1 ） **#{}是预编译处理，${}是字符串替换**。
 2 ） Mybatis 在处理#{}时，会将 sql 中的#{}替换为? 号，调用 PreparedStatement 的 set 方法
 来赋值；
 3 ） Mybatis 在处理${}时，就是把${}替换成变量的值。
 4 ）使用#{}可以有效的防止 SQL 注入，提高系统安全性。
-
-
 
 ### 7 、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？
 

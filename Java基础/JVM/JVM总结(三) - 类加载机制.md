@@ -16,10 +16,6 @@
   * [4、理解ClassLoader](#4理解classloader)
   * [5、自定义类加载器](#4自定义类加载器)
 
-
-
-
-
 一张总结图（来自牛客网）
 
 ![j46.png](images/j46.png)
@@ -405,6 +401,16 @@ public class CLInitDemo {
 ```
 
 使用ClassLoader加载静态内部类Hello，Hello有一个static语句块，输出"hello"，运行该程序，类被加载了，但没有任何输出，即static语句块没有被执行。如果将loadClass的语句换为：` Class<?> cls = Class.forName(className);`，则static语句块会被执行，屏幕将输出"hello"。
+
+> 面试题: 
+>
+> Java中Class.forName和classloader都可以用来对类进行加载，他们的区别?。 
+>
+> `Class.forName()`除了将类的.class文件加载到jvm中之外，还会对类进行解释，执行类中的static块。
+>
+> 而classloader只干一件事情，就是将`.class`文件加载到jvm中，不会执行static中的内容，只有在`newInstance`才会去执行static块。
+>
+> `Class.forName(name,initialize,loader)`带参数也可控制是否加载static块。并且只有调用了newInstance()方法采用调用构造函数，创建类的对象。
 
 看一下ClassLoader的loadClass的源代码:
 

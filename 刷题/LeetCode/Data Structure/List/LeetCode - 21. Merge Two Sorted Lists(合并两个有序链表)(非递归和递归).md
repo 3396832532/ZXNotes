@@ -1,4 +1,4 @@
-﻿## LeetCode - 21. Merge Two Sorted Lists(合并两个有序链表)(非递归和递归)
+# LeetCode - 21. Merge Two Sorted Lists(合并两个有序链表)(非递归和递归)
 
  - 非递归
  - 递归

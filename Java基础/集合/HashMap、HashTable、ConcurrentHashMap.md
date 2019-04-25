@@ -63,3 +63,35 @@ Dictionary是什么？它是任何可将键映射到相应值的类的抽象父�
 
 
 
+# 阿里面经
+
+#### 1、Hash Map 和 Hash Table 的区别， Hash Map 中的 key 可以是任何对象或数据类型吗？ HashTable 是线程安全的么？
+
+• Hash Map 和 Hash Table 的区别
+○ Hashtable 的方法是同步的， HashMap 未经同步，所以在多线程场合要手动同步 HashMap 这个区别就像 Vector 和ArrayList 一样。
+○ Hashtable 不允许 null 值 (key 和 value 都不可以 ) ， HashMap 允许 null 值 (key 和 value 都可以 ) 。
+○ 两者的遍历方式大同小异， Hashtable 仅仅比 HashMap 多一个 elements 方法。Hashtable 和 HashMap 都能通过 values() 方法返回一个 Collection ，然后进行遍历处理。两者也都可以通过 entrySet() 方法返回一个 Set ， 然后进行遍历处理。
+○ HashTable 使用 Enumeration ， HashMap 使用 Iterator 。
+○ 哈希值的使用不同， Hashtable 直接使用对象的 hashCode 。而 HashMap 重新计算 hash 值，而且用于代替求模。
+○ Hashtable 中 hash 数组默认大小是 11 ，增加的方式是 old*2+1 。 HashMap 中 hash 数组的默认大小是 16 ，而且一定是 2的指数。
+○ HashTable 基于 Dictionary 类，而 HashMap 基于 AbstractMap 类
+• Hash Map 中的 key 可以是任何对象或数据类型吗
+○ 可以为 null ，但不能是可变对象，如果是可变对象的话，对象中的属性改变，则对象 HashCode 也进行相应的改变，导致下次无法查找到已存在 Map 中的数据。
+○ 如果可变对象在 HashMap 中被用作键，那就要小心在改变对象状态的时候，不要改变它的哈希值了。我们只需要保证成员变量的改变能保证该对象的哈希值不变即可。
+• HashTable 是线程安全的么
+○ HashTable 是线程安全的，其实现是在对应的方法上添加了 synchronized 关键字进行修饰，由于在执行此方法的时候需要获得对象锁，则执行起来比较慢。所以现在如果为了保证线程安全的话，使用 CurrentHasxhMap 。
+
+#### 2、HashMap和Concurrent HashMap区别， Concurrent HashMap 线程安全吗， Concurrent HashMap如何保证 线程安全？
+
+• HashMap 和 Concurrent HashMap 区别？
+○ HashMap 是非线程安全的， CurrentHashMap 是线程安全的。
+○ ConcurrentHashMap 将整个 Hash 桶进行了分段 segment ，也就是将这个大的数组分成了几个小的片段 segment ，而且每个小的片段 segment 上面都有锁存在，那么在插入元素的时候就需要先找到应该插入到哪一个片段 segment ，然后再在这个片段上面进行插入，而且这里还需要获取 segment 锁。
+○ ConcurrentHashMap 让锁的粒度更精细一些，并发性能更好。
+• Concurrent HashMap 线程安全吗， Concurrent HashMap 如何保证 线程安全？
+○ HashTable 容器在竞争激烈的并发环境下表现出效率低下的原因是所有访问 HashTable 的线程都必须竞争同一把锁，那假如容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争，从而可以有效的提高并发访问效率，这就是 ConcurrentHashMap 所使用的锁分段技术，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。
+○ get 操作的高效之处在于整个 get 过程不需要加锁，除非读到的值是空的才会加锁重读 。 get 方法里将要使用的共享变都定义成 volatile ，如用于统计当前 Segement 大小的 count 字段和用于存储值的 HashEntry 的 value 。定义成 volatile 的变量，能够在线程之间保持可见性，能够被多线程同时读，并且保证不会读到过期的值，但是只能被单线程写（有一种情况可以被多线程写，就是写入的值不依赖于原值），在 get 操作里只需要读不需要写共享变量 count 和 value ，所以可以不用加锁。
+○ Put 方法首先定位到 Segment ，然后在 Segment 里进行插入操作。插入操作需要经历两个步骤，第一步判断是否需要
+对 Segment 里的 HashEntry 数组进行扩容，第二步定位添加元素的位置然后放在 HashEntry 数组里。
+
+
+
