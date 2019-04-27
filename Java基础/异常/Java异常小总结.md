@@ -1,11 +1,11 @@
-﻿## Java异常小总结
+# Java异常小总结
  * [异常的介绍](#异常的介绍)
  * [异常的分类](#异常的分类)
  * [异常的处理](#异常的处理)
  * [`finally`和`throws`使用](#finally和throws使用)
  * [自定义异常](#自定义异常)
 ***
-### <font color = red id = "1">异常的介绍
+### 异常的介绍
  在`Java`语言中，将程序执行中发生的不正常情况称为“异常”(开发过程中的语法错误和逻辑错误不是异常)。`Java`程序在执行过程中所发生的异常事件可分为两类(都是属于`Throwable`下的)：
 * `Error`:  Java虚拟机无法解决的严重问题。如：JVM系统内部错误、资源耗尽、虚拟机错误(`VirtualMacheError`)及其子类内存溢出错误(`OutOfMemoryError`)和栈溢出错误(`StackOverflowError`)。一般不编写针对性的代码进行处理；
 * `Exception`: 其它因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如：
@@ -76,12 +76,12 @@ public class TestExceptionOne {
 ```
 <font color = blue>捕获异常后，程序就不会异常退出了，但`try`语句内异常点之后的其他代码就不会执行了，执行完`catch`内的语句后，<font color =red>程序会继续执行`catch`大括号外的代码。
 ***
-### <font color = red id = "2">异常的分类
+### 异常的分类
 ![这里写图片描述](images/y3.png)
 
 
 
-**整体的架构图:**
+**整体的架构图**:
 
 
 ![这里写图片描述](images/y4.png)
@@ -130,38 +130,37 @@ StackTraceElement[] getStackTrace() //获取异常栈每一层的信息，每个
 
 **分类：编译时异常和运行时异常**
 ![这里写图片描述](images/y1.png)
-**<font color = green>运行时异常:**
+**运行时异常**:
 * 是指编译器不要求强制处置的异常。一般是指编程时的逻辑错误，是程序员应该积极避免其出现的异常。`java.lang.RuntimeException`类及它的子类都是运行时异常。
 * 对于这类异常，可以不作处理，因为这类异常很普遍，若全处理可能会对程序的可读性和运行效率产生影响。
 
-**<font color = green>编译时异常</font>**
+**编译时异常**
 * 是指编译器要求必须处置的异常。即程序在运行时由于外界因素造成的一般性异常。编译器要求java程序必须捕获或声明所有编译时异常。
 * 对于这类异常，如果程序不处理，可能会带来意想不到的结果。
 
-**<font color = green>区别</font>**
+**区别**
 *  `RuntimeException`(运行时异常)比较特殊，含义是`unchecked exception `(未受检异常)，相对而言，`Exception`的其他子类和`Exception`自身则是`checked exception`(受检异常)，`Error`及其子类也是`unchecked exception`；
 * `checked`还是`unchecked`，区别在于Java如何处理这两种异常，对于`checked`异常，Java会强制要求程序员进行处理，否则会有编译错误，而对于`unchecked`异常则没有这个要求；
 
 常见的运行时异常`RuntimeException`: 
 ![在这里插入图片描述](images/y5.png)
 ***
-### <font color = red id = "3">异常的处理以及自定义异常
+### 异常的处理以及自定义异常
 
-Java提供的异常处理机制是<font color = red>抓抛模型。
+Java提供的异常处理机制是**抓抛模型**。
 * `Java`程序的执行过程中如出现异常，会生成一个异常类对象，该异常对象将被提交给`Java`运行时系统，这个过程称为抛出(`throw`)异常。
 
 * 异常对象的生成:  
-	* 由虚拟机自动生成：程序运行过程中，虚拟机检测到程序发生了问题，如果在当前代码中没有找到相应的处理程序，就会在后台自动创建一个对应异常类的实例对象并抛出 --> <font color = blue>自动抛出</font>；
+	* 由虚拟机自动生成：程序运行过程中，虚拟机检测到程序发生了问题，如果在当前代码中没有找到相应的处理程序，就会在后台自动创建一个对应异常类的实例对象并抛出 --> 自动抛出；
 	* 由程序员手动创建：`Exception exception = new ClassCastException();` -->  创建好的异常对象不抛出对程序没有任何影响，和创建一个普通对象一样；
 
-* 如果一个方法内抛出异常，该异常对象会被抛给调用者方法中处理。如果异常没有在调用者方法中处理，它继续被抛给这个调用方法的上层方法。这个过程将一直继续下去，直到异常被处理。这一过程称为捕获(`catch`)异常。如果一个异常回到`main()`方法，并且`main()`也不处理，则程序运行终止。(<font color = red>就是上面说的异常链</font>)
-
-
+* 如果一个方法内抛出异常，该异常对象会被抛给调用者方法中处理。如果异常没有在调用者方法中处理，它继续被抛给这个调用方法的上层方法。这个过程将一直继续下去，直到异常被处理。这一过程称为捕获(`catch`)异常。如果一个异常回到`main()`方法，并且`main()`也不处理，则程序运行终止。(就是上面说的异常链)
 
 **异常处理的5个关键字**
+
 ![在这里插入图片描述](images/y6.png)
 
-<font color= green>**Java提供的"抓抛模型"**</font>
+**Java提供的"抓抛模型"**
 * `"抛"`，当我们执行代码时，一旦出现异常，就会在异常的代码出生成一个对应的异常类型的对象，并将此对象抛出(**自动抛出/手动抛出**)。
 	* ① 一旦抛出此异常类的对象，那么程序就终止执行；
 	* ② 此异常类的对象抛给方法的调用者；
@@ -170,26 +169,26 @@ Java提供的异常处理机制是<font color = red>抓抛模型。
 
 * `"抓"`，抓住上一步抛出来的异常类的对象，如何抓? 即为异常的处理方式。
 
-<font color= green>**"抓"的两种处理方式**</font>
+**"抓"的两种处理方式**
 
 * 第一种处理的方式: `try catch`
 	* ① 注意`try`内声明的变量，类似于局部变量，出了`try{}`语句，就不能被调用；
 	* ② `catch`语句内部是对异常对象的处理 ，例如 `getMessage()`、`printStackTrace()`；
-	* ③ 可以有多个`catch`语句，`try`中抛出的异常类对象从上往下去匹配`catch`中的异常类的类型，一旦满足就执行`catch`中的代码，执行完，<font color = blue>就跳出其后的多条`catch`语句</font>；
+	* ③ 可以有多个`catch`语句，`try`中抛出的异常类对象从上往下去匹配`catch`中的异常类的类型，一旦满足就执行`catch`中的代码，执行完，就跳出其后的多条`catch`语句；
 	* ④ 对于运行时异常，可以不显示的处理。对于编译时异常，必须要显示的进行处理；
-	* ⑤ 若`catch`中有多个异常类型是"并列关系"，熟上熟下都可以。<font color = red>若是"包含"关系，必须将子类放在父类的上面，否则报错；</font>
+	* ⑤ 若`catch`中有多个异常类型是"并列关系"，熟上熟下都可以。若是"包含"关系，必须将子类放在父类的上面，否则报错；
 	* ⑥  `finally`中存放的是一定会执行的代码，不管`try`中，`catch`中是否仍有异常未处理，以及是否有`return `语句；
 	* ⑦ `try - catch`是可以嵌套的；
-	* ⑧ `catch`块内处理完后，<font color=  blue>可以重新抛出异常</font>，异常可以是原来的，也可以是新建的(为什么要重新抛出呢？因为当前代码不能够完全处理该异常，需要调用者进一步处理)；
+	* ⑧ `catch`块内处理完后，可以重新抛出异常，异常可以是原来的，也可以是新建的(为什么要重新抛出呢？因为当前代码不能够完全处理该异常，需要调用者进一步处理)；
 
 * 第二种处理的方式: `throws `(在方法的声明处，显示的抛出改异常对象的类型)
 	* 当异常在一个方法内部出现的时候，会抛一个异常类的对象，抛给方法的调用者；
 	* 异常的对象可以逐层向上抛，直至`main()`中，当然在向上抛的过程中，可以再通过`try-catch`进行处理；
 
-> 注意:  <font color = blue>子类重写父类的方法，其抛出的异常类型只能是**被重写的方法的异常类的子类或和异常类一样；**</font>
+> 注意:  子类重写父类的方法，其抛出的异常类型只能是**被重写的方法的异常类的子类或和异常类一样**；
 
 
-<font color = green>**这里补充一下异常使用原则:**
+**这里补充一下异常使用原则**:
 
 异常应该且仅用于异常情况，也就是说异常不能代替正常的条件判断。比如说，循环处理数组元素的时候，你应该先检查索引是否有效再进行处理，而不是等着抛出索引异常再结束循环。对于一个引用变量，如果正常情况下它的值也可能为`null`，那就应该先检查是不是`null`，不为`null`的情况下再进行调用。
 另一方面，真正出现异常的时候，应该抛出异常，而不是返回特殊值，比如`String`的`substring`方法，它返回一个子字符串，代码如下：
@@ -208,12 +207,12 @@ public String substring(int beginIndex) {
 代码会检查`beginIndex`的有效性，如果无效，会抛出`StringIndexOutOfBoundsException`。纯技术上一种可能的替代方法是不抛异常而返回特殊值`null`，但`beginIndex`无效是异常情况，异常不能假装当正常处理。
 
 ***
-### <font color = red id = "4">`finally`和`throws`使用
+### `finally`和`throws`使用
 
 `finally`内的代码不管有无异常发生，都会执行。具体来说：
-* 如果没有异常发生，在`try`内的代码执行结束<font color  =red>后</font>执行；
-* 如果有异常发生且被`catch`捕获，在`catch`内的代码执行结束<font color  =red>后</font>执行；
-* 如果有异常发生但没被捕获，<font color = blue>则在异常被抛给上层<font color = red> 之前</font>执行</font>。
+* 如果没有异常发生，在`try`内的代码执行结束**后**执行；
+* 如果有异常发生且被`catch`捕获，在`catch`内的代码执行结束**后**执行；
+* 如果有异常发生但没被捕获，**则在异常被抛给上层** 之前执行。
 
 由于`finally`的这个特点，它一般用于**释放资源，如数据库连接、文件流**等。
 
@@ -241,9 +240,9 @@ public class TestExceptionOne {
     }
 }
 ```
-程序输出`10`。实际执行过程是，<font color = red>在执行到`try`内的`return ret;`语句前，会先将返回值`ret`保存在一个临时变量中，然后才执行`finally`语句，最后`try`再返回那个临时变量，`finally`中对`ret`的修改不会被返回。</font>
+程序输出`10`。实际执行过程是，在执行到`try`内的`return ret;`语句前，会先将返回值`ret`保存在一个临时变量中，然后才执行`finally`语句，最后`try`再返回那个临时变量，`finally`中对`ret`的修改不会被返回。
 
-如果在`finally`中也有`return`语句呢？ <font color=  red>`try`和`catch`内的`return`会丢失，实际会返回`finally`中的返回值。`finally`中有`return`不仅会覆盖`try`和`catch`内的返回值，而且还会掩盖`try`和`catch`内的异常，就像异常没有发生一样，例如：
+如果在`finally`中也有`return`语句呢？ `try`和`catch`内的`return`会丢失，实际会返回`finally`中的返回值。`finally`中有`return`不仅会覆盖`try`和`catch`内的返回值，而且还会掩盖`try`和`catch`内的异常，就像异常没有发生一样，例如：
 
 ```java
 public class TestExceptionOne {
@@ -283,6 +282,7 @@ public class TestExceptionOne {
 
 ```
 `finally`中抛出了`RuntimeException`，则原异常`ArithmeticException`就丢失了。
+
 ![在这里插入图片描述](images/y7.png)
 
 所以为避免混淆，应该避免在`finally`中使用`return`语句或者抛出异常，如果调用的其他代码可能抛出异常，则应该捕获异常并进行处理。
@@ -326,7 +326,7 @@ public class ReturnExceptionDemo {
 输出: 
 ![这里写图片描述](images/y8.png)
 
-<font color=green>**throws关键字**
+**throws关键字**
 
 
 `throws`跟在方法的括号后面，可以声明多个异常，以逗号分隔。
@@ -339,7 +339,7 @@ public class ReturnExceptionDemo {
 
 * 对于`RuntimeException(unchecked exception)`，是不要求使用`throws`进行声明的，但对于`checked exception`，则必须进行声明，换句话说，如果没有声明，则不能抛出。
 
-* 对于`checked exception`，<font color= red>不可以抛出而不声明，但可以声明抛出但实际不抛出，</font>不抛出声明它干嘛？主要用于在父类方法中声明，父类方法内可能没有抛出，但子类重写方法后可能就抛出了，子类不能抛出父类方法中没有声明的`checked exception`，所以就将所有可能抛出的异常都写到父类上了。
+* 对于`checked exception`，不可以抛出而不声明，但可以声明抛出但实际不抛出，不抛出声明它干嘛？主要用于在父类方法中声明，父类方法内可能没有抛出，但子类重写方法后可能就抛出了，子类不能抛出父类方法中没有声明的`checked exception`，所以就将所有可能抛出的异常都写到父类上了。
 
 如果一个方法内调用了另一个声明抛出`checked exception`的方法，则必须处理这些`checked exception`，不过，处理的方式既可以是`catch`，也可以是继续使用`throws`，如下代码所示：
 ```java
@@ -354,7 +354,7 @@ public void tester() throws AppException {
 对于`test`抛出的`SQLException`，这里使用了`catch`，而对于`AppException`，则将其添加到了自己方法的`throws`语句中，表示当前方法也处理不了，还是由上层处理吧。
 
 ***
-### <font color  = red  id = "5">自定义异常
+### 自定义异常
 
 除了`Java API`中定义的异常类，也可以自己定义异常类，一般通过继承`Exception`或者它的某个子类，如果父类是`RuntimeException`或它的某个子类，则自定义异常也是`unchecked exception`，如果是`Exception`或`Exception`的其他子类，则自定义异常是`checked exception`。
 

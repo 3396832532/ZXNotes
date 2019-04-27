@@ -59,10 +59,6 @@ Dictionary是什么？它是任何可将键映射到相应值的类的抽象父�
 
 
 
-
-
-
-
 # 阿里面经
 
 #### 1、Hash Map 和 Hash Table 的区别， Hash Map 中的 key 可以是任何对象或数据类型吗？ HashTable 是线程安全的么？

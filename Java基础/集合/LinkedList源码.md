@@ -29,7 +29,7 @@ private static class Node<E> {
 定义指向头、尾的指针以及一个`size`。
 
 ```java
- transient int size = 0;
+transient int size = 0;
 
 transient Node<E> first;
 

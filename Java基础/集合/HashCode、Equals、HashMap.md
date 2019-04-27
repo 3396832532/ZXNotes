@@ -1,4 +1,4 @@
-## HashCode、Equals、HashMap
+# HashCode、Equals、HashMap
 
 ## 1、hashCode、Equals
 
@@ -20,9 +20,7 @@ equals()方法则是在HashMap中插入值或查询时会使用到。当HashMap�
 
 * 在存储散列集合时 ( 如 Set 类 ) ，如果原对象 .equals( 新对象 ) ，但没有对 hashCode 重写，即两个对象拥有不同的hashCode ，则在在集合中将会存储两个值相同的对象，从而导致混淆。**因此在重写 equals 方法时，必须重写 hashCode方法**。
 
-
-
-(1)、hashCode（）介绍
+(1)、hashCode()介绍
 
 hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个 int 整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。
 散列表存储的是键值对(key-value)，它的特点是：能根据"键"快速的检索出对应的 "值 "。这其中就利用到了散列码！（可以快速找到所需要的对象）
@@ -69,11 +67,11 @@ hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返
 
 > **重写equals()方法需要注意什么？** 
 > 归根结底，还是想问equals()方法的主要特性。Java语言规范要求equals()方法具有如下特性： 
-> -    自反性：对于任何非空引用x，x.equals(x)应该返回true。    
-> -    对称性：对于任何引用x和y，当且仅当y.equals(x) 返回true时，x.equals(y)也应该返回true。    
-> -    传递性：对于任何引用x、y和z，如果x.equals(y) 返回true，y.equals(z)返回true，x.equals(z)也应该返回true。    
+> -    自反性：对于任何非空引用`x`，`x.equals(x)`应该返回true。    
+> -    对称性：对于任何引用x和y，当且仅当`y.equals(x)` 返回true时，`x.equals(y)`也应该返回true。    
+> -    传递性：对于任何引用x、y和z，如果`x.equals(y)` 返回true，`y.equals(z)`返回true，x.equals(z)也应该返回true。    
 > -    一致性：如果x和y引用的对象没有发生变化，反复调用x.equals(y)应该返回同样的结果。    
-> -    非空性：对于任何非空引用x，x.equals(null)应该返回false。
+> -    非空性：对于任何非空引用x，`x.equals(null)`应该返回false。
 
 Object的默认`equals`实现:
 
@@ -104,7 +102,7 @@ public boolean equals(Object obj) {
 
 **重写hashCode()方法需要注意什么？** 
 
--    应用程序执行期间，只要一个对象用于equals()方法的属性未被修改，则该对象多次返回的哈希值应相等。    
+-    应用程序执行期间，只要一个对象用于`equals()`方法的属性未被修改，则该对象多次返回的哈希值应相等。    
 -    **如果两个对象通过equals()方法比较的结果为true，那么要保证这两个对象的哈希值相等**。    
 -    **如果两个对象通过equals()方法比较的结果为false，那么这两个对象的哈希值可以相等也可以不相等，但理想情况下是应该不相等，以提高散列表的性能**。
 
