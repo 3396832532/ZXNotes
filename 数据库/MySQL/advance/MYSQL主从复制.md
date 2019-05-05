@@ -12,6 +12,8 @@ MySQL复制过程分成三步：
 
 ![zhucong_1.png](images/zhucong_1.png)
 
+![1557017250485](assets/1557017250485.png)
+
 Mysql的复制（replication）是一个**异步的复制**。
 
 实现整个复制操作主要由三个进程完成的，其中两个进程在Slave（Sql进程和IO进程），另外一个进程在 Master（IO进程）上。 

@@ -87,9 +87,9 @@ trim|where|set|foreach|if|choose|when|otherwise|bind。
 ### 6 、 #{}和 ${}的区别是什么？
 
 1 ） **#{}是预编译处理，${}是字符串替换**。
-2 ） Mybatis 在处理#{}时，会将 sql 中的#{}替换为? 号，调用 PreparedStatement 的 set 方法
+2 ） Mybatis 在处理#{}时，会将 sql 中的`#{}`替换为? 号，调用 PreparedStatement 的 set 方法
 来赋值；
-3 ） Mybatis 在处理${}时，就是把${}替换成变量的值。
+3 ） Mybatis 在处理`${}`时，就是把`${}`替换成变量的值。
 4 ）使用#{}可以有效的防止 SQL 注入，提高系统安全性。
 
 ### 7 、为什么说 Mybatis 是半自动 ORM 映射工具？它与全自动的区别在哪里？

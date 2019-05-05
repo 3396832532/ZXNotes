@@ -6,8 +6,6 @@
 * NIO 的非阻塞式网络通信
   * 选择器(Selector)
   * SocketChannel、ServerSocketChannel、DatagramChannel
-* 管道(Pipe)
-* Java NIO2 (Path、Paths 与 Files )
 
 ## 一、Java NIO 与 IO 的主要区别
 
