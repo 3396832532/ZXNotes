@@ -13,7 +13,9 @@
 
 >  QQ群: `443186280`。有兴趣的可以加一下。
 >
-> 可以一起讨论题目，我也会尽量每天发一两道题解，大家可以当做打卡，一起刷题，一起进步^_^。
+>  可以一起讨论题目，我也会尽量每天发一两道题解，大家可以当做打卡，一起刷题，一起进步^_^。
+>
+>  更: 暂时比较忙，QQ不怎么看，后续会计划。
 
 列表(**之前不是按照顺序写的，但是后面我会补上前面空缺的**)
 
@@ -40,7 +42,7 @@
 | 19 | [Remove Nth Node From End of List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2019.%20Remove%20Nth%20Node%20From%20End%20of%20List.md) | 快慢指针 | Medium |
 | 20 | [Valid Parentheses](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Stack/LeetCode%20-%2020.%20Valid%20Parentheses.md) | Stack | Easy |
 | 21 | [Merge Two Sorted Lists](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2021.%20Merge%20Two%20Sorted%20Lists(%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8)(%E9%9D%9E%E9%80%92%E5%BD%92%E5%92%8C%E9%80%92%E5%BD%92).md) | List | Easy |
-| 22 |                                                              |      |      |
+| 22 | [Generate Parentheses](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2022.%20Generate%20Parentheses(%E9%80%92%E5%BD%92).md) | Search | Medium |
 | 23 |                                                              |      |      |
 | 24 |                                                              |      |      |
 | 25 |                                                              |      |      |
