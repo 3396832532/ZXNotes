@@ -3149,10 +3149,11 @@ public class M28_ApproximateNumberEnum {
     static ArrayList<Integer> divisor(int n) {
         ArrayList<Integer> res = new ArrayList<>();
         for (int i = 1; i * i <= n; i++) {
-            if (n % i == 0)
+            if (n % i == 0) {
                 res.add(i);
-            if (i != n / i)
-                res.add(n / i);
+                if (i != n / i)
+                    res.add(n / i);
+            }
         }
         return res;
     }
