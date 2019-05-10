@@ -1,3 +1,13 @@
+
+
+
+在以下 4 种特殊情况下，finally 块不会被执行：
+
+* 在 finally 语句块中发生了异常。
+* 在前面的代码中用了 `System.exit()`退出程序。
+* 程序所在的线程死亡。
+* 关闭 CPU。
+
 ## 1、情况一
 
 
@@ -214,8 +224,6 @@ public class TryFinally {
 
 
 
-
-
 ***
 
 参考: 
@@ -223,3 +231,5 @@ public class TryFinally {
 <https://blog.csdn.net/qq_33275672/article/details/76585345>
 
 <https://blog.csdn.net/w_linux/article/details/80589486>
+
+https://blog.csdn.net/loongshawn/article/details/50489706
