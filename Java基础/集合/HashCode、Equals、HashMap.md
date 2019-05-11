@@ -25,7 +25,7 @@ equals()方法则是在HashMap中插入值或查询时会使用到。当HashMap�
 hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个 int 整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。
 散列表存储的是键值对(key-value)，它的特点是：能根据"键"快速的检索出对应的 "值 "。这其中就利用到了散列码！（可以快速找到所需要的对象）
 
-(2)、为什么要有 hashCode?
+(2)、为什么要有 hashCode()?
 
 当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的 hashcode， HashSet 会假设对象没有重复出现。
 

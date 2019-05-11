@@ -45,6 +45,7 @@ public class TestExceptionOne {
 如果用户输入的不是数字，最后就会抛出`NumberFormatException`异常，对于屏幕输出中的<font color = red>异常栈信息</font>，使用的用户无法理解，也不知道该怎么办，我们需要给用户一个较为友好的信息，告诉用户，他应该输入的是数字，要做到这一点，我们需要自己"捕获"异常。
 
 查看`NumberFormatException`和`Integer`的源码可以发现: 
+
 ![在这里插入图片描述](images/y2.png)
 
 分析: 
@@ -129,8 +130,10 @@ StackTraceElement[] getStackTrace() //获取异常栈每一层的信息，每个
 
 
 **分类：编译时异常和运行时异常**
+
 ![这里写图片描述](images/y1.png)
 **运行时异常**:
+
 * 是指编译器不要求强制处置的异常。一般是指编程时的逻辑错误，是程序员应该积极避免其出现的异常。`java.lang.RuntimeException`类及它的子类都是运行时异常。
 * 对于这类异常，可以不作处理，因为这类异常很普遍，若全处理可能会对程序的可读性和运行效率产生影响。
 

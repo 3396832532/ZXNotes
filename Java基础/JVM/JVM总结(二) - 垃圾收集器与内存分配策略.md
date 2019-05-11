@@ -403,7 +403,7 @@ public class FinalizeEscapeGC {
 概括
 
 * 它是 Serial 收集器的多线程版本；
-* 是 Server 模式下的虚拟机首选新生代收集器，除了性能原因外，主要是因为除了 Serial 收集器，只有它能与 CMS 收集器配合工作：
+* 是 Server 模式下的虚拟机首选新生代收集器，除了性能原因外，主要是因为除了 Serial 收集器，**只有它能与 CMS 收集器配合工作**：
 >在JDK1.5 时期，HotSpot 推出了 CMS 收集器（Concurrent Mark Sweep），它是 HotSpot 虚拟机中第一款真正意义上的并发收集器（收集线程和用户线程同时执行）。不幸的是，CMS 作为老年代的收集器，却无法与 JDK1.4.0 中已经存在的新生代收集器 Parallel Scavenge 配合工作，所以在 JDK1.5中使用 CMS 来收集老年代的时候，新生代只能选择 ParNew 或者 Serial 收集器中的一个。
 
 * 默认开启的线程数量与 CPU 数量相同，可以使用 -XX:ParallelGCThreads 参数来设置线程数。
@@ -470,8 +470,8 @@ Parallel Scavenge 收集器提供了两个参数用于精确控制委吐量，�
 
 * 整个过程分为四个步骤: 
 
-  * **① 初始标记(CMS initial Mark) (标记一下 GC Roots 能直接关联到的对象，速度很快，需要停顿**；
-  * **② 并发标记(CMS concurrent mark)(时间最长)**；
+  * **①初始标记(CMS initial Mark) (标记一下 GC Roots 能直接关联到的对象，速度很快，需要停顿**；
+  * **②并发标记(CMS concurrent mark)(时间最长)**；
   * **③重新标记(CMS remark)(需要停顿)**；
   * **④并发清除(CMS concurrent sweep)**；
 
