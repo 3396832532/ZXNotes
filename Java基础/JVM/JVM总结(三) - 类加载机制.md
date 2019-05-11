@@ -267,7 +267,7 @@ Java运行时，会根据**类的完全限定名寻找并加载类，寻找的�
 
 ### 3、双亲委派模型
 
-上面的三种加载器有一定的关系，可以认为是父子关系，`Application ClassLoader`的父亲是`Extension ClassLoader`，Extension的父亲是`Bootstrap ClassLoader`，注意不是父子继承关系，而是父子委派关系，子ClassLoader有一个变量parent指向父ClassLoader，在子ClassLoader加载类时，一般会首先通过父ClassLoader加载，具体来说，在加载一个类时，基本过程是：
+上面的三种加载器有一定的关系，可以认为是父子关系，`Application ClassLoader`的父亲是`Extension ClassLoader`，Extension的父亲是`Bootstrap ClassLoader`，**注意不是父子继承关系，而是父子委派关系，子ClassLoader有一个变量parent指向父ClassLoader，在子ClassLoader加载类时，一般会首先通过父ClassLoader加载**，具体来说，在加载一个类时，基本过程是：
 
 * 判断是否已经加载过了，加载过了，直接返回Class对象，一个类只会被一个ClassLoader加载一次。
 * 如果没有被加载，先让父ClassLoader去加载，如果加载成功，返回得到的Class对象。
