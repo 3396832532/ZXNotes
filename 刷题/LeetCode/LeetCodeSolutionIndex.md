@@ -44,7 +44,7 @@
 | 21 | [Merge Two Sorted Lists](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2021.%20Merge%20Two%20Sorted%20Lists(%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8)(%E9%9D%9E%E9%80%92%E5%BD%92%E5%92%8C%E9%80%92%E5%BD%92).md) | List | Easy |
 | 22 | [Generate Parentheses](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2022.%20Generate%20Parentheses(%E9%80%92%E5%BD%92).md) | Search | Medium |
 | 23 | [Merge K Sorted Lists](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2023.%20Merge%20k%20Sorted%20Lists.md) | List | Hard |
-| 24 |                                                              |      |      |
+| 24 | [Swap Nodes in Pairs](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2024.%20Swap%20Nodes%20in%20Pairs.md) | List | Medium |
 | 25 |                                                              |      |      |
 | 26 |                                                              |      |      |
 | 27 |                                                              |      |      |
