@@ -47,7 +47,7 @@
 | 24 | [Swap Nodes in Pairs](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2024.%20Swap%20Nodes%20in%20Pairs.md) | List | Medium |
 | 25 | [Reverse Nodes in K-Group](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2025.%20Reverse%20Nodes%20in%20K-Group.md) | List | Hard |
 | 26 | [Remove Duplicates from Sorted Array](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2026.%20Remove%20Duplicates%20from%20Sorted%20Array.md) | Two Pointer | Easy |
-| 27 |                                                              |      |      |
+| 27 | [Remove Element](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2027.%20Remove%20Element.md) | Two Pointer | Easy |
 | 28 |                                                              |      |      |
 | 29 |                                                              |      |      |
 | 30 |                                                              |      |      |
