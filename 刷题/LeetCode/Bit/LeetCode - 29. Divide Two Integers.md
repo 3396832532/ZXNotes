@@ -1,4 +1,4 @@
-# LeetCode - 29 Divide Two Integers
+# LeetCode - 29. Divide Two Integers
 
 #### [题目链接](https://leetcode.com/problems/divide-two-integers/)
 
