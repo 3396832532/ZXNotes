@@ -49,7 +49,7 @@
 | 26 | [Remove Duplicates from Sorted Array](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2026.%20Remove%20Duplicates%20from%20Sorted%20Array.md) | Two Pointer | Easy |
 | 27 | [Remove Element](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2027.%20Remove%20Element.md) | Two Pointer | Easy |
 | 28 | [Implement strStr()](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/String/KMP/LeetCode%20-%2028.%20Implement%20strStr().md) | String、KMP | Easy |
-| 29 |                                                              |      |      |
+| 29 | [Divide Two Integers](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Bit/LeetCode%20-%2029.%20Divide%20Two%20Integers.md) | Bit | Medium |
 | 30 |                                                              |      |      |
 | 31 | [Next Permutation](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%2031.%20Next%20Permutation(%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97).md) | 模拟 | Medium |
 | 32 |                                                              |      |      |
