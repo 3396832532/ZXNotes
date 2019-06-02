@@ -30,6 +30,12 @@
 
 这 7 个阶段中的：**加载、验证、准备、初始化、卸载**的顺序是固定的。但它们并不一定是严格同步串行执行，它们之间可能会有交叉，但总是以 “开始” 的顺序总是按部就班的。至于解析则有可能在初始化之后才开始，这是为了支持 Java 语言的运行时绑定（也称为动态绑定或晚期绑定）。
 
+
+
+Java程序对类的使用方式可以分为两种: **主动引用、被动引用**。
+
+所有的Java虚拟机实现必须在每个类或接口被Java程序 "**首次主动使用**"时才初始化他们。
+
 ### 1、主动引用
 
  虚拟机规范中并没有强制约束何时进行加载，但是规范**严格规定了有且只有下列五种情况必须对类进行初始化**（加载、验证、准备都会随之发生）：
@@ -38,12 +44,14 @@
   * **使用 new 关键字实例化对象的时候**；
   * 读取或设置一个类的静态字段（被 final 修饰、已在编译期把结果放入常量池的静态字段除外）的时候；
   * 以及**调用一个类的静态方法**的时候；
-* 使用`java.lang.reflect `包的方法对类进行反射调用的时候，如果类没有进行初始化，则需要先触发其初始化；
+* 通过反射(`Class.forName()`)使用`java.lang.reflect `包的方法对类进行反射调用的时候，如果类没有进行初始化，则需要先触发其初始化；
 * 当初始化一个类的时候，**如果发现其父类还没有进行过初始化，则需要先触发其父类的初始化**；
 * 当虚拟机启动时，用户需要指定一个要执行的主类（包含 `main() `方法的那个类），虚拟机会先初始化这个主类；
 * 当使用 JDK 1.7 的动态语言支持时，如果一个`java.lang.invoke.MethodHandle` 实例最后的解析结果为 `REF_getStatic, REF_putStatic, REF_invokeStatic `的方法句柄，并且这个方法句柄所对应的类没有进行过初始化，则需要先触发其初始化；
 
 ### 2、被动引用
+
+**被动使用不会导致类的初始化，只有首次主动引用才会初始化**。
 
 以下三种情况是被动引用:
 
@@ -52,54 +60,116 @@
 测试:
 
 ```java
-class SuperClass{
+/**
+ * 1、对于静态字段来说，只有直接定义了该字段的类才会被初始化
+ * 2、当一个类在初始化时，要求其父类全部已经初始化完毕了
+ * --X:+TraceClassLoading 用于追踪类的加载信息并打印出来
+ *  jvm参数总结:
+ *     a、 -XX:+<option>， 表示开启option选项
+ *     b、 -XX:-<option>， 表示关闭option选项
+ *     c、 -XX:<option>=<value>，表示option选项的值设置为value
+ */
+public class T1 {
+
+    public static void main(String[] args) {
+//        System.out.println(P1.p_str);  //1、对于静态字段来说，只有直接定义了该字段的类才会被初始化
+        System.out.println(C1.c_str);    //2、当一个类在初始化时，要求其父类全部已经初始化完毕了
+
+    }
+}
+
+class P1{
+
+    public static String p_str = "parent str";
+
     static {
-        System.out.println("SuperClass init...");
+        System.out.println("Parent static block~");
     }
-    public static int val = 123;
+
 }
 
-class SubClass extends SuperClass{
+class C1 extends P1{
+
+    public static String c_str = "child str";
+
     static {
-        System.out.println("SubClass init...");
+        System.out.println("Child static block~");
     }
+
 }
 
-public class Code_01_NoInitialization {
-    public static void main(String[] args){
-        System.out.println(SubClass.val); 
-    }
-}
-
-```
-
+------------------------------------
+分析运行结果:
+第一种情况: System.out.println(P1.p_str);
+输出: 
+Parent static block~
+parent str
+原因: 由于p_str是父类的，所以不会去加载C1(子类)
+第二种情况: System.out.println(C1.c_str);  
 输出:
-
-```java
-SuperClass init...
-123
+Parent static block~
+Child static block~
+child str
+原因:因为c_str是子类的，而子类加载完毕之前父类都要加载，所以会先输出父类static块
 ```
 
 - 2、通过**数组定义来引用类**，不会触发此类的初始化。该过程会对数组类进行初始化，数组类是一个由虚拟机自动生成的、直接继承自 Object 的子类，其中包含了数组的属性和方法。
 
 ```java
-SuperClass[] sca = new SuperClass[10];
+public class T4 {
+
+    public static void main(String[] args) {
+        P4 p4_1 = new P4();
+
+        System.out.println("=================");
+
+        P4 p4_2 = new P4(); //这里不会再 执行P4的初始化代码块，只会在  首次主动引用  的时候初始化
+
+        P4[] p4s = new P4[1]; // 数组也不会初始化
+        System.out.println(p4s.getClass()); // 对于数组实例来说，其类型是由JVM在运行期间动态生成的，表示为[Lcom.zxin...T4
+        P4[][] p4s1 = new P4[1][1];
+        System.out.println(p4s1.getClass());
+
+        int[] ints = new int[1];
+        System.out.println(ints.getClass());
+    }
+}
+
+class P4{
+    static {
+        System.out.println("P4 static block~");
+    }
+}
+
+输出:(只会进行一次初始化)
+P4 static block~
+=================
+class [Lp1_classloader.P4;
+class [[Lp1_classloader.P4;
+class [I
 ```
 
 - 3、**常量**在编译阶段会存入调用类的常量池中，本质上并没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化。
 
 ```java
-class ConstClass{
-    static {
-        System.out.println("ConstClass init...");
+/**
+ * final (常量) 对类加载的影响
+ *     常量在编译阶段会存入到调用这个常量的方法所在的类的常量池中
+ *     本质上，调用类并没有直接引用到定义常量的类，因此不会触发定义常量的类的初始化
+ *     注意: 我们指的是 将常量存放到了T2的常量池中，之后T2与P就没有任何关系了(甚至可以将P.class删除)
+ */
+public class T2 {
+    public static void main(String[] args) {
+        System.out.println(P2.str);
     }
-    public final static String str = "hello world!";
 }
 
+class P2{
 
-public class Code_02_NoInitialization {
-    public static void main(String[] args){
-        System.out.println(ConstClass.str);
+    public static final String str = "P str";
+
+    static {
+        System.out.println("P static block~");
     }
 }
 ```
@@ -107,8 +177,41 @@ public class Code_02_NoInitialization {
 输出:
 
 ```java
-hello world!
+P str
 ```
+
+但是要注意下面的情况:
+
+**当一个常量的值并非编译期间可以确定，那么其值就不会被放到调用类的常量池中，这时在程序运行时，会导致主动使用这个常量所在的类，显然会导致这个列被初始化**。
+
+```java
+
+/**
+ * 当一个常量的值并非编译期间可以确定，那么其值就不会被放到调用类的常量池中，
+ * 这时在程序运行时，会导致主动使用这个常量所在的类，显然会导致这个列被初始化
+ */
+public class T3 {
+
+    public static void main(String[] args) {
+        System.out.println(P3.str);
+    }
+}
+
+class P3{
+
+    public static final String str = UUID.randomUUID().toString();
+
+    static {
+        System.out.println("P static block~");
+    }
+}
+
+输出(可以看到P3被加载(static块被输出)):
+P static block~
+b716f2dd-5a6e-4542-bc88-0cf833216de5
+```
+
+
 
 ## 二、类加载过程
 
@@ -120,15 +223,15 @@ hello world!
 
 加载过程完成以下三件事：
 
-- **通过一个类的全限定名来获取定义此类的二进制字节流**(这个就是类加载器做的事情)；
+- **通过一个类的全限定名来获取定义此类的二进制字节流，即将类的`.class`文件中的二进制数据读入到内存中**(这个就是类加载器做的事情)；
 - 将这个**字节流所代表的静态存储结构转化为方法区的运行时存储结构**；
-- 在内存中生成一个代表这个类的 **Class 对象**，作为方法区这个类的各种数据的访问入口；
+- 在内存中生成一个代表这个类的 **Class 对象(java.lang.Class)**，作为方法区这个类的各种数据的访问入口；
 
 加载源（即二进制字节流可以从以下方式中获取）：
 
 - **文件**：从 ZIP 包读取，这很常见，最终成为日后 JAR、EAR、WAR 格式的基础。
 - **网络**：从网络中获取，这种场景最典型的应用是 Applet。
-- **计算生成一个二进制流**：运行时计算生成，这种场景使用得最多得就是动态代理技术，在 java.lang.reflect.Proxy 中，就是用了 ProxyGenerator.generateProxyClass 的代理类的二进制字节流。
+- **计算生成一个二进制流**：运行时计算生成，这种场景使用得最多得就是动态代理技术，在 `java.lang.reflect.Proxy` 中，就是用了` ProxyGenerator.generateProxyClass` 的代理类的二进制字节流。
 - **由其他文件生成**：由其他文件生成，典型场景是 JSP 应用，即由 JSP 文件生成对应的 Class 类。
 - **数据库**：从数据库读取，这种场景相对少见，例如有些中间件服务器（如 SAP Netweaver）可以选择把程序安装到数据库中来完成程序代码在集群间的分发。
 
@@ -184,7 +287,7 @@ public static final int value = 123;
 - **符号引用**：符号引用是一组符号来描述所引用的目标对象，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。符号引用与虚拟机实现的内存布局无关，引用的目标对象并不一定已经加载到内存中。
 - **直接引用**：*直接引用可以是直接指向目标对象的指针*、相对偏移量或是一个能间接定位到目标的句柄。直接引用是与虚拟机内存布局实现相关的，同一个符号引用在不同虚拟机实例上翻译出来的直接引用一般不会相同，如果有了直接引用，那引用的目标必定已经在内存中存在。
 
-符号引用就是字符串，这个字符串包含足够的信息，以供实际使用时可以找到相应的位置。你比如说某个方法的符号引用，如：“java/io/PrintStream.println:(Ljava/lang/String;)”。里面有类的信息，方法名，方法参数等信息。
+符号引用就是字符串，这个字符串包含足够的信息，以供实际使用时可以找到相应的位置。你比如说某个方法的符号引用，如：`“java/io/PrintStream.println:(Ljava/lang/String;)”`。里面有类的信息，方法名，方法参数等信息。
 
 当第一次运行时，要根据字符串的内容，到该类的方法表中搜索这个方法。运行一次之后，符号引用会被替换为直接引用，下次就不用搜索了。直接引用就是偏移量，通过偏移量虚拟机可以直接在该类的内存区域中找到方法字节码的起始位置。
 
@@ -192,7 +295,7 @@ public static final int value = 123;
 
 **初始化阶段才真正开始执行类中定义的 Java 程序代码**。初始化阶段即虚拟机执行类构造器 `<clinit>()` 方法的过程。
 
-在准备阶段，**类变量已经赋过一次系统要求的初始值，而在初始化阶段，根据程序员通过程序制定的主观计划去初始化类变量和其它资源**。
+在准备阶段，**类变量已经赋过一次系统要求的初始值，而在初始化阶段，根据程序员通过程序制定的主观计划去初始化类变量和其它资源，即为类的静态变量赋予正确的初始值**。
 
 `<clinit>()` 方法具有以下特点：
 
@@ -209,6 +312,7 @@ public class Test {
 ```
 
 - 与类的构造函数（或者说实例构造器` <init>()`）不同，不需要显式的调用父类的构造器。虚拟机会自动保证在子类的 `<clinit>()` 方法运行之前，父类的 `<clinit>()` 方法已经执行结束。因此虚拟机中第一个执行` <clinit>() `方法的类肯定为 java.lang.Object。
+
 - 由于父类的 `<clinit>()` 方法先执行，也就意味着父类中定义的静态语句块要优先于子类的变量赋值操作。例如以下代码：
 
 ```java

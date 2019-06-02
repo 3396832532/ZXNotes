@@ -595,6 +595,7 @@ public class TestAllocation {
 
 ```
 先配置运行参数: 
+
 ![在这里插入图片描述](images/j38.png)
 
 设置和对应内存的关系:
