@@ -211,7 +211,52 @@ P static block~
 b716f2dd-5a6e-4542-bc88-0cf833216de5
 ```
 
+* 当一个接口在初始化时，并不要求其父接口都完成了初始化，只有在真正用到父接口的时候，如引用接口中定义的常量时，才会初始化。
 
+```java
+public class T5{
+	
+	public static void main(String[] args){
+		System.out.println(CI5.b);
+	}
+}
+
+interface PI5{
+	public static final int a = new Random().nextInt(4);
+}
+
+interface CI5 extends PI5{
+	public static final int b = 5;
+}
+```
+
+可以发现删除`PI5.class`文件之后，也可以运行（如果改成类，且不加上final关键字，就会抛出异常，因为接口就算不加`final`关键字，默认也会加上(接口里面的变量默认是`public static final`)）
+
+![1559543568574](assets/1559543568574.png)
+
+但是下面的动态引用还是会需要用到父类的初始化。
+
+```java
+public class T5{
+	
+	public static void main(String[] args){
+		System.out.println(CI5.b);
+	}
+}
+
+interface PI5{
+	public static final int a = new Random().nextInt(4);
+}
+
+interface CI5 extends PI5{
+	//public static final int b = 5;
+	public static final int b = new Random().nextInt(5);
+}
+```
+
+删除父接口的`.class`之后，再次运行，也会抛出异常。
+
+![1559543525468](assets/1559543525468.png)
 
 ## 二、类加载过程
 
