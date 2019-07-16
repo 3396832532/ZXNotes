@@ -43,6 +43,8 @@ TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网�
 发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。
 这种把数据信息包装起来的做法称为**封装（ encapsulate ）**。
 
+
+
 ### 3、IP、TCP和DNS
 
 #### 1)、IP(负责传输)
@@ -92,9 +94,7 @@ DNS （ Domain Name System ）服务是和 HTTP 协议一样位于应用层的�
 ### 4)、各种协议与Http协议的关系
 
 <div align="center"><img src="images/http/7_.png"></div><br>
-
 <div align="center"><img src="images/http/8_.png"></div><br>
-
 ### 5、URI和URL
 
 与 URI （统一资源标识符）相比，我们更熟悉 URL （ UniformResource Locator ，统一资源定位符）。
