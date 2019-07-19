@@ -3,6 +3,8 @@
 * [一、Git基础概念](#一git基础概念)
 * [二、Git常用命令](#二git常用命令)
 
+git实操命令总结: https://www.nowcoder.com/discuss/178786?type=0&order=0&pos=17&page=1
+
 ## 一、Git基础概念
 
 Git功能简单概述
