@@ -34,7 +34,7 @@ Comparator<Integer>com = new Comparator<Integer>() {
  Comparator<Integer> com = (x, y) -> Integer.compare(y, x);
 ```
 
-**下面给出一个例子来引入`Lambda`表达式。**
+**下面给出一个例子来引入`Lambda`表达式**。
 
 给出一个`Employee`类，有`name、age、salary`三个属性：
 
