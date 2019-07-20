@@ -407,14 +407,15 @@ public interface MyCalFunction<T,R> {
  }
 ```
 更多的例子: (取自`<<`Java8`实战>>`)
+
 ![在这里插入图片描述](images/lambda1.png)
 
 > 根据上述语法规则，以下哪个不是有效的Lambda表达式？
-> (1)  () -> {}
-> (2)  () -> "Raoul"
-> (3)  () -> {return "Mario";}
-> (4)  (Integer i) -> return "Alan" + i;
-> (5)  (String s) -> {"IronMan";}
+> (1) ` () -> {}`
+> (2) ` () -> "Raoul"`
+> (3) `() -> {return "Mario";}`
+> (4) ` (Integer i) -> return "Alan" + i;`
+> (5)  `(String s) -> {"IronMan";}`
 > 答案：只有4和 5是无效的Lambda。
 >
 > (1) 这个Lambda没有参数，并返回void。 它类似于主体为空的方法：public void run() {}。
@@ -562,7 +563,9 @@ public void test1(){
 }
 ```
 **注意，这样写的前提: `Consumer`中的`accept()`方法和`println()`方法的参数列表和返回类型要完全一致:** 
+
 ![这里写图片描述](images/lambda4.png)
+
 ![这里写图片描述](images/lambda5.png)
 
 再看一个例子: 
@@ -622,6 +625,8 @@ public void test2(){
 }
 ```
 ![这里写图片描述](images/lambda6.png)
+
+
 
 ![这里写图片描述](images/lambda7.png)
 

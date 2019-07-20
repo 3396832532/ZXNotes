@@ -69,7 +69,7 @@ public class Code_01_Java7AndJava8Compare {
   * 内部迭代 — 与使用迭代器显式迭代的集合不同，流的迭代操作是在背后进行的；
   * **①`Stream`自己不会存储元素；② `Stream`不会改变原对象，相反，他们会返回一个持有结果的新`Stream`；③Stream操作是延迟执行的，这意味着他们会等到需要结果的时候才执行**；
 
-![](images/stream1.png)
+![stream1.png](images/stream1.png)
 
 ### 3、流与集合
 
