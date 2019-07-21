@@ -489,7 +489,7 @@ Java运行时，会根据**类的完全限定名寻找并加载类，寻找的�
 
 - 自定义的加载顺序：尽管不被建议，自定义的ClassLoader可以不遵从"双亲委派"这个约定，不过，即使不遵从，以"java"开头的类也不能被自定义类加载器加载，这是由Java的安全机制保证的，以避免混乱。
 - 网状加载顺序：在OSGI框架中，类加载器之间的关系是一个网，每个OSGI模块有一个类加载器，不同模块之间可能有依赖关系，在一个模块加载一个类时，可能是从自己模块加载，也可能是委派给其他模块的类加载器加载。
-- 父加载器委派给子加载器加载：典型的例子有JNDI服务(Java Naming and Directory Interface)，它是Java企业级应用中的一项服务。
+- 父加载器委派给子加载器加载：典型的例子有JNDI服务(`Java Naming and Directory Interface`)，它是Java企业级应用中的一项服务。
 
 一个程序运行时，会创建一个Application ClassLoader，在程序中用到ClassLoader的地方，如果没有指定，一般用的都是这个ClassLoader，所以，**这个ClassLoader也被称为系统类加载器(System ClassLoader)**。
 
