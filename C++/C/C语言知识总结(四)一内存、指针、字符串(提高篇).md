@@ -1,4 +1,7 @@
+
+
 ﻿## C语言知识总结(四)一内存、指针、字符串(提高篇)
+
 * [内存四区](#1)
 * [指针](#2)
 * [函数指针](#3)
@@ -11,7 +14,7 @@
 ##### 数据类型概念
 * "类型"是对数据的抽象；
 * 类型相同的数据有相同的表示形式、存储格式以及相关的操作 ；
-* 程序中使用的所有数据都必定属于某一种数据类型 ；
+* 程序中使用的所有数据都必定属于某一种数据类型 ； 
 
 ##### 数据类型本质
 * <font color = red>数据类型可理解为创建变量的模具：是固定内存大小的别名；
@@ -46,15 +49,18 @@ int main(int argc, char const **argv)
 }
 ```
 输出结果: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112235553380.png)
+
+![1563678465719](assets/1563678465719.png)
 
 ##### <font color = red>程序内存四区模型: 
 * 操作系统把物理硬盘代码load到内存；
 * 操作系统把`C`语言代码分成四个区；
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111314344949.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563678484021](assets/1563678484021.png)
+
 各个区的功能: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113161727860.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678501109](assets/1563678501109.png)
 
 > <font color = red>注意全局区包括: 全局变量、静态变量、文字常量区；
 
@@ -89,7 +95,8 @@ int main(int argc, char const *argv[])
 p1 = 0x55806a717774, p2 = 0x55806a717774
 ```
 分析: (<font color = red>字符串常量放在文字常量区</font> )
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111314533493.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678609815](assets/1563678609815.png)
 
 
 <font color = blue>② 栈区测试: 
@@ -124,7 +131,8 @@ p = (null)
 ```
 
 内存分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113152050949.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678668687](assets/1563678668687.png)
 
 ③堆区: 
 
@@ -160,7 +168,7 @@ int main(int argc, char const *argv[])
 p = abcd
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113153434514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563678683569](assets/1563678683569.png)
 > 关于 `free()`函数: 
 > * `free(p)`意义: 告诉系统，`p`原来指向的内存可以被别人使用了；
 > * 释放完指针p `free(p)`，此时`p`的地址还在，没有变，只是此时的`p`相当于一个野指针，所以最好是重新赋值为`NULL`；
@@ -169,7 +177,9 @@ p = abcd
 
 * 在<font color = red>堆和全局区</font>分配的: 其他函数都能用；
 * <font color = blue>在栈上分配的内存，子函数执行完成，父函数不能使用；
-##### 函数的调用模型![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113153920136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+##### 函数的调用模型
+
+![1563678722598](assets/1563678722598.png)
 
 ##### <font color = red>栈的生长方向和内存存放方向
 
@@ -190,9 +200,12 @@ int main(int argc, char const *argv[])
 }
 ```
 运行结果:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111316061433.png)
+
+![1563678738192](assets/1563678738192.png)
+
 分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113160621747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678749399](assets/1563678749399.png)
 
 ***
 ### <font color= red id = "2">指针
@@ -223,7 +236,8 @@ int main(int argc, char const *argv[])
 }
 ```
 分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113175935154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678768829](assets/1563678768829.png)
 
 ##### 函数传递(值传递和地址传递)
 
@@ -252,8 +266,11 @@ int main(int argc, char const *argv[])
 }
 ```
 输出:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113182924723.png)
+
+![1563678781957](assets/1563678781957.png)
+
 总结: 
+
 * 还是和之前的一样，只不过这里的变量是<font color = red>指针变量</font>，指针是指向指向指针的指针而已；
 * 地址传递前面一定要记得加上`&`，然后函数中通过`*`来操作指针指向的内存；
 
@@ -339,7 +356,9 @@ p = abcd, len = 4
 * 第一步，先给`temp`在堆区分配空间，此时`temp`指针变量的值是`oxaabb`；
 * 第二步，将`"abcd"`拷贝到`temp`指向的堆区空间；
 * 第三步，将`temp`的值(地址的值)赋值给`p`指向的内存，而`p`指向的内存就是`main`函数中的`p`；此时`main`函数中的`p` = `0xaabb`，所以`main`函数中的`p`也指向了堆区空间，所以得到上面的打印结果；
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113185616243.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678806538](assets/1563678806538.png)
+
 ***
 ### <font color= red id = "3">函数指针
 
@@ -535,10 +554,13 @@ int main(int argc, char const *argv[])
 }
 ```
 输出： 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113203205916.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678825779](assets/1563678825779.png)
+
+
+
 > * 所以可以看到还是可以通过指针来修改`const`修饰的变量的值；
 > * 还有一点 : <font color = blue>在另一.c源文件中引用const常量时，只能声明，不能改变；
-
 
 ***
 ### <font color= red id = "5">二级指针
@@ -549,7 +571,7 @@ int main(int argc, char const *argv[])
 * <font color = blue>通过指针访问变量称为间接访问</font>。由于指针变量直接指向变量,所以称为“一级指针”。<font color = red>而如果通过指向指针的指针变量来访问变量则构成“二级指针”。 
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181113231430688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563678837574](assets/1563678837574.png)
 
 ##### 二级指针第一种输入模型(<font color = blue>指针数组</font>)
 
@@ -655,7 +677,7 @@ aaaaaaaaaaaa
 >	* 	首行首元素地址`+1`，跳过一个字符，一个字符为`1`个字节，`+1`
 >	* 	`sizeof(a)`: 有`4`个一维数组，每个数组长度为`30`，`4 * 30 = 120`；
 >	* 	`sizeof(a[0])`: 第`0`个一维数组首元素地址，相当于测第`0`个一维数组的长度：为`30`；
-	
+
 一维数组`b`(`char b[30]`): 
 >	*	`&b`代表整个一维数组的地址，相当于二维数组首行地址；
 >	*	`b`代表一维数组首元素地址，相当于二维数组首行首元素地址；
@@ -789,7 +811,9 @@ int main(int argc, char const *argv[])
 0-temp-0 1-temp-1 2-temp-2 
 ```
 关于`getMem`函数的内存分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111411162687.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678854129](assets/1563678854129.png)
+
 ##### 总结三种输入模型的内存分配
 ```cpp
 #include <stdio.h>
@@ -827,7 +851,8 @@ int main(int argc, char const *argv[])
 789 789 789
 ```
 总结：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181114130053363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678870202](assets/1563678870202.png)
 
 
 ##### 案例一:替换字符串
@@ -1117,7 +1142,8 @@ int main(int argc, char const **argv)
 }
 ```
 输出结果: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181115201818530.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678894466](assets/1563678894466.png)
 
 
 ##### 二维数组形参(数组指针做形参)
@@ -1470,10 +1496,15 @@ int main(int argc, const char **argv)
 
 ```
 输出: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181116110356267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678911447](assets/1563678911447.png)
+
 大概的内存分析:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181116123245220.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70) 
+
+![1563678923223](assets/1563678923223.png) 
+
 总结: 
+
 * 主要通过这题加强对内存分配的顺序以及结构体嵌套指针的使用；
 * 还有释放内存要注意的顺序；
 
@@ -1484,9 +1515,8 @@ int main(int argc, const char **argv)
 * 深拷贝需要自己实现拷贝指针所指向的内存空间的内容；
 * 如果使用浅拷贝，不能同时释放两次内存；
 
+![1563678934897](assets/1563678934897.png)
 
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181116114922503.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 看个例子: 
 
 ```cpp
@@ -1541,7 +1571,9 @@ zhangsan, 13
 zhangsan, 13
 ```
 内存分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181116114459501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563678946606](assets/1563678946606.png)
+
 ##### 结构体字节对齐
 一些原则: 
 
@@ -1550,6 +1582,7 @@ zhangsan, 13
 > * 结构体作为成员的对齐规则。
 > >* 如果一个结构体`B`里嵌套另一个结构体`A`，则结构体`A`应从`offset`为`A`内部最大成员的整数倍的地方开始存储。（`struct B`里存有`struct A`，`A`里有`char`，`int`，`double`等成员，那`A`应该从`8`的整数倍开始存储。），结构体A中的成员的对齐规则仍满足原则1、原则2。
 > > * 注意：①. 结构体`A`所占的大小为该结构体成员内部最大元素的整数倍，不足补齐。②. 不是直接将结构体`A`的成员直接移动到结构体`B`中
+>
 > * 收尾工作: 结构体的总大小，也就是`sizeof`的结果，必须是其内部最大成员的整数倍，不足的要补齐。
 
 

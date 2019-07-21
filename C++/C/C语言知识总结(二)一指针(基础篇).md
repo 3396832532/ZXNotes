@@ -31,7 +31,7 @@
 	* 不要搞混二级指针和字符数组指针使用
 
 ***
-### <font color = red id = "1">内存相关
+### 内存相关
 #### 内存
 内存含义：
 * 存储器：计算机的组成中，用来存储程序和数据，辅助`CPU`进行运算处理的重要部分。 
@@ -60,10 +60,10 @@
 * 编码就是对内存的每一个字节分配一个32位或64位的编号（与32位或者64位处理器相关）；
 * 这个内存标号就是内存地址；
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109100019392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676358953](assets/1563676358953.png)
 
 ***
-### <font color = red id = "2">指针和指针变量
+### 指针和指针变量
 #### 指针和指针变量
 
 指针: 
@@ -102,10 +102,13 @@ int main(int argc, char const *argv[])
 }
 ```
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109101338975.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+
+![1563676374043](assets/1563676374043.png)
 
 #### 野指针和空指针
 <font color = red>野指针:
+
 * 指针变量也是变量，是变量就可以任意赋值，不要越界即可（32位为4字节，64位为8字节）；
 * 但是，任意数值赋值给指针变量没有意义，因为这样的指针就成了野指针，此指针指向的区域是未知(操作系统不允许操作此指针指向的内存区域)；
 * 所以，野指针不会直接引发错误，操作野指针指向的内存区域才会出问题。 
@@ -126,7 +129,9 @@ int main(int argc, char const *argv[])
 段错误
 ```
 解释: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109104934901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676388437](assets/1563676388437.png)
+
 <font color = red>空指针: 
 
 * 野指针和有效指针变量保存的都是数值，为了标志此指针变量没有指向任何变量(空闲可用)，C语言中，可以把NULL赋值给此指针，这样就标志此指针为空指针，没有任何指针。
@@ -198,7 +203,9 @@ int main(int argc, char const *argv[])
 可以看到前三个就是内存地址的值的10进制表示，最后一个是`p1`指向的内存地址的值，也就是`a`的值；
 
 内存图如下: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109123214712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676408651](assets/1563676408651.png)
+
 ####  `[]`不是数组的专属
 也可以使用类似数组`[]`的方式来访问指针: 
 ```cpp
@@ -349,7 +356,9 @@ int main(int argc, char const *argv[])
 
 ```
 指针和数组的内存图: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109180200271.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676424030](assets/1563676424030.png)
+
 #### 通过指针加减法来访问数组
 ```cpp
 #include <stdio.h>
@@ -409,7 +418,7 @@ int main(int argc, char const *argv[])
 1 2 3
 ```
 ***
-###  <font color = red id = "4">指针和函数
+###  指针和函数
 #### 指针和函数以及值传递
 
 经典问题: `swap`函数。 
@@ -447,7 +456,8 @@ int main(int argc, char const *argv[])
 }
 ```
 内存图如下: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181109192659288.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676435095](assets/1563676435095.png)
 
 #### 形参中的数组(`"假数组"`(实际上是一个指针))
 
@@ -733,7 +743,8 @@ p2 = 0x561b8fe9c7a4
 段错误
 ```
 内存图: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110101255559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676593021](assets/1563676593021.png)
 
 #### 字符串常量区初始化字符指针和字符数组的区别
 
@@ -754,7 +765,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110104125508.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676610872](assets/1563676610872.png)
 #### `main`函数形参说明(字符指针数组) 
 ```cpp
 #include <stdio.h>
@@ -802,7 +813,9 @@ int main(int argc, char const **argv)
 }
 ```
 运行结果：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110111601290.png)
+
+![1563676624900](assets/1563676624900.png)
+
 #### 字符指针练习: `A`字符串在`B`字符串中出现的次数
 * 熟练掌握使用指针变量移动来实现寻找出现的次数；
 ```cpp

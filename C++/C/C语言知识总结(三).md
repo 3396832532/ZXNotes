@@ -1,4 +1,9 @@
+
+
+
+
 ﻿## C语言知识总结(三)
+
 * 内存管理
 * 内存布局
 * 结构体、共用体
@@ -70,9 +75,9 @@ i = 3
 ##### 普通局部变量和`static`局部变量的区别
 
 从<font color =red>内存分配和释放</font>的角度看: 
- 
+
  * ①普通局部变量只有执行到定义变量的语句才分配空间；
-  ②`static`局部变量在编译阶段(函数还没有执行)，变量的空间已经分配；
+    ②`static`局部变量在编译阶段(函数还没有执行)，变量的空间已经分配；
 * ①普通局部变量离开作用域`{}`，自动释放；
 ②`static`局部变量只有在整个程序结束才自动释放；
 
@@ -137,12 +142,12 @@ int main(int argc, char *argv[])
 * 同一源文件中,允许全局变量和局部变量同名，在局部变量的作用域内，全局变量不起作用；
 * <font color = red>所有的函数默认都是全局的，意味着所有的函数都不能重名，但如果是staitc函数，那么作用域是文件级的，所以不同的文件static函数名是可以相同的。
 
-
 看一个分文件编程的例子，加深对`static`函数和普通全局函数的理解: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111016352889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676643955](assets/1563676643955.png)
 
 ##### 总结
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110162340723.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676653222](assets/1563676653222.png)
 ***
 ### 内存布局
 
@@ -163,11 +168,13 @@ int main(int argc, char *argv[])
 > * 栈区`stack`: 栈是一种先进后出的内存结构，由编译器自动分配释放，存放函数的参数值、返回值、局部变量等。在程序运行过程中实时加载和释放，因此，局部变量的生存周期为申请到释放该段栈空间。
 > * 堆区 `heap`: 堆是一个大容器，它的容量要远远大于栈，但没有栈那样先进后出的顺序。用于动态内存分配。堆在内存中位于BSS区和栈区之间。一般由程序员分配和释放，若程序员不释放，程序结束时由操作系统回收。 
 
+![1563676670688](assets/1563676670688.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110165637758.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110171251224.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676697144](assets/1563676697144.png)
+
 ##### `memset`使用
 `void *memset(void *s, int c, size_t n);`
+
 * 功能：将`s`的内存区域的前`n`个字节以参数`c`填入；
 * 参数：①`s`：需要操作内存`s`的首地址；②`c`：填充的字符，`c`虽然参数为`int`，但必须是`unsigned char` , 范围为`0~255`③`n`：指定需要设置的大小；
 * 返回值：`s`的首地址；
@@ -250,7 +257,9 @@ int main(int argc, char const **argv)
 }
 ```
 运行结果：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110184252174.png)
+
+![1563676717889](assets/1563676717889.png)
+
 `memmove`和`memcmp`简单使用测试：
 
 *  `memmove` : `memmove()`功能用法和`memcpy()`一样，区别在于：`dest`和`src`所指的内存空间重叠时，`memmove()`仍然能处理，不过执行效率比`memcpy()`低些；
@@ -313,7 +322,7 @@ int main(int argc, char const *argv[])
 ```
 分析: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110191326217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676734004](assets/1563676734004.png)
 
 > * 内存泄露: 动态分配了空间，不释放；
 > * 内存污染: 非法使用内存； 
@@ -339,7 +348,8 @@ main(int argc, char const *argv[])
 }
 ```
 <font color = blue>局部变量返回地址:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110232723516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676746208](assets/1563676746208.png)
 
 ②. <font color = red>返回data区地址(合法): 
 
@@ -380,8 +390,9 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110234228360.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676762623](assets/1563676762623.png)
 ④. 值传递二(合法): 
+
 * 和上面的程序唯一的不同就是此时`p`是在函数调用之前分配空间；
 
 ```cpp
@@ -402,7 +413,8 @@ int main(int argc, char const *argv[])
 }
 ```
 同样看内存图: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110235003534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676775722](assets/1563676775722.png)
 ⑤. 返回堆区地址(合法): 
 
 ```cpp
@@ -430,7 +442,7 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181110235634997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676790063](assets/1563676790063.png)
 
 ***
 ### 结构体、共用体
@@ -485,7 +497,8 @@ int main(int argc, char const *argv[])
 * 直接定义结构体类型变量（无类型名）；
 
 三种方式对应下图: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111092836609.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676803049](assets/1563676803049.png)
 
 <font color =red>结构体类型和结构体变量关系：
 
@@ -592,7 +605,8 @@ int main(int argc, char const *argv[])
 13, zhangsan, 63
 ```
 分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111101129326.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676817117](assets/1563676817117.png)
 
 ##### 结构体的打印
 有两种打印方式: 
@@ -663,15 +677,21 @@ int main(int argc, char const **argv)
 }
 ```
 内存分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111111049672.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676830225](assets/1563676830225.png)
 
 ##### 成员列表中有指针
 ①. <font color=  blue>成员变量保存字符串常量的首地址: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111112450261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676853582](assets/1563676853582.png)
+
 ②. <font color= blue>成员变量指向栈区空间: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111130210895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676863442](assets/1563676863442.png)
+
 ③. 成员变量指针指向堆区空间: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111131207409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676877818](assets/1563676877818.png)
 
 总的测试代码: 
 
@@ -763,7 +783,8 @@ int main(int argc, char const **argv)
 }
 ```
 示意图: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111133218633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676892955](assets/1563676892955.png)
 
 ###### 共用体
 
@@ -813,9 +834,12 @@ int main(int argc, char *argv[])
 }
 ```
 运行结果: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111164454962.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676911604](assets/1563676911604.png)
+
 分析: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111164338488.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676920269](assets/1563676920269.png)
 
 ##### `typedef`关键字
 * 作用是为一种数据类型(基本类型或自定义数据类型)定义一个新名字，不能创建新类型；
@@ -886,7 +910,7 @@ int main()
 * `FILE`指针`fp`，调用了`fopen()`，就在堆上分配空间，把地址返回给`fp`；
 * <font color = red>`fp`指针不是指向文件，`fp`指针和文件关联，`fp`内部成员保存了文件的状态；
 * 操作`fp`指针，不能直接操作，必须通过文件库函数来操作`fp`指针；(对文件的任何操作，`fp`里面内容发生变化)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111170224900.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1563676935545](assets/1563676935545.png)
 
 C语言中有三个特殊的文件指针由系统默认打开，用户无需定义即可直接使用:
 * `stdin`： 标准输入，默认为当前终端（键盘），我们使用的`scanf`、`getchar`函数默认从此终端获得数据。
@@ -1044,7 +1068,8 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018111122363496.png)
+![1563676956880](assets/1563676956880.png)
+
 ②`vi`命令的简单模仿实现: 　
 
 ```cpp
@@ -1070,7 +1095,8 @@ int main(int argc, char const *argv[])
 > 注意`fgets`也会将换行符`\n`读进去。
 
 演示效果：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181111225003208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563676980786](assets/1563676980786.png)
 
 ##### 按照行读写文件`fgets`、`fputs`
 * `int fputs(const char * str, FILE * stream);`: 将str所指定的字符串写入到stream指定的文件中，字符串结束符 `'\0'`  不写入文件；
@@ -1499,7 +1525,8 @@ int main(int argc, char const *argv[])
 }
 ```
 测试结果: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112164127318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563677002327](assets/1563677002327.png)
 
 ##### 案例: 使用`fwrite`和`fread`实现`cp`命令
 > 简单的实现了`linux`下的`cp`拷贝命令，具体细节没有考虑
@@ -1527,7 +1554,8 @@ int main(int argc, char const *argv[])
 
 ```
 演示结果: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112164331584.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563677026375](assets/1563677026375.png)
 
 > 注意这里打开文件的时候是`rb`和`wb`，这里涉及到<font color = red> Windows和Linux文本文件区别:</font>
 > * `b`是二进制模式的意思，`b`只是在`Windows`有效，在`Linux`用`r`和`rb`的结果是一样的；
@@ -1591,7 +1619,9 @@ int main(int argc, char const *argv[])
 }
 ```
 效果： 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112182401566.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1563677038950](assets/1563677038950.png)
+
 ##### 文件缓冲区
 >ANSI C标准采用“缓冲文件系统”处理数据文件。所谓缓冲文件系统是指: 
 > * <font color= blue>系统自动地在内存区为程序中每一个正在使用的文件开辟一个文件缓冲区从内存向磁盘输出数据必须先送到内存中的缓冲区，装满缓冲区后才一起送到磁盘去。
@@ -1605,7 +1635,8 @@ int main(int argc, char const *argv[])
 * 程序正常关闭，缓冲区的内容也会写入文件；
 
 <font color = red>磁盘文件的存取: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181112183209146.png)
+
+![1563677052177](assets/1563677052177.png)
 
 * 磁盘文件，一般保存在硬盘、U盘等掉电不丢失的磁盘设备中，在需要时调入内存；
 * 在内存中对文件进行编辑处理后，保存到磁盘中；

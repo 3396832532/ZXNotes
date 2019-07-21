@@ -98,6 +98,8 @@ C代码编译成可执行程序经过4步：
 
 ![在这里插入图片描述](images/c3.png)
 
+
+
 ![在这里插入图片描述](images/c4.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106195818281.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
@@ -934,7 +936,6 @@ int main(int argc, char const *argv[])
 > * 注意：由于`scanf()`和`gets()`无法知道字符串s大小，必须遇到换行符或读到文件结尾为止才接收输入，因此容易导致字符数组越界(缓冲区溢出)的情况。
 
 ② `fgets函数`相关：
-　　
 
 ```c
 char *fgets(char *s, int size, FILE *stream);
@@ -976,6 +977,8 @@ int main(int argc, char const *argv[])
 }
 ```
 输入输出结果: 
+
+
 
 ![在这里插入图片描述](images/c15.png)
 
