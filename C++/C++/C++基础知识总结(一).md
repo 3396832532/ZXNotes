@@ -1185,6 +1185,7 @@ int main(int argc, const char **argv)
 }
 ```
 运行结果: 
+
 ![在这里插入图片描述](images/cpp1.png)
 
 ***
@@ -1387,6 +1388,7 @@ int main(int argc, const char **argv)
 缓冲区的概念: 
 * 要注意；
 * 读和写是站在应用程序的角度来看的；
+
 ![在这里插入图片描述](images/cpp2.png)
 
 
@@ -1442,6 +1444,7 @@ int main(int argc, char const **argv)
 }
 ```
 运行效果: 
+
 ![在这里插入图片描述](images/cpp3.png)
 
 测试`cin.peek()`函数的使用: 
@@ -1470,7 +1473,10 @@ int main(int argc, char const** argv)
 
 ```
 运行结果：　
+
 ![在这里插入图片描述](images/cpp4.png)
+
+
 
 测试`cin.putback()`函数的使用: 
 
@@ -1516,6 +1522,7 @@ cout.setf(标记)
 输入输出是以系统指定的标准设备（输入设备为键盘，输出设备为显示器）为对象的。 在实际应用中，常以磁盘文件作为对象。即从磁盘文件读取数据，将数据输出到磁盘文件。 和 文件有关系的输入输出类主要在 `fstream.h` 这 个头文件中被定义，在这个头文件中主要被定义了三个类， 由这三个类控制对文件的各种输入输出操作 ， 他们分别是 `ifstream`、 `ofstream`。
 
 ![在这里插入图片描述](images/cpp5.png)
+
 由于文件设备并不像显示器屏幕与键盘那样是标准默认设备，所以它在 `fstream.h` 头 文件中
 是没有像 `cout` 那 样预先定义的全局对象，所以我们必须自己定义一个该类的对象。 `ifstream` 类 ，它是从 `istream` 类 派生的，用来支持从磁盘文件的输入。`ofstream` 类 ，它是从`ostream`类 派生的，用来支持向磁盘文件的输出。
 `fstream` 类 ，它是从` iostream `类 派生的，用来支持对磁盘文件的输入输出。
@@ -1555,6 +1562,7 @@ int main(int argc, char const **argv)
 ```
 
 演示结果: 
+
 ![在这里插入图片描述](images/cpp6.png)
 
 
