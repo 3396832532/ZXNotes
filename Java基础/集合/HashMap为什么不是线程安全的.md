@@ -28,7 +28,7 @@ HashMap内部的Node数组默认的大小是16，假设有100万个元素，那�
 
 > HashMap在并发执行put操作时会引起死循环，导致CPU利用率接近100%。因为多线程会导致HashMap的Node链表形成环形数据结构，一旦形成环形数据结构，Node的next节点永远不为空，就会在获取Node时产生死循环。
 
-哇塞，居然会产生死循环。。。。google了一下，才知道死循环并不是发生在put操作时，而是发生在扩容时。详细的解释可以看下面几篇博客：
+哇，居然会产生死循环。。。。google了一下，才知道死循环并不是发生在put操作时，而是发生在扩容时。详细的解释可以看下面几篇博客：
 
 - [酷壳-Java HashMap的死循环](http://coolshell.cn/articles/9606.html)
 - [HashMap在java并发中如何发生死循环](http://firezhfox.iteye.com/blog/2241043)

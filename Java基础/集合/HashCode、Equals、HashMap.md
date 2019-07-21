@@ -12,13 +12,13 @@ equals()方法则是在HashMap中插入值或查询时会使用到。当HashMap�
 
 
 当 equals 方法被重写时，通常有必要重写 hashCode 方法，以维护 hashCode 方法的常规协定，该协定声明相对等的两个对象必须有相同的 hashCode
-* `object1.euqal(object2) 时为 true` ， `object1.hashCode() == object2.hashCode() 为 true`；
+* `object1.euqal(object2)` 时为 `true` ， `object1.hashCode() == object2.hashCode()`必为 `true`；
 * `object1.hashCode() == object2.hashCode()` 为 false 时， `object1.euqal(object2) `必定为` false`；
-* `object1.hashCode() == object2.hashCode() `为 true 时，但 `object1.euqal(object2) `不一定定为 true；
+* `object1.hashCode() == object2.hashCode() `为 true 时，但 `object1.euqal(object2) `不一定定为 `true`；
 
 重写 equals 不重写 hashcode 会出现什么问题
 
-* 在存储散列集合时 ( 如 Set 类 ) ，如果原对象 .equals( 新对象 ) ，但没有对 hashCode 重写，即两个对象拥有不同的hashCode ，则在在集合中将会存储两个值相同的对象，从而导致混淆。**因此在重写 equals 方法时，必须重写 hashCode方法**。
+* 在存储散列集合时 ( 如 Set 类 ) ，如果`原对象 .equals( 新对象 )` ，但没有对 hashCode 重写，即两个对象拥有不同的hashCode ，则在在集合中将会存储两个值相同的对象，从而导致混淆。**因此在重写 equals 方法时，必须重写 hashCode方法**。
 
 (1)、hashCode()介绍
 
@@ -31,7 +31,7 @@ hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返
 
 **但是如果发现有相同 hashcode 值的对象，这时会调用 equals（）方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功**。如果不同的话，就会重新散列到其他位置，这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。
 
-(3)、hashCode（）与 equals（）的相关规定
+(3)、`hashCode()`与 `equals()`的相关规定
 
 如果两个对象相等，则 hashcode 一定也是相同的
 
@@ -121,24 +121,3 @@ public boolean equals(Object obj) {
     * 无符号右移 >>> : 无论最高位是0还是1，左边补齐0。 　　
 
     所以 ： `31 * i = (i << 5) - i`（ 验证:代入`i == 2` 得到:  左边 `31 * 2=62`，右边   `2 * 2 ^ 5 - 2=62`）  --> 两边相等，JVM就可以高效的进行计算了。
-
-## 总结四
-
-(1)、hashCode（）介绍
-
-hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个 int 整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在 JDK 的 Object.java 中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。
-散列表存储的是键值对(key-value)，它的特点是：能根据"键"快速的检索出对应的 "值 "。这其中就利用到了散列码！（可以快速找到所需要的对象）
-
-(2)、为什么要有 hashCode?
-
-当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的 hashcode， HashSet 会假设对象没有重复出现。
-
-**但是如果发现有相同 hashcode 值的对象，这时会调用 equals（）方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功**。如果不同的话，就会重新散列到其他位置，这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。
-
-(3)、hashCode（）与 equals（）的相关规定
-
-如果两个对象相等，则 hashcode 一定也是相同的
-
-两个对象相等, 对两个对象分别调用 equals 方法都返回 true
-
-**两个对象有相同的 hashcode 值，它们也不一定是相等的，因此，equals 方法被覆盖过，则 hashCode 方法也必须被覆盖，hashCode() 的默认行为是对堆上的对象产生独特值**。如果没有重写hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）

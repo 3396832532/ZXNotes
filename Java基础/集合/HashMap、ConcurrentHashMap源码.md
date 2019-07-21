@@ -390,7 +390,7 @@ private Segment<K,V> ensureSegment(int k) {
 }
 ```
 
-总的来说，ensureSegment(int k) 比较简单，对于并发操作使用 CAS 进行控制。
+总的来说，`ensureSegment(int k)`比较简单，对于并发操作使用 CAS 进行控制。
 
 ### 4、获取写入锁: scanAndLockForPut
 
