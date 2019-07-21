@@ -654,7 +654,7 @@ public void test3(){
 
 #### 3)、语法格式(三) 类::实例方法名</font>
 
-使用注意: **若Lambda参数列表中的第一个参数是实例方法的第一个调用者，而第二个参数是实例方法的参数时，可以使用`ClassName :: method`。**
+使用注意: **若Lambda参数列表中的第一个参数是实例方法的第一个调用者，而第二个参数是实例方法的参数时，可以使用`ClassName :: method`**。
 ```java
 public void test4(){
     BiPredicate<String,String>bp = (x,y) -> x.equals(y);
@@ -667,6 +667,46 @@ public void test4(){
 ![这里写图片描述](images/lambda11.png)
 
 
+
+再举一列:
+
+```java
+public class Student {
+
+    private String name;
+    private int score;
+    
+    //..省略构造方法和setter、getter
+
+    //当前的和传入的比较
+    public int compareByScore(Student student){
+        return getScore() - student.getScore();
+    }
+}
+```
+
+测试:
+
+```java
+public class T1 {
+
+    public static void main(String[] args) {
+
+        List<Student> stus = Arrays.asList(
+                new Student("zhangsan", 93),
+                new Student("wangwu", 95),
+                new Student("lisi", 94)
+        );
+
+        // 3、 类名:: 实例方法名
+        stus.sort(Student::compareByScore);
+
+        stus.forEach(s -> System.out.println(s.getName()));
+    }
+}
+```
+
+ 总结: **第一个参数作为调用者，其他参数是真正的参数**。
 
 ### 2)、构造器引用
 **需要调用构造器的参数列表，要与函数式接口中的抽象方法的参数列表保持一致；**

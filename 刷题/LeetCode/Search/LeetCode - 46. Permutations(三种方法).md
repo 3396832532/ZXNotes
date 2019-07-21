@@ -54,7 +54,6 @@ class Solution {
 ![这里写图片描述](images/39_ss.png)
 
 <div align="center"><img src="images/46_ss.png"></div><br>
-
 代码:
 
 ```java
