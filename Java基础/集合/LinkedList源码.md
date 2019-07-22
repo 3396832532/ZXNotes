@@ -1,3 +1,5 @@
+# LinkedList源码
+
 LinkedList还实现了队列接口Queue。
 
 Queue扩展了Collection，它的主要操作有三个：

@@ -1,4 +1,6 @@
-<https://www.cnblogs.com/linjiqin/p/8003838.html>
+# Redis实现分布式锁
+
+转载: <https://www.cnblogs.com/linjiqin/p/8003838.html>
 
 我们加锁就一行代码：`jedis.set(String key, String value, String nxxx, String expx, int time)`，这个set()方法一共有五个形参：
 

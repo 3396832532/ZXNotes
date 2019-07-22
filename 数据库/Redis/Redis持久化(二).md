@@ -2,6 +2,8 @@
 
 转载: <https://mp.weixin.qq.com/s/nOfd37J21axDMnlYK9WDrg>
 
+
+
 由于 RDB 的数据实时性问题，目前用 AOF 比较多了，而持久化恢复也是优先 AOF。
 
 RDB 是旧的模式，现在基本上都使用 AOF。
@@ -13,7 +15,6 @@ RDB 是旧的模式，现在基本上都使用 AOF。
 Redis会单独创建（fork）一个子进程来进行持久化，会先将数据写入到 一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。
 
 <div align="center><img src="assets/1555842247398.png"></div><br>
-
 RDB特点: 
 
 1、RDB 是一种快照模式，即——保存的是 key value 数据内容。
@@ -153,5 +154,4 @@ Redis 单线程架构**无法充分利用多核CPU，通常的做法是一台机
 整个过程如图：
 
 <div align="center"><img src="assets/1555843337361.png"></div><br>
-
 通过不断判断 AOF 的状态，手动执行 AOF 重写，保证 AOF 不会存在竞争。

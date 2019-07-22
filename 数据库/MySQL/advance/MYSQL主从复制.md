@@ -116,8 +116,9 @@ MASTER_LOG_FILE='mysqlbin.具体数字',MASTER_LOG_POS=具体值;
 ![zhucong_5.png](images/zhucong_5.png)
 
 <div align="center"><img src="images/zhucong_6.png"><div><br>
-
 ### 7、主机键表，看从机有没有
+
+
 
 ### 8、如何停止主从服务复制功能
 

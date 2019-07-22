@@ -6,6 +6,7 @@
 * NIO 的非阻塞式网络通信
   * 选择器(Selector)
   * SocketChannel、ServerSocketChannel、DatagramChannel
+  * Pipe管道
 
 ## 一、Java NIO 与 IO 的主要区别
 
@@ -650,7 +651,6 @@ public class NIO_07_BlockingIO_02 {
 选择器（Selector） 是 SelectableChannle 对象的多路复用器，Selector 可以同时监控多个 SelectableChannel 的 IO 状况，也就是说，利用 Selector 可使一个单独的线程管理多个 Channel。Selector 是非阻塞 IO 的核心
 
 <div align="center">   <img src="assets/1555684641942.png"></div><br>
-
 > 图片出处: <https://itimetraveler.github.io/2018/05/15/%E3%80%90Java%E3%80%91NIO%E7%9A%84%E7%90%86%E8%A7%A3/>
 
 `Selector`使用：

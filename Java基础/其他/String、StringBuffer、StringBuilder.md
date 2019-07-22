@@ -1,10 +1,14 @@
-## 总结一
+## 一、String、StringBuffer、StringBuilder对比
+
+
 
 转载: <https://www.cnblogs.com/su-feng/p/6659064.html>
 
+
+
 这三个类之间的区别主要是在两个方面，即运行速度和线程安全这两方面。
 
-1. 首先说运行速度，或者说是执行速度，**在这方面运行速度快慢为：StringBuilder > StringBuffer > String**
+1、首先说运行速度，或者说是执行速度，**在这方面运行速度快慢为：StringBuilder > StringBuffer > String**
 
 　　**String最慢的原因：**
 
@@ -17,7 +21,7 @@
 4 System.out.println(str);
 ```
 
-　　如果运行这段代码会发现先输出“abc”，然后又输出“abcde”，好像是str这个对象被更改了，其实，这只是一种假象罢了，JVM对于这几行代码是这样处理的，首先创建一个String对象str，并把“abc”赋值给str，然后在第三行中，其实JVM又创建了一个新的对象也名为str，然后再把原来的str的值和“de”加起来再赋值给新的str，而原来的str就会被JVM的垃圾回收机制（GC）给回收掉了，所以，str实际上并没有被更改，也就是前面说的String对象一旦创建之后就不可更改了。所以，Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。
+　　如果运行这段代码会发现先输出“abc”，然后又输出“abcde”，好像是str这个对象被更改了，其实，这只是一种假象罢了，JVM对于这几行代码是这样处理的，首先创建一个String对象str，并把“abc”赋值给str，然后在第三行中，**其实JVM又创建了一个新的对象也名为str**，然后再把原来的str的值和“de”加起来再赋值给新的str，而原来的str就会被JVM的垃圾回收机制（GC）给回收掉了，所以，str实际上并没有被更改，也就是前面说的String对象一旦创建之后就不可更改了。所以，Java中对String对象进行的操作实际上是一个不断创建新的对象并且将旧的对象回收的一个过程，所以执行速度很慢。
 
 　　而StringBuilder和StringBuffer的对象是变量，对变量进行操作就是直接对该对象进行更改，而不进行创建和回收的操作，所以速度要比String快很多。
 
@@ -30,9 +34,7 @@
 4 System.out.println(stringBuilder.toString());
 ```
 
-　　这样输出结果也是“abcde”和“abcde”，但是String的速度却比StringBuilder的反应速度要快很多，这是因为第1行中的操作和 `String str="abcde";`
-
-是完全一样的，所以会很快，而如果写成下面这种形式
+　　这样输出结果也是“abcde”和“abcde”，但是String的速度却比StringBuilder的反应速度要快很多，这是因为第1行中的操作和 `String str="abcde";`是完全一样的，所以会很快，而如果写成下面这种形式
 
 ```java
 1 String str1="abc";
@@ -42,13 +44,13 @@
 
 　　那么JVM就会像上面说的那样，不断的创建、回收对象来进行这个操作了。速度就会很慢。
 
-2. 再来说线程安全
+2、再来说线程安全
 
 　　**在线程安全上，StringBuilder是线程不安全的，而StringBuffer是线程安全的**
 
 　　如果一个StringBuffer对象在字符串缓冲区被多个线程使用时，StringBuffer中很多方法可以带有synchronized关键字，所以可以保证线程是安全的，但StringBuilder的方法则没有该关键字，所以不能保证线程安全，有可能会出现一些错误的操作。所以如果要进行的操作是多线程的，那么就要使用StringBuffer，但是在单线程的情况下，还是建议使用速度比较快的StringBuilder。
 
-3. 总结一下
+3、总结一下
 
 　　**String：适用于少量的字符串操作的情况**
 
@@ -73,7 +75,9 @@ String 不变性的理解
 * `String s = new String("Hello world");` **可能创建两个对象也可能创建一个对象。如果静态区中有“ Hello world ”字符串常量对象的话，则仅仅在堆中创建一个对象。如果静态区中没有“ Hello world ”对象，则堆上和静态区中都需要创建对象**。
 * 在 java 中 , **通过使用 "+" 符号来串联字符串的时候 , 实际上底层会转成通过 StringBuilder 实例的 append() 方法来实现** 。
 
-## 总结二
+---
+
+## 二、String对象不可变的原因
 
 <https://www.cnblogs.com/goody9807/p/6516374.html>
 

@@ -1,3 +1,5 @@
+# MYSQL乐观锁和悲观锁
+
 转载: <https://www.cnblogs.com/zhiqian-ali/p/6200874.html>
 
 #### 悲观锁（Pessimistic Lock）
