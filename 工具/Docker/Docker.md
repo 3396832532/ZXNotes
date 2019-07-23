@@ -234,9 +234,7 @@ Union 文件系统是 Docker 镜像的基础。**镜像可以通过分层来进�
 特性：一次同时加载多个文件系统，但从外面看起来，只能看到一个文件系统，联合加载会把各层文件系统叠加起来，这样最终的文件系统会包含所有底层的文件和目录。
 
 <div align="center"><img src="images/1_10.png"></div><br>
-
 <div align="center"><img src="images/1_9.png"></div><br>
-
 ### 1、docker commit
 
 特点: (`commit`的只是一个副本容器。原来的不能修改)

@@ -1,7 +1,5 @@
 # RabbitMQ
 
-
-
 ## 一、RabbitMQ解决的问题
 
 RabbitMQ是用来干啥的?
