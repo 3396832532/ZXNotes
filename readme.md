@@ -6,7 +6,7 @@
 
 [刷题](刷题/)
 
-**下面的三个专栏得到了大部分人的点赞，推荐给大家**:
+**下面的三个专栏得到了大部分人的点赞，推荐给大家**
 
 * [**30个笔试面试模板题**](刷题/InterviewAlgorithm.md)
 * [**图解LeetCode**](刷题/LeetCode/LeetCodeSolutionIndex.md)
