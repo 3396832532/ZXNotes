@@ -14,7 +14,7 @@
 
 累计: `Codeforces`80道左右，`LeetCode`200道左右，其他`OJ`100道+。
 
-> 之前在牛客网发的两篇帖子，算是给自己项目做了一个推广 ^_^。
+> 之前在牛客网发的两篇帖子，算是给自己项目做了一个推广 ^_^
 >
 > * https://www.nowcoder.com/discuss/171791
 > * https://www.nowcoder.com/discuss/177397
