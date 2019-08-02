@@ -473,9 +473,9 @@ Java运行时，会根据**类的完全限定名寻找并加载类，寻找的�
 
 按照开发人员来说，类加载器不是只有一个，一般程序运行时，都会有三个：
 
-* 启动类加载器(`Bootstrap ClassLoader`)：这个加载器是Java虚拟机实现的一部分，不是Java语言实现的，一般是C++实现的，它负责加载Java的基础类，主要是`<JAVA_HOME>/lib/rt.jar`，我们日常用的Java类库比如String, ArrayList等都位于该包内。
+* 启动类加载器(`Bootstrap ClassLoader`)：这个加载器是Java虚拟机实现的一部分，不是Java语言实现的，一般是C++实现的，它负责加载Java的基础类，主要是`<JAVA_HOME>/lib/rt.jar`，我们日常用的Java类库比如String，ArrayList等都位于该包内。
 * 扩展类加载器(`Extension ClassLoader`)：这个加载器的实现类是`sun.misc.Launcher$ExtClassLoader`，它负责加载Java的一些扩展类，一般是`<JAVA_HOME>/lib/ext`目录中的jar包。
-* 应用程序类加载器(`Application ClassLoade`r)：这个加载器的实现类是`sun.misc.Launcher$AppClassLoader`，它负责加载应用程序的类，包括自己写的和引入的第三方法类库，即所有在类路径中指定的类。
+* 应用程序类加载器(`Application ClassLoader`)：这个加载器的实现类是`sun.misc.Launcher$AppClassLoader`，它负责加载应用程序的类，包括自己写的和引入的第三方法类库，即所有在类路径中指定的类。
 
 ### 3、双亲委派模型
 
