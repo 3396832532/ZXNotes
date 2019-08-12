@@ -26,22 +26,19 @@
 ```java
 public class Solution {
     public String replaceSpace(StringBuffer str) {
-        int spaceNum = 0; //计算空格数量
-        for (int i = 0; i < str.length(); i++)
-            if (str.charAt(i) == ' ')
-                spaceNum++; 
-        int fi = str.length() - 1; //第一个指针 
-        int se = str.length() + 2 * spaceNum - 1; //第二个指针的位置
-        str.setLength(se + 1); //新的长度 = oldLen + 2 * spaceNum
-        while (fi >= 0) {
-            if (str.charAt(fi) == ' ') {
-                str.setCharAt(se--, '0');
-                str.setCharAt(se--, '2');
-                str.setCharAt(se--, '%');
-            } else {
-                str.setCharAt(se--, str.charAt(fi));
+        int spaceNum = 0;
+        for(int i = 0; i < str.length(); i++) if(str.charAt(i) == ' ') spaceNum++;
+        int newLen = str.length() + 2*spaceNum;
+        int oriPos = str.length() - 1 , newPos = newLen-1;
+        str.setLength(newLen);
+        for(; oriPos >= 0; oriPos--){
+            if(str.charAt(oriPos) == ' '){
+                str.setCharAt(newPos--, '0');
+                str.setCharAt(newPos--, '2');
+                str.setCharAt(newPos--, '%');
+            }else {
+                str.setCharAt(newPos--, str.charAt(oriPos));
             }
-            fi--;
         }
         return str.toString();
     }

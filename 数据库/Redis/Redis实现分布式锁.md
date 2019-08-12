@@ -25,14 +25,83 @@
 Redis加解锁的正确姿势
 
 * 通过setnx命令，必须给锁设置一个失效时间； (避免死锁) 
-* 加锁的时候，每个节点产生一个随机字符串(作为lockKey的value) (UUID)；(避免误删锁)
+* 加锁的时候，每个节点产生一个随机字符串(作为lockKey的value) (UUID)；(避免误删锁，即自己线程加的锁，有可能被别的线程删掉)
 * 写入随机值与设置失效时间必须是同时的； (保证加锁是原子的)
 
+```java
+@RestController
+public class RedisLockController {
 
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
-可能出现的问题:
+    @RequestMapping("/testRedis")
+    public String testRedis(){
+        String lockKey = "lockKey";
+        String clientId = UUID.randomUUID().toString(); //防止 自己线程加的锁，总是有可能被别的线程删掉
+        try {
+            //设值和设置过期必须是 原子性的操作
+            Boolean res = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, clientId, 10, TimeUnit.SECONDS);
+            if(!res){
+                return "error";
+            }
+            int stock = Integer.parseInt(stringRedisTemplate.opsForValue().get("stock")); //jedis.get()
+            if(stock > 0){
+                int newStock = stock-1;
+                stringRedisTemplate.opsForValue().set("stock", newStock + "");
+                System.out.println("扣减成功, 剩余库存: " + newStock + "");
+            }else{
+                System.out.println("扣减失败, 库存不足");
+            }
+        }finally {
+            //解锁 , 就是判断这把锁是不是自己加的
+            if(clientId.equals(stringRedisTemplate.opsForValue().get(lockKey))){
+                stringRedisTemplate.delete(lockKey);
+            }
+        }
+        return "success";
+    }
+}
+```
 
-自己线程加的锁，总是有可能被别的线程删掉，释放掉。
+使用Redisson实现分布式锁:
+
+![1565570699214](assets/1565570699214.png)
+
+简单来说: **就是另开一个定时任务延长锁的时间，防止两个线程同时进入**。
+
+```java
+@RestController
+public class RedissonLockController {
+
+    @Autowired
+    Redisson redisson;
+
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
+    @RequestMapping("/testRedisson")
+    public String testRedis() throws InterruptedException {
+        String lockKey = "lockKey";
+        String clientId = UUID.randomUUID().toString();
+        RLock lock = redisson.getLock(lockKey); // 得到锁
+        try {
+            lock.tryLock(30, TimeUnit.SECONDS); // 超时时间
+            int stock = Integer.parseInt(stringRedisTemplate.opsForValue().get("stock")); //jedis.get()
+            if (stock > 0) {
+                int newStock = stock - 1;
+                stringRedisTemplate.opsForValue().set("stock", newStock + "");
+                System.out.println("扣减成功, 剩余库存: " + newStock + "");
+            } else {
+                System.out.println("扣减失败, 库存不足");
+            }
+        } finally {
+            lock.unlock();
+        }
+        return "success";
+    }
+}
+```
 
 
 
