@@ -4,7 +4,7 @@
 *  Numpy数据存储
 * 随机函数、统计函数、梯度函数
 ***
-### N维数组对象ndarray
+### 一、N维数组对象ndarray
 
 ##### 基本构成
 ndarray是一个多维数组对象，由两部分构成：
@@ -12,7 +12,7 @@ ndarray是一个多维数组对象，由两部分构成：
 * 实际的数据；
 * 描述这些数据的元数据（数据维度、数据类型等)；
 
-<font color = red>ndarray数组一般要求所有元素类型相同（同质），数组下标从0开始。
+ndarray数组一般要求所有元素类型相同（同质），数组下标从0开始。
 
 注意: 
 * 在NumPy中维度(dimensions)叫做轴(axes)，轴的个数叫做秩(rank)；
@@ -21,12 +21,14 @@ ndarray是一个多维数组对象，由两部分构成：
 * <font color  =red>ndarray大部分创建的数组默认都是浮点数(出了arange等函数)，为什么？因为大部分科学计算都是浮点数，很少只有整数的数据；
 
  下图显示了ndarray，数据类型对象（dtype）和数组标量类型之间的关系。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031155640926.png)
+
+![1565883772699](assets/1565883772699.png)
 
 ##### ndarray对象的属性
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031160254408.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565883784039](assets/1565883784039.png)
 代码演示: 
-```py
+
+```python
 import numpy as np
 
 a = np.array([[0, 1, 2, 3, 4],
@@ -77,7 +79,7 @@ int64
 
 ##### ndarray也可以有非同质的对象
 
-```py
+```python
 import numpy as np
 
 # 非同质的 ndarray对象，无法有效发挥NumPy优势，尽量避免使用
@@ -112,13 +114,13 @@ object
 <font color = blue>① 从Python中的列表、元组等类型创建ndarray数组: 
 
 基本格式如下: 
-```py
+```python
 x = np.array(list/tuple)
 x = np.array(list/tuple, dtype=np.float32)
 ```
 注意: 当np.array()不指定dtype时，NumPy将根据数据情况关联一个dtype类型；
 
-```py
+```python
 import numpy as np
 
 # 使用列表创建ndarray对象
@@ -149,18 +151,20 @@ numpy.array(object, dtype = None, copy = True, order = None, subok = False, ndmi
 ```
 |参数|描述|
 |--|--|
-| object| 任何暴露数组接口方法的对象都会返回一个数组或任何（嵌套）序列(元组、列表等) | 
-| dtype| 数组的所需数据类型，可选。| 
-| copy| 可选，默认为true，对象是否被复制。| 
-| order| C（按行）、F（按列）或A（任意，默认）。| 
-| subok |默认情况下，返回的数组被强制为基类数组。 如果为true，则返回子类。 | 
+| object| 任何暴露数组接口方法的对象都会返回一个数组或任何（嵌套）序列(元组、列表等) |
+| dtype| 数组的所需数据类型，可选。|
+| copy| 可选，默认为true，对象是否被复制。|
+| order| C（按行）、F（按列）或A（任意，默认）。|
+| subok |默认情况下，返回的数组被强制为基类数组。 如果为true，则返回子类。 |
 |ndmin| 指定返回数组的最小维数。|
 
-
 ② <font color = blue>使用NumPy中函数创建ndarray数组，如：arange, ones, zeros等 
- ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031165642318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
- 测试：
-```py
+
+![1565883829671](assets/1565883829671.png) 
+
+测试：
+
+```python
 import numpy as np
 
 # 使用arange来创建(类似python3中的range)
@@ -223,10 +227,14 @@ print("*" * 20)
 ```
 
 其他函数：　
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018103116582238.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565883854248](assets/1565883854248.png)
+
+
 
 测试: 
-```py
+
+```python
 import numpy as np
 
 a = np.linspace(1, 10, 4)  # 在[1,10]中等间距的选4个数
@@ -249,14 +257,16 @@ print(c)
 两种变化: 
 
  * <font color = blue>维度变化；
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031180052895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565883878635](assets/1565883878635.png)
+
  * 元素类型变化 : astype函数；
 
 
 
 ①维度变化: reshape和resize以及flatten的使用: 
 
-```py
+```python
 import numpy as np
 
 a = np.ones((2, 3, 4), dtype=np.int32)
@@ -309,7 +319,7 @@ print(c)
 ```
 ②元素类型变化: astype函数，以及ndarray转换成列表的tolist()方法: 
 
-```py
+```python
 import numpy as np
 
 a = np.ones((2, 3), dtype=np.int)
@@ -338,15 +348,18 @@ print(b.tolist())  # 注意生成的列表也是二维的
 注意:<font color =red> 数组与标量之间的运算作用于数组的每一个元素。</font>
 
 常用的一元函数：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031183234229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
+![1565883914159](assets/1565883914159.png)
 
 常用的二元函数：　
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031183836593.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565883925491](assets/1565883925491.png)
+
+
 
 例子: 
 
-```py
+```python
 import numpy as np
 
 a = np.arange(12).reshape((2, 6))
@@ -385,7 +398,7 @@ print(b > a)  # 各个位置的比较
 
 ```
 ***
-### Numpy数据存储
+### 二、Numpy数据存储
 ##### 一维或二维数据存储
 <font color = blue>  存储到csv文件：
 ```py
@@ -545,14 +558,14 @@ b = np.load("a.npy")
 print(b)
 ```
 ***
-### 随机函数、统计函数、梯度函数
+### 三、随机函数、统计函数、梯度函数
 
-##### 随机函数: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031200503203.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+##### 随机函数 
+![1565883954382](assets/1565883954382.png)
 
 相关函数简单测试：
 
-```py
+```python
 import numpy as np
 
 a = np.random.rand(2, 3)  # 生成shape为[2,3]的ndarray
@@ -609,10 +622,10 @@ print(b)
   [12 16 17 18]]]
 ```
 ##### 统计函数
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031201736376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565883975355](assets/1565883975355.png)
 简单的几个演练: 
 
-```py
+```python
 import numpy as np
 
 a = np.arange(15).reshape(3, 5)
@@ -629,14 +642,15 @@ print(np.sum(a, axis=1))
 print(np.average(a, axis=0, weights=[10, 5, 1]))
 ```
 输出:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018103120382587.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565883990819](assets/1565883990819.png)
 
 ##### 梯度函数的使用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031204449440.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565884002978](assets/1565884002978.png)
 
 简单测试: 
 
-```py
+```python
 import numpy as np
 
 # 一维梯度
@@ -661,5 +675,5 @@ print(np.gradient(b))
 ```
 
 ***
-**关于Numpy更多总结可以看[这篇博客](https://blog.csdn.net/a373595475/article/details/79580734)，我也会持续更新相关知识**
+**关于Numpy更多总结可以看[这篇博客](https://blog.csdn.net/a373595475/article/details/79580734)**
 

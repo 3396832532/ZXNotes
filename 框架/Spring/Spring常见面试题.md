@@ -27,7 +27,6 @@
 Bean 实例从创建到最后销毁，需要经过很多过程，执行很多生命周期方法: 
 
 <div align="center"><img src="images/1_2.png"></div><br>
-
 * 1)、调用无参构造器，创建实例对象(new)。 
 * 2)、调用参数的 setter，为属性注入值(IOC)。 
 * 3)、若 Bean 实现了 `BeanNameAware `接口，则会执行接口方法 setBeanName(String beanId)，**使Bean 类可以获取其在容器中的 id 名称**。
@@ -46,7 +45,7 @@ Bean 实例从创建到最后销毁，需要经过很多过程，执行很多生
 
 
 
-## IOC和AOP
+## 三、IOC和AOP
 
 Spring不需要我们实例化，已经帮我们做好了实例化；(控制反转(IOC))
 
