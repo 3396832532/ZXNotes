@@ -5,11 +5,11 @@
 
 抛InterruptedException的代表方法有：
 
-1、java.lang.Object 类的 wait 方法
+1、`java.lang.Object` 类的 wait 方法
 
-2、java.lang.Thread 类的 sleep 方法
+2、`java.lang.Thread` 类的 sleep 方法
 
-3、java.lang.Thread 类的 join 方法
+3、`java.lang.Thread` 类的 join 方法
 
 
 三个方法有个共同点就是需要花点时间：

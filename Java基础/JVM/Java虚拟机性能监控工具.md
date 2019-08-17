@@ -80,6 +80,7 @@ jmap [option] vmid
 ```
 生成某个pid的存储快照示例: 
 ![在这里插入图片描述](images/tool3.png)
+
 ![在这里插入图片描述](images/tool4.png)
 
 ### 5、jhat :  虚拟机堆转存储快照工具

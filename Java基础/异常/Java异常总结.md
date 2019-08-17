@@ -6,7 +6,7 @@
  * [自定义异常](#自定义异常)
  * [异常注意事项](#异常注意事项)
 ***
-### 异常的介绍
+## 一、异常的介绍
  在`Java`语言中，将程序执行中发生的不正常情况称为“异常”(开发过程中的语法错误和逻辑错误不是异常)。`Java`程序在执行过程中所发生的异常事件可分为两类(都是属于`Throwable`下的)：
 * `Error`:  Java虚拟机无法解决的严重问题。如：JVM系统内部错误、资源耗尽、虚拟机错误(`VirtualMacheError`)及其子类内存溢出错误(`OutOfMemoryError`)和栈溢出错误(`StackOverflowError`)。一般不编写针对性的代码进行处理；
 * `Exception`: 其它因编程错误或偶然的外在因素导致的一般性问题，可以使用针对性的代码进行处理。例如：
@@ -78,7 +78,7 @@ public class TestExceptionOne {
 ```
 <font color = blue>捕获异常后，程序就不会异常退出了，但`try`语句内异常点之后的其他代码就不会执行了，执行完`catch`内的语句后，<font color =red>程序会继续执行`catch`大括号外的代码。
 ***
-### 异常的分类
+## 二、异常的分类
 ![这里写图片描述](images/y3.png)
 
 
@@ -152,7 +152,7 @@ StackTraceElement[] getStackTrace() //获取异常栈每一层的信息，每个
 ![在这里插入图片描述](images/y5.png)
 
 ***
-### 异常的处理以及自定义异常
+## 三、异常的处理以及自定义异常
 
 Java提供的异常处理机制是**抓抛模型**。
 * `Java`程序的执行过程中如出现异常，会生成一个异常类对象，该异常对象将被提交给`Java`运行时系统，这个过程称为抛出(`throw`)异常。
@@ -214,7 +214,7 @@ public String substring(int beginIndex) {
 代码会检查`beginIndex`的有效性，如果无效，会抛出`StringIndexOutOfBoundsException`。纯技术上一种可能的替代方法是不抛异常而返回特殊值`null`，但`beginIndex`无效是异常情况，异常不能假装当正常处理。
 
 ***
-### `finally`和`throws`使用
+## 四、`finally`和`throws`使用
 
 `finally`内的代码不管有无异常发生，都会执行。具体来说：
 * 如果没有异常发生，在`try`内的代码执行结束**后**执行；
@@ -361,7 +361,7 @@ public void tester() throws AppException {
 对于`test`抛出的`SQLException`，这里使用了`catch`，而对于`AppException`，则将其添加到了自己方法的`throws`语句中，表示当前方法也处理不了，还是由上层处理吧。
 
 ***
-### 自定义异常
+## 五、自定义异常
 
 除了`Java API`中定义的异常类，也可以自己定义异常类，一般通过继承`Exception`或者它的某个子类，如果父类是`RuntimeException`或它的某个子类，则自定义异常也是`unchecked exception`，如果是`Exception`或`Exception`的其他子类，则自定义异常是`checked exception`。
 
@@ -431,7 +431,7 @@ class DefException extends Exception{
 ```
 ***
 
-### 异常注意事项
+## 六、异常注意事项
 
 1、不要推诿或延迟处理异常，就地解决最好，并且需要实实在在的进行处理，而不是只捕捉，不动作。 
 2、一个函数尽管抛出了多个异常，但是只有一个异常可被传播到调用端。最后被抛出的异常时唯一被调用端接收的异常，其他异常都会被吞没掩盖。如果调用端要知道造成失败的最初原因，程序之中就绝不能掩盖任何异常。 
@@ -439,6 +439,7 @@ class DefException extends Exception{
 4、按照我们程序员的惯性认知：当遇到return语句的时候，执行函数会立刻返回。但是，在Java语言中，如果存在finally就会有例外。除了return语句，try代码块中的break或continue语句也可能使控制权进入finally代码块。 
 5、请勿在try代码块中调用return、break或continue语句。万一无法避免，一定要确保finally的存在不会改变函数的返回值。 
 6、函数返回值有两种类型：值类型与对象引用。对于对象引用，要特别小心，如果在finally代码块中对函数返回的对象成员属性进行了修改，即使不在finally块中显式调用return语句，这个修改也会作用于返回值上。 
+
 7、勿将异常用于控制流。 
 
 8、继承某个异常时，重写方法时，要么不抛出异常，要么抛出一模一样的异常。 

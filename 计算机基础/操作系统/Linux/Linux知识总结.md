@@ -1,3 +1,5 @@
+
+
 ﻿# Linux知识总结
 
 * [一、基础知识以及常用命令](#一基础知识以及常用命令)
@@ -16,6 +18,7 @@
 
 ![在这里插入图片描述](images/linux1.png)
 ![在这里插入图片描述](images/linux2.png)
+
 #### 2)、Unix和Linux之间的关系 
 ![在这里插入图片描述](images/linux3.png)
 #### 3)、发行版和内核之间的关系 
@@ -25,7 +28,7 @@
 
 #### 4)、多用户操作系统(不同于Windows的单用户操作系统) 
 
-![在这里插入图片描述](https://img-blog.csdn.net/20181009190042718?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![1565965143246](assets/1565965143246.png)
 
 相关的目录的作用速查
 
@@ -65,7 +68,9 @@ command [-options] [parameter]
 > 小技巧： `ctrl + -/+ `可以缩小/放大终端的字体；
 
 常用的7个命令:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101152036112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70) 
+
+![1565965155955](assets/1565965155955.png) 
+
 #### 1)、查看相关命令的帮助信息的两种方式 
 
 * `command --help`，比如  `ls -- help`查看ls的命令的帮助信息；
@@ -80,52 +85,62 @@ command [-options] [parameter]
 
 
 #### 3)、命令结合通配符的使用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101154057528.png)
+![1565965165001](assets/1565965165001.png)
 简单的使用举例: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101154218536.png)
+
+![1565965176041](assets/1565965176041.png)
 
 #### 4)、`cd`命令的常用变化格式以及路径
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101154517318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965186170](assets/1565965186170.png)
 
 #### 5)、创建、删除、移动、复制操作
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101161542175.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965203591](assets/1565965203591.png)
 #### 6)、查看文件内容的三个命令
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101162521830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101162731699.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965223743](assets/1565965223743.png)
+
+![1565965237259](assets/1565965237259.png)
 
 grep使用案例: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018110116302161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965248252](assets/1565965248252.png)
 
 #### 7)、echo、重定向、管道
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101163848942.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965258142](assets/1565965258142.png)
+
 管道使用案例: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101163808905.png)
+![1565965268817](assets/1565965268817.png)
 
 ***
 ## 二、远程管理
 
 ### 1、网络的基本知识
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101182441984.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101182454565.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965284384](assets/1565965284384.png)
+
+![1565965291661](assets/1565965291661.png)
 
 ### 2、 远程登录
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101183517261.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965300119](assets/1565965300119.png)
 
 关于域名以及端口号：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101183613125.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565965311606](assets/1565965311606.png)
+
 SSH的简单使用:
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101184522514.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965320720](assets/1565965320720.png)
 
 ### 3、远程复制
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101192217165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101192317353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965332005](assets/1565965332005.png)
+
+
 
 ### 4、SSH高级一免密码登录和设置别名
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101193649200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70) 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101194041487.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965361697](assets/1565965361697.png)
+
+
+![1565965369608](assets/1565965369608.png)
+
 ***
 ## 三、用户权限和用户管理
 
@@ -137,43 +152,53 @@ SSH的简单使用:
 * 修改权限终端命令；
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101194850276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965384666](assets/1565965384666.png)
 
 `ls -l`相关参数说明: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101200310797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
-终端测试说明: ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101200229507.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965396320](assets/1565965396320.png)
+
+终端测试说明: 
+
+![1565965408320](assets/1565965408320.png)
 
 其中上面绿色字体的硬链接数就是有多少种方式可以到达这个目录或者文件: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101201254454.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965420202](assets/1565965420202.png)
+
 `chmod命令`改变`文件/目录`的权限: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018110123090663.png)
+![1565965432327](assets/1565965432327.png)
 测试使用`chmod`命令: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101203110663.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965449209](assets/1565965449209.png)
 
-执行可执行的权限`chmod +x 01.py`就可以执行了: ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101203626300.png)
+执行可执行的权限`chmod +x 01.py`就可以执行了: 
+
+![1565965458143](assets/1565965458143.png)
 
 `chmod`对目录的操作: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101231453690.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965473891](assets/1565965473891.png)
 
 ### 1、超级用户
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101233242678.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965480817](assets/1565965480817.png)
 ### 2、组管理命令
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101233429805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965489218](assets/1565965489218.png)
 
 ### 3、用户管理终端命令
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101234335289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965498772](assets/1565965498772.png)
+
 在`unbutu`中创建一个`zhangsan`的用户并放到`dev`组：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101234213761.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565965513219](assets/1565965513219.png)
 
 ### 4、查看用户信息以及passwd文件和usermod命令
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101235737666.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181101235323591.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965534442](assets/1565965534442.png)\
+
+![1565965545645](assets/1565965545645.png)
+
 如果是在`Windows`下使用`XShell`来操作`Linux`，默认使用的`shell(终端)`是`dash`，但是这个`Shell`不好，所以可以使用下面的命令来更改默认的`Shell`: 
 
 ```shell
@@ -181,19 +206,22 @@ sudo usermod -s /bin/bash zhangsan   // 指定张三用户的shell为bash，而�
 ```
 
 ### 5、which查看可执行文件的位置
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105183954533.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965555263](assets/1565965555263.png)
 
 >可以使用`last`命令 查询用户登录情况；
 
 ### 6、切换用户
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105184200429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965563100](assets/1565965563100.png)
 ### 7、修改文件权限的三个命令以及chmod和三个数字修改权限(常用)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105190520753.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965572081](assets/1565965572081.png)
 ***
 ### 8、系统信息相关命令
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105192639981.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018110519131392.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105192702501.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965587721](assets/1565965587721.png)
+
+![1565965599330](assets/1565965599330.png)
+
+![1565965609443](assets/1565965609443.png)
+
 ***
 ## 四、其他命令
 * 查找文件 `find`
@@ -203,21 +231,25 @@ sudo usermod -s /bin/bash zhangsan   // 指定张三用户的shell为bash，而�
 
 
 ### 1、查找文件
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105193738127.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965618673](assets/1565965618673.png)
+
 演练: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/201811051937053.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565965631860](assets/1565965631860.png)
 
 ### 2、软链接(类似`Windows`的快捷方式)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105201410626.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965639025](assets/1565965639025.png)
 
 举例:  
-<font color = blue> 先看相对路径建立软链接: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105200526353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+ 先看相对路径建立软链接: 
+
+![1565965655394](assets/1565965655394.png)
 
 通过绝对路径创建的、以及移动两个软链接之后，相对路径的失效效果:
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105201232576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965665213](assets/1565965665213.png)
 
 **`注意`: 当省略了`-s`选项就是创建硬链接。**
 
@@ -226,32 +258,32 @@ sudo usermod -s /bin/bash zhangsan   // 指定张三用户的shell为bash，而�
 下面是软链接和硬链接的示意图:
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105202902318.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965672450](assets/1565965672450.png)
 
 ### 3、打包压缩
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105205035546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965684515](assets/1565965684515.png)
 
 演练: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105205109376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965699155](assets/1565965699155.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105205127788.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965706514](assets/1565965706514.png)
 
 演练: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105205151458.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965718604](assets/1565965718604.png)
 
 注意，除了`.gzip`的压缩文件，还有一个`bz2`的文件压缩文件格式: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105205542187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965726451](assets/1565965726451.png)
 
 ### 4、软件安装
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105210116203.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965734612](assets/1565965734612.png)
 
 设置软件源: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105210409229.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965744510](assets/1565965744510.png)
 
 

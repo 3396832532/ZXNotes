@@ -575,3 +575,209 @@ public class Code_06_NumericStream {
 
 ## 三、Optional取代null
 
+简单使用:
+
+```java
+public class T1 {
+    public static void main(String[] args) {
+        Optional<Integer> optional = Optional.empty();
+//        Optional<Integer> optional = Optional.of(2);
+
+        //不推荐的写法
+        if(optional.isPresent()){
+            System.out.println(optional.get());
+        }
+        //推荐的写法(通过函数式写法)
+        optional.ifPresent(System.out::println);
+
+        System.out.println("-------------");
+        System.out.println(optional.orElse(-1));
+
+        System.out.println("-------------");
+        System.out.println(optional.orElseGet(() -> -1));
+
+    }
+}
+
+```
+
+一个很有用的实例:  **需要返回Company里面的员工列表，如果没有就返回一个空的list**
+
+代码:
+
+```java
+@Data
+@AllArgsConstructor
+public class Company {
+
+    private String name;
+
+    List<Employee> employees;
+}
+
+```
+
+```java
+@Data
+@AllArgsConstructor
+public class Employee {
+
+    private String name;
+
+}
+```
+
+测试代码:
+
+```java
+public class T1 {
+
+    static Company company =
+            new Company("baidu", Arrays.asList(new Employee("zhangsan"), new Employee("lisi")));
+
+    //传统方法
+    static List<Employee> m1(){
+        List<Employee> list = company.getEmployees();
+        if(list != null){
+            return list;
+        }else {
+            return new ArrayList<>();
+        }
+    }
+
+    //使用函数式+Optional
+    static List<Employee> m2(){
+        return Optional.ofNullable(company).map(c -> c.getEmployees()).orElse(Collections.emptyList());
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println(m1());
+        System.out.println(m2());
+    }
+}
+```
+
+输出:
+
+```java
+[Employee(name=zhangsan), Employee(name=lisi)]
+[Employee(name=zhangsan), Employee(name=lisi)]
+```
+
+> 重要的一点是 ***Optional*** **不是** ***Serializable***。因此，它不应该用作类的字段，不用Optional作为类的成员变量和方法参数
+
+
+
+看Optional实际中应用的场景，去除多余的 `if(xx != null)`的判断:
+
+实体类:
+
+```java
+@Data
+@AllArgsConstructor
+public class User {
+    private String name;
+    private Address address;
+}
+
+@Data
+@AllArgsConstructor
+public class Address {
+
+    private Country country;
+
+}
+
+@Data
+@AllArgsConstructor
+public class Country {
+
+    private String name;
+
+    private String city;
+}
+
+```
+
+```java
+public class T {
+
+    public static void main(String[] args) {
+        User user = getUser();
+        if (user != null) {
+            Address address = user.getAddress();
+            if (address != null) {
+                Country country = address.getCountry();
+                if (country != null) {
+                    String city = country.getCity();
+                    if (city != null) {
+                        city = city.toUpperCase();
+                        System.out.println(city);
+                    }
+                }
+            }
+        }
+    }
+
+    static User getUser(){
+        return new User("zhangsan", new Address(new Country("china", "changsha")));
+    }
+}
+
+```
+
+
+
+改造:
+
+
+
+改造实体类:
+
+ ```java
+@AllArgsConstructor
+public class User {
+    private String name;
+    private Address address;
+
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
+    }
+}
+
+@AllArgsConstructor
+public class Address {
+
+    private Country country;
+
+    public Optional<Country> getCountry() {
+        return Optional.ofNullable(country);
+    }
+
+}
+
+ ```
+
+测试:
+
+```java
+public class T {
+
+    public static void main(String[] args) {
+        User user = getUser();
+        String res = Optional.ofNullable(user)
+                .flatMap(u -> u.getAddress())
+                .flatMap(a -> a.getCountry())
+                .map(c -> c.getCity())
+                .orElse("default").toUpperCase();
+        System.out.println(res);
+    }
+
+    static User getUser(){
+        return new User("zhangsan", new Address(new Country("china", "changsha")));
+    }
+}
+
+```
+

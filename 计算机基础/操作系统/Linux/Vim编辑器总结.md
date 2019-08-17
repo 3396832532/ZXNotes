@@ -7,72 +7,84 @@
 * 日常开发中，知道某一行有错，打开文件的时候同时定位到对应的行。命令： `vim 文件名 +行数`；
 * 如果后面没有加上函数，也就是`vim 文件名 +`，则定位到<font color = blue>文件末尾；
 * 如果在终端强制退出`vim`，会产生一个`.swp`的交换文件，再次编辑的时候会出现需要选择编辑的情况，此时选择`D`选项，删除之前的`.swp`文件，然后编辑即可；
-* <font color = red> `"+y`将Vim中的内容复制到系统剪切板；
-* <font color = red>`"+p`将系统剪切板的内容拷贝到vim中（非编辑模式下）。
+*  `"+y`将Vim中的内容复制到系统剪切板；
+* `"+p`将系统剪切板的内容拷贝到vim中（非编辑模式下）。
 ***
 ## 二、基本知识总结
 ### 1、工作模式
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105231415548.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105235202846.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964389885](assets/1565964389885.png)
+
+![1565964401993](assets/1565964401993.png)
 
 注意末行模式的常见命令: 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105231455986.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181105235139210.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964419977](assets/1565964419977.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106101903622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964463324](assets/1565964463324.png)
+
+![1565964519436](assets/1565964519436.png)
 ### 2、移动、选中文本(可视化)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106110631291.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964550546](assets/1565964550546.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106110720778.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964571182](assets/1565964571182.png)
 ### 3、撤销、恢复、删除
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018110611085675.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964583608](assets/1565964583608.png)
 ### 4、复制、粘贴、替换
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106112509734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964660005](assets/1565964660005.png)
 ### 5、 缩排、重复执行
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106121239797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964689620](assets/1565964689620.png)
 ### 6、查找、替换
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106121505119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964701388](assets/1565964701388.png)
 ### 7、查找、替换
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106124828734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106124245362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964718679](assets/1565964718679.png)
+
+
+
+![1565964762783](assets/1565964762783.png)
+
 替换结果: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106124302446.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565964782977](assets/1565964782977.png)
 
 ### 8、插入命令的扩展
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106144645625.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964805843](assets/1565964805843.png)
+
 <font color = red>插入命令的两个日常使用</font>
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106144945724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565964820606](assets/1565964820606.png)
+
 ### 9、分屏命令
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106150226355.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964856379](assets/1565964856379.png)
+
 `Vim`默认的内置文件浏览器
 
 ![在这里插入图片描述](images/vim1.png)
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106151340347.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964882432](assets/1565964882432.png)
 
 展示一个为目录，一个来编辑文件。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106151415157.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964898514](assets/1565964898514.png)
 
 ***
 ## 三、命令表
 
 ### 1、移动光标
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106152602912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106152538511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964919850](assets/1565964919850.png)
+
+![1565964931958](assets/1565964931958.png)
 
 ### 2、搜寻与取代
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106152904773.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964942539](assets/1565964942539.png)
 
 ### 3、删除、复制、粘贴
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106153129985.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106153306394.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964957118](assets/1565964957118.png)
+![1565964968950](assets/1565964968950.png)
 
 ### 4、插入模式
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018110615370213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964982096](assets/1565964982096.png)
 ### 5、末行模式命令
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106153932102.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565964998863](assets/1565964998863.png)
 ### 6、区块选择、分屏
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106154345260.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1565965012509](assets/1565965012509.png)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181106154533295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
