@@ -512,8 +512,6 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAcce
         return (E) elementData[index];
     }
 
-
-
     /**
      * 设置 index 位置元素的值
      * @param index 索引值

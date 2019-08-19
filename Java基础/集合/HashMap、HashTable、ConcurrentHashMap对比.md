@@ -59,23 +59,22 @@ Dictionary是什么？它是任何可将键映射到相应值的类的抽象父�
 
 `HashMap`中的`0`位置上放的是`null`值(键为`null`)。
 
-
-
-
-
-常见题目
+## 六、常见问题
 
 ### 1、Hash Map 和 Hash Table 的区别
 
 Hash Map 和 Hash Table 的区别
 
+* hashmap采用的是数组(桶位)+链表+红黑树结构实现，而hashtable中采用的是数组(桶位)+链表实现
+
 * Hashtable 的方法是同步的， HashMap 未经同步，所以在多线程场合要手动同步。
 * Hashtable 不允许 null 值 (key 和 value 都不可以 ) ， HashMap 允许 null 值 (key 和 value 都可以) 。
 * 两者的遍历方式大同小异， Hashtable 仅仅比 HashMap 多一个 `elements()` 方法。Hashtable 和 HashMap 都能通过 values() 方法返回一个 Collection ，然后进行遍历处理。两者也都可以通过 entrySet() 方法返回一个 Set ， 然后进行遍历处理。
 * HashTable 使用 Enumeration ， HashMap 使用 Iterator 。
-* 哈希值的使用不同， Hashtable 直接使用对象的 hashCode 。而 HashMap 重新计算 hash 值，而且用于代替求模。
-* Hashtable 中 hash 数组默认大小是 11 ，增加的方式是 old*2+1 。 HashMap 中 hash 数组的默认大小是 16 ，而且一定是 2的指数。
+* 哈希值的使用不同， Hashtable 直接使用对象的 hashCode 。而 HashMap 重新计算 hash 值，而且用于代替求模。hashmap中的寻址方法采用的是位运算按位与，而hashtable中寻址方式采用的是求余数。
+* Hashtable 中 hash 数组默认大小是 11 ，增加的方式是 old*2+1 。 HashMap 中 hash 数组的默认大小是 16 ，而且一定是 2的指数(HashTable中可以为任意整数)。
 * HashTable 基于 Dictionary 类，而 HashMap 基于 AbstractMap 类
+* hashmap中出现hash冲突时，如果链表节点数小于8时是将新元素加入到链表的末尾，而hashtable中出现hash冲突时采用的是将新元素加入到链表的开头。
 
 ### 2、Hash Map 中的 key 可以是任何对象或数据类型吗
 

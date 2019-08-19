@@ -1,4 +1,4 @@
-# HashTable源码
+# HashTable
 
 HashTable继承Dictionary类，实现Map接口。
 
@@ -35,14 +35,14 @@ int index = (hash & 0x7FFFFFFF) % tab.length;
 
 ```java
 public synchronized V put(K key, V value) {
-    // Make sure the value is not null
     if (value == null) {
         throw new NullPointerException();
     }
-
     // Makes sure the key is not already in the hashtable.
     Entry<?,?> tab[] = table;
     int hash = key.hashCode();
+    // 因为hash可能为负数，所以就先和0x7FFFFFFF相与
+    // 在HashMap中，是用 (table.length - 1) & hash 计算要放置的位置
     int index = (hash & 0x7FFFFFFF) % tab.length;
     @SuppressWarnings("unchecked")
     Entry<K,V> entry = (Entry<K,V>)tab[index];
@@ -58,6 +58,13 @@ public synchronized V put(K key, V value) {
     return null;
 }
 ```
+
+![1566126461870](assets/1566126461870.png)
+
+* ① 由于直接使用key.hashcode()，而没有向hashmap一样先判断key是否为null，所以key为null时，调用key.hashcode()会出错，所以hashtable中key也不能为null；
+* ②hashtable中对hash值进行寻址的方法为hash%数组长度(与hashmap的`index = hash & (tab.length – 1)`不同，所以不要求数组长度必须为2的n次方)；
+* ③遍历table[index]所连接的链表，查找是否已经存在key与需要插入的key值相同的节点，如果存在则直接更新value，并返回旧的value；
+* ④如果table[index]所连接的链表上不存在相同的key，则通过addEntry()方法将**新节点加到链表的开头**
 
 `addEntry()`方法:
 
@@ -82,6 +89,10 @@ private void addEntry(int hash, K key, V value, int index) {
     count++;
 }
 ```
+
+* 如果加入新节点后，hashtable中元素的个数超过了阈值threshold，则利用rehash()对数组进行扩容。
+*  e=table[index]，并将新节点加在了e节点的前面，最后table[index]=e。相当于把把新节点放在table[index]位置，即整个链表的首部。 
+
 
 `rehash()`方法:
 
@@ -137,3 +148,8 @@ public synchronized V get(Object key) {
 }
 ```
 
+遍历table[index]链表，找到key值相同的节点的value返回，注意同样在该过程中使用到了key的equal方法，所以key被应用与hashtable时不仅要实现hashcode方法还有实现equal方法。
+
+
+
+> 附源码注释文章: https://www.cnblogs.com/wupeixuan/p/8620197.html

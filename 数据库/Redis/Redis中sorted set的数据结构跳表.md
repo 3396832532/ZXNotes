@@ -1,6 +1,6 @@
-<https://blog.csdn.net/yellowriver007/article/details/79021103>
+# Redis的跳表数据结构
 
-
+好文:<https://blog.csdn.net/yellowriver007/article/details/79021103>
 
 ConcurrentSkipListMap有如下特点：
 
