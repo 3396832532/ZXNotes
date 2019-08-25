@@ -1,7 +1,5 @@
 # RabbitMQ
 
-
-
 ## 一、引入
 
 引入
@@ -32,7 +30,7 @@ producer：消息生产者，就是投递消息的程序。
 
 consumer：消息消费者，就是接受消息的程序。
 
-Broker：简单来说就是消息队列服务器实体。
+Broker：简单来说就是消息队列服务器实体，消息队列服务进程，此进程包括两个部分：Exchange和Queue。
 
 Exchange：消息交换机，用来接收生产者发送的消息并将这些消息路由给对应的队列，它指定消息按什么规则，路由到哪个队列（三种常用如下）。
 
@@ -40,7 +38,7 @@ Exchange：消息交换机，用来接收生产者发送的消息并将这些消
 * fanout(发布与订阅)
 * topic(主题，规则匹配)
 
-Queue：消息队列载体，每个消息都会被投入到一个或多个队列。
+Queue：消息队列载体，存储消息的队列，每个消息都会被投入到一个或多个队列。
 
 Binding：绑定，**它的作用就是把exchange和queue按照路由规则绑定起来**。
 
@@ -50,11 +48,7 @@ vhost：虚拟主机，一个broker里可以开设多个vhost，用作不同用�
 
 channel：消息通道(AMQP信道(TCP里面的虚拟连接))，在客户端的每个连接里，可建立多个channel，每个channel代表一个会话任务。
 
-
-
 > **由Exchange，Queue，RoutingKey三个才能决定一个从Exchange到Queue的唯一的线路**。
-
-
 
 
 `Advanced Message Queueing Protoco` : 高级消息队列协议。
@@ -71,7 +65,80 @@ channel：消息通道(AMQP信道(TCP里面的虚拟连接))，在客户端的�
 > * 2、如果不用信道，那应用程序会以TCP连接Rabbit，高峰时每秒成千上万链接造成巨大资源浪费；
 > * 3、信道的原理是**一条线程一条通道，多条线程多条通道**，同用一条TCP链接。一条TCP可以容纳无限的信道，即使每秒成千上万的请求也不会成为性能的瓶颈；
 
-## 三、RabbitMQ如何保证消息投递成功
+## 三、RabbitMQ工作原理
+
+![1566617632393](assets/1566617632393.png)
+
+消息发布接收流程：
+
+-----发送消息-----
+
+1、生产者和Broker建立TCP连接。
+
+2、生产者和Broker建立通道。
+
+3、生产者通过通道消息发送给Broker，由Exchange将消息进行转发。
+
+4、Exchange将消息转发到指定的Queue（队列）
+
+----接收消息-----
+
+1、消费者和Broker建立TCP连接
+
+2、消费者和Broker建立通道
+
+3、消费者监听指定的Queue（队列）
+
+4、当有消息到达Queue时Broker默认将消息推送给消费者。
+
+5、消费者接收到消息。
+
+## 四、工作模式介绍
+
+* Work Queues
+* Publish / Subscribe  (Fanout)
+* Routing  (Direct)
+* Topic
+* Header、RPC
+
+**1、publish/subscribe与work queues有什么区别**。
+
+区别：
+
+1）work queues不用定义交换机，而publish/subscribe需要定义交换机。
+
+2）publish/subscribe的生产方是面向交换机发送消息，work queues的生产方是面向队列发送消息(底层使用默认交换机)。
+
+3）publish/subscribe需要设置队列和交换机的绑定，work queues不需要设置，实质上work queues会将队列绑
+定到默认的交换机 。
+
+相同点：
+
+所以两者实现的发布/订阅的效果是一样的，多个消费端监听同一个队列不会重复消费消息。
+
+![1566619435185](assets/1566619435185.png)
+
+**2、Routing模式和Publish/subscibe有啥区别**。
+
+Routing模式要求队列在绑定交换机时要指定routingkey，消息会转发到符合routingkey的队列。
+
+* 绑定时需要制定routingKey；
+* 发送消息的时候需要制定routingKey；
+* 消费者接受指定队列指定routingKey的消息；
+
+![1566619470035](assets/1566619470035.png)
+
+3、**routing和topic模式的区别**。
+
+增加通配符。
+
+![1566620346851](assets/1566620346851.png)
+
+4、**header与routing模式区别**。
+
+header模式取消routingkey，使用header中的 key/value（键值对）匹配队列。
+
+## 五、RabbitMQ如何保证消息投递成功
 
 ![1_2.png](images/1_2.png)
 
@@ -89,8 +156,6 @@ channel：消息通道(AMQP信道(TCP里面的虚拟连接))，在客户端的�
 * Step 7：我们可以采用设置最大努力尝试次数，比如投递了3次，还是失败，那么我们可以将最终状态设置为Status = 2 ，最后 交由人工解决处理此类问题（或者把消息转储到失败表中）。
 
  
-
-
 
 问题:
 
