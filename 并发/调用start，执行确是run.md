@@ -10,4 +10,5 @@ Thread中使用了[模板方法设计模式](https://blog.csdn.net/zxzxzx0119/ar
 
 ### 3、start( )与run( )之间有什么区别？
 run()方法:在本线程内调用该Runnable对象的run()方法，可以重复多次调用； 
+
 start()方法:启动一个线程，调用该Runnable对象的run()方法，不能多次启动一个线程；

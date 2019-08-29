@@ -11,7 +11,7 @@
 
 ![images/m3.png](images/m3.png)
 
-### 一、中心扩展方法
+## 一、中心扩展方法
 这个方法也是最容易想到的： 
 
  - 从`i`位置开始，**每个位置都要往左右两边开始扩张**，相等就继续扩，不相等就停止，**并记录，注意这里的下标的变化，以及边界的处理**；
@@ -20,7 +20,6 @@
 图:
 
 <div align="center"><img src="images/5_s.png"></div><br> 
-
 代码: 
 
 ```java
@@ -62,7 +61,6 @@ class Solution {
 能画出二维`dp`表，能搞清计算顺序就`ok`。
 
 <div align="center"><img src="images/5_s_2.png"></div><br>
-
 代码: 
 
 ```java
@@ -98,7 +96,6 @@ Mancher解决的是求**最长回文子串的长度**的问题，这里有一个
 看下图(为了处理奇回文和偶回文，在原来的字符串基础上处理成中间和两边都要带上`#`的字符串)
 
 <div align="center"><img src="images/5_s_3.png"></div><br>
-
 首先给出四个概念:
 
  - **回文直径，以一个中心开始，向两边开始扩，能扩出来的范围，以及回文半径(回文直径的一半)**;
@@ -108,8 +105,6 @@ Mancher解决的是求**最长回文子串的长度**的问题，这里有一个
 
 看一个简单的示例
 <div align="center"><img src="images/5_s_4.png"></div><br>
-
-
  首先我们的目的就是要求出所有的`r[]`数组(每个位置的最长回文半径，然后取最大的即可)，Manacher算法分为大的两种情况
 
  - 第一种可能性: `i`不在回文右边界(`pR`, 也就是`i < pR`)里，直接暴力扩(向两边)；
@@ -123,15 +118,12 @@ Mancher解决的是求**最长回文子串的长度**的问题，这里有一个
 第一种情况
 
 <div align="center"><img src="images/5_s_5.png"></div><br>
-
 第二种情况
 
 <div align="center"><img src="images/5_s_6.png"></div><br>
-
 第三种情况
 
 <div align="center"><img src="images/5_s_7.png"></div><br>
-
 上面的图片解释了三种情况下分别的做法，具体的做法看代码的注释。
 
 注意其中第一种情况和第二种情况取最小值。

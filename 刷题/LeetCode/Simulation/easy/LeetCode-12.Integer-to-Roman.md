@@ -46,7 +46,6 @@
 然后就从大的数到小的数累加即可。
 
 <div align="center"><img src="images/12_s.png"></div><br>
-
 代码: 
 
 ```java

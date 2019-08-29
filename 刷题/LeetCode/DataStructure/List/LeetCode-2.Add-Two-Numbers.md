@@ -1,6 +1,6 @@
 ## LeetCode - 2. Add Two Numbers
 
-#### [题目链接]()
+#### [题目链接](https://leetcode.com/problems/add-two-numbers/)
 
 > <https://leetcode.com/problems/add-two-numbers/>
 
@@ -21,7 +21,6 @@
 图: 
 
 <div align="center"><img src="images/2_s.png"></div><br>
-
 代码: 
 
 ```java

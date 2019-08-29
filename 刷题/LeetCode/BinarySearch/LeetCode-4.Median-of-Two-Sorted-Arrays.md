@@ -12,6 +12,7 @@
 * 如果总数是奇数，那么中位数就是<font color = red>**C<sub>k-1</sub>**</font>，而<font color = red>**C<sub>k-1</sub> = max(A<sub>m<sub>1</sub> - 1</sub>，B<sub>m<sub>2</sub> - 1</sub>)**</font>；
 
 看下面的例子: 
+
 ![在这里插入图片描述](images/4_s1.png)
 
 <font color = blue> 求解的过程就是:
@@ -36,6 +37,7 @@
 **奇数的例子:**
 
 ![在这里插入图片描述](images/4_s3.png)
+
 过程: 
 
 * 一开始`L = 0、R = 4`，`k = (5+8+1)/2 = 7`；

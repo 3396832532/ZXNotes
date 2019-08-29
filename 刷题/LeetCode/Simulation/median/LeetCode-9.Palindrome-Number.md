@@ -44,7 +44,6 @@ class Solution {
 图:
 
 <div align="center"><img src="images/9_s.png"></div><br>
-
 代码: 
 
 ```java
