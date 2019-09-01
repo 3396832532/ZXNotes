@@ -140,6 +140,7 @@ final V putVal(K key, V value, boolean onlyIfAbsent) {
 ## 三、get
 
 ConcurrentHashMap中的get方法是没有锁的。
+
 分析一下get方法是怎么实现的多线程下数据可见性。
 
 1、通过tabAt的volatile读

@@ -2,6 +2,8 @@
 
 <https://blog.csdn.net/luoshenfu001/article/details/5816408>
 
+spring设计模式: https://blog.csdn.net/caoxiaohong1005/article/details/80039656
+
 ## IoC（Inversion of Control）  
 
  1、IoC（Inversion of Control）是指容器控制程序对象之间的关系，而不是传统实现中，由程序代码直接操控。控制权由应用代码中转到了外部容器，控制权的转移是所谓反转。 对于Spring而言，就是由Spring来控制对象的生命周期和对象之间的关系；IoC还有另外一个名字——“依赖注入（Dependency Injection）”。从名字上理解，所谓依赖注入，即组件之间的依赖关系由容器在运行期决定，即由容器动态地将某种依赖关系注入到组件之中。  
