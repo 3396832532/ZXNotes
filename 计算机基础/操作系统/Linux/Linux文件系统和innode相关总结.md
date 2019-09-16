@@ -61,7 +61,6 @@ Change: 2018-07-22 16:37:10.833611360 +0800
 ### inode的大小
 
 <div align="center"><img src="assets/0417_WTD_Linux_F1.gif"></div><br>
-
 inode 也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是**数据区**，存放文件数据；另一个是 **inode 区**（inode table），存放 inode 所包含的信息。
 
 每个 inode 节点的大小，一般是 128 字节或 256 字节。inode 节点的总数，在格式化时就给定，一般是每 1KB 或每 2KB 就设置一个 inode。假定在一块 1GB 的硬盘中，每个 inode 节点的大小为 128 字节，每 1KB 就设置一个 inode，那么 inode table 的大小就会达到 128 MB，占整块硬盘的 12.8%。

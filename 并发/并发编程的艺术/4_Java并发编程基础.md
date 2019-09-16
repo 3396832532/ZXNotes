@@ -44,7 +44,6 @@ while(true){
 所以，在任何时候碰到InterruptedException，都要自己手动把这个线程中断。由于这个时候已经处于非阻塞状态，所以可以正常中断，最正确的代码如下：
 
 ```java
-
 while(!Thread.currentThread().isInterrupted()){
     try {
      Thread.sleep(1000);

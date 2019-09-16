@@ -85,6 +85,7 @@ Hystrix的熔断状态机模型：
 
 考虑以下情况：我们有多个应用程序使用 Spring Cloud Config 读取属性，而 Spring Cloud Config 从
 GIT 读取这些属性。
+
 下面的例子中多个员工生产者模块从 Employee Config Module 获取 Eureka 注册的财产。
 如果假设 GIT 中的 Eureka 注册属性更改为指向另一台 Eureka 服务器，会发生什么情况。在这种情况
 下，我们将不得不重新启动服务以获取更新的属性。

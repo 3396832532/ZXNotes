@@ -1,5 +1,7 @@
 # HashMap
 
+https://www.cnblogs.com/Jtianlin/p/8628062.html
+
 ## 一、内部基本属性常量
 
 ```java
