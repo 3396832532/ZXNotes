@@ -1,18 +1,20 @@
-# 记录学习笔记
+# 学习笔记
+
+更新  **Java/大数据/C++/Go** 等技术笔记。
 
 目前还不完善，正在不断更新。
 
 ## 刷题
 
-[刷题](刷题/)
+[刷题](Algorithm/)
 
 **下面的三个专栏得到了大部分人的点赞，推荐给大家**
 
-* [**30个笔试面试模板题**](刷题/InterviewAlgorithm.md)
-* [**图解LeetCode**](刷题/LeetCode/LeetCodeSolutionIndex.md)
-* [**图解剑指Offer**](刷题/Other/剑指Offer/)
+* [**30个笔试面试模板题**](Algorithm/InterviewAlgorithm.md)
+* [**图解LeetCode**](Algorithm/LeetCode/LeetCodeSolutionIndex.md)
+* [**图解剑指Offer**](Algorithm/Other/剑指Offer/)
 
-累计: `Codeforces`80道左右，`LeetCode`200道左右，其他`OJ`100道+。
+OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 
 > 之前在牛客网发的两篇帖子，算是给自己项目做了一个推广 ^_^
 >
@@ -21,16 +23,16 @@
 
 ## 数据结构与算法
 
-[**数据结构和算法**](https://github.com/ZXZxin/ZXBlog/tree/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95)
+[**数据结构和算法**](DataStructure/)
 
 部分文章：
 
-* [**二分查找的总结-6种变形**](数据结构算法/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
-* [**各种排序算法的总结-10多种**](数据结构算法/Algorithm/Sort/各种排序算法总结(全面).md)
-* [**二叉树的各种操作**](数据结构算法/Tree/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等).md)
-* [**关键路径详解**](数据结构算法/Graph/关键路径/Hdu%20-%204109.%20Instrction%20Arrangement以及关键路径详解.md)
-* [**最小生成树两种算法**](数据结构算法/Graph/最小生成树/Hdu%20-%201863.%20畅通工程(最小生成树模板题)(Kruskal算法和Prim算法实现).md)
-* [**最短路径算法**](数据结构算法/Graph/最短路/Hdu%20-%201874.%20畅通工程续(最短路dijkstra模板).md)
+* [**二分查找的总结-6种变形**](DataStructure/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
+* [**各种排序算法的总结-10多种**](DataStructure/Algorithm/Sort/各种排序算法总结(全面).md)
+* [**二叉树的各种操作**](DataStructure/Tree/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等).md)
+* [**关键路径详解**](DataStructure/Graph/关键路径/Hdu%20-%204109.%20Instrction%20Arrangement以及关键路径详解.md)
+* [**最小生成树两种算法**](DataStructure/Graph/最小生成树/Hdu%20-%201863.%20畅通工程(最小生成树模板题)(Kruskal算法和Prim算法实现).md)
+* [**最短路径算法**](DataStructure/Graph/最短路/Hdu%20-%201874.%20畅通工程续(最短路dijkstra模板).md)
 * [链表、栈、队列实现](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/List/%E9%93%BE%E8%A1%A8%E3%80%81%E6%A0%88%EF%BC%8C%E9%98%9F%E5%88%97%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E7%8E%B0.md)
 * [哈夫曼树和哈夫曼编码](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Tree/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E5%92%8C%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E6%80%BB%E7%BB%93.md)
 * [线索二叉树](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Tree/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.md)
@@ -43,7 +45,7 @@
 * [矩阵快速幂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Math/%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C%E5%92%8C%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82.md)
 * [并查集](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/UnionFind/POJ%20-%201611.%20The%20Suspects%E4%BB%A5%E5%8F%8A%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%80%BB%E7%BB%93.md)
 
-其他的可以参考具体的文件夹下，[**点这里**](数据结构算法/)
+其他的可以参考具体的文件夹下，[**点这里**](DataStructure/)
 
 ## 设计模式
 
@@ -67,7 +69,7 @@
 
 ## Java基础
 
-[Java基础](Java基础/)
+[Java基础](Java/)
 
 * [JVM](Java基础/JVM)
 * [异常](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%BC%82%E5%B8%B8/Java%E5%BC%82%E5%B8%B8%E5%B0%8F%E6%80%BB%E7%BB%93.md)

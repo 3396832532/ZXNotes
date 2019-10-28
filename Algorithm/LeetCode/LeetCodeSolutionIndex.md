@@ -9,7 +9,7 @@
 * 完善做过的之后，以后大概每天增加`2~4`题；
 * 图片偶尔可能会加载不出来，因为`github`偶尔会比较慢，科学上网后不会存在这个问题；
 
-**如果觉得还不错的话，给个`star`哦** ，*╯3╰ 
+**如果觉得还不错的话，给个`star`哦**
 
 列表(**之前不是按照顺序写的，但是后面我会补上前面空缺的**)
 
@@ -27,10 +27,10 @@
 | 10 | [Regular Expression Matching](DP/LeetCode-10.Regular-Expression-Matching.md) | DP | Hard |
 | 11 | [Container With Most Water](TwoPointer/LeetCode-11.Container-With-Most-Water.md) | 双指针 | Medium |
 | 12 | [Integer to Roman](Simulation/easy/LeetCode-12.Integer-to-Roman.md) | 模拟 | Medium |
-| 13 | [Roman to Integer](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Simulation/median/LeetCode%20-%2013.%20Roman%20to%20Integer.md) | 模拟 | Easy |
-| 14 | [Longest Comman Prefix](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Trie/LeetCode%20-%2014.%20Longest%20Common%20Prefix.md) | 分治、二分、Trie | Easy |
-| 15 | [3Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2015.%203Sum.md) | 双指针 | Medium |
-| 16 | [3Sum Closest](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2016.%203Sum%20Closest.md) | 双指针 | Medium |
+| 13 | [Roman to Integer](Simulation/median/LeetCode-13.Roman-to-Integer.md) | 模拟 | Easy |
+| 14 | [Longest Comman Prefix](DataStructure/Trie/LeetCode-14.Longest-Common-Prefix.md) | 分治、二分、Trie | Easy |
+| 15 | [3Sum](TwoPointer/LeetCode-15.3Sum.md) | 双指针 | Medium |
+| 16 | [3Sum Closest](TwoPointer/LeetCode-16.3Sum-Closest.md) | 双指针 | Medium |
 | 17 | [Letter Combination of a Phone Number](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2017.%20Letter%20Combinations%20of%20a%20Phone%20Number.md) | Search | Medium |
 | 18 | [4Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Two%20Pointer/LeetCode%20-%2018.%204Sum.md) | 双指针 | Medium |
 | 19 | [Remove Nth Node From End of List](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/List/LeetCode%20-%2019.%20Remove%20Nth%20Node%20From%20End%20of%20List.md) | 快慢指针 | Medium |

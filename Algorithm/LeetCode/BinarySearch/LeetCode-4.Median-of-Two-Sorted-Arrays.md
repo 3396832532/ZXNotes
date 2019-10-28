@@ -8,14 +8,14 @@
 ## 解析
 假设两个数组的中间位置为`k`，其中` k=(n1 + n2 + 1)/2`，只要找到中间位置这个值，也就找到了中位数，所以我们可以把问题转换成查找两个数组中第 `k` 大的数。
 
-* 如果是总数是偶数，那么如下图，我们的中位数肯定是<font color = red>**(C<sub>k-1</sub> + C<sub>K</sub>) / 2</font>**；而<font color = red>**C<sub>k-1</sub> = max(A<sub>m<sub>1</sub> - 1</sub>，B<sub>m<sub>2</sub> - 1</sub>)**</font>，<font color = red>**C<sub>k</sub> = min(A<sub>m<sub>1</sub> </sub>，B<sub>m<sub>2</sub></sub>)**</font>；
+* 如果是总数是偶数，那么如下图，我们的中位数肯定是**(C<sub>k-1</sub> + C<sub>K</sub>) / 2**；而<font color = red>**C<sub>k-1</sub> = max(A<sub>m<sub>1</sub> - 1</sub>，B<sub>m<sub>2</sub> - 1</sub>)**</font>，<font color = red>**C<sub>k</sub> = min(A<sub>m<sub>1</sub> </sub>，B<sub>m<sub>2</sub></sub>)**</font>；
 * 如果总数是奇数，那么中位数就是<font color = red>**C<sub>k-1</sub>**</font>，而<font color = red>**C<sub>k-1</sub> = max(A<sub>m<sub>1</sub> - 1</sub>，B<sub>m<sub>2</sub> - 1</sub>)**</font>；
 
 看下面的例子: 
 
 ![在这里插入图片描述](images/4_s1.png)
 
-<font color = blue> 求解的过程就是:
+ 求解的过程就是:
 
 * 对`nums1`数组进行二分查找那样的`m1`，然后得到对应的`m2`，比较`nums1[m1]`和`nums2[m2-1]`的大小（不能比较`nums2[m2]`，可能会越界）；
 * 二分边界是`L > R`，二分完毕就可以找到`m1`的位置，然后对应`m2 = k - m1`；然后确定<font color = red>**C<sub>k-1</sub>**</font>和<font color = red>**C<sub>k</sub>**</font>；

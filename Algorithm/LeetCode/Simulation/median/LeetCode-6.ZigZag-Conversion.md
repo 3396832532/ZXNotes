@@ -17,7 +17,6 @@
 图:
 
 <div align="center"><img src="images/6_s.png"></div><br>
-
 代码：
 
 ```java
@@ -57,15 +56,12 @@ class Solution {
 每种情况的图:
 
 <div align="center"><img src="images/6_s_2.png"></div><br>
-
 最后一行的:
 
 <div align="center"><img src="images/6_s_3.png"></div><br>
-
 中间的时候:
 
 <div align="center"><img src="images/6_s_4.png"></div><br>
-
 代码
 
 ```java

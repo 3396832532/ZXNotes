@@ -10,11 +10,11 @@
 
 ## 解析
 
-两种做法。一种和[LeetCode - 1. Two Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%201.%20Two%20Sum(Hash).md)一样。另一种是使用双指针。
+两种做法。一种和**LeetCode - 1. Two Sum**一样。另一种是使用双指针。
 
 
 
-第一种写法，和[LeetCode - 1. Two Sum](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%201.%20Two%20Sum(Hash).md)类似的，那个题目是找到两个数的和为`target`。
+第一种写法，和**LeetCode - 1. Two Sum**类似的，那个题目是找到两个数的和为`target`。
 
 这里的做法是:
 
@@ -25,7 +25,6 @@
 图(图是没有sort之前的，sort只是为了去重，和这个算法没有关系): 
 
 <div align="center"><img src="images/15_s.png"></div><br>
-
 代码:
 
 ```java
@@ -64,7 +63,6 @@ class Solution {
 图:
 
 <div align="center"><img src="images/15_s2.png"></div><br>
-
 代码:
 
 ```java

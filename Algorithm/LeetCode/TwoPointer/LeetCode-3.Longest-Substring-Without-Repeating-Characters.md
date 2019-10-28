@@ -104,7 +104,6 @@ class Solution {
 图: 
 
 <div align="center"><img src="images/3_s_2.png"></div><br>
-
 代码:
 
 
