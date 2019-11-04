@@ -1,10 +1,10 @@
-# 学习笔记
+# CS Learn Notes
 
 更新  **Java/大数据/C++/Go** 等技术笔记。
 
 目前还不完善，正在不断更新。
 
-## 刷题
+## 一、算法
 
 [刷题](Algorithm/)
 
@@ -21,18 +21,16 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 > * https://www.nowcoder.com/discuss/171791
 > * https://www.nowcoder.com/discuss/177397
 
-## 数据结构与算法
-
-[**数据结构和算法**](DataStructure/)
+[数据结构和算法](Algorithm/DataStructure/)
 
 部分文章：
 
-* [**二分查找的总结-6种变形**](DataStructure/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
-* [**各种排序算法的总结-10多种**](DataStructure/Algorithm/Sort/各种排序算法总结(全面).md)
-* [**二叉树的各种操作**](DataStructure/Tree/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等).md)
-* [**关键路径详解**](DataStructure/Graph/关键路径/Hdu%20-%204109.%20Instrction%20Arrangement以及关键路径详解.md)
-* [**最小生成树两种算法**](DataStructure/Graph/最小生成树/Hdu%20-%201863.%20畅通工程(最小生成树模板题)(Kruskal算法和Prim算法实现).md)
-* [**最短路径算法**](DataStructure/Graph/最短路/Hdu%20-%201874.%20畅通工程续(最短路dijkstra模板).md)
+* [二分查找的总结-6种变形](DataStructure/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
+* [各种排序算法的总结-10多种](DataStructure/Algorithm/Sort/各种排序算法总结(全面).md)
+* [二叉树的各种操作](DataStructure/Tree/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等).md)
+* [关键路径详解](DataStructure/Graph/关键路径/Hdu%20-%204109.%20Instrction%20Arrangement以及关键路径详解.md)
+* [最小生成树两种算法](DataStructure/Graph/最小生成树/Hdu%20-%201863.%20畅通工程(最小生成树模板题)(Kruskal算法和Prim算法实现).md)
+* [最短路径算法](DataStructure/Graph/最短路/Hdu%20-%201874.%20畅通工程续(最短路dijkstra模板).md)
 * [链表、栈、队列实现](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/List/%E9%93%BE%E8%A1%A8%E3%80%81%E6%A0%88%EF%BC%8C%E9%98%9F%E5%88%97%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AE%9E%E7%8E%B0.md)
 * [哈夫曼树和哈夫曼编码](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Tree/%E5%93%88%E5%A4%AB%E6%9B%BC%E6%A0%91%E5%92%8C%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%E6%80%BB%E7%BB%93.md)
 * [线索二叉树](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Tree/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93.md)
@@ -47,7 +45,7 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 
 其他的可以参考具体的文件夹下，[**点这里**](DataStructure/)
 
-## 设计模式
+## 二、设计模式
 
 比较简单易懂的总结。
 
@@ -67,7 +65,7 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 * [工厂方法](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/05%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.md)
 * [抽象工厂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/06%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md)
 
-## Java基础
+## 三、Java基础
 
 [Java基础](Java/)
 
@@ -78,27 +76,27 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 * [多线程并发](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B(%E4%BA%8C).md)
 
 
-## MYSQL
+## 四、MYSQL
 
 * [事务和隔离级别](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.md)
 * [索引](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E7%B4%A2%E5%BC%95.md)
 * [锁机制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E9%94%81%E6%9C%BA%E5%88%B6.md)
 * [主从复制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.md)
 
-## Redis
+## 五、Redis
 
 * [事务和消息订阅](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E4%BA%8B%E5%8A%A1%E5%92%8C%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85.md)
 * [Redis持久化](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96.md)
 * [主从复制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/Redis/Redis%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.md)
 
-## 操作系统
+## 六、操作系统
 
 [操作系统](计算机基础/操作系统)
 
 * [Linux基础](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/Linux%E7%9F%A5%E8%AF%86%E5%B0%8F%E6%80%BB%E7%BB%93.md)
 * [Vim常用总结](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%80%BB%E7%BB%93.md)
 
-## 计算机网络
+## 七、计算机网络
 
 [计算机网络](计算机基础/计算机网络)
 
@@ -109,7 +107,7 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 * [传输层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_5_%E8%BF%90%E8%BE%93%E5%B1%82.md)
 * [应用层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_6_%E5%BA%94%E7%94%A8%E5%B1%82.md)
 
-## 工具
+## 八、工具
 
 Git
 
