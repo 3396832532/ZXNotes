@@ -1,17 +1,17 @@
 # Http协议
 
-* [一、Web和网络基础](#一web和网络基础)
+* [1、Web和网络基础](#1web和网络基础)
 
-## 一、Web和网络基础
+## 1、Web和网络基础
 
-### 1、使用HTTP协议访问Web
+### 1.1、使用HTTP协议访问Web
 
 * 客户端: 通过发送请求获取服务器资源的 Web 浏览器等，都可称为客户端（ client ）。
 * Web 使用一种名为 HTTP （ `HyperText Transfer Protocol` ，超文本传输协议）的协议作为规范，完成从客户端到服务器端等一系列运作流程。而协议是指规则的约定。Web是建立在Http协议上通信的；
 
 ![](images/http/1_客户端.png)
 
-### 2、TCP/IP
+### 1.2、TCP/IP
 
 TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网络层和数据链路层；
 
@@ -43,11 +43,9 @@ TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网�
 发送端在层与层之间传输数据时，每经过一层时必定会被打上一个该层所属的首部信息。反之，接收端在层与层传输数据时，每经过一层时会把对应的首部消去。
 这种把数据信息包装起来的做法称为**封装（ encapsulate ）**。
 
+### 1.3、IP、TCP和DNS
 
-
-### 3、IP、TCP和DNS
-
-#### 1)、IP(负责传输)
+#### 1.3.1、IP(负责传输)
 
 按层次分， **IP （ Internet Protocol ）网际协议位于网络层**。几乎所有使用网络的系统都会用到 IP 协议。 
 
@@ -65,7 +63,7 @@ TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网�
 
 ![](images/http/4_.png)
 
-#### 2)、TCP协议(确保可靠性)
+#### 1.3.2、TCP协议(确保可靠性)
 
 按层次分， TCP 位于传输层，提供可靠的字节流服务。
 
@@ -81,7 +79,7 @@ TCP/IP 协议族按层次分别分为以下 4 层：应用层、传输层、网�
 
 ![](images/http/5_.png)
 
-#### 3)、DNS(负责域名解析)
+#### 1.3.3、DNS(负责域名解析)
 
 DNS （ Domain Name System ）服务是和 HTTP 协议一样位于应用层的协议。它提供**域名到 IP 地址之间**的解析服务。
 
@@ -91,17 +89,17 @@ DNS （ Domain Name System ）服务是和 HTTP 协议一样位于应用层的�
 
 ![](images/http/6_DNS.png)
 
-### 4)、各种协议与Http协议的关系
+### 1.4、各种协议与Http协议的关系
 
 <div align="center"><img src="images/http/7_.png"></div><br>
 <div align="center"><img src="images/http/8_.png"></div><br>
-### 5、URI和URL
+### 1.5、URI和URL
 
 与 URI （统一资源标识符）相比，我们更熟悉 URL （ UniformResource Locator ，统一资源定位符）。
 
 URL 正是使用 Web 浏览器等访问 Web 页面时需要输入的网页地址。
 
-#### 1)、URI(统一资源标识符)
+#### 1.5.1、URI(统一资源标识符)
 
 URI 是 Uniform Resource Identifier 的缩写。 
 
@@ -133,7 +131,7 @@ telnet://192.0.2.16:80/
 urn:oasis:names:specification:docbook:dtd:xml:4.1.2
 ```
 
-#### 2)、URI格式
+#### 1.5.2、URI格式
 
 表示指定的 URI ，要使用涵盖全部必要信息的绝对 URI 、绝对 URL 以及相对 URL 。相对 URL ，是指从浏览器中基本 URI 处指定的 URL ，形如` /image/logo.gif` 。
 
@@ -150,10 +148,8 @@ urn:oasis:names:specification:docbook:dtd:xml:4.1.2
 * 查询字符串 : 针对已指定的文件路径内的资源，可以使用查询字符串传入任意参数。此项可选。
 * 片段标识符 : 使用片段标识符通常可标记出已获取资源中的子资源（文档内的某个位置）。但在 RFC 中并没有明确规定其使用方法。该项也为可选项。
 
-## 二、简单的HTTP协议
+## 2、简单的HTTP协议
 
-
-
-### 1、Http是不保存状态的协议
+### 2.1、Http是不保存状态的协议
 
 HTTP 是一种不保存状态，即无状态（ stateless ）协议。 HTTP 协议自身不对请求和响应之间的通信状态进行保存。也就是说在 HTTP 这个级别，协议对于发送过的请求或响应都不做持久化处理。
