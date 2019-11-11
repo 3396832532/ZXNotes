@@ -25,12 +25,12 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 
 部分文章：
 
-* [二分查找的总结-6种变形](DataStructure/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
-* [各种排序算法的总结-10多种](DataStructure/Algorithm/Sort/各种排序算法总结(全面).md)
-* [二叉树的各种操作](DataStructure/Tree/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等).md)
-* [关键路径详解](DataStructure/Graph/关键路径/Hdu%20-%204109.%20Instrction%20Arrangement以及关键路径详解.md)
-* [最小生成树两种算法](DataStructure/Graph/最小生成树/Hdu%20-%201863.%20畅通工程(最小生成树模板题)(Kruskal算法和Prim算法实现).md)
-* [最短路径算法](DataStructure/Graph/最短路/Hdu%20-%201874.%20畅通工程续(最短路dijkstra模板).md)
+* [二分查找的总结-6种变形](Algorithm/DataStructure/Algorithm/BinarySearch/二分查找的总结(6种变形).md)
+* [各种排序算法的总结-10多种](Algorithm/DataStructure/Algorithm/Sort/各种排序算法总结(全面).md)
+* [二叉树的各种操作](Algorithm/DataStructure/Tree/二叉树的各种操作(递归和非递归遍历,树深度,结点个数等等).md)
+* [关键路径详解](Algorithm/DataStructure/Graph/关键路径/Hdu%20-%204109.%20Instrction%20Arrangement以及关键路径详解.md)
+* [最小生成树两种算法](Algorithm/DataStructure/Graph/最小生成树/Hdu%20-%201863.%20畅通工程(最小生成树模板题)(Kruskal算法和Prim算法实现).md)
+* [最短路径算法](Algorithm/DataStructure/Graph/最短路/Hdu%20-%201874.%20畅通工程续(最短路dijkstra模板).md)
 * [链表、栈、队列实现](Algorithm/DataStructure/DataStructure/List/链表、栈，队列的总结与实现.md)
 * [哈夫曼树和哈夫曼编码](Algorithm/DataStructure/Tree/哈夫曼树和哈夫曼编码总结.md)
 * [线索二叉树](Algorithm/DataStructure/Tree/线索二叉树学习总结.md)
