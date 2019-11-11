@@ -39,7 +39,7 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 * [字典树](Algorithm/DataStructure/DataStructure/Trie/LeetCode%20-%20208.%20Implement%20Trie%20(Prefix%20Tree)以及实现字典树(前缀树).md)
 * [线段树](Algorithm/DataStructure/DataStructure/SegmentTree/线段树总结以及LeetCode%20-%20307.%20Range%20Sum%20Query%20-%20Mutable.md)
 * [素数筛法](Algorithm/DataStructure/Math/Hdu%20-%201431素数回文以及素数相关总结.md)
-* [乘法快速幂](Algorithm/DataStructure/Math/乘法快速幂相关总结%20&%20LeetCode%20-%2050.%20Pow(x, n).md)
+* [乘法快速幂](Algorithm/DataStructure/Math/乘法快速幂相关总结%20&%20LeetCode%20-%2050.%20Pow.md)
 * [矩阵快速幂](Algorithm/DataStructure/Math/矩阵相关操作和矩阵快速幂.md)
 * [并查集](Algorithm/DataStructure/DataStructure/UnionFind/POJ%20-%201611.%20The%20Suspects以及并查集总结.md)
 
