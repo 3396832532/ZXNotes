@@ -49,39 +49,39 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 
 比较简单易懂的总结。
 
-[设计模式](杂项/设计模式/)
+[设计模式](Other/DesignPatterns/)
 
-* [动态代理1](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/11%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F(%E4%B8%80).md)
-* [动态代理2](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/12%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F(%E4%BA%8C).md)
-* [策略模式](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/01%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F.md)
-* [观察者](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/02%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.md)
-* [装饰者](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/03%E8%A3%85%E9%A5%B0%E8%80%85%E6%A8%A1%E5%BC%8F.md)
-* [单例模式](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/14%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.md)
-* [模板方法](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/09%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.md)
-* [迭代器](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/10%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F.md)
-* [适配器1](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/07%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F(%E4%B8%80).md)
-* [适配器2](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/08%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F(%E4%BA%8C).md)
-* [简单工厂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/04%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md)
-* [工厂方法](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/05%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F.md)
-* [抽象工厂](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%9D%82%E9%A1%B9/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/06%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.md)
+* [动态代理1](Other/DesignPatterns/11代理模式(一).md)
+* [动态代理2](Other/DesignPatterns/12代理模式(二).md)
+* [策略模式](Other/DesignPatterns/01策略模式.md)
+* [观察者](Other/DesignPatterns/02观察者模式.md)
+* [装饰者](Other/DesignPatterns/03装饰者模式.md)
+* [单例模式](Other/DesignPatterns/14单例模式.md)
+* [模板方法](Other/DesignPatterns/09模板方法设计模式.md)
+* [迭代器](Other/DesignPatterns/10迭代器模式.md)
+* [适配器1](Other/DesignPatterns/07适配器模式(一).md)
+* [适配器2](Other/DesignPatterns/08适配器模式(二).md)
+* [简单工厂](Other/DesignPatterns/04简单工厂模式.md)
+* [工厂方法](Other/DesignPatterns/05工厂方法模式.md)
+* [抽象工厂](Other/DesignPatterns/06抽象工厂模式.md)
 
 ## 三、Java基础
 
 [Java基础](Java/)
 
-* [JVM](Java基础/JVM)
-* [异常](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%BC%82%E5%B8%B8/Java%E5%BC%82%E5%B8%B8%E5%B0%8F%E6%80%BB%E7%BB%93.md)
-* [泛型](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E6%B3%9B%E5%9E%8B/%E6%B3%9B%E5%9E%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%BB%E7%BB%93.md)
-* [反射](https://github.com/ZXZxin/ZXBlog/blob/master/Java%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/%E5%8F%8D%E5%B0%84%E5%9F%BA%E7%A1%80.md)
-* [多线程并发](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B9%B6%E5%8F%91/%E5%A4%9A%E7%BA%BF%E7%A8%8B/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B(%E4%BA%8C).md)
+* [JVM](Java/JVM)
+* [异常](Java/异常/Java异常总结.md)
+* [泛型](Java/泛型/泛型-1-基础总结.md)
+* [反射](Java/反射/反射-1-基础.md)
+* [并发](Java/Concurrence)
 
 
 ## 四、MYSQL
 
-* [事务和隔离级别](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%BA%8B%E5%8A%A1%E5%92%8C%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB.md)
-* [索引](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E7%B4%A2%E5%BC%95.md)
-* [锁机制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E9%94%81%E6%9C%BA%E5%88%B6.md)
-* [主从复制](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/advance/MYSQL%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6.md)
+* [事务和隔离级别](DB/MySQL/advance/MYSQL事务和隔离级别.md)
+* [索引](DB/MySQL/advance/MYSQL索引.md)
+* [锁机制](DB/MySQL/advance/MYSQL锁机制.md)
+* [主从复制](DB/MySQL/advance/MYSQL主从复制.md)
 
 ## 五、Redis
 
@@ -91,32 +91,32 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 
 ## 六、操作系统
 
-[操作系统](计算机基础/操作系统)
+* [操作系统](Basics/OS/OsBasic)
 
-* [Linux基础](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/Linux%E7%9F%A5%E8%AF%86%E5%B0%8F%E6%80%BB%E7%BB%93.md)
-* [Vim常用总结](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux/Vim%E7%BC%96%E8%BE%91%E5%99%A8%E6%80%BB%E7%BB%93.md)
+* [Linux基础](Basics/OS/Linux/LinuxNotes.md)
+* [Vim常用总结](Basics/OS/Linux/Vim.md)
 
 ## 七、计算机网络
 
-[计算机网络](计算机基础/计算机网络)
+[计算机网络](Basics/NetWork/)
 
-* [计算机网络协议](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_1_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%92%8C%E5%8D%8F%E8%AE%AE.md)
-* [物理层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_2_%E7%89%A9%E7%90%86%E5%B1%82.md)
-* [数据链路层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_3_%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82.md)
-* [网络层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_4_%E7%BD%91%E7%BB%9C%E5%B1%82.md)
-* [传输层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_5_%E8%BF%90%E8%BE%93%E5%B1%82.md)
-* [应用层](https://github.com/ZXZxin/ZXBlog/blob/master/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E6%80%BB%E7%BB%93_6_%E5%BA%94%E7%94%A8%E5%B1%82.md)
+* [计算机网络协议](Basics/NetWork/1_NetworkProtocol.md)
+* [物理层](Basics/NetWork/2_PhysicalLayer.md)
+* [数据链路层](Basics/NetWork/3_DataLinkLayer.md)
+* [网络层](Basics/NetWork/4_NetworkLayer.md)
+* [传输层](Basics/NetWork/5_TransportLayer.md)
+* [应用层](Basics/NetWork/6_ApplicationLayer.md)
 
 ## 八、工具
 
 Git
 
-* [Git基础和入门](工具/Git/Git_1_基础和入门.md)
-* [Git分支和版本回退](工具/Git/Git_2_分支和版本回退.md)
-* [checkout、stash、标签、diff](工具/Git/Git_3_checkout、stash、标签、diff.md)
-* [Git远程协作和分支](工具/Git/Git_4_远程协作和分支.md)
-* [远程分支、本地分支、refspec](工具/Git/Git_5_远程分支、本地分支、refspec.md)
+* [Git基础和入门](Tools/Git/Git_1_基础和入门.md)
+* [Git分支和版本回退](Tools/Git/Git_2_分支和版本回退.md)
+* [checkout、stash、标签、diff](Tools/Git/Git_3_checkout、stash、标签、diff.md)
+* [Git远程协作和分支](Tools/Git/Git_4_远程协作和分支.md)
+* [远程分支、本地分支、refspec](Tools/Git/Git_5_远程分支、本地分支、refspec.md)
 
 Docker
 
-* [Docker基础](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%B7%A5%E5%85%B7/Docker/Docker.md)
+* [Docker基础](Tools/Docker/Docker.md)
