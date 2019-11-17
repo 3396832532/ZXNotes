@@ -31,7 +31,7 @@
 | 14 | [Longest Comman Prefix](DataStructure/Trie/LeetCode-14.Longest%20Common%20Prefix.md) | 分治、二分、Trie | Easy |
 | 15 | [3Sum](TwoPointer/LeetCode-15.3Sum.md) | 双指针 | Medium |
 | 16 | [3Sum Closest](TwoPointer/LeetCode-16.3Sum%20Closest.md) | 双指针 | Medium |
-| 17 | [Letter Combination of a Phone Number](Search/LeetCode-17.Letter Combinations%20of%20a%20Phone%20Number.md) | Search | Medium |
+| 17 | [Letter Combination of a Phone Number](Search/LeetCode-17.Letter%20Combinations%20of%20a%20Phone%20Number.md) | Search | Medium |
 | 18 | [4Sum](TwoPointer/LeetCode-18.4Sum.md) | 双指针 | Medium |
 | 19 | [Remove Nth Node From End of List](DataStructure/List/LeetCode-19.Remove%20Nth%20Node%20From%20End%20of%20List.md) | 快慢指针 | Medium |
 | 20 | [Valid Parentheses](DataStructure/Stack/LeetCode-20.Valid%20Parentheses.md) | Stack | Easy |
@@ -45,13 +45,13 @@
 | 28 | [Implement strStr()](String/KMP/LeetCode-28.Implement%20strStr().md) | String、KMP | Easy |
 | 29 | [Divide Two Integers](Bit/LeetCode-29.Divide%20Two%20Integers.md) | Bit | Medium |
 | 30 | [Substring with Concatenation of All Words](DataStructure/Map/LeetCode-30.Substring%20with%20Concatenation%20of%20All%20Words.md) | Map | Hard |
-| 31 | [Next Permutation](Simulation/median/LeetCode-31.Next Permutation.md) | 模拟 | Medium |
+| 31 | [Next Permutation](Simulation/median/LeetCode-31.Next%20Permutation.md) | 模拟 | Medium |
 | 32 |                                                              |      |      |
 | 33 |                                                              |      |      |
 | 34 | [Find First and Last Position of Element in Sorted Array](BinarySearch/LeetCode-34.Find%20First%20and%20Last%20Position%20of%20Element%20in%20Sorted%20Array.md) | 二分 | Medium |
 | 35 |                                                              |      |      |
 | 36 |                                                              |      |      |
-| 37 | [Sudoku Solver](Search/LeetCode-37.Sudoku Solver.md) | Search | Hard |
+| 37 | [Sudoku Solver](Search/LeetCode-37.Sudoku%20Solver.md) | Search | Hard |
 | 38 |                                                              |      |      |
 | 39 | [Combination Sum](Search/LeetCode-39.Combination%20Sum.md) | Search | Medium |
 | 40 | [Combination Sum II](Search/LeetCode-40.Combination%20Sum%20II%20&&%20LeetCode%20-%20216.%20Combination%20Sum%20III.md) | Search | Medium |
