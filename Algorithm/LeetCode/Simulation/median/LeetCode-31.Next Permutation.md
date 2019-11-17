@@ -17,12 +17,11 @@
  - 普通的情况的做法就是：
     - 从数组的后面往前面开始找，直到找到第一个**当前数不比前一个数小**的位置，记为`nums[pivot]`。
     - 然后再从后面始往前找到第一个比`nums[pivot]`大的位置，交换这个两个位置的数。
-    - 然后从[]`pivot~nums.length-1]`之间的数翻转过来即可。
+    - 然后从`[pivot~nums.length-1]`之间的数翻转过来即可。
 
 图:
 
 <div align="center"><img src="images/31_ss.png"></div><br>
-
 代码如下 : 
 
 ```java
