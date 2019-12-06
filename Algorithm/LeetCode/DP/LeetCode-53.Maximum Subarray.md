@@ -22,7 +22,6 @@
 图: 
 
 <div align="center"><img src="images/53_ss.png"></div><br>
-
 代码:
 
 ```java
@@ -54,7 +53,6 @@ class Solution {
 动态规划就是从小问题到大问题，递归相反的方向，我们可以正向的保存一个**以每一个数结尾的最大子序和的数组**，然后递推到最后一个，其中使用个`max`保存最大值；
 
 <div align="center"><img src="images/53_ss2.png"></div><br>
-
 代码: 
 
 ```java
