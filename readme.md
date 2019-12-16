@@ -109,7 +109,7 @@ OJ:  `Codeforces`、`LeetCode`、`NowCoder`。
 
 ## 八、工具
 
-Git
+Git.
 
 * [Git基础和入门](Tools/Git/Git_1_基础和入门.md)
 * [Git分支和版本回退](Tools/Git/Git_2_分支和版本回退.md)
