@@ -10,17 +10,19 @@
 ***
 ### 基础中的基础
 
-* 解释型语言和编译型语言差距；
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026205213120.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
 * Python概述
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026205305245.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884066088](assets/1565884066088.png)
+
 * 解释器执行原理
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026205829737.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884115805](assets/1565884115805.png)
+
 * which python3可以查看python3的位置(linux下)； 
 * 交互式环境中使用exit()或者ctrl+D退出；
 * 9 // 2表示取结果的整数，乘方使用**；
 * 乘法可以用在 字符串中 也就是说  "_ " * 5  会输出5个 "_"；
-* <font color = blue>数据类型分为 数字型和非数字型: (1)数字型 : 整形、浮点型、布尔型、复数型。(2)非数字型: 字符串、列表、元组、字典。</font><font color = green>type(变量名)查看变量类型；
+* <font color = blue>数据类型分为 数字型和非数字型: (1)数字型 : 整形、浮点型、布尔型、复数型。(2)非数字型: 字符串、列表、元组、字典。</font>type(变量名)查看变量类型；
 * python3中没有long，只有int；
 * 变量的输入:  input()函数。**注意: input()函数输入的数据类型都是字符串类型；**
 * 在python中，如果变量名需要两个或多个单词组成时，可以按照下面的方式: ①每个单词都是小写；②单词和单词之间使用_下划线连接；③使用驼峰规则；
@@ -61,11 +63,10 @@ print(b)  # 1
 ```
 * 逻辑运算符:`and、or、not`，成员运算符`in、not in`，身份运算符`is、is not`；
 
-
 ***
 ### 列表、元组(tuple)、字典、集合、字符串
 * 列表可以嵌套；
-```py
+```python
 x = [['a', 'b', 'c'], [1, 2, 3]]
 print(x[0])  # ['a', 'b', 'c']
 print(x[0][1])  # 'b'
@@ -74,7 +75,7 @@ print(x[0][1])  # 'b'
 * 元组一般保存**不同类型**的数据；
 * <font color = red>注意: 只有一个元素的元组: single_tuple = (5,) ，也就是说元组中只包含一个元素时，需要在元素后面添加逗号；不能这样写 single_tuple = (5)，这样是一个整形的变量；</font>另外，创建元组也可以不加上括号；
 
-```py
+```python
 tup = "a", "b", "c", "d"
 print(tup)
 print(type(tup))
@@ -85,17 +86,17 @@ print(type(tup2))
 
 ```
 输出:
-```py
+```python
 ('a', 'b', 'c', 'd')
 <class 'tuple'>
 ('a',)
 <class 'tuple'>
 ```
 
-* <font color = blue>元组的用途: ① 作为函数的参数和返回值；②格式化字符串(格式字符串本身就是一个元组)；(3)让列表不可以被修改，保护数据安全；
+* 元组的用途: ① 作为函数的参数和返回值；②格式化字符串(格式字符串本身就是一个元组)；(3)让列表不可以被修改，保护数据安全；
 * 格式化字符串和元组的关系，看下面的三个print输出是一样的: 
 
-```py
+```python
 # 元组和格式化字符串的关系
 info_tuple = ("小明", 21, 1.85)
 print("%s 年龄是 %d 身高是 %.2f" % ("小明", 21, 1.85))
@@ -108,7 +109,7 @@ print(info_str)
 * 字典: ① 键必须是唯一的 ②值可以取任意类型，但是键只能使用字符串、数字或者元组(键只能是不可变类型)。
 * **遍历字典的时候for k in dict 中的k是键，而不是值。（普通的for），不过也可以通过items()方法遍历键值对: **
 
-```py
+```python
 dict_student = {'name': 'xiaoming', 'age': '18', 'qq': "1234"}
 
 # 遍历方式一
@@ -126,7 +127,7 @@ for k, v in dict_student.items():
 * isdecimla()、isdigit()、isnumeric()都不能判断字符串中的小数，(可以判断字符串中的整数)；
 * 集合set的使用: <font color = red>可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。</font> 集合还有一些方法`add()、update()、pop()`等；
 
-```py
+```python
 student = {'Tom', 'Jim', 'Mary', 'Tom', 'Jack', 'Rose'}
 print(student)  # 输出集合，重复的元素被自动去掉
 
@@ -159,7 +160,7 @@ Rose 在集合中
 * TODO关键字的使用，在编写程序框架的时候，可以用TODO标示某个地方还没有做某事；
 * 迭代器的使用
 
-```py
+```python
 import sys  # 引入 sys 模块
 
 lst = [1, 2, 3, 4]
@@ -187,9 +188,10 @@ print()
 ```
 
 * 字符串中切片的使用:  ①类似截取，但是可以指定步长；②python中支持倒序索引，最后一个是-1，倒数第二个是-2.....；
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031112103587.png)
 
-```py
+![1565884186495](assets/1565884186495.png)
+
+```python
 # 切片的使用
 num_str = "12345678"
 
@@ -240,28 +242,28 @@ print(num_str[::-1])
 -  注意: 如果变量已经被定义，当给一个变量复制的时候，本质上是修改了数据的引用。①  变量不再对之前的数据引用；②变量改为对新复制的数据引用；
 * 可变类型和不可变类型
 
-> <font color = blue>不可变类型: 内存中的数据不允许修改: 
+> 不可变类型: 内存中的数据不允许修改: 
 > > ① 数字类型: `int`、`bool`、 `float`、`complex`、`long`
 > >  ② 字符串 :`str`
 > >  ③ 元组 :`tuple`
 > 
-> <font color = blue>可变类型: 内存中的数据可以被修改
+> 可变类型: 内存中的数据可以被修改
 > >① 列表 `list`
 > >② 字典 `dict`
 
 >* 可变类型：变量赋值 a=5 后再赋值 a=10，这里实际是新生成一个 int 值对象 10，再让 a 指向它，而 5 被丢弃，不是改变a的值，相当于新生成了a；
 > * 不可变类型: 变量赋值 la=[1,2,3,4] 后再赋值 la[2]=5 则是将 list la 的第三个元素值更改，本身la没有动，只是其内部的一部分值被修改了。
 
-<font color = red>函数参数传递时注意: 
+函数参数传递时注意: 
 > * 不可变类型：类似 c++ 的值传递，如 整数、字符串、元组。如fun（a），传递的只是a的值，没有影响a对象本身。比如在 fun（a）内部修改 a 的值，只是修改另一个复制的对象，不会影响 a 本身。
 >  *  可变类型：类似 c++ 的引用传递，如 列表，字典。如 fun（la），则是将 la 真正的传过去，修改后fun外部的la也会受影响；
 * 局部变量和全局变量
 > `局部变量：函数内部定义的变量，只能在函数内部使用；`
 > `全局变量:   函数外部定义的变量，所有函数内部都可以使用这个变量；(不推荐使用)`
 
-注意: <font color= red>在python中，不允许修改全局变量的值，如果修改，会在函数中定义一个局部变量；
+注意:在python中，不允许修改全局变量的值，如果修改，会在函数中定义一个局部变量；
 
-```py
+```python
 num = 10
 
 
@@ -283,8 +285,8 @@ method2()
 # 99
 # 10
 ```
-* <font color = blue>可以使用global关键字修改全局变量的值。
-* <font color = blue>全局变量的命名规则: 前面加上`g_` 或者`gl_`；
+* 可以使用global关键字修改全局变量的值。
+* 全局变量的命名规则: 前面加上`g_` 或者`gl_`；
 
 ***
 ### 函数
@@ -294,7 +296,7 @@ method2()
 
 例如: 
 
-```py
+```python
 def measure():
     """测量湿度和温度"""
     temp = 39
@@ -317,7 +319,7 @@ print(gl_wetness)
 ```
 * 交换两个变量a、b的值的三种解法(第三种python专用)
 
-```py
+```python
 a = 6
 b = 100
 
@@ -342,12 +344,12 @@ a, b = b, a
 print(a)
 print(b)
 ```
-* <font color = red>如果在函数中使用赋值语句，并不会影响调用函数时传递的实参变量；无论传递的参数可变还是不可变； 
-* <font color = red>只要针对参数使用赋值语句，会在函数内部修改局部变量的引用，不会影响到外部变量的引用； 
+* 如果在函数中使用赋值语句，并不会影响调用函数时传递的实参变量；无论传递的参数可变还是不可变； 
+* 只要针对参数使用赋值语句，会在函数内部修改局部变量的引用，不会影响到外部变量的引用； 
 
 测试: 
 
-```py
+```python
 def demo(num, num_list):
     print("函数内部的代码")
 
@@ -367,7 +369,7 @@ print(gl_list)  # [4, 5, 6]
 ```
 输出：
 
-```py
+```python
 函数内部的代码
 100
 [1, 2, 3]
@@ -376,12 +378,13 @@ print(gl_list)  # [4, 5, 6]
 [4, 5, 6]
 ```
 一张图解释:
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026201819891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884272407](assets/1565884272407.png)
 
 
 * 	如果传递的参数是可变类型，在函数内部，使用方法修改了数据的内容，同样会影响到外部的数据。
 
-```py
+```python
 def demo(num_list):
     print("函数内部的代码")
     num_list.append(666)
@@ -404,13 +407,13 @@ print(gl_list)
 示意图: 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026203444819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
 
-<font color = red>上面写了，这里再重复一遍可变类型和不可变类型和参数传递的关系: 
+上面写了，这里再重复一遍可变类型和不可变类型和参数传递的关系: 
 > * 不可变类型：类似 c++ 的值传递，如 整数、字符串、元组。如fun（a），传递的只是a的值，没有影响a对象本身。比如在 fun（a）内部修改 a 的值，只是修改另一个复制的对象，不会影响 a 本身。
 >  *  可变类型：类似 c++ 的引用传递，如 列表，字典。如 fun（la），则是将 la 真正的传过去，修改后fun外部的la也会受影响；
 
 * 列表变量调用 += 的时候相当于是调用extend，这个是一个特列；
 
-```py
+```python
 def demo(num, num_list):
     print("函数开始")
 
@@ -447,7 +450,7 @@ print(gl_list)
 
 * 缺省参数： ①定义函数时，可以给某个参数指定一个默认值，指定了默认值的参数叫做缺省参数；②一般使用最常见的值作为缺省参数；③缺省参数的定义位置：<font color = red>必须保证带有默认值的缺省参数定义在参数列表的末尾；
 
-```py
+```python
 def print_info(name, gender=True):
     gender_text = "男生"
     if not gender:
@@ -460,7 +463,7 @@ print_info("小美", False)
 ```
 还要注意，**如果后面有多个参数，且只给具体的某一个指定默认值，就要具体的指定参数的名字:**
 
-```py
+```python
 def print_info(name, title="", gender=True):
     gender_text = "男生"
     if not gender:
@@ -473,18 +476,23 @@ print_info("小美", gender=False)  # 这里必须指定为gender
 
 ```
 输出: 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026220216361.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
-这个原理类似<font color = blue>降序排序: 
 
-```py
+![1565884369278](assets/1565884369278.png)
+
+这个原理类似降序排序: 
+
+```python
 gl_list = [6, 3, 9]
 gl_list.sort(reverse=True)
 print(gl_list)
 ```
 * 多值参数
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026230411404.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
 
-```py
+![1565884385735](assets/1565884385735.png)
+
+
+
+```python
 def demo(num, *args, **kwargs):  # 多值参数 *接收元组 **接收字典
     print(num)
     print(args)
@@ -501,7 +509,7 @@ demo(1, 2, 3, 4, 5, name="小明", age=18)
 ```
 使用多值参数的好处，例如下面的例子计算求和，如果不使用* args 也就是不使用多值的元组的时候，我们传递参数的时候就需要传递一个元组，但是这样的话就直接传递一串数字就好了。
 
-```py
+```python
 def sum_number(*args):
     res = 0
     for n in args:
@@ -513,11 +521,12 @@ print(sum_number(1, 2, 3, 4, 5))
 # print(sum_number((1, 2, 3, 4, 5)))  # 如果不加上*的话就要加上这个表示元组的括号
 ```
 * 多值参数元组和字典的拆包
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181026233208529.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884413986](assets/1565884413986.png)
 
 首先看下面代码的输出，这个代码是出乎意料的: 
 
-```py
+```python
 def demo(*args, **kwargs):
     print(args)
     print(kwargs)
@@ -536,7 +545,7 @@ demo(gl_tuple, gl_dict)
 ```
 加上拆包：
 
-```py
+```python
 def demo(*args, **kwargs):
     print(args)
     print(kwargs)
@@ -557,16 +566,16 @@ demo(*gl_tuple, **gl_dict)  # 注意这里加上了拆包 类似与之前的传�
 ***
 ### 面向对象(封装、继承、多态)
 * 类中: ①特征被称为属性；②行为被称为方法；③三要素:类名、属性、方法；
-* <font color = blue>dir函数可以查看对象的所有方法；
+* dir函数可以查看对象的所有方法；
 * dir显示的方法中，`__方法名__`格式的方法是`Python`提供的`内置方法/属性`；　
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027000525325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+![1565884440827](assets/1565884440827.png)
 
 * 类中的方法第一个参数必须是`self`(类似Java中的this?)；
 
 创建第一个类:
 
-```py
+```python
 class Cat:
     def eat(self):
         print("小猫爱吃鱼!")
@@ -583,9 +592,13 @@ print("%x" % id(tom))  # 输出16进制的地址
 print("%d" % id(tom))  # 输出10进制的地址
 ```
 输出：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027001927801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884458136](assets/1565884458136.png)
+
 * 引用的强调
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027001907291.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884472431](assets/1565884472431.png)
+
 * <font color = blue>Python如果不想修改类，可以直接给对象增加属性(不同于其他语言!)(这种方式不推荐)</font>；
 * <font color= red>self关键字(Java中的this关键字): 哪一个对象调用的这个方法，self就是哪个对象的引用，可以通过self.访问对象的属性和方法；</font>
 * 初始化方法`__init__`：
@@ -604,7 +617,7 @@ print("%d" % id(tom))  # 输出10进制的地址
 
 使用: 
 
-```py
+```python
 class Cat:
     def __init__(self):
         print("这是一个初始化方法")
@@ -620,14 +633,14 @@ tom.eat()
 ```
 输出:  
 
-```py
+```python
 这是一个初始化方法
 Tom
 Tom 爱吃鱼
 ```
 * 初始化方法`__init__`中带参数，构造对象；
 
-```py
+```python
 class Cat:
     def __init__(self, new_name):
         print("这是一个初始化方法")
@@ -648,9 +661,10 @@ lazy_cat.eat()
 ```
 
 * `__del__`方法的调用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027094614659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
 
-```py
+![1565884497961](assets/1565884497961.png)
+
+```python
 class Cat:
     def __init__(self, new_name):
         print("初始化方法被调用")
@@ -699,7 +713,7 @@ print(tom)
 
 * **面向对象案例一 : <font color = blue>房子和家具**
 
-```py
+```python
 class HouseItem:
     def __init__(self, name, area):
         self.name = name
@@ -764,9 +778,9 @@ print(my_home)
 总面积: 60.00【剩余: 18.00】
 家具: ['席梦思', '衣柜']
 ```
-* **面向对象案例二 : <font color = blue>枪和士兵**
+* **面向对象案例二 : 枪和士兵**
 
-```py
+```python
 class Gun:  # 枪类
     def __init__(self, model): 
         self.model = model
@@ -818,9 +832,10 @@ xusanduo.fire()
 ```
 
 * 身份运算符( `== 类似Java中的equals，而 is(身份运算符) 却类似 java中的 == `)；
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027130044409.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
 
-```py
+![1565884520624](assets/1565884520624.png)
+
+```python
 a = [1, 2, 3]
 b = [1, 2, 3]
 
@@ -828,10 +843,10 @@ print(a == b)  # True
 print(a is b)  # False
 
 ```
-* 私有属性和私有方法: <font color = red>只需要在属性名或者方法名前面加上两个下划线(真的6...)，私有属性只能在类的内部使用；
-* 但是`Python`中没有真正意义的私有，这个私有只是<font color = red>伪私有</font>。<font color = blue>可以使用`_类名__属性`或者`_类名__方法`强制访问私有属性或方法；
+* 私有属性和私有方法: 只需要在属性名或者方法名前面加上两个下划线(真的6...)，私有属性只能在类的内部使用；
+* 但是`Python`中没有真正意义的私有，这个私有只是<font color = red>伪私有</font>。可以使用`_类名__属性`或者`_类名__方法`强制访问私有属性或方法；
 
-```py
+```python
 class Woman:
     def __init__(self, name):
         self.name = name
@@ -860,7 +875,7 @@ print(xiaomei._Woman__age)  # 强制访问
 
 * 关于继承中的重写，和Java中差不多，直接覆盖即可；
 
-```py
+```python
 class Animal:
 
     def eat(self):
@@ -899,7 +914,7 @@ xiao_tian.fly()
 ```
 * 扩展相关方法中使用super()关键字，和Java也差不多；
 
-```py
+```python
 class XiaoTianQuan(Dog):  # 继承可以传递，既继承了Animal也继承了Dog
 
     def fly(self):
@@ -911,7 +926,7 @@ class XiaoTianQuan(Dog):  # 继承可以传递，既继承了Animal也继承了D
 ```
 * 注意子类不能访问父类的私有属性
 
-```py
+```python
 class A:
     def __init__(self):
         self.num1 = 3  
@@ -936,7 +951,7 @@ b.demo()  # 报错
 ```
 * 但是子类可以通过公有方法间接的来访问父类的私有属性；
 
-```py
+```python
 class A:
     def __init__(self):
         self.__num2 = 33
@@ -961,7 +976,7 @@ b.demo()  # 报错
 ```
 * 多继承(Java中使用的是接口)
 
-```py
+```python
 class A:
     def test_a(self):
         print("A类中的test_a方法!")
@@ -981,7 +996,7 @@ c.test_b()
 ```
 * 注意，<font color = blue>使用多继承的时候，如果两个父类中有相同的方法，尽量避免使用多继承， 避免产生混淆。</font><font color = red>可以使用`__mro__(方法搜索顺序)`用于在多继承时，判断方法、属性的调用路径；</font>
 
-```py
+```python
 class A:
     def test1(self):
         print("A类中的test_1方法!")
@@ -1008,16 +1023,18 @@ print(C.__mro__)  # 输出C的继承路径
 
 ```
 输出：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018102720444714.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884557130](assets/1565884557130.png)
 
 * 新式类(python3)与旧式类(python2)
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027205441822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884568681](assets/1565884568681.png)
 
 * 多态
 
 案例: 人和普通狗和哮天犬玩耍
 
-```py
+```python
 class Dog(object):
     def __init__(self, name):
         self.name = name
@@ -1060,15 +1077,17 @@ p.play_with_dog(dog)
 > > * ①在内存中为对象分配空间；
 > > * ②调用初始化方法`__init__`为对象初始化；
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027232643295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+![1565884597116](assets/1565884597116.png)
 
 * 类也是一个特殊的对象
-* ![在这里插入图片描述](https://img-blog.csdnimg.cn/2018102723385273.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884615189](assets/1565884615189.png)
 
 * 属性的获取机制 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181027235015970.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
 
-```py
+![1565884626256](assets/1565884626256.png)
+
+```python
 class Tool(object):
     count = 0  # 这个是类属性
 
@@ -1087,10 +1106,12 @@ print(tool3.count)  # 3
 
 ```
 * 定义类属性和类方法
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181028000025451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_27,color_FFFFFF,t_70)
+
+![1565884642980](assets/1565884642980.png)
+
 代码：
 
-```py
+```python
 class Tool(object):
 
     count = 0
@@ -1110,10 +1131,13 @@ tool3 = Tool("扳手")
 Tool.show_tool_count()  # 3
 ```
 
-* 静态方法
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018103012044268.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70) 
+静态方法
 
-```py
+![1565884679425](assets/1565884679425.png)
+
+   
+
+```python
 class Dog(object):
 
     @staticmethod
@@ -1126,7 +1150,7 @@ Dog.run()
 ```
 * 三种方法(静态方法、类方法、实例方法)的综合使用(<font color = blue>注意: 如果既要访问类属性，又要访问实例属性，就定义实例方法</font>)；
 
-```py
+```python
 class Game(object):
     top_score = 0
 
@@ -1151,9 +1175,10 @@ game = Game("小明")
 game.start_game()
 ```
 * 单例模式以及`__new__方法` 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181030143105190.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
-```py
+![1565884711364](assets/1565884711364.png)
+
+```python
 class MusicPlayer:
     def __new__(cls, *args, **kwargs):  # 重写父类的__new__方法，必须返回
         print("创建对象，分配空间")
@@ -1177,7 +1202,7 @@ print(player)
 ```
 如果只重写`__new__方法`，没有返回相关的引用，创建的对象就为None。
 
-```py
+```python
 class MusicPlayer:
     def __new__(cls, *args, **kwargs):  # 重写父类的__new__方法，必须返回
         print("创建对象，分配空间")
@@ -1196,7 +1221,7 @@ None
 ```
 * 实现单例模式
 
-```py
+```python
 class MusicPlayer(object):
     instance = None  # 类实例变量
     
@@ -1214,7 +1239,7 @@ print(player2)  # <__main__.MusicPlayer object at 0x7fd7b631a978> 和上面的�
 ```
 * 上面的单例模式虽然`__new__`方法只会执行一次，但是`__init__`还是会执行多次，如何只让初始化只执行一次呢，可以定义一个类变量记录；
 
-```py
+```python
 class MusicPlayer(object):
     instance = None  # 类实例变量
     init_flag = False
@@ -1239,14 +1264,15 @@ player2 = MusicPlayer()
 print(player1)
 print(player2)
 ```
-*** 
+***
 ### 异常
 * 异常的语法结构
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181030192801418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884742923](assets/1565884742923.png)
 
 * 异常基本语法以及指定异常；
 
-```py
+```python
 try:
     num = int(input("请输入: "))
     res = 8 / num
@@ -1259,7 +1285,7 @@ except ZeroDivisionError:
 ```
 * 未知错误的异常处理代码演示；
 
-```py
+```python
 try:
     num = int(input("请输入: "))
     res = 8 / num
@@ -1287,7 +1313,7 @@ print("*" * 50)
 
 * 和Java一样，也有异常的传递性；
 
-```py
+```python
 def demo1():
     return int(input("请输入一个数: "))
 
@@ -1309,7 +1335,7 @@ except Exception as result:
 
 * 类似Java中的`throw`关键字，`raise`抛出异常对象；
 
-```py
+```python
 def input_password():
     pwd = input("请输入密码: ")
     if len(pwd) >= 6:
@@ -1345,7 +1371,9 @@ Moudel_say_hello()  # 调用的是模块1的say_hello()
 ```
 * `from import * `的导入方式，这样和直接`import 模块名`看似是一样的，但是这种方式和from import一样，调用的时候不需要指定 `模块名.`，还是很方便的，<font color = blue>但是开发中不推荐使用，因为有可能多个模块之间有相同的函数，这样也会导致覆盖的问题；
 * <font color = red>给文件起名千万不要和系统的文件模块名字相同，因为搜索模块的顺序是先从当前目录下搜索模块，最后才是python解释器中的模块；</font>
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181030222646918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884774512](assets/1565884774512.png)
+
 ```py
 import random  # 同一个目录下不要有 random.py这个文件 ,不然就会先导入同目录下的，而不会导入python库中的
 
@@ -1354,11 +1382,12 @@ num = random.randint(0, 10)
 print(num)
 ```
 * `__name__`属性以及导入模块和测试的问题
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181030224431564.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884787207](assets/1565884787207.png)
 
 例如在python/exception包下面有两个文件`测试模块3.py`和`py10___name__属性的使用.py`两个文件:
 `py10___name__属性的使用.py`代码如下: 
-```py
+```python
 def say_hello():
     print("你好!")
 
@@ -1383,7 +1412,8 @@ print("*" * 5)
 
 * 包的概念: ①<font color = red>包是含有多个模块的特殊目录；</font>②包下有一个`__init__.py`文件;
 * 在开发中，希望导入一个包，这个包中有多个模块，这时要使用包中的某个模块，需要在`__init__.py`中使用`from . import 模块名`的方式"注册"这个模块，别人才能使用这个模块；
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181030232956658.png)
+
+![1565884801935](assets/1565884801935.png)
 
 例如: 
 `python/py_message`包下面有三个文件: `__init__.py`、`send_message.py`、`receive_message.py`三个文件，外界想使用后面两个文件: 则三个文件的代码如下 : 
@@ -1420,11 +1450,16 @@ print(txt)
 ***
 ### 文件
 * 文件的存储方式
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031000127959.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884814006](assets/1565884814006.png)
+
 * 文件基本操作(<font color = blue>python中是一个函数(open)+三个方法) 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031000550247.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884823217](assets/1565884823217.png)
+
 * read方法
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031001048722.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884835124](assets/1565884835124.png)
 
 ```py
 # 1. 打开文件 获取文件对象
@@ -1459,9 +1494,10 @@ hello
 ****************************************
 ```
 * 读取文件的方式
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181031102226493.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
 
-```py
+![1565884845943](assets/1565884845943.png)
+
+```python
 file = open("README", "w")  # w代表的是写入文件(覆盖)  a代表的是追加
 
 file.write("write hello to README")
@@ -1470,7 +1506,7 @@ file.close()
 ```
 * 分行读取文件 :  `readline` : 用来读取大文件的正确姿势。(`read`方法默认是直接读取整个文件)。`readline`每次读取一行之后，就会将文件指针往下移动一行；
 
-```py
+```python
 file = open("README")
 
 while True:
@@ -1495,7 +1531,7 @@ file_write.close()
 ```
 * 大文件复制
 
-```py
+```python
 file_read = open("README")
 file_write = open("README[复件]", "w")
 
@@ -1510,10 +1546,11 @@ file_write.close()
 
 ```
 * OS模块的命令使用
-![在这里插入图片描述](https://img-blog.csdnimg.cn/2018103110473490.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+
+![1565884868193](assets/1565884868193.png)
+
 * 让`python2`也支持中文，只需要在py文件的行首增加一行代码`#  *-* coding:utf-8 *-*`即可(python2默认使用的是ascii码编码)；
 * 指定了上面的格式之后，如果遍历字符串，还是会乱码，处理的方式是在字符串前面加上一个`u`，例如`str = u"hello"`,意思就是按照`utf-8`编码格式处理；
 * `eval()函数`，会将字符串的内容当做<font color = red>表达式处理(python语句)</font>；<font color = blue>但是不要滥用这个函数，这个函数可以被注入内容(类似sql注入)，例如输入`__import__('os').system.('ls')`等</font>
-
 
 ***
