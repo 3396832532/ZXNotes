@@ -16,6 +16,12 @@
 * 首先看如果没有相邻的方格的话，就是`4 * (grid[i][j] == 1)`的数量 ，记为`island`；
 * 如果有相邻的，我们只需要遍历每一个，上下左右`4`个方向，有相邻的统计即可，最后用`island - 这个数量`即可；
 
+图:
+
+<div align="center"><img src="assets/1554961801999.png"></div><br>
+
+代码:
+
 ```java
 class Solution {
     public int islandPerimeter(int[][] grid) {
@@ -44,7 +50,7 @@ class Solution {
     }
 }
 ```
-这种写法一点小小的改进就是，只判断四个方向中的两个，这样就可以少判断一个岛屿，但是`neighbor`就要`*2` : 
+这种写法一点小小的改进就是，只判断四个方向中的两个，这样就可以少判断一个岛屿，但是`neighbor`就要`*2` 
 
 ```java
 class Solution {
@@ -73,6 +79,8 @@ class Solution {
 
 * **在判断`check`函数中，没有加入`vis[i][j]`的判断，因为这会影响`neighbor`的统计**；
 * **因为`neighbor`的统计不依赖于 是否访问过这个方格，而是只看这个方格是否有相邻的方格**；
+
+代码:
 
 ```java
 class Solution {
@@ -134,10 +142,12 @@ class Solution {
 ```
 ***
 ### DFS
-类似的，会`DFS`就行，但是也要和`BFS`一样，注意: 
+但是也要和`BFS`一样，注意: 
 
 * 虽然访问过了，但是还是要减去`1`的情况，也就是`else if`中的；
 * 没访问过，是`１`，当然也要减去`1`；
+
+代码:
 
 
 ```java

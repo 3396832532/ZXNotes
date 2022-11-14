@@ -1,5 +1,5 @@
 
-## LeetCode - 680. Valid Palindrome II(删除一个字符判断能否构成回文)
+# LeetCode - 680. Valid Palindrome II(删除一个字符判断能否构成回文)
 #### [题目链接](https://leetcode.com/problems/valid-palindrome-ii/)
 
 > https://leetcode.com/problems/valid-palindrome-ii/
@@ -10,13 +10,11 @@
 
 ![在这里插入图片描述](images/680_t.png)
 
-
-
 #### 解析
 
 暴力枚举删除每一个位置的方法肯定是行不通的。
 
-这里需要用到<font color =blue>回文串的性质</font>。
+这里需要用到**回文串的性质**。
 
 看下面两个例子: 
 
@@ -27,9 +25,8 @@
 另一种情况：　
 
 `e a b f f b e a e`
+
 ![在这里插入图片描述](images/680_s2.png)
-
-
 
 
 所以解题步骤: 

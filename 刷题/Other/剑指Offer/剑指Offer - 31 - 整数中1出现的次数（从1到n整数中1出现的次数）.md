@@ -10,35 +10,47 @@
 
 ### 解析
 
-这题的解法非常多。很好的一道思维+拓展题。
+这题的解法非常多。很好的一道思维+拓展题。说一种个人认为比较好理解的方法，其他自己好好琢磨吧。
 
-#### 1、常规思路
+参考了这个博客: https://blog.csdn.net/yi_afly/article/details/52012593
 
-这种方法就是每个数都求一下。显然不是好方法。
+![1555202832462](assets/1555202832462.png)
+
+![1555202889455](assets/1555202889455.png)
+
+![1555202908028](assets/1555202908028.png)
+
+**再举一个栗子: 统1～5246中1的个数** :
+
+* 想到每一位和1的关系，拿5246，先是个位6，个位的变化范围是0~9，而这样的变化，会有524次，所以这里有524个1，又因为最后一次有个6，所以还要加一次，所以个位的1的个数是524+1 = 525；
+* 再看十位，十位上的数字是4，所以同理，这个位数的上的1的个数应该是52 * 10，**注意这里不是52 * 1，因为，10位上的数后面10-20之间有10个1，且最后`4>1`，所以还要加上10，所以十位上的1的个数是`52 * 10+10 = 530`。这里要注意如果十位上的数字是1的话，就要看个位上的数是多少了，也就是10 ~ 20之间取多少个，这时候我们只要计算**`n%10+1`就行了。
+* 然后同理推高位，可以得到1~5246中1的个数是`(524 * 1+1)+(52 * 10+10)+(5 * 100+100) +( 0 * 1000+1000) = 2655`个。
+
+代码:
 
 ```java
 public class Solution {
-    
     public int NumberOf1Between1AndN_Solution(int n) {
+        if (n <= 0) return 0;
         int res = 0;
-        for (int i = 1; i <= n; i++)
-            res += numbers(i);
-        return res;
-    }
-
-    private int numbers(int n) {
-        int sum = 0;
-        while (n > 0) {
-            if (n % 10 == 1)
-                sum += 1;
-            n /= 10;
+        // base表示当前判断的位数、cur表示当前位、height表示高位
+        int base = 1, cur, height = n;
+        while (height > 0) {
+            cur = height % 10;
+            height /= 10;
+            res += height * base; //先加上一开始的
+            if (cur == 1)
+                res += (n % base) + 1; //==1 就要看前面的了
+            else if (cur > 1)
+                res += base; //后面剩的，>1 还要+base
+            base *= 10;
         }
-        return sum;
+        return res;
     }
 }
 ```
 
-#### 2、
+#### 二、其他解法
 
 ```java
 public class Solution {
@@ -125,33 +137,6 @@ public class Solution {
 }
 ```
 
-#### 3、
-
-```java
-public class Solution {
-    public int NumberOf1Between1AndN_Solution(int n) {
-        if (n <= 0)
-            return 0;
-        int res = 0;
-        int base = 1, cur, height = n;  // base表示当前判断的位数、cur表示当前位、height表示高位
-        while (height > 0) {
-            cur = height % 10;
-            height /= 10;
-            res += height * base; //先加上一开始的
-            if (cur == 1) {
-                res += (n % base) + 1; //==1 就要看前面的了
-            } else if (cur > 1) {
-                res += base; //后面剩的，>1 还要+base
-            }
-            base *= 10;
-        }
-        return res;
-    }
-}
-```
-
-#### 4、
-
 ```java
 public class Solution {
     
@@ -178,8 +163,6 @@ public class Solution {
     }
 }
 ```
-
-#### 5、
 
 ```java
 public class Solution {

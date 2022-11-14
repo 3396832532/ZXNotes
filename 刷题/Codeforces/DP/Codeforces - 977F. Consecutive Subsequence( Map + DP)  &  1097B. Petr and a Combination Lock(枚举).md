@@ -4,13 +4,13 @@
 * Codeforces - 1097B. Petr and a Combination Lock(枚举)
 ***
 
-### <font color = red id = "1">Codeforces - 977F. Consecutive Subsequence( Map + DP)
+### Codeforces - 977F. Consecutive Subsequence( Map + DP)
 #### [题目链接](https://codeforces.com/problemset/problem/977/F)
 
 > https://codeforces.com/problemset/problem/977/F
 
 #### 题目
-**求最长的连续递增子序列(注意是<font color = blue>连续递增</font>(也就是值前后相差为`1`))， 输出长度以及子序列的下标。**
+**求最长的连续递增子序列(注意是连续递增(也就是值前后相差为`1`))， 输出长度以及子序列的下标。**
 
 ![在这里插入图片描述](images/977F_t.png)
 ![在这里插入图片描述](images/977F_t2.png)

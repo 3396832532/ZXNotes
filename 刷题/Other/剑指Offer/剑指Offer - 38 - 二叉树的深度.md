@@ -34,7 +34,7 @@ public class Solution {
 * 同时，我们在当前层的时候，可以得知下一层的节点的数量(通过`queue.size()`)；
 * 然后在到了下一层的时候， 就判断统计的数量`count == nextLevelSize`，如果等于，就加一层`depth++`；
 
-![](images/38_s.png)
+![png](images/38_s.png)
 
 代码:
 

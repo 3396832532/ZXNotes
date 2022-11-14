@@ -14,7 +14,9 @@
 一维的动态规划，直接从左到右记录`0～每个位置`的和，然后递归`sums[i] = sums[i-1] + nums[i]`，求出所有的
 `sums`，然后要求某个区间的和，就直接返回`sums[j] - sums[i-1]`即可，如果`i = 0`,就直接返回`sums[j]`。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181221002020730.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=,size_16,color_FFFFFF,t_70)
+![1554879059264](assets/1554879059264.png)
+
+代码:
 
 ```java
 public class NumArray {
@@ -38,7 +40,7 @@ public class NumArray {
 ```
 ***
 ### 线段树
-**线段树解析看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/82083796)。**
+线段树解析看[这篇博客](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Data%20Structure/SegmentTree/%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%80%BB%E7%BB%93%E4%BB%A5%E5%8F%8ALeetCode%20-%20307.%20Range%20Sum%20Query%20-%20Mutable.md#%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%9F%A5%E8%AF%A2)。
 
 ```java
 public class NumArray {

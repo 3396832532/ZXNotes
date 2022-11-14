@@ -1,4 +1,4 @@
-﻿##  LeetCode - 381. Insert Delete GetRandom O(1) - Duplicates allowed(允许重复)
+#  LeetCode - 381. Insert Delete GetRandom O(1) - Duplicates allowed(允许重复)
 
 #### [题目链接](https://leetcode.com/problems/insert-delete-getrandom-o1-duplicates-allowed/)
 
@@ -8,7 +8,7 @@
 ![在这里插入图片描述](images/381_t.png)
 
 #### 解析
-做这题之前先做[**LeetCode - 380**](https://blog.csdn.net/zxzxzx0119/article/details/86023769)。
+做这题之前先做[**LeetCode - 380**](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Data%20Structure/Map/LeetCode%20-%20380.%20Insert%20Delete%20GetRandom%20O(1)%20(%E5%B8%B8%E6%95%B0%E6%97%B6%E9%97%B4%E6%8F%92%E5%85%A5%E3%80%81%E5%88%A0%E9%99%A4%E5%92%8C%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E5%85%83%E7%B4%A0).md)。
 
 
 这一题加上了可以加入重复的元素，题目就变得复杂了一些。
@@ -27,12 +27,17 @@
 添加元素很简单，维护`map`和`list`即可。
 
 例如添加元素`6`: 
+
 ![在这里插入图片描述](images/381_s2.png)
 
 删除元素思想也是和最后一个元素交换位置，不过也要维护相应的信息即可。
 
 删除元素`9`: 
+
 ![在这里插入图片描述](images/381_s3.png)
+
+代码:
+
 ```java
 class RandomizedCollection {
 

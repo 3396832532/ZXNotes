@@ -1,22 +1,20 @@
-﻿## LeetCode - 3. Longest Substring Without Repeating Characters(滑动窗口)
-* 暴力**O(N<sup>3</sup>)**
-* 普通滑动窗口
-* 优化滑动窗口
-***
-#### [题目链接](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/description/)
+# LeetCode - 3. Longest Substring Without Repeating Characters(滑动窗口)
+#### [题目链接](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/)
 
-> https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/description/
+> https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
 
 #### 题目
 ![在这里插入图片描述](images/3_t.png)
-### 暴力O(N<sup>3</sup>)
-方法: 
+## 暴力O(N<sup>3</sup>)
+方法:
 * 使用一个函数`isAllUnique`来判断某一段字符串是不是有重复的字符；
-* 然后枚举左右边界，一段一段的判断，时间复杂度<font color = red>**O(N<sup>3</sup>)**；
+* 然后枚举左右边界`[L, R]`，一段一段的判断，时间复杂度O(N<sup>3</sup>)；
+
+暴力会超时。
 
 ```java
 class Solution {
-    
+
     public int lengthOfLongestSubstring(String s) {
         if (s == null || s.length() == 0)
             return 0;
@@ -33,7 +31,6 @@ class Solution {
     //判断[L,R]之间的字符是不是都是不重复的
     public boolean isAllUnique(String s, int L, int R) {
         Set<Character> set = new HashSet<>();
-
         for (int i = L; i <= R; i++) {
             if (!set.contains(s.charAt(i)))
                 set.add(s.charAt(i));
@@ -44,29 +41,34 @@ class Solution {
     }
 }    
 ```
-### 普通滑动窗口
+## 滑动窗口
 和普通的滑动窗口一样，使用一个`freq`数组来保存字符出现的次数:
-* 每次试探`++R`，要判断是否越界，然后判断如果前面的字符串段中没有重复的话，`R`就可以继续扩展，对应`s.charAt(++R)`上的频次要`++`；
+* 每次试探`++R`，要判断是否越界，然后判断如果`chs[R+1]`与前面的字符串段中没有重复的话，`R`就可以继续扩展，对应`chs[R+1]`上的频次要`++`；
 * 如果有重复的话，左边界`L`就扩展，此时对应的频次要`--`；
+* 每一个窗口都更新一下全局最大值；
+
+图: 
+
+![3_s.png](images/3_s.png)
+
+代码: 
 
 ```java
 class Solution {
-
-    // 普通滑动窗口
     public int lengthOfLongestSubstring(String s) {
-        if (s.length() == 0 || s == null)
-            return 0;
-        char[] str = s.toCharArray();
+        if (s == null || s.length() == 0) return 0;
+        char[] chs = s.toCharArray();
         int[] freq = new int[256];
-        int L = 0, R = -1, res = 0;
-        while (R < str.length) {
-            if (R + 1 == str.length)//一定要break 不然L不会break； R你都到str.length - 1，L你要再移动也不会更长了
+        int L = 0, R = -1;
+        int res = 0;
+        while (R < s.length()) {
+            if (R + 1 == s.length()) //一定要break, 一是防止越界，二是不然L不会break； R你都到str.length - 1，L你要再移动也不会更长了
                 break;
-            if (freq[str[R + 1]] == 0)
-                freq[str[++R]]++;
+            //如果freq[chs[R + 1]] != 0，就要先一直移动L,直到freq[chs[R+1]]可以进入窗口，这个过程不会错过最优解
+            if (freq[chs[R + 1]] == 0)
+                freq[chs[++R]]++;
             else
-                freq[str[L++]]--;
-
+                freq[chs[L++]]--;
             res = Math.max(res, R - L + 1);
         }
         return res;
@@ -77,50 +79,52 @@ class Solution {
 
 ```java
 class Solution {
-    // 普通滑动窗口
     public int lengthOfLongestSubstring(String s) {
-        if (s.length() == 0 || s == null)
-            return 0;
-        char[] str = s.toCharArray();
+        if (s == null || s.length() == 0) return 0;
+        char[] chs = s.toCharArray();
         int[] freq = new int[256];
-        int L = 0, R = -1, res = 0;
-        while (R + 1 < str.length) {
-            if (freq[str[R + 1]] == 0)
-                freq[str[++R]]++;
+        int L = 0, R = -1;
+        int res = 0;
+        while (R + 1 < s.length()) { // 直接写成这样就行
+            if (freq[chs[R + 1]] == 0)
+                freq[chs[++R]]++;
             else
-                freq[str[L++]]--;
-
+                freq[chs[L++]]--;
             res = Math.max(res, R - L + 1);
         }
         return res;
     }
 }
 ```
-***
-### 优化滑动窗口
 更加优化的方式是: 
-* 每次更新`L`的时候，不是简单的只移动一个位置，使用一个`last[i]`记录`i`最后一次出现的位置；
-* 然后当扩展`R`的时候，如果前面有重复的，就可以让L扩展到`last[s.charAt( R )] + 1`的位置；
-* 然后记得每次都要更新`last[s.charAt( R )]`的值；
+
+* 使用一个`index[]`数组记录每一个` chs[i]`最后一次出现位置；
+* 下次我的`L`要移动的时候，我直接移动到`index[chs[R+1]]`的位置，前面的`L~index[R]`都直接跳过了。
+
+图: 
+
+<div align="center"><img src="images/3_s_2.png"></div><br>
+
+代码:
 
 
 ```java
+// 优化的滑动窗口
+// 其中使用index[c]保存字符c上一次出现的位置, 用于在右边界发现重复字符时, 快速移动左边界
+// 使用这种方法, 时间复杂度依然为O(n), 但是只需要动r指针, 实际上对整个s只遍历了一次
 class Solution {
-    // 优化的滑动窗口
-    // 其中使用last[c]保存字符c上一次出现的位置, 用于在右边界发现重复字符时, 快速移动左边界
-    // 使用这种方法, 时间复杂度依然为O(n), 但是只需要动r指针, 实际上对整个s只遍历了一次
     public int lengthOfLongestSubstring(String s) {
-        if (s == null || s.length() == 0)
-            return 0;
+        if (s == null || s.length() == 0) return 0;
+        char[] chs = s.toCharArray();
+        int[] index = new int[256];
         int L = 0, R = -1, res = 0;
-        int[] last = new int[256]; //保存s[i] 上一次出现的位置
-        Arrays.fill(last, -1);      // 标记
+        Arrays.fill(index, -1);
         while (R + 1 < s.length()) {
             R++;
-            if (last[s.charAt(R)] != -1) {  //有重复的,此时快速的移动L
-                L = Math.max(L, last[s.charAt(R)] + 1);
-            }
-            last[s.charAt(R)] = R;
+            if(index[chs[R]] != -1) 
+                L = Math.max(L, index[chs[R]]+1); // 此时L直接移动到上一个R的前一个位置
+            //注意更新 R的索引位置
+            index[chs[R]] = R;
             res = Math.max(res, R - L + 1);
         }
         return res;

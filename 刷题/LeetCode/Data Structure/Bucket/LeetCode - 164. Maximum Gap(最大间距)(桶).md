@@ -4,10 +4,10 @@
 > https://leetcode-cn.com/problems/maximum-gap/description/
 
 #### 题目
-![在这里插入图片描述](images/164_t.png)
+![在这里插入图片描述](assets/164_t.png)
 
 #### 解析
-桶排序思想和相关实现可以看下[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/79826380#t13)。
+桶排序思想和相关实现可以看下[这篇博客](https://github.com/ZXZxin/ZXBlog/blob/master/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/Algorithm/Sort/%E5%90%84%E7%A7%8D%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93(%E5%85%A8%E9%9D%A2).md#%E6%A1%B6%E6%8E%92%E5%BA%8F)。
 思路: 
 
 *  先找到数组的最大值和最小值，记为`max`和`min`；
@@ -18,8 +18,13 @@
 比如下面的例子: 
 
 ![在这里插入图片描述](images/164_s.png)
+
 注意不一定就是空桶两侧的非空桶的答案: 
+
 ![在这里插入图片描述](images/164_s2.png)
+
+代码:
+
 ```java
 class Solution {
     //将 num 映射到对应的桶子

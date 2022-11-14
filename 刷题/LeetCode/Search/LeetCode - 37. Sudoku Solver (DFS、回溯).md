@@ -6,14 +6,16 @@
 #### 题目
 ![在这里插入图片描述](images/37_t.png)
 #### 解析
-这个题目和[**N皇后问题**](https://blog.csdn.net/zxzxzx0119/article/details/81840774)很像: 
+这个题目和[**N皇后问题**](https://github.com/ZXZxin/ZXBlog/blob/master/%E5%88%B7%E9%A2%98/LeetCode/Search/LeetCode%20-%2051.%20N-Queens(N%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98).md)很像: 
 
-* `N`皇后问题的数组标记法中用三个数组标记<font color = red>**列、主对角线、副对角线**</font>是否已经摆法了皇后，这里同样也需要用三个二维数组来标记之前是否已经摆放(<font color = blue>求解</font>)了数字。
+* `N`皇后问题的数组标记法中用三个数组标记**列、主对角线、副对角线**是否已经摆法了皇后，这里同样也需要用三个二维数组来标记之前是否已经摆放(求解)了数字。
+* 使用三个数组标记之后，然后就是递归去尝试求解了。**一开始将不是`.`的先标记已经放置了(置为`true`)，然后递归求解即可，记得递归之后回溯**；
 
-* 使用三个数组标记之后，然后就是递归去尝试求解了。<font color = blue>一开始将不是`.`的先标记已经放置了(置为`true`)，然后递归求解即可，记得递归之后回溯；
-
+图: 
 
 ![在这里插入图片描述](images/37_s.png)
+
+代码:
 
 ```java
 import java.io.*;
@@ -65,7 +67,7 @@ class Solution {
         }
         return false;
     }
-
+	//test
     public static void main(String[] args){
         PrintStream out = System.out;
         char[][] board = {

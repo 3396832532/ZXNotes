@@ -1,4 +1,4 @@
-﻿## LeetCode - 128. Longest Consecutive Sequence (哈希表)
+# LeetCode - 128. Longest Consecutive Sequence (哈希表)
 
 #### [题目链接](https://leetcode.com/problems/longest-consecutive-sequence/)
 
@@ -8,13 +8,13 @@
 ![在这里插入图片描述](images/128_t.png)
 
 
-#### 解析
+## 解析
 第一种方法: 
 
 
-* 使用一个`HashSet`来存储对应的值，<font color = blue>**一开始先将所有的值都加入`set`**</font>；
+* 使用一个`HashSet`来存储对应的值，**一开始先将所有的值都加入`set`**；
 
-* 遍历数组的每一个元素，每次去检查当前元素`num`的前一个元素`num - 1`是不是在`set`中，如果是，<font color = red>说明`num`不是最长长度的起点，跳过</font>；
+* 遍历数组的每一个元素，每次去检查当前元素`num`的前一个元素`num - 1`是不是在`set`中，如果是，说明`num`不是最长长度的起点，跳过；
 
 * 如果不是，则在`set`集合中不断的每次`+1`，(也就是不断检查`num + 1、num + 2、num + 3、num + 4.....`在不在`set`中)，并记录查到的元素个数(也就是长度)，然后更新结果(记录最大长度)`res`即可；
 
@@ -23,6 +23,9 @@
 看两个例子: 
 
 ![在这里插入图片描述](images/128_s.png)
+
+代码:
+
 ```java
 import java.io.*;
 import java.util.*;
@@ -59,18 +62,19 @@ class Solution {
 
 第二种解法: 
 
-* 用一个`HashMap`记录`<key , value > = ` <font color = red><数组的值，这个值如果作为边界(左/右)时的最大长度></font>。整个过程和动态规划有点类似；
+* 用一个`HashMap`记录`<key , value > = ` <数组的值，这个值如果作为边界(左/右)时的最大长度>。整个过程和动态规划有点类似；
 
-* 遍历数组的每一个元素，先得到`num - 1`和`num + 1`在`map`中对应的`value`，如果两个`value`都为空，说明此时`num`两边都没有相邻的元素，所以`put(num, 1)`，表示`num`作为<font color = blue>左/右</font>边界的最大长度为`1`；
-* 如果`map.get(num - 1) == null && map.get(num + 1) != null`，说明此时`num`可以作为<font color= green>右边界</font>，而此时不但要更新`num`的`value`，也要更新`nums[num - map.get(num - 1)]`的`value`，这个`value`就是`map.get(num - 1) + 1`，所以说这个过程有点类似动态规划；
-* 同理，如果`map.get(num - 1) != null && map.get(num + 1) == null`，说明此时`num`可以作为<font color = green>左边界</font>，而此时不但要更新`num`的`value`，也要更新`nums[num + map.get(num + 1)]`的`value`，这个`value`就是`map.get(num + 1) + 1`。
+* 遍历数组的每一个元素，先得到`num - 1`和`num + 1`在`map`中对应的`value`，如果两个`value`都为空，说明此时`num`两边都没有相邻的元素，所以`put(num, 1)`，表示`num`作为**左/右**边界的最大长度为`1`；
+* 如果`map.get(num - 1) == null && map.get(num + 1) != null`，说明此时`num`可以作为右边界，而此时不但要更新`num`的`value`，也要更新`nums[num - map.get(num - 1)]`的`value`，这个`value`就是`map.get(num - 1) + 1`，所以说这个过程有点类似动态规划；
+* 同理，如果`map.get(num - 1) != null && map.get(num + 1) == null`，说明此时`num`可以作为**左边界**，而此时不但要更新`num`的`value`，也要更新`nums[num + map.get(num + 1)]`的`value`，这个`value`就是`map.get(num + 1) + 1`。
 
-* 如果`map.get(num - 1) != null && map.get(num + 1) != null`，则此时同时可以作为<font color= green>左右边界，说明它是连接两边的桥梁</font>，所以要同时更新`num、nums[num - map.get(num - 1)]、nums[num + map.get(num + 1)] `的值为`map.get(num - 1) + map.get(num + 1) + 1`；
+* 如果`map.get(num - 1) != null && map.get(num + 1) != null`，则此时同时可以作为**左右边界**，说明它是连接两边的桥梁，所以要同时更新`num、nums[num - map.get(num - 1)]、nums[num + map.get(num + 1)] `的值为`map.get(num - 1) + map.get(num + 1) + 1`；
 
 看一个例子:
 
-
 ![在这里插入图片描述](images/128_s2.png)
+
+代码:
 
 ```java
 import java.io.*;
@@ -119,11 +123,66 @@ class Solution {
 }
 ```
 
+另外还有一种并查集的代码，和上面有点类似，就是将有`num- 1`和`num + 1`的下标都加入到同一个集合中，可以基于`size`的并查集，最后取一个最大的集合即可。
 
+```java
+import java.util.*;
 
-***
+class Solution {
 
-`C++`代码: 
+    public int longestConsecutive(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int count = 0;
+        for (int num : nums) if (!map.containsKey(num)) map.put(num, count++);
+        UnionFind uf = new UnionFind(count);
+        int res = 1;
+        for (int num : nums) {
+            if (map.containsKey(num - 1)) uf.union(map.get(num), map.get(num - 1));
+            if (map.containsKey(num + 1)) uf.union(map.get(num), map.get(num + 1));
+            res = Math.max(res, uf.sz[uf.findRoot(map.get(num))]);
+        }
+        return res;
+    }
+
+    class UnionFind {
+        int[] parent;
+        int[] sz;
+
+        public UnionFind(int n) {
+            parent = new int[n];
+            sz = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+                sz[i] = 1;
+            }
+        }
+
+        public int findRoot(int p) {
+            while (p != parent[p]) {
+                parent[p] = parent[parent[p]];
+                p = parent[p];
+            }
+            return p;
+        }
+
+        public void union(int a, int b) {
+            int aR = findRoot(a);
+            int bR = findRoot(b);
+            if (aR == bR) return;
+            if (sz[aR] > sz[bR]) {
+                parent[bR] = aR;
+                sz[aR] += sz[bR];
+            } else {
+                parent[aR] = bR;
+                sz[bR] += sz[aR];
+            }
+        }
+    }
+}
+```
+
+相关`C++`代码: 
 
 
 ```java

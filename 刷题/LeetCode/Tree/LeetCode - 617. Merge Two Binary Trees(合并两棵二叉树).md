@@ -1,4 +1,4 @@
-﻿## LeetCode - 617. Merge Two Binary Trees(合并两棵二叉树)
+# LeetCode - 617. Merge Two Binary Trees(合并两棵二叉树)
 * 递归
 * 递归优化(改变原有的二叉树结构)
 * 非递归前序
@@ -29,7 +29,7 @@ class Solution {
 ```
 ***
 ### 递归优化(改变原有的二叉树结构)
-这个优化在于我们<font color = red>不需要每次递归的时候都创建一个`TreeNode `对象(`Java`堆中): 
+这个优化在于我们不需要每次递归的时候都创建一个`TreeNode `对象(`Java`堆中): 
 
 而是只声明一个`TreeNode`的引用(在栈中): 
 ```java
@@ -81,16 +81,18 @@ class Solution {
 }
 ```
 但是上面显然是错误的。
-为什么呢，经过调试，<font color = blue>发现虽然看似处理了当前`t1`为`null`的情况，但是当前`t1`却没有和它的父亲连接起来，也就是没有在树的体系结构中，看下图: 
+为什么呢，经过调试，发现虽然看似处理了当前`t1`为`null`的情况，但是当前`t1`却没有和它的父亲连接起来，也就是没有在树的体系结构中，看下图: 
+
 ![在这里插入图片描述](images/617_s.png)
 
-**所以处理的办法就是:**
+**所以处理的办法就是**
 
-* <font color = red>当前的`t1`直接判断自己的`left`和`right`，如果为空，就设置成`t2`的结点；</font>
-* <font color = red>如果不为空，就加入栈中，进行前序非递归的步骤；
-* <font color = red>这样的话，当前的`t1(tops[0])`一定不为`null`；
+* **当前的`t1`直接判断自己的`left`和`right`，如果为空，就设置成`t2`的结点**；
+* **如果不为空，就加入栈中，进行前序非递归的步骤**；
+* 这样的话，当前的`t1(tops[0])`一定不为`null`；
 
-非递归前序不懂的可以看[这篇博客](https://blog.csdn.net/zxzxzx0119/article/details/79808127#t2)。
+代码:
+
 ```java
 class Solution {
     public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
@@ -158,7 +160,7 @@ class Solution {
 }
 ```
 ***
-### BFS(层序)
+### BFS
 这题当然也可以层序合并求解。
 
 ```java

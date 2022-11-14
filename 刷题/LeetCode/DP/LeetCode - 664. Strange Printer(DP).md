@@ -1,4 +1,4 @@
-﻿## LeetCode - 664. Strange Printer(DP)
+# LeetCode - 664. Strange Printer(DP)
 #### [题目链接](https://leetcode.com/problems/strange-printer/)
 
 > https://leetcode.com/problems/strange-printer/
@@ -17,6 +17,8 @@
 举例:
 
 ![在这里插入图片描述](images/664_s.png)
+
+代码:
 
 ```java
 class Solution {
@@ -50,8 +52,9 @@ class Solution {
 
 然后就是改成动态规划(递推)，按照边界条件改即可，看一个例子`dp[2][7]`的可能依赖位置:
 
-
 ![在这里插入图片描述](images/664_s2.png)
+
+代码:
 
 ```java
 class Solution {

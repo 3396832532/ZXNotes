@@ -1,4 +1,4 @@
-﻿### LeetCode - 380. Insert Delete GetRandom O(1) (常数时间插入、删除和获取随机元素)
+# LeetCode - 380. Insert Delete GetRandom O(1) (常数时间插入、删除和获取随机元素)
 
 * [HashMap + List 实现](#hashmap---list-实现)
 * [两个HashMap实现](#两个hashmap实现)
@@ -13,7 +13,7 @@
 ![在这里插入图片描述](images/380_t.png)
 
 ***
-### <font color = red id = "1">HashMap + List 实现
+### HashMap + List 实现
 
 解析: 
 
@@ -22,7 +22,12 @@
 * `remove()`:  先获取要移除的值`val`的 `index`，记为`removeIndex`，然后取`List`中的最后一个元素，记为`lastVal`，然后执行` valIndexMap.put(lastVal, removeIndex);`和` vals.set(removeIndex, lastVal); `也就是将最后一个元素放到要删除的位置。 最后在两个容器中移除要删除的元素即可；
 * `getRandom()`: 在`List`中随机取一个元素即可；
 
+图: 
+
 ![在这里插入图片描述](images/380_s.png)
+
+代码:
+
 ```java
 class RandomizedSet {
 
@@ -68,11 +73,11 @@ class RandomizedSet {
 ```
 ***
 
-### <font color = red id = "2">两个HashMap实现
+### 两个HashMap实现
 
 这个和上面那个也是类似的: 
 
-* 通过一个`size`变量来维护这个<font color =blue>容器</font>的容量；
+* 通过一个`size`变量来维护这个**容器**的容量；
 * 然后要增加一个`index -> val`的容器，这个就是替代了那个`List`，可以通过`index`来获取`val`；
 * 主要的思想还是通过将最后一个元素(`size - 1`)放到删除元素的位置(`removeIndex`)；
 

@@ -1,4 +1,4 @@
-﻿## LeetCode - 628. Maximum Product of Three Numbers(数组中三个数的最大累成积)(简单题)
+# LeetCode - 628. Maximum Product of Three Numbers(数组中三个数的最大累成积)(简单题)
 * 排序方法
 * O(N)方法
 
@@ -9,8 +9,12 @@
 
 #### 题目
 ![在这里插入图片描述](images/628_t.png)
+
+也不是很难的题目。
+
 ### 排序方法
-很容易想到最大的累成积只有可能是<font color= red>**最大的三个数相乘`(max1 * max2 * max3)`**</font>或者<font color = blue>**`最大数(max1) * 最小的数(min1) * 次小的数(min2)`**</font> 。
+
+很容易想到最大的累成积只有可能是**最大的三个数相乘`(max1 * max2 * max3)`**或者**`最大数(max1) * 最小的数(min1) * 次小的数(min2)`**。
 
 于是第一种方法就是排序，然后找出这些数即可。
 

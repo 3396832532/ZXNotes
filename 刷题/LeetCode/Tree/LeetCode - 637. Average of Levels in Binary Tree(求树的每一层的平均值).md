@@ -9,13 +9,14 @@
 #### 题目
 ![在这里插入图片描述](images/637_t.png)
 
-
-
 ### BFS(层次)
 很容易想到的解法就是层次遍历，每次处理一层，先得到队列中所有元素的个数，然后全部处理完，然后处理下一层。
+
+图:
+
 ![这里写图片描述](images/637_s.png)
 
-
+代码:
 
 ```java
 class Solution {
@@ -47,11 +48,13 @@ class Solution {
 
 ***
 ### DFS(前序和中序递归)
-递归的做法就是 记录一个层数`level`，用两个`List`保存合以及个数，每次遍历到这一层的时候：
+递归的做法就是 记录一个层数`level`，用两个`List`保存和以及个数，每次遍历到这一层的时候：
 
  - 或者是这一层第一次来，那就加上第一次`val`，次数变为`1`；
  - 或者不是第一次，不是第一层就累加这一层的和以及个数；
- - **因为前序是先根，再左，再右，所以可以通过层数`level`和`list`的大写来判断上面的情况；**
+ - **因为前序是先根，再左，再右，所以可以通过层数`level`和`list`的大写来判断上面的情况**；
+
+图:
 
 ![这里写图片描述](images/637_s2.png)
 
@@ -73,7 +76,7 @@ class Solution {
         return res;
     }
 
-    private static void pre(TreeNode root, int level, List<Double> sum, List<Integer> count) {
+    private void pre(TreeNode root, int level, List<Double> sum, List<Integer> count) {
         if (root == null) return;
         if (level < sum.size()) { //回去的
             sum.set(level, sum.get(level) + root.val);
@@ -104,7 +107,7 @@ class Solution {
         return res;
     }
 
-    private static void in(TreeNode root, int level, List<Double> sum, List<Integer> count) {
+    private void in(TreeNode root, int level, List<Double> sum, List<Integer> count) {
         if (root == null)
             return;
         if (level >= sum.size()) {
@@ -133,7 +136,7 @@ class Solution {
         return res;
     }
 
-    private static void pos(TreeNode root, int level, List<Double> sum, List<Integer> count) {
+    private void pos(TreeNode root, int level, List<Double> sum, List<Integer> count) {
         if (root == null) return;
         if (level >= sum.size()) {
             sum.add(0.0);

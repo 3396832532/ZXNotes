@@ -2,6 +2,7 @@
 
 * 暴力 (`O(N^5)`)
 * 改进动态规划(`O(N^３)`)
+* [LeetCode - 304. Range Sum Query 2D - Immutable](#leetcode---304-range-sum-query-2d---immutable)
 * 优化动态规划(`O(N^2)`) 
 
 ***
@@ -21,6 +22,9 @@
 * 然后枚举的每一个正方形还需要判断这个正方形内是不是全都是`1`，时间复杂度`O(N * M )`；
 
 ![在这里插入图片描述](images/221_s.png)
+
+代码:
+
 ```java
 class Solution {
     public int maximalSquare(char[][] matrix) {
@@ -69,21 +73,22 @@ class Solution {
 看下图对于`sum( 0~x,  0~y )`的求法: 
 
 其中两个蓝色部分有一个重叠的绿色部分，所以要多减去一个。
+
 ![在这里插入图片描述](images/221_s2.png)
 
 如果求出了上面的`sums`数组，我们就可以在`O(1)`时间内检查这个枚举的正方形是不是全都是`1`了，我们只需要求枚举的正方形的和是不是等于`size * size`就可以判断。
 
 
-<font color = purple>怎么由当前已经求得的`sums`数组得到当前枚举的正方形的和呢? 
+**怎么由当前已经求得的`sums`数组得到当前枚举的正方形的和呢**? 
 
 可以由`sum`数组得到当前以`(x, y)`为左上角顶点的正方形的和，大体框架如下: 
 
 ![在这里插入图片描述](images/221_s3.png)
 
 
-<font color =red>不过这里要注意代码的处理:
+不过这里要注意代码的处理:
 
-我们`sums`数组起始从`1, 1`开始会比较方便处理，<font color = blue>所以实际上下面的代码中`sums[x, y]`表示的是`[0 ~ i-1, 0 ~ j-1]`内的和。</font>不然判断边界就会比较麻烦，所以检查的时候第三层循环`size = Math.min(n-x+1, m-y+1) `开始也需要注意。 
+我们`sums`数组起始从`1, 1`开始会比较方便处理，所以实际上下面的代码中`sums[x, y]`表示的是`[0 ~ i-1, 0 ~ j-1]`内的和。不然判断边界就会比较麻烦，所以检查的时候第三层循环`size = Math.min(n-x+1, m-y+1) `开始也需要注意。 
 ```java
 class Solution {
     public int maximalSquare(char[][] matrix) {
@@ -115,8 +120,13 @@ class Solution {
 }
 ```
 
+#### LeetCode - 304. Range Sum Query 2D - Immutable
+
 这里[**LeetCode - 304. Range Sum Query 2D - Immutable**](https://leetcode.com/problems/range-sum-query-2d-immutable/) 就完全是这种方法解决:
+
 ![在这里插入图片描述](images/304_t.png)
+
+代码：
 
 ```java
 class NumMatrix {
@@ -178,10 +188,12 @@ public NumMatrix(int[][] matrix) {
 * 如果当前`matrix[i][j] == 0`，则`dp[i][j] = 0`；
 * 其他一般的情况，看下图，可以得到`dp[i][j] = min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]) + 1`；
 
+图:
+
 
 ![在这里插入图片描述](images/221_s4.png)
 
-
+代码:
 
 ```java
 class Solution {

@@ -1,9 +1,9 @@
 ﻿## LeetCode - 297. Serialize and Deserialize Binary Tree(二叉树的序列化和反序列化)
 
- - [LeetCode - 297. Serialize and Deserialize Binary Tree](#1)
- - [附LeetCode - 449. Serialize and Deserialize BST](#2)
+ - [LeetCode - 297. Serialize and Deserialize Binary Tree](#leetcode---297-serialize-and-deserialize-binary-tree)
+ - [LeetCode - 449. Serialize and Deserialize BST](#leetcode---449-serialize-and-deserialize-bst)
 ***
-### <font id = "1">LeetCode - 297. Serialize and Deserialize Binary Tree
+### LeetCode - 297. Serialize and Deserialize Binary Tree
 #### [题目链接](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/)
 
 > https://leetcode.com/problems/serialize-and-deserialize-binary-tree/description/
@@ -11,16 +11,18 @@
 #### 题意
 ![在这里插入图片描述](images/297_t.png)
 
-
-
 当然上面这个是按层序列化，我们也可以按前序序列化，只要能通过序列化的结果还原二叉树即可。
 
 ### 解析
- **前序序列化，就是将当前的树按照前序的方式生成一个字符串，如果结点不为空，就是结点的`value`，如果结点为`null`，就用`”null“`来代替。**
+ **前序序列化，就是将当前的树按照前序的方式生成一个字符串，如果结点不为空，就是结点的`value`，如果结点为`null`，就用`”null“`来代替**。
 
 逻辑很简单，直接上前序序列化代码
 
 由于说最好不要使用全局变量，所以这里反序列化的时候使用了一个`idx`数组(大小为`1`)。
+
+<div align="center"><img src="assets/1554877901005.png"></div><br>
+
+代码:
 
 ```java
 public class Codec {
@@ -200,7 +202,7 @@ public StringBuilder serHelper(TreeNode root) {
 }
 ```
 ***
-### <font id = "2">附LeetCode - 449. Serialize and Deserialize BST
+### LeetCode - 449. Serialize and Deserialize BST
 
 #### [题目链接](https://leetcode.com/problems/serialize-and-deserialize-bst/)
 
@@ -208,7 +210,7 @@ public StringBuilder serHelper(TreeNode root) {
 
 #### 题目
 
-> 和上一个题目一样，<font color = red>但是给你的是一个二叉搜索树。
+> 和上一个题目一样，但是给你的是一个二叉搜索树。
 #### 解析
 
 唯一的不同就是可以在反序列化的时候可以利用`BST`的性质来优化这个过程。
@@ -216,9 +218,11 @@ public StringBuilder serHelper(TreeNode root) {
 * 例如下面的`7`去反序列话的时候，递归左子树的时候给一个限定，如果当前数值`>7`，就肯定不行，返回`null`；
 * 同理递归右子树的时候，结点的值不能`>7`，否则返回`null`；
 
+图:
+
 ![在这里插入图片描述](images/449_s.png)
 
-
+代码:
 
 ```java
 public class Codec {

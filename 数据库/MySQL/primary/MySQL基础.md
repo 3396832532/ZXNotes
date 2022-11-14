@@ -1,4 +1,4 @@
-# <font color = red>MySQL基础
+# MySQL基础
  - [一、数据库的基本操作](#一数据库的基本操作)
     - [1、基本命令](#1基本命令)
     - [2、数据库储存引擎](#2数据库储存引擎)
@@ -12,11 +12,16 @@
      - [2、如何选择数据类型](#2如何选择数据类型)
      - [3、常见运算符介绍](#3常见运算符介绍)
  - [四、Mysql函数](#四mysql函数)
- - 查询数据
- - 插入、更新与删除数据
- - 索引
+      - [1、数学函数](#1数学函数)
+      - [2、字符串函数](#2字符串函数)
+      - [3、日期和时间函数](#3日期和时间函数)
+      - [4、条件判断函数](#4条件判断函数)
+      - [5、系统信息函数](#5系统信息函数)
+      - [6、加/解密函数](#6加解密函数)
+      - [7、其他函数](#7其他函数)
+      - [8、综合案列-Mysql函数的使用](#8综合案列-mysql函数的使用)
 ***
-## <font color = red>一、数据库的基本操作
+## 一、数据库的基本操作
 ### 1、基本命令
 **登陆数据库命令:**
 ```mysql
@@ -123,7 +128,7 @@ MEMORY 存储引擎**将表中的数据存储到内存中，为查询和引用�
 
 ***
 
-## <font color = red>二、数据表的基本操作
+## 二、数据表的基本操作
 
 ### 1、创建数据表
 
@@ -467,7 +472,7 @@ alter table employees rename employees_info;
 ```
 ***
 
-## <font color = red>三、数据类型和运算符
+## 三、数据类型和运算符
 
 ### 1、MYSQL数据类型介绍
 
@@ -729,8 +734,6 @@ BLOB是一个二进制大对象，用来存储可变数量的数据。有四种�
 
 浮点类型包括 FLOAT 和 DOUBLE 类型。DOUBLE 类型精度比 FLOAT 类型高，因此，如要求存储精度较高时，应选择 DOUBLE 类型。
 
-
-
 #### 2)、浮点数和定点数
 
 浮点数FLOAT、DOUBLE 相对于定点数 DECIMAL 的优势是: **在长度一定的情况下, 浮点数能表示更大的数据范围**，但是由于浮点数容易产生误差。
@@ -759,8 +762,6 @@ CHAR 是固定长度，**所以它的处理速度比 VARCHAR 的速度要快**�
 
 * 对于MYyISAM 存储引擎: 最好使用固定长度(`char`)的数据列代替可变长度的数据列。这样可以使整个表静态化，从而使数据检索更快，用空间换时间。
 * 对于 InnoDB 存储引擎: 使用可变长度(`varchar`)的数据列，因为 InnoDB 数据表的存储格式不分固定长度和可变长度，因此使用 CHAR 不一定比使用 VARCHAR 更好，但由于VARCHAR 是按照实际的长度存储，比较节省空间，所以对磁盘 IO 和数据存储总量比较好。
-
-
 
 #### 5)、ENUM和SET
 
@@ -836,7 +837,7 @@ LEAST(值 1,值 2…,值m)
 
 **GREATEST**
 
-语法格式：`GREATEST(值1, 值2, 值3)` ，其中`n`表示参数列表中有`n`个值。当有`2`个或多个参数时，返回为最大值，假如任意一个自变量为NULL，则`GREATEST()`的返回值为NULL。\
+语法格式：`GREATEST(值1, 值2, 值3)` ，其中`n`表示参数列表中有`n`个值。当有`2`个或多个参数时，返回为最大值，假如任意一个自变量为NULL，则`GREATEST()`的返回值为NULL。
 
 **LIKE**
 
@@ -884,344 +885,562 @@ select note,note is null,note like 't%',note regexp '$y',note regexp '[gm]' from
 select price,price&2,price|4, ~price from tmp15;
 # 位运算
 select price,price<<2,price>>2 from tmp15;
-
 ```
 
 ***
-## <font color = red>四、Mysql函数
+## 四、Mysql函数
 
-###数学函数
+### 1、数学函数
 
-```
+#### 1)、绝对值，π，平方根，去余函数(适用小数)
+
+```mysql
 #绝对值，π，平方根，去余函数(适用小数)
-select abs(-1),pi(),sqrt(9),Mod(31,8),Mod(45.5,6);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414100041110?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select abs(-1),pi(),sqrt(9),Mod(31,8),Mod(45.5,6);
+
+效果:
+
++---------+----------+---------+-----------+-------------+
+| abs(-1) | pi()     | sqrt(9) | Mod(31,8) | Mod(45.5,6) |
++---------+----------+---------+-----------+-------------+
+|       1 | 3.141593 |       3 |         7 |         3.5 |
++---------+----------+---------+-----------+-------------+
 
 ```
+#### 2)、获取整数的函数
+
+```mysql
 #获取整数的函数
-select ceil(-3.5),ceiling(3.5),floor(-3.5),floor(3.5);
-```
-效果![这里写图片描述](https://img-blog.csdn.net/20180414100448562?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select ceil(-3.5),ceiling(3.5),floor(-3.5),floor(3.5);
+
+效果:
+
++------------+--------------+-------------+------------+
+| ceil(-3.5) | ceiling(3.5) | floor(-3.5) | floor(3.5) |
++------------+--------------+-------------+------------+
+|         -3 |            4 |          -4 |          3 |
++------------+--------------+-------------+------------+
 
 ```
+#### 3)、获取随机数的函数
+
+```mysql
 #获取随机数的函数
-select rand(),rand(),rand(10),rand(10);
+mysql> select rand(),rand(),rand(10),rand(10);
 
-```
-![这里写图片描述](https://img-blog.csdn.net/20180414100756428?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+效果:
 
++--------------------+---------------------+--------------------+--------------------+
+| rand()             | rand()              | rand(10)           | rand(10)           |
++--------------------+---------------------+--------------------+--------------------+
+| 0.9031498375378082 | 0.46329259729319494 | 0.6570515219653505 | 0.6570515219653505 |
++--------------------+---------------------+--------------------+--------------------+
+
+可以看到前面两个不同，后面两个指定了种子所以相同。
 ```
+#### 4)、Round函数(四舍五入函数)，truncate()函数
+
+```mysql
 #Round函数(四舍五入函数)，truncate()函数
-select round(3.4),(3.6),round(3.16,1),round(3.16,0),round(232.28,-1),truncate(1.31,1),truncate(1.99,1),truncate(19.99,-1);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414101532820?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select round(3.4),(3.6),round(3.16,1),round(3.16,0),round(232.28,-1),truncate(1.31,1),truncate(1.99,1),truncate(19.99,-1);
+
+效果:
+
++------------+-----+---------------+---------------+------------------+------------------+------------------+--------------------+
+| round(3.4) | 3.6 | round(3.16,1) | round(3.16,0) | round(232.28,-1) | truncate(1.31,1) | truncate(1.99,1) | truncate(19.99,-1) |
++------------+-----+---------------+---------------+------------------+------------------+------------------+--------------------+
+|          3 | 3.6 |           3.2 |             3 |              230 |              1.3 |              1.9 |                 10 |
++------------+-----+---------------+---------------+------------------+------------------+------------------+--------------------+
 
 ```
+#### 5)、符号函数，幂运算函数pow,power,exp()
+
+```mysql
 #符号函数，幂运算函数pow,power,exp()//e的x乘方
-select sign(-21),sign(0),sign(21),pow(2,2),power(2,-2),exp(2);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414101833603?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select sign(-21),sign(0),sign(21),pow(2,2),power(2,-2),exp(2);
+
+效果:
+
++-----------+---------+----------+----------+-------------+------------------+
+| sign(-21) | sign(0) | sign(21) | pow(2,2) | power(2,-2) | exp(2)           |
++-----------+---------+----------+----------+-------------+------------------+
+|        -1 |       0 |        1 |        4 |        0.25 | 7.38905609893065 |
++-----------+---------+----------+----------+-------------+------------------+
 
 ```
+#### 6)、自然对数运算和以10为底的对数运算，弧度，角度 radians角度转弧度，弧度转角度
+
+```mysql
 #自然对数运算和以10为底的对数运算,弧度，角度 radians角度转弧度，弧度转角度
-select log(3),log(-3),log10(100),log10(-100),radians(180),degrees(pi()/2);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414102846475?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select log(3),log(-3),log10(100),log10(-100),radians(180),degrees(pi()/2);
+
+效果:
+
++--------------------+---------+------------+-------------+-------------------+-----------------+
+| log(3)             | log(-3) | log10(100) | log10(-100) | radians(180)      | degrees(pi()/2) |
++--------------------+---------+------------+-------------+-------------------+-----------------+
+| 1.0986122886681098 |    NULL |          2 |        NULL | 3.141592653589793 |              90 |
++--------------------+---------+------------+-------------+-------------------+-----------------+
 
 ```
+#### 7)、正弦函数余弦函数
+
+```mysql
 #正弦函数余弦函数
-select sin(pi()/2),degrees(asin(1)),cos(pi()),degrees(acos(-1)),round(tan(pi()/4)),degrees(atan(1)),cot(pi()/4);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414103636239?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###字符串函数
+mysql> select sin(pi()/2),degrees(asin(1)),cos(pi()),degrees(acos(-1)),round(tan(pi()/4)),degrees(atan(1)),cot(pi()/4);
+
+效果:
+
++-------------+------------------+-----------+-------------------+--------------------+------------------+--------------------+
+| sin(pi()/2) | degrees(asin(1)) | cos(pi()) | degrees(acos(-1)) | round(tan(pi()/4)) | degrees(atan(1)) | cot(pi()/4)        |
++-------------+------------------+-----------+-------------------+--------------------+------------------+--------------------+
+|           1 |               90 |        -1 |               180 |                  1 |               45 | 1.0000000000000002 |
++-------------+------------------+-----------+-------------------+--------------------+------------------+--------------------+
 
 ```
+### 2、字符串函数
 
+#### 1)、字符串函数、concat_ws忽略空值null
+
+```mysql
 #字符串函数,concat_ws忽略空值null
-select char_length('aab'),length('aabb'),concat('My sql ','5.7'),concat('My',null,'sql'),concat_ws('-','a','b','c'),concat_ws('*','aa',null,'bb');
+mysql> select char_length('aab'),length('aabb'),concat('My sql ','5.7'),concat('My',null,'sql'),concat_ws('-','a','b','c'),concat_ws('*','aa',null,'bb');
+
+效果:
+
++--------------------+----------------+-------------------------+-------------------------+----------------------------+-------------------------------+
+| char_length('aab') | length('aabb') | concat('My sql ','5.7') | concat('My',null,'sql') | concat_ws('-','a','b','c') | concat_ws('*','aa',null,'bb') |
++--------------------+----------------+-------------------------+-------------------------+----------------------------+-------------------------------+
+|                  3 |              4 | My sql 5.7              | NULL                    | a-b-c                      | aa*bb                         |
++--------------------+----------------+-------------------------+-------------------------+----------------------------+-------------------------------+
 
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/2018041410443992?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 2)、替换字符串的函数
 
-```
-
+```mysql
 #替换字符串的函数
-select insert('Quest',2,4,'What') as Coll,insert('Quest',-1,4,'What') as Coll2,insert('Quest',3,100,'Wh') as Coll3;
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414110146458?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select insert('Quest',2,4,'What') as Coll,insert('Quest',-1,4,'What') as Coll2,insert('Quest',3,100,'Wh') as Coll3;
+
+效果:
+
++-------+-------+-------+
+| Coll  | Coll2 | Coll3 |
++-------+-------+-------+
+| QWhat | Quest | QuWh  |
++-------+-------+-------+
 
 ```
+#### 3)、大小写转换、获取指定长度字符串的函数left,right
+
+```mysql
 #大小写转换,获取指定长度字符串的函数left,right;
-select lower('ZHENGXIN'),lcase('ZHENGXIN'),upper('zhengxin'),ucase('zhengxin'),left('football',5),right('football',5);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414110548833?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select lower('ZHENGXIN'),lcase('ZHENGXIN'),upper('zhengxin'),ucase('zhengxin'),left('football',5),right('football',5);
+
+效果:
+
++-------------------+-------------------+-------------------+-------------------+--------------------+---------------------+
+| lower('ZHENGXIN') | lcase('ZHENGXIN') | upper('zhengxin') | ucase('zhengxin') | left('football',5) | right('football',5) |
++-------------------+-------------------+-------------------+-------------------+--------------------+---------------------+
+| zhengxin          | zhengxin          | ZHENGXIN          | ZHENGXIN          | footb              | tball               |
++-------------------+-------------------+-------------------+-------------------+--------------------+---------------------+
 
 ```
+#### 4)、填充字符串的函数,删除空格的函数
+
+```mysql
 #填充字符串的函数,删除空格的函数
-select lpad('hello',4,'*'),lpad('hello',10,'*'),
-rpad('hello',10,'*'),concat('(',ltrim('   book   '),')'),
-concat('(',rtrim('   book   '),')'),
-concat('(',trim('   book   '),')'),
-trim('xy' from 'xyxyabababxyxy');
-```
-***
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414112006326?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select lpad('hello',4,'*'),lpad('hello',10,'*'),
+    -> rpad('hello',10,'*'),concat('(',ltrim('   book   '),')'),
+    -> concat('(',rtrim('   book   '),')'),
+    -> concat('(',trim('   book   '),')'),
+    -> trim('xy' from 'xyxyabababxyxy');
+    
+效果:
+
++---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
+| lpad('hello',4,'*') | lpad('hello',10,'*') | rpad('hello',10,'*') | concat('(',ltrim('   book   '),')') | concat('(',rtrim('   book   '),')') | concat('(',trim('   book   '),')') | trim('xy' from 'xyxyabababxyxy') |
++---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
+| hell                | *****hello           | hello*****           | (book   )                           | (   book)                           | (book)                             | ababab                           |
++---------------------+----------------------+----------------------+-------------------------------------+-------------------------------------+------------------------------------+----------------------------------+
 
 ```
+#### 5)、重复生成,空格函数，替换函数，比较大小的函数
+
+```mysql
 #重复生成,空格函数，替换函数，比较大小的函数
-select repeat('mysql',3),concat('(',space(6),')'),
-replace('xxx.baidu.com','x','w'),strcmp('abc','abd');
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414133734950?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select repeat('mysql',3),concat('(',space(6),')'),
+    -> replace('xxx.baidu.com','x','w'),strcmp('abc','abd');
+    
+效果:
+    
++-------------------+--------------------------+----------------------------------+---------------------+
+| repeat('mysql',3) | concat('(',space(6),')') | replace('xxx.baidu.com','x','w') | strcmp('abc','abd') |
++-------------------+--------------------------+----------------------------------+---------------------+
+| mysqlmysqlmysql   | (      )                 | www.baidu.com                    |                  -1 |
++-------------------+--------------------------+----------------------------------+---------------------+
 
 ```
-#获取字串的函数
-select substring('breakfast',5) as coll,
-substring('breakfast',3,5) as coll2,
-substring('breakfast',-3) as coll3, #从后面开始截取3个
-substring('breakfast',-1,4) as coll4; #从结尾开始第一个位置截取四个
+#### 6)、获取子串的函数
+
+```mysql
+#获取子串的函数
+mysql> select substring('breakfast',5) as coll,
+    -> substring('breakfast',3,5) as coll2,
+    -> substring('breakfast',-3) as coll3, #从后面开始截取3个
+    -> substring('breakfast',-1,4) as coll4; #从结尾开始第一个位置截取四个
+   
+效果:
+    
++-------+-------+-------+-------+
+| coll  | coll2 | coll3 | coll4 |
++-------+-------+-------+-------+
+| kfast | eakfa | ast   | t     |
++-------+-------+-------+-------+
+
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414134457483?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 <font color = crimson>注意还有一个MID函数和substring作用是一样的</font>
-***
 
-```
+```mysql
 #匹配字串开始的位置,字符串逆序
-select locate('ball','football'),position('ball'in'football'),
-instr('football','ball'),reverse('abc');
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414140015303?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select locate('ball','football'),position('ball'in'football'),
+    -> instr('football','ball'),reverse('abc');
+    
+效果:
+
++---------------------------+------------------------------+--------------------------+----------------+
+| locate('ball','football') | position('ball'in'football') | instr('football','ball') | reverse('abc') |
++---------------------------+------------------------------+--------------------------+----------------+
+|                         5 |                            5 |                        5 | cba            |
++---------------------------+------------------------------+--------------------------+----------------+
 
 ```
+#### 7)、返回指定位置的值，返回指定字符串的位置的函数
+
+```mysql
 #返回指定位置的值,返回指定字符串的位置的函数
-select elt(3,'a','b','c'),elt(2,'a'),
-field('Hi','hihi','Hey','Hi','bas') as coll,
-field('Hi','hihi','a','b') as coll2,
-find_in_set('Hi','hihi,Hey,Hi,bas'); #返回字串位置的函数
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414141233663?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select elt(3,'a','b','c'),elt(2,'a'),
+    -> field('Hi','hihi','Hey','Hi','bas') as coll,
+    -> field('Hi','hihi','a','b') as coll2,
+    -> find_in_set('Hi','hihi,Hey,Hi,bas'); #返回字串位置的函数
+
+效果:
+
++--------------------+------------+------+-------+-------------------------------------+
+| elt(3,'a','b','c') | elt(2,'a') | coll | coll2 | find_in_set('Hi','hihi,Hey,Hi,bas') |
++--------------------+------------+------+-------+-------------------------------------+
+| c                  | NULL       |    3 |     0 |                                   3 |
++--------------------+------------+------+-------+-------------------------------------+
 
 ```
+#### 8)、make_set()函数的使用
+
+```mysql
 #make_set()函数的使用
-select make_set(1,'a','b','c') as coll,#0001选第一个
-make_set(1|4, 'hello','nice','word') as coll2, #0001 0100-->0101 -->选第一和第三
-make_set(1|4,'hello','nice',null,'word') as coll3,#0001 0100-->0101 -->选第一和第三
-make_set(0,'a','b','c') as coll4; 
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414142118936?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
-###日期和时间函数
+mysql> select make_set(1,'a','b','c') as coll,#0001选第一个
+    -> make_set(1|4, 'hello','nice','word') as coll2, #0001 0100-->0101 -->选第一和第三
+    -> make_set(1|4,'hello','nice',null,'word') as coll3,#0001 0100-->0101 -->选第一和第三
+    -> make_set(0,'a','b','c') as coll4; 
+    
+效果:
+  
++------+------------+-------+-------+
+| coll | coll2      | coll3 | coll4 |
++------+------------+-------+-------+
+| a    | hello,word | hello |       |
++------+------------+-------+-------+
 
 ```
+***
+### 3、日期和时间函数
+
+#### 1)、获取日期时间函数
+
+```mysql
 #获取日期时间函数
-select current_date(),curdate(),curdate()+0,
-current_time(),curtime(),curtime()+0,
-current_timestamp(),localtime(),now(),sysdate();
+mysql> select current_date(),curdate(),curdate()+0,
+    -> current_time(),curtime(),curtime()+0,
+    -> current_timestamp(),localtime(),now(),sysdate();
+ 
+效果:
+ 
++----------------+------------+-------------+----------------+-----------+-------------+---------------------+---------------------+---------------------+---------------------+
+| current_date() | curdate()  | curdate()+0 | current_time() | curtime() | curtime()+0 | current_timestamp() | localtime()         | now()               | sysdate()           |
++----------------+------------+-------------+----------------+-----------+-------------+---------------------+---------------------+---------------------+---------------------+
+| 2019-02-25     | 2019-02-25 |    20190225 | 10:40:22       | 10:40:22  |      104022 | 2019-02-25 10:40:22 | 2019-02-25 10:40:22 | 2019-02-25 10:40:22 | 2019-02-25 10:40:22 |
++----------------+------------+-------------+----------------+-----------+-------------+---------------------+---------------------+---------------------+---------------------+s
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414142607410?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 2)、获取时间的数字，根据时间获取日期(互为反函数)
 
-```
-
+```mysql
 #获取时间的数字,根据时间获取日期(互为反函数)
-select unix_timestamp(),unix_timestamp(now()),now(),
-from_unixtime(1523689758);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414151053533?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select unix_timestamp(),unix_timestamp(now()),now(),
+    -> from_unixtime(1523689758);
+
+效果:
+
++------------------+-----------------------+---------------------+---------------------------+
+| unix_timestamp() | unix_timestamp(now()) | now()               | from_unixtime(1523689758) |
++------------------+-----------------------+---------------------+---------------------------+
+|       1551062468 |            1551062468 | 2019-02-25 10:41:08 | 2018-04-14 15:09:18       |
++------------------+-----------------------+---------------------+---------------------------+
 
 ```
+#### 3)、返回当前时区日期和时间的函数，日期月份时间函数
+
+```mysql
 #返回当前时区日期和时间的函数,日期月份时间函数
-select utc_time(),utc_time()+0,
-utc_date(),utc_date()+0,
-month('2016-03-04'),monthname('2016-03-04'),
-dayname('2018-04-14'),dayofweek('2018-04-14'),
-weekday('2018-04-14');
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414152120121?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-注意dayofweek和weekday的差别
-![这里写图片描述](https://img-blog.csdn.net/20180414152202919?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-![这里写图片描述](https://img-blog.csdn.net/20180414152209424?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select utc_time(),utc_time()+0,
+    -> utc_date(),utc_date()+0,
+    -> month('2016-03-04'),monthname('2016-03-04'),
+    -> dayname('2018-04-14'),dayofweek('2018-04-14'),
+    -> weekday('2018-04-14');
+   
+效果:
+    
++------------+--------------+------------+--------------+---------------------+-------------------------+-----------------------+-------------------------+-----------------------+
+| utc_time() | utc_time()+0 | utc_date() | utc_date()+0 | month('2016-03-04') | monthname('2016-03-04') | dayname('2018-04-14') | dayofweek('2018-04-14') | weekday('2018-04-14') |
++------------+--------------+------------+--------------+---------------------+-------------------------+-----------------------+-------------------------+-----------------------+
+| 02:41:56   |        24156 | 2019-02-25 |     20190225 |                   3 | March                   | Saturday              |                       7 |                     5 |
++------------+--------------+------------+--------------+---------------------+-------------------------+-----------------------+-------------------------+-----------------------+
 
 ```
+注意dayofweek和weekday的差别：
+
+* `DAYOFWEEK(d)`函数返回d对应的一周中的索引(位置)。1表示周日，2表示周一，....，7表示周六；
+* `WEEKDAY(d)`返回d对应的工作日索引。0表示周一，1表示周二，...，6表示周日；
+
+```mysql
 #返回是这一年的第几周
-select week('2018-4-16'),#默认0表示第一天从周末开始
-week('2018-04-16',1), #周一#返回是这一年的第几周
-dayofyear('2018-4-16'),dayofmonth('2018-4-14'), #返回一年中的第几天
-year('2018-4-14'),quarter('2018-4-14'),
-minute('10:10:02'),second("10:10:02");
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414161034181?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select week('2018-4-16'),#默认0表示第一天从周末开始
+    -> week('2018-04-16',1), #周一#返回是这一年的第几周
+    -> dayofyear('2018-4-16'),dayofmonth('2018-4-14'), #返回一年中的第几天
+    -> year('2018-4-14'),quarter('2018-4-14'),
+    -> minute('10:10:02'),second("10:10:02");
+    
+效果:
+
++-------------------+----------------------+------------------------+-------------------------+-------------------+----------------------+--------------------+--------------------+
+| week('2018-4-16') | week('2018-04-16',1) | dayofyear('2018-4-16') | dayofmonth('2018-4-14') | year('2018-4-14') | quarter('2018-4-14') | minute('10:10:02') | second("10:10:02") |
++-------------------+----------------------+------------------------+-------------------------+-------------------+----------------------+--------------------+--------------------+
+|                15 |                   16 |                    106 |                      14 |              2018 |                    2 |                 10 |                  2 |
++-------------------+----------------------+------------------------+-------------------------+-------------------+----------------------+--------------------+--------------------+
 
 ```
+#### 4)、获取指定日期的指定值的函数
+
+```mysql
 #获取指定日期的指定值的函数
-select extract(year from '2018-07-06') as coll,
-extract(year_month from '2018-08-06') as coll2,
-extract(day_minute from '2018-07-06 10:11:05') as coll3;
+mysql> select extract(year from '2018-07-06') as coll,
+    -> extract(year_month from '2018-08-06') as coll2,
+    -> extract(day_minute from '2018-07-06 10:11:05') as coll3;
+    
+效果:
+    
++------+--------+-------+
+| coll | coll2  | coll3 |
++------+--------+-------+
+| 2018 | 201808 | 61011 |
++------+--------+-------+
 
 ```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414161511106?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+#### 5)、时间和秒钟转换的函数
 
-```
+```mysql
 #时间和秒钟转换的函数
-select time_to_sec('01:00:40'),
-sec_to_time(3600);
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414174423286?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> select time_to_sec('01:00:40'),
+    -> sec_to_time(3600);
+    
+效果:    
+
++-------------------------+-------------------+
+| time_to_sec('01:00:40') | sec_to_time(3600) |
++-------------------------+-------------------+
+|                    3640 | 01:00:00          |
++-------------------------+-------------------+
 
 ```
+#### 6)、计算日期和时间的函数
+
+```mysql
 #计算日期和时间的函数
-select date_add('2010-12-31 23:59:59',interval 1 second) as coll,
-adddate('2010-12-31 23:59:59',interval 1 second) as coll2,
-date_add('2010-12-31 23:59:59',interval '0:0:1' hour_second) as coll3, #后面的hour_second要看表决定
-date_sub('2011-01-02',interval 31 day) as coll4,
-subdate('2011-01-02',interval 31 day) as coll5,
-date_sub('2011-01-02 00:01:00',interval '0 0:1:1' day_second) as coll6; #对应位置的相减
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414174708360?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+mysql> select date_add('2010-12-31 23:59:59',interval 1 second) as coll,
+    -> adddate('2010-12-31 23:59:59',interval 1 second) as coll2,
+    -> date_add('2010-12-31 23:59:59',interval '0:0:1' hour_second) as coll3, #后面的hour_second要看表决定
+    -> date_sub('2011-01-02',interval 31 day) as coll4,
+    -> subdate('2011-01-02',interval 31 day) as coll5,
+    -> date_sub('2011-01-02 00:01:00',interval '0 0:1:1' day_second) as coll6; #对应位置的相减
+   
+效果:
+    
++---------------------+---------------------+---------------------+------------+------------+---------------------+
+| coll                | coll2               | coll3               | coll4      | coll5      | coll6               |
++---------------------+---------------------+---------------------+------------+------------+---------------------+
+| 2011-01-01 00:00:00 | 2011-01-01 00:00:00 | 2011-01-01 00:00:00 | 2010-12-02 | 2010-12-02 | 2011-01-01 23:59:59 |
++---------------------+---------------------+---------------------+------------+------------+---------------------+
 
 ```
+#### 7)、直接输入两个时间，计算
 
+```mysql
 #直接输入两个时间，计算
-select addtime('2000-12-31 23:59:59','1:1:1') as coll,
-subtime('2000-12-31 23:59:59','1:1:1')as coll2,
-datediff('2000-12-28','2001-01-03') as coll3; #前面的减后面的
+mysql> select addtime('2000-12-31 23:59:59','1:1:1') as coll,
+    -> subtime('2000-12-31 23:59:59','1:1:1')as coll2,
+    -> datediff('2000-12-28','2001-01-03') as coll3; #前面的减后面的
++---------------------+---------------------+-------+
+| coll                | coll2               | coll3 |
++---------------------+---------------------+-------+
+| 2001-01-01 01:01:00 | 2000-12-31 22:58:58 |    -6 |
++---------------------+---------------------+-------+
+
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180414175044280?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-注意看表
+注意日期的一些区别:
+
 ![这里写图片描述](https://img-blog.csdn.net/20180414174815850?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
-#####日期和时间格式化的函数
+
+日期和时间格式化的函数
+
 ![这里写图片描述](https://img-blog.csdn.net/2018041417493265?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![这里写图片描述](https://img-blog.csdn.net/20180414174940784?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 ![这里写图片描述](https://img-blog.csdn.net/20180414174950614?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
-```
+#### 8)、时间日期格式化函数
+
+```mysql
 #时间日期格式化函数
-select date_format('1997-10-04 22:23:00','%W %M %Y') as coll,
-date_format('1997-10-04 22:23:00','%D %y %a %d %m %b %j'),
-time_format('16:00:00','%H %k %h %I %l'),
-date_format('2000-10-05 22:23:00',get_format(date,'USA'));
-```
-![这里写图片描述](https://img-blog.csdn.net/20180414175142523?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###条件约束函数
+mysql> select date_format('1997-10-04 22:23:00','%W %M %Y') as coll,
+    -> date_format('1997-10-04 22:23:00','%D %y %a %d %m %b %j'),
+    -> time_format('16:00:00','%H %k %h %I %l'),
+    -> date_format('2000-10-05 22:23:00',get_format(date,'USA'));
+    
+效果:
+
++-----------------------+-----------------------------------------------------------+------------------------------------------+-----------------------------------------------------------+
+| coll                  | date_format('1997-10-04 22:23:00','%D %y %a %d %m %b %j') | time_format('16:00:00','%H %k %h %I %l') | date_format('2000-10-05 22:23:00',get_format(date,'USA')) |
++-----------------------+-----------------------------------------------------------+------------------------------------------+-----------------------------------------------------------+
+| Saturday October 1997 | 4th 97 Sat 04 10 Oct 277                                  | 16 16 04 04 4                            | 10.05.2000                                                |
++-----------------------+-----------------------------------------------------------+------------------------------------------+-----------------------------------------------------------+
 
 ```
+### 4、条件判断函数
+
+```mysql
 #条件约束函数
-select if(1>2,2,3),
-ifNull(null,10),ifNull(1/0,100),
-case 2 when 1 then 'one' when 2 then 'two' when 3 then 'three' else 'more' end, #2等于后面的2返回后面的then
-case when 1>2 then 'a' else 'b' end;
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414190109796?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###系统信息函数
+mysql> select if(1>2,2,3),
+    -> ifNull(null,10),ifNull(1/0,100),
+    -> case 2 when 1 then 'one' when 2 then 'two' when 3 then 'three' else 'more' end, #2等于后面的2返回后面的then
+    -> case when 1>2 then 'a' else 'b' end;
+    
+效果:
+    
++-------------+-----------------+-----------------+--------------------------------------------------------------------------------+-------------------------------------+
+| if(1>2,2,3) | ifNull(null,10) | ifNull(1/0,100) | case 2 when 1 then 'one' when 2 then 'two' when 3 then 'three' else 'more' end | case when 1>2 then 'a' else 'b' end |
++-------------+-----------------+-----------------+--------------------------------------------------------------------------------+-------------------------------------+
+|           3 |              10 |        100.0000 | two                                                                            | b                                   |
++-------------+-----------------+-----------------+--------------------------------------------------------------------------------+-------------------------------------+
 
 ```
+### 5、系统信息函数
+
+```mysql
 #系统信息函数
-select version(),connection_id(),#版本号，连接次数
-database(),schema(), #查看当前的数据库名
-user(),current_user(),system_user(),session_user();
-show processlist;#输出当前用户的连接信息
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414190945328?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
+mysql> show processlist;#输出当前用户的连接信息
+
+效果:
+
++----+------+-----------+------------+---------+------+----------+------------------+
+| Id | User | Host      | db         | Command | Time | State    | Info             |
++----+------+-----------+------------+---------+------+----------+------------------+
+|  2 | root | localhost | learnmysql | Query   |    0 | starting | show processlist |
++----+------+-----------+------------+---------+------+----------+------------------+
+1 row in set (0.00 sec)
 
 ```
+```mysql
 #获取字符串的字符集和排列方式的函数
-select charset('abc'),charset(convert('abc' using latin1)),
-charset(version()), #获取字符集
-collation('abc'),collation(convert('abc' using utf8));#获取排列方式
-```
-效果
-还要注意Last_insert_id最后自动生成的ID值
-![这里写图片描述](https://img-blog.csdn.net/20180414194735908?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###加/解密函数
+mysql> select charset('abc'),charset(convert('abc' using latin1)),
+    -> charset(version()), #获取字符集
+    -> collation('abc'),collation(convert('abc' using utf8));#获取排列方式
+    
+效果:    
+
++----------------+--------------------------------------+--------------------+------------------+--------------------------------------+
+| charset('abc') | charset(convert('abc' using latin1)) | charset(version()) | collation('abc') | collation(convert('abc' using utf8)) |
++----------------+--------------------------------------+--------------------+------------------+--------------------------------------+
+| utf8           | latin1                               | utf8               | utf8_general_ci  | utf8_general_ci                      |
++----------------+--------------------------------------+--------------------+------------------+--------------------------------------+
 
 ```
-#加密解密函数
-select password('newpwd'),MD5('mypwd'), 
-encode('secret','cry'),length(encode('secret','cry')),
-decode(encode('secret','cry'),'cry');#加密后解密
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414195439560?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###其他函数
+还要注意Last_insert_id最后自动生成的ID值。
+
+### 6、加/解密函数
+
+```mysql
+mysql> select password('newpwd'),MD5('mypwd'), 
+    -> encode('secret','cry'),length(encode('secret','cry')),
+    -> decode(encode('secret','cry'),'cry');#加密后解密
+   
+效果:
+    
++-------------------------------------------+----------------------------------+------------------------+--------------------------------+--------------------------------------+
+| password('newpwd')                        | MD5('mypwd')                     | encode('secret','cry') | length(encode('secret','cry')) | decode(encode('secret','cry'),'cry') |
++-------------------------------------------+----------------------------------+------------------------+--------------------------------+--------------------------------------+
+| *1FA85AA204CC12B39B20E8F1E839D11B3F9E6AA4 | 318bcb4be908d0da6448a0db76908d78 | �h��                     |                              6 | secret                               |
++-------------------------------------------+----------------------------------+------------------------+--------------------------------+--------------------------------------+
 
 ```
-#其他函数
-select format(123.1234,2),format(123.1,3),format(123.123,0),#格式化函数
-#不同进制数之间的转换
-conv('a',16,2),conv(15,10,2),conv(15,10,8),conv(15,10,16);
+### 7、其他函数
+
+```mysql
+mysql> select format(123.1234,2),format(123.1,3),format(123.123,0),#格式化函数
+    -> #不同进制数之间的转换
+    -> conv('a',16,2),conv(15,10,2),conv(15,10,8),conv(15,10,16);
+    
+效果:   
+ 
++--------------------+-----------------+-------------------+----------------+---------------+---------------+----------------+
+| format(123.1234,2) | format(123.1,3) | format(123.123,0) | conv('a',16,2) | conv(15,10,2) | conv(15,10,8) | conv(15,10,16) |
++--------------------+-----------------+-------------------+----------------+---------------+---------------+----------------+
+| 123.12             | 123.100         | 123               | 1010           | 1111          | 17            | F              |
++--------------------+-----------------+-------------------+----------------+---------------+---------------+----------------+
 
 ```
-![这里写图片描述](https://img-blog.csdn.net/20180414200512674?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-***
 
-```
-
+```mysql
 #IP地址与数字相互转换的函数
-select inet_aton('209.207.224.40'),inet_ntoa(3520061480),
-#枷锁函数和解锁函数
-get_lock('lock1',10),#这个锁持续10秒
-is_used_lock('lock1'),  #返回当前连接ID
-is_free_lock('lock1'), #是否是可用的
-release_lock('lock1');
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414201609394?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+mysql> select inet_aton('209.207.224.40'),inet_ntoa(3520061480),
+    -> #枷锁函数和解锁函数
+    -> get_lock('lock1',10),#这个锁持续10秒
+    -> is_used_lock('lock1'),  #返回当前连接ID
+    -> is_free_lock('lock1'), #是否是可用的
+    -> release_lock('lock1');
+
+效果:
+
++-----------------------------+-----------------------+----------------------+-----------------------+-----------------------+-----------------------+
+| inet_aton('209.207.224.40') | inet_ntoa(3520061480) | get_lock('lock1',10) | is_used_lock('lock1') | is_free_lock('lock1') | release_lock('lock1') |
++-----------------------------+-----------------------+----------------------+-----------------------+-----------------------+-----------------------+
+|                  3520061480 | 209.207.224.40        |                    1 |                     2 |                     0 |                     1 |
++-----------------------------+-----------------------+----------------------+-----------------------+-----------------------+-----------------------+
 
 ```
+```mysql
 #重复执行指定操作的函数
-select benchmark(5000,password('newpad')),
-charset('abc'),charset(convert('abc' using latin1)),#改变字符集的函数
-cast(100 as char(2)),convert('2010-10-11 12:12:12',time);#改变数据类型的函数
-```
-效果
-![这里写图片描述](https://img-blog.csdn.net/20180414202751518?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3p4enh6eDAxMTk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-###综合案列-Mysql函数的使用
+mysql> select benchmark(5000,password('newpad')),
+    -> charset('abc'),charset(convert('abc' using latin1)),#改变字符集的函数
+    -> cast(100 as char(2)),convert('2010-10-11 12:12:12',time);#改变数据类型的函数
+  
+效果:
+    
++------------------------------------+----------------+--------------------------------------+----------------------+-------------------------------------+
+| benchmark(5000,password('newpad')) | charset('abc') | charset(convert('abc' using latin1)) | cast(100 as char(2)) | convert('2010-10-11 12:12:12',time) |
++------------------------------------+----------------+--------------------------------------+----------------------+-------------------------------------+
+|                                  0 | utf8           | latin1                               | 10                   | 12:12:12                            |
++------------------------------------+----------------+--------------------------------------+----------------------+-------------------------------------+
 
 ```
+### 8、综合案列-Mysql函数的使用
+
+```mysql
 select round(rand() * 10),round(rand() * 10),round(rand() * 10);#产生三个1-10之间的随机数
 select pi(),sin(pi()),cos(0),round(tan(pi()/4)),floor(cot(pi()/4));
 
@@ -1256,10 +1475,4 @@ select m_brith,case when year(m_brith) < 2000 then 'old'
 when year(m_brith) > 2000 then 'young' 
 else 'not born' end as status from member;
 ```
-
-
-
-
-
-
 
